@@ -1,6 +1,7 @@
 package com.example.football_manager.dto;
 
 import java.time.LocalDateTime;
+import jakarta.validation.constraints.NotNull;
 
 public class MatchRequestDTO {
 

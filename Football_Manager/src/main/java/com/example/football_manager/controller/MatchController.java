@@ -17,7 +17,7 @@ public class MatchController {
 
     // Schedule a match
     @PostMapping
-    public ResponseEntity<String> createMatch(@Valid @RequestBody MatchRequestDTO matchDTO) {
+    public ResponseEntity<String> createMatch(@Valid @ModelAttribute MatchRequestDTO matchDTO) {
         try {
             String response = matchService.createMatch(matchDTO);
             return new ResponseEntity<>(response, HttpStatus.CREATED);

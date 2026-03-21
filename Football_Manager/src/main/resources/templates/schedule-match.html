@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Football Manager - Schedule</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-100 p-10">
+    <div class="max-w-lg mx-auto bg-white p-8 rounded-lg shadow">
+        <h2 class="text-2xl font-bold mb-6">Schedule New Match</h2>
+
+        <form th:action="@{/api/matches}" th:object="${matchRequest}" method="POST" class="space-y-4">
+            
+            <div>
+                <label class="block text-sm font-medium">Home Team ID</label>
+                <input type="number" th:field="*{homeTeamId}" class="w-full border p-2 rounded" required>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium">Away Team ID</label>
+                <input type="number" th:field="*{awayTeamId}" class="w-full border p-2 rounded" required>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium">Kickoff Time</label>
+                <input type="datetime-local" th:field="*{kickoffTime}" class="w-full border p-2 rounded" required>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium">Venue</label>
+                <input type="text" th:field="*{venue}" class="w-full border p-2 rounded" required>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium">Status</label>
+                <select th:field="*{status}" class="w-full border p-2 rounded">
+                    <option th:each="st : ${T(com.example.football_manager.dto.MatchRequestDTO.MatchStatus).values()}" 
+                            th:value="${st}" th:text="${st}"></option>
+                </select>
+            </div>
+
+            <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
+                Schedule Match
+            </button>
+        </form>
+    </div>
+</body>
+</html>
