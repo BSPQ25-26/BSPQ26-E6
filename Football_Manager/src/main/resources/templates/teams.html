@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Football Manager - Teams</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-100 p-10">
+    <div class="max-w-3xl mx-auto">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold">Teams</h2>
+            <form th:action="@{/logout}" method="POST">
+                <button type="submit"
+                        class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 text-sm">
+                    Logout
+                </button>
+            </form>
+        </div>
+
+        <div th:if="${#lists.isEmpty(teams)}"
+             class="bg-white p-6 rounded-lg shadow text-center text-gray-500">
+            No teams found.
+        </div>
+
+        <div class="space-y-3">
+            <div th:each="team : ${teams}"
+                 class="bg-white p-4 rounded-lg shadow flex justify-between items-center">
+                <div>
+                    <p class="font-semibold text-lg" th:text="${team.name}"></p>
+                    <p class="text-sm text-gray-500" th:text="${team.city}"></p>
+                </div>
+                <button th:onclick="|confirmDelete(${team.id}, '${team.name}')|"
+                        class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 text-sm">
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Dialog -->
+    <div id="confirmModal"
+         class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full mx-4">
+            <h3 class="text-lg font-bold mb-2">Confirm Deletion</h3>
+            <p id="confirmMessage" class="text-gray-600 mb-6"></p>
+            <div class="flex gap-3 justify-end">
+                <button onclick="closeModal()"
+                        class="px-4 py-2 border rounded hover:bg-gray-100">Cancel</button>
+                <form id="deleteForm" method="POST">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                    <button type="submit"
+                            class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function confirmDelete(id, name) {
+            document.getElementById('confirmMessage').textContent =
+                'Are you sure you want to delete team "' + name + '"?';
+            document.getElementById('deleteForm').action = '/teams/delete/' + id;
+            document.getElementById('confirmModal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('confirmModal').classList.add('hidden');
+        }
+
+        document.getElementById('confirmModal').addEventListener('click', function (e) {
+            if (e.target === this) closeModal();
+        });
+    </script>
+</body>
+</html>
