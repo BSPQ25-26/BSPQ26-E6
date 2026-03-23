@@ -29,10 +29,20 @@
                     <p class="font-semibold text-lg" th:text="${team.name}"></p>
                     <p class="text-sm text-gray-500" th:text="${team.city}"></p>
                 </div>
-                <button th:onclick="|confirmDelete(${team.id}, '${team.name}')|"
-                        class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 text-sm">
-                    Delete
-                </button>
+                
+                <div class="flex gap-2 items-center">
+                    
+                    <a th:href="@{/teams/edit/{id}(id=${team.id})}"
+                       class="bg-indigo-600 text-white px-3 py-1 rounded hover:bg-indigo-700 text-sm transition cursor-pointer">
+                        Edit
+                    </a>
+                    
+                    <button th:onclick="|confirmDelete(${team.id}, '${team.name}')|"
+                            class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 text-sm">
+                        Delete
+                    </button>
+                    
+                </div>
             </div>
         </div>
     </div>
