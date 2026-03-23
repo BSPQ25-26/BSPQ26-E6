@@ -39,6 +39,16 @@ public class TeamController {
         teamService.deleteTeam(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Team> getTeamById(@PathVariable Long id) {
+        return ResponseEntity.of(teamService.getTeamById(id));
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<Team>> getTeamsContainingName(@RequestParam String name) {
+        return ResponseEntity.ok(teamService.getTeamsContainingName(name));
+    }
     
     @GetMapping
     public ResponseEntity<List<Team>> getAllTeams() {

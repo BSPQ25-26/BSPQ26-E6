@@ -7,6 +7,7 @@ import com.example.football_manager.repository.CountryRepository;
 import com.example.football_manager.repository.TeamRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -53,7 +54,18 @@ public class TeamService {
 
         teamRepository.delete(existingTeam);
     }
-    
+
+    public Optional<Team> getTeamById(Long id) {
+        return teamRepository.findById(id);
+    }
+
+    public List<Team> getTeamsContainingName(String name) {
+        if (name == null || name.trim().isEmpty()) {
+            return List.of();
+        }
+        return teamRepository.findByNameContainingIgnoreCase(name.trim());
+    }
+
     public List<Team> getAllTeams() {
         return teamRepository.findAll();
     }
