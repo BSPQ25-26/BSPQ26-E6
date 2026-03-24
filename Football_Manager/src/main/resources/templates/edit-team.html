@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Football Manager - Edit Team</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8 font-sans">
+    
+    <div class="sm:mx-auto sm:w-full sm:max-w-md">
+        <h2 class="mt-6 text-center text-3xl font-extrabold text-slate-900">
+            Edit Team Details
+        </h2>
+        <p class="mt-2 text-center text-sm text-slate-600">
+            Update the information for this club
+        </p>
+    </div>
+
+    <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+        <div class="bg-white py-8 px-4 shadow-xl sm:rounded-xl sm:px-10 border border-slate-100">
+            <form th:action="@{/api/teams/{id}(id=${teamId})}" th:object="${teamRequest}" th:method="put" class="space-y-6">
+                
+                <div>
+                    <label for="name" class="block text-sm font-medium text-slate-700">Team Name</label>
+                    <div class="mt-1">
+                        <input id="name" type="text" th:field="*{name}" required maxlength="30"
+                            class="appearance-none block w-full px-4 py-3 border border-slate-300 rounded-lg shadow-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition duration-200">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="logoUrl" class="block text-sm font-medium text-slate-700">Logo URL</label>
+                    <div class="mt-1">
+                        <input id="logoUrl" type="url" th:field="*{logoUrl}" required placeholder="https://example.com/logo.png"
+                            class="appearance-none block w-full px-4 py-3 border border-slate-300 rounded-lg shadow-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition duration-200">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="countryId" class="block text-sm font-medium text-slate-700">Country</label>
+                    <div class="relative mt-1">
+                        <select id="countryId" th:field="*{countryId}" required
+                            class="appearance-none block w-full px-4 py-3 border border-slate-300 rounded-lg shadow-sm bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition duration-200 cursor-pointer">
+                            <option value="" disabled>Select a country</option>
+                            <option value="Spain">Spain</option>
+                            <option value="England">England</option>
+                            <option value="Italy">Italy</option>
+                            <option value="Germany">Germany</option>
+                            <option value="France">France</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
+                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-4 flex flex-col space-y-3">
+                    <button type="submit"
+                        class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-bold text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200">
+                        Save Changes
+                    </button>
+                    
+                    <a th:href="@{/teams}" 
+                        class="w-full flex justify-center py-3 px-4 border border-slate-300 rounded-lg shadow-sm text-sm font-medium text-slate-700 bg-white hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200">
+                        Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -12,13 +12,9 @@ public class MatchRequestDTO {
         CANCELLED
     }
 
-    @NotNull(message = "Home team ID is required")
     private Long homeTeamId;
-    @NotNull(message = "Away team ID is required")
     private Long awayTeamId;
-    @NotNull(message = "Kickoff time is required")
     private LocalDateTime kickoffTime;
-    @NotNull(message = "Venue is required")
     private String venue;
     
     private MatchStatus status;
