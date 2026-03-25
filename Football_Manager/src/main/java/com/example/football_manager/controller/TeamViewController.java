@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 
 @Controller
 public class TeamViewController {
@@ -18,7 +17,6 @@ public class TeamViewController {
     @Autowired
     private TeamService teamService;
 
-    // INYECTAMOS EL SERVICIO DE PAÍSES
     @Autowired
     private CountryService countryService; 
 
@@ -31,11 +29,10 @@ public class TeamViewController {
     @GetMapping("/teams/add")
     public String showAddTeamForm(Model model) {
         model.addAttribute("teamRequest", new TeamRequestDTO());
-        // ENVIAMOS LA LISTA DE PAÍSES A LA VISTA
         model.addAttribute("countries", countryService.getAllCountries()); 
         return "add-team";
     }
-
+  
     @PostMapping("/teams/add")
     public String createTeam(@ModelAttribute TeamRequestDTO teamDTO) {
         teamService.createTeam(teamDTO);
@@ -57,12 +54,12 @@ public class TeamViewController {
 
         model.addAttribute("teamRequest", teamDTO);
         model.addAttribute("teamId", id);
-        // ENVIAMOS LA LISTA DE PAÍSES TAMBIÉN A LA VISTA DE EDICIÓN
+
         model.addAttribute("countries", countryService.getAllCountries()); 
         return "edit-team";
     }
 
-    @PutMapping("/teams/edit/{id}")
+    @PostMapping("/teams/edit/{id}")
     public String updateTeam(@PathVariable Long id, @ModelAttribute TeamRequestDTO teamDTO) {
         teamService.updateTeam(id, teamDTO);
         return "redirect:/teams";
