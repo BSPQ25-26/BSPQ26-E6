@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
 @Table(name = "\"user\"")
@@ -15,10 +15,20 @@ import java.util.UUID;
 public class User {
 
     @Id
-    private UUID id; // comes from auth.users
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(nullable = false, length = 30)
     private String username;
+
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String email;
+
+    @Column(name = "hashed_password", nullable = false, columnDefinition = "TEXT")
+    private String hashedPassword;
+
+    @Column(name = "is_admin", nullable = false)
+    private Boolean isAdmin = false;
 
     @ManyToMany
     @JoinTable(

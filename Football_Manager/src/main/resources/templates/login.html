@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Football Manager - Login</title>
@@ -9,25 +9,16 @@
     <div class="max-w-md mx-auto bg-white p-8 rounded-lg shadow">
         <h2 class="text-2xl font-bold mb-6">Login</h2>
 
-        <div th:if="${param.error}" class="mb-4 p-3 bg-red-100 text-red-700 rounded">
-            Invalid email or password.
-        </div>
-        <div th:if="${param.logout}" class="mb-4 p-3 bg-green-100 text-green-700 rounded">
-            You have been logged out.
-        </div>
-        <div th:if="${param.registered}" class="mb-4 p-3 bg-green-100 text-green-700 rounded">
-            Registration successful! Please log in.
-        </div>
+        <div id="message" class="hidden mb-4 p-3 rounded"></div>
 
-        <form th:action="@{/login}" method="POST" class="space-y-4">
+        <form id="loginForm" class="space-y-4">
             <div>
-                <label class="block text-sm font-medium mb-1">Email</label>
-                <input type="email" name="username" class="w-full border p-2 rounded"
-                       required placeholder="email@example.com">
+                <label for="username" class="block text-sm font-medium mb-1">Username</label>
+                <input id="username" type="text" name="username" class="w-full border p-2 rounded" required>
             </div>
             <div>
-                <label class="block text-sm font-medium mb-1">Password</label>
-                <input type="password" name="password" class="w-full border p-2 rounded" required>
+                <label for="password" class="block text-sm font-medium mb-1">Password</label>
+                <input id="password" type="password" name="password" class="w-full border p-2 rounded" required>
             </div>
             <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
                 Login
@@ -36,8 +27,45 @@
 
         <p class="mt-4 text-center text-sm">
             Don't have an account?
-            <a th:href="@{/register}" class="text-blue-600 hover:underline">Register</a>
+            <a href="/register" class="text-blue-600 hover:underline">Register</a>
         </p>
     </div>
+
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        const message = document.getElementById('message');
+
+        function showMessage(text, isError) {
+            message.textContent = text;
+            message.className = isError
+                ? 'mb-4 p-3 bg-red-100 text-red-700 rounded'
+                : 'mb-4 p-3 bg-green-100 text-green-700 rounded';
+        }
+
+        loginForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(loginForm);
+            const payload = {
+                username: formData.get('username'),
+                password: formData.get('password')
+            };
+
+            const response = await fetch('/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            const data = await response.json();
+            if (!response.ok) {
+                showMessage(data.message || 'Login failed', true);
+                return;
+            }
+
+            showMessage('Login successful. Redirecting...', false);
+            window.location.href = '/teams';
+        });
+    </script>
 </body>
 </html>

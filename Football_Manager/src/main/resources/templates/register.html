@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Football Manager - Register</title>
@@ -9,26 +9,20 @@
     <div class="max-w-md mx-auto bg-white p-8 rounded-lg shadow">
         <h2 class="text-2xl font-bold mb-6">Register</h2>
 
-        <div th:if="${error}" class="mb-4 p-3 bg-red-100 text-red-700 rounded" th:text="${error}"></div>
+        <div id="message" class="hidden mb-4 p-3 rounded"></div>
 
-        <form th:action="@{/register}" th:object="${registerDTO}" method="POST" class="space-y-4">
+        <form id="registerForm" class="space-y-4">
             <div>
-                <label class="block text-sm font-medium mb-1">Name</label>
-                <input type="text" th:field="*{name}" class="w-full border p-2 rounded" required>
-                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
-                      class="text-red-600 text-sm"></span>
+                <label for="username" class="block text-sm font-medium mb-1">Username</label>
+                <input id="username" type="text" name="username" class="w-full border p-2 rounded" required>
             </div>
             <div>
-                <label class="block text-sm font-medium mb-1">Email</label>
-                <input type="email" th:field="*{email}" class="w-full border p-2 rounded" required>
-                <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
-                      class="text-red-600 text-sm"></span>
+                <label for="email" class="block text-sm font-medium mb-1">Email</label>
+                <input id="email" type="email" name="email" class="w-full border p-2 rounded" required>
             </div>
             <div>
-                <label class="block text-sm font-medium mb-1">Password</label>
-                <input type="password" th:field="*{password}" class="w-full border p-2 rounded" required>
-                <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
-                      class="text-red-600 text-sm"></span>
+                <label for="password" class="block text-sm font-medium mb-1">Password</label>
+                <input id="password" type="password" name="password" class="w-full border p-2 rounded" required minlength="8">
             </div>
             <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
                 Register
@@ -37,8 +31,48 @@
 
         <p class="mt-4 text-center text-sm">
             Already have an account?
-            <a th:href="@{/login}" class="text-blue-600 hover:underline">Login</a>
+            <a href="/login" class="text-blue-600 hover:underline">Login</a>
         </p>
     </div>
+
+    <script>
+        const registerForm = document.getElementById('registerForm');
+        const message = document.getElementById('message');
+
+        function showMessage(text, isError) {
+            message.textContent = text;
+            message.className = isError
+                ? 'mb-4 p-3 bg-red-100 text-red-700 rounded'
+                : 'mb-4 p-3 bg-green-100 text-green-700 rounded';
+        }
+
+        registerForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(registerForm);
+            const payload = {
+                username: formData.get('username'),
+                email: formData.get('email'),
+                password: formData.get('password')
+            };
+
+            const response = await fetch('/auth/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            const data = await response.json();
+            if (!response.ok) {
+                showMessage(data.message || 'Registration failed', true);
+                return;
+            }
+
+            showMessage('Registration successful. Redirecting to login...', false);
+            setTimeout(() => {
+                window.location.href = '/login';
+            }, 1000);
+        });
+    </script>
 </body>
 </html>
