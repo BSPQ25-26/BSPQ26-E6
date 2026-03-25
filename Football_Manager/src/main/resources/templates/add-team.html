@@ -18,7 +18,7 @@
 
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div class="bg-white py-8 px-4 shadow-xl sm:rounded-xl sm:px-10 border border-slate-100">
-            <form th:action="@{/api/teams}" th:object="${teamRequest}" method="POST" class="space-y-6">
+            <form th:action="@{/teams/add}" th:object="${teamRequest}" method="POST" class="space-y-6">
                 
                 <div>
                     <label for="name" class="block text-sm font-medium text-slate-700">Team Name</label>
