@@ -3,6 +3,7 @@ package com.example.football_manager.controller;
 import com.example.football_manager.dto.TeamRequestDTO;
 import com.example.football_manager.service.CountryService;
 import com.example.football_manager.service.TeamService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,10 +19,16 @@ public class TeamViewController {
     private TeamService teamService;
 
     @Autowired
-    private CountryService countryService; 
+    private CountryService countryService;
 
     @GetMapping("/teams")
-    public String teamsPage(Model model) {
+    public String teamsPage(Model model, HttpSession session) {
+        // Leemos de la sesión si el usuario logueado es admin
+        Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
+
+        // Pasamos la variable a la vista HTML (si es null, será false)
+        model.addAttribute("isAdmin", isAdmin != null && isAdmin);
+
         model.addAttribute("teams", teamService.getAllTeams());
         return "teams";
     }
@@ -29,10 +36,10 @@ public class TeamViewController {
     @GetMapping("/teams/add")
     public String showAddTeamForm(Model model) {
         model.addAttribute("teamRequest", new TeamRequestDTO());
-        model.addAttribute("countries", countryService.getAllCountries()); 
+        model.addAttribute("countries", countryService.getAllCountries());
         return "add-team";
     }
-  
+
     @PostMapping("/teams/add")
     public String createTeam(@ModelAttribute TeamRequestDTO teamDTO) {
         teamService.createTeam(teamDTO);
@@ -47,7 +54,7 @@ public class TeamViewController {
         TeamRequestDTO teamDTO = new TeamRequestDTO();
         teamDTO.setName(existingTeam.getName());
         teamDTO.setLogoUrl(existingTeam.getLogoUrl());
-        
+
         if (existingTeam.getCountry() != null) {
             teamDTO.setCountryId(existingTeam.getCountry().getId());
         }
@@ -55,7 +62,7 @@ public class TeamViewController {
         model.addAttribute("teamRequest", teamDTO);
         model.addAttribute("teamId", id);
 
-        model.addAttribute("countries", countryService.getAllCountries()); 
+        model.addAttribute("countries", countryService.getAllCountries());
         return "edit-team";
     }
 

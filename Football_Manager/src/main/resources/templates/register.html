@@ -4,58 +4,84 @@
     <meta charset="UTF-8">
     <title>Football Manager - Register</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .pitch-bg {
+            background-color: #0f172a;
+            background-image: radial-gradient(circle at top right, #064e3b, transparent 40%),
+            radial-gradient(circle at bottom left, #064e3b, transparent 40%);
+        }
+    </style>
 </head>
-<body class="bg-slate-100 p-10">
-    <div class="max-w-md mx-auto bg-white p-8 rounded-lg shadow">
-        <h2 class="text-2xl font-bold mb-6">Register</h2>
+<body class="pitch-bg min-h-screen flex items-center justify-center p-4 font-sans text-slate-100">
 
-        <div id="message" class="hidden mb-4 p-3 rounded"></div>
+<div class="max-w-md w-full bg-slate-800/80 backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden border border-slate-700">
+    <div class="p-8">
+        <div class="text-center mb-8">
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 mb-4 shadow-inner">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path></svg>
+            </div>
+            <h2 class="text-3xl font-extrabold text-white tracking-tight uppercase">Join the Club</h2>
+            <p class="text-sm text-slate-400 mt-2">Create your manager profile.</p>
+        </div>
 
-        <form id="registerForm" class="space-y-4">
+        <div id="message" class="hidden mb-4 p-3 rounded-lg text-sm text-center font-medium"></div>
+
+        <form id="registerForm" class="space-y-5">
             <div>
-                <label for="username" class="block text-sm font-medium mb-1">Username</label>
-                <input id="username" type="text" name="username" class="w-full border p-2 rounded" required>
+                <label for="username" class="block text-sm font-medium text-slate-300 mb-1">Username</label>
+                <input type="text" id="username" name="username" required
+                       class="w-full px-4 py-3 rounded-lg bg-slate-900 border border-slate-600 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all">
             </div>
+
             <div>
-                <label for="email" class="block text-sm font-medium mb-1">Email</label>
-                <input id="email" type="email" name="email" class="w-full border p-2 rounded" required>
+                <label for="email" class="block text-sm font-medium text-slate-300 mb-1">Email</label>
+                <input type="email" id="email" name="email" required
+                       class="w-full px-4 py-3 rounded-lg bg-slate-900 border border-slate-600 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all">
             </div>
+
             <div>
-                <label for="password" class="block text-sm font-medium mb-1">Password</label>
-                <input id="password" type="password" name="password" class="w-full border p-2 rounded" required minlength="8">
+                <label for="password" class="block text-sm font-medium text-slate-300 mb-1">Password</label>
+                <input type="password" id="password" name="password" required minlength="8"
+                       class="w-full px-4 py-3 rounded-lg bg-slate-900 border border-slate-600 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all">
             </div>
-            <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
-                Register
+
+            <button type="submit" class="w-full py-3 px-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-lg shadow-lg shadow-emerald-600/30 transition-all transform hover:-translate-y-0.5 uppercase tracking-wide mt-2">
+                Create Profile
             </button>
         </form>
-
-        <p class="mt-4 text-center text-sm">
-            Already have an account?
-            <a href="/login" class="text-blue-600 hover:underline">Login</a>
+    </div>
+    <div class="px-8 py-4 bg-slate-900/50 border-t border-slate-700 text-center">
+        <p class="text-sm text-slate-400">
+            Already have a profile?
+            <a href="/login" class="font-medium text-emerald-400 hover:text-emerald-300 transition-colors">Sign in</a>
         </p>
     </div>
+</div>
 
-    <script>
-        const registerForm = document.getElementById('registerForm');
-        const message = document.getElementById('message');
+<script>
+    const registerForm = document.getElementById('registerForm');
+    const message = document.getElementById('message');
 
-        function showMessage(text, isError) {
-            message.textContent = text;
-            message.className = isError
-                ? 'mb-4 p-3 bg-red-100 text-red-700 rounded'
-                : 'mb-4 p-3 bg-green-100 text-green-700 rounded';
-        }
+    function showMessage(text, isError) {
+        message.textContent = text;
+        message.classList.remove('hidden');
+        // Estilos para encajar con el fondo oscuro
+        message.className = isError
+            ? 'mb-4 p-3 bg-red-500/10 border border-red-500/50 text-red-400 rounded-lg text-sm text-center font-medium'
+            : 'mb-4 p-3 bg-emerald-500/10 border border-emerald-500/50 text-emerald-400 rounded-lg text-sm text-center font-medium';
+    }
 
-        registerForm.addEventListener('submit', async (event) => {
-            event.preventDefault();
+    registerForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
 
-            const formData = new FormData(registerForm);
-            const payload = {
-                username: formData.get('username'),
-                email: formData.get('email'),
-                password: formData.get('password')
-            };
+        const formData = new FormData(registerForm);
+        const payload = {
+            username: formData.get('username'),
+            email: formData.get('email'),
+            password: formData.get('password')
+        };
 
+        try {
             const response = await fetch('/auth/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -72,7 +98,10 @@
             setTimeout(() => {
                 window.location.href = '/login';
             }, 1000);
-        });
-    </script>
+        } catch (error) {
+            showMessage('Network error. Please try again.', true);
+        }
+    });
+</script>
 </body>
 </html>
