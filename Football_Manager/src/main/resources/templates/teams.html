@@ -36,10 +36,17 @@
         <div th:each="team : ${teams}"
              class="bg-white p-4 rounded-lg shadow flex justify-between items-center">
 
-            <div>
-                <p class="font-semibold text-lg" th:text="${team.name}"></p>
-                <p class="text-sm text-gray-500"
-                   th:text="${team.country != null ? team.country.name : 'No country'}"></p>
+            <div class="flex items-center gap-4">
+
+                <img th:src="${team.logoUrl != null && !team.logoUrl.isEmpty() ? team.logoUrl : 'https://via.placeholder.com/150?text=Logo'}"
+                     alt="Team Logo"
+                     class="w-12 h-12 object-contain rounded bg-slate-50 border border-slate-200">
+
+                <div>
+                    <p class="font-semibold text-lg" th:text="${team.name}"></p>
+                    <p class="text-sm text-gray-500"
+                       th:text="${team.country != null ? team.country.name : 'No country'}"></p>
+                </div>
             </div>
 
             <div class="flex gap-2 items-center">
