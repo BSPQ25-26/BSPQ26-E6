@@ -10,17 +10,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class AdminViewController {
 
     @Autowired
-    private TeamService teamService; // Inyectamos el servicio para obtener los equipos
+    private TeamService teamService; 
 
     @GetMapping("/admin")
     public String adminPanel() {
         return "admin-panel";
     }
 
-    // Nuevo endpoint para gestionar los equipos desde el panel de control
     @GetMapping("/admin/manage-teams")
     public String manageTeams(Model model) {
         model.addAttribute("teams", teamService.getAllTeams());
-        return "admin-manage-teams"; // El nombre de la nueva vista HTML
+        return "admin-manage-teams";
     }
 }

@@ -23,10 +23,8 @@ public class TeamViewController {
 
     @GetMapping("/teams")
     public String teamsPage(Model model, HttpSession session) {
-        // Leemos de la sesión si el usuario logueado es admin
         Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
 
-        // Pasamos la variable a la vista HTML (si es null, será false)
         model.addAttribute("isAdmin", isAdmin != null && isAdmin);
 
         model.addAttribute("teams", teamService.getAllTeams());

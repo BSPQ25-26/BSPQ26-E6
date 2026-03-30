@@ -42,7 +42,6 @@ public class AuthController {
         try {
             User user = userService.login(loginDTO.getUsername(), loginDTO.getPassword());
 
-            // GUARDAMOS EN SESIÓN SI ES ADMIN PARA USARLO EN LAS VISTAS HTML
             session.setAttribute("isAdmin", user.getIsAdmin());
 
             return ResponseEntity.ok(
