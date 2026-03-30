@@ -5,6 +5,7 @@ import com.example.football_manager.dto.LoginDTO;
 import com.example.football_manager.dto.RegisterDTO;
 import com.example.football_manager.model.User;
 import com.example.football_manager.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,9 +38,12 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponseDTO> login(@Valid @RequestBody LoginDTO loginDTO) {
+    public ResponseEntity<AuthResponseDTO> login(@Valid @RequestBody LoginDTO loginDTO, HttpSession session) {
         try {
             User user = userService.login(loginDTO.getUsername(), loginDTO.getPassword());
+
+            // GUARDAMOS EN SESIÓN SI ES ADMIN PARA USARLO EN LAS VISTAS HTML
+            session.setAttribute("isAdmin", user.getIsAdmin());
 
             return ResponseEntity.ok(
                     new AuthResponseDTO(user.getId(), user.getUsername(), user.getEmail(), user.getIsAdmin(), "Login successful")
