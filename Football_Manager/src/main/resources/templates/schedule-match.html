@@ -22,6 +22,11 @@
             </div>
 
             <div>
+                <label class="block text-sm font-medium">Competition ID</label>
+                <input type="number" th:field="*{competitionId}" class="w-full border p-2 rounded" required>
+            </div>
+
+            <div>
                 <label class="block text-sm font-medium">Kickoff Time</label>
                 <input type="datetime-local" th:field="*{kickoffTime}" class="w-full border p-2 rounded" required>
             </div>
