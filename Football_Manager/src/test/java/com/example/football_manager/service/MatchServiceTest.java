@@ -1,10 +1,17 @@
 package com.example.football_manager.service;
 
 import com.example.football_manager.dto.MatchRequestDTO;
+import com.example.football_manager.dto.MatchResultDTO;
+import com.example.football_manager.model.Match;
+import com.example.football_manager.model.Team;
+import com.example.football_manager.repository.MatchRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -122,5 +129,39 @@ class MatchServiceTest {
         String result = matchService.registerResult(9L, 2, 1);
 
         assertEquals("Result registered for match 9: 2 - 1", result);
+    }
+    
+    @Test
+    void getFinishedMatchResults_shouldReturnTeamsAndScore() {
+        MatchRepository repository = Mockito.mock(MatchRepository.class);
+
+        Team homeTeam = new Team();
+        homeTeam.setName("Arsenal");
+
+        Team awayTeam = new Team();
+        awayTeam.setName("Chelsea");
+
+        Match finishedMatch = new Match();
+        finishedMatch.setId(11L);
+        finishedMatch.setLeftTeam(homeTeam);
+        finishedMatch.setRightTeam(awayTeam);
+        finishedMatch.setLeftScore((short) 3);
+        finishedMatch.setRightScore((short) 2);
+        finishedMatch.setDatetime(OffsetDateTime.parse("2026-04-19T14:00:00Z"));
+        finishedMatch.setFinished(true);
+
+        Mockito.when(repository.findByFinishedTrueOrderByDatetimeDesc()).thenReturn(List.of(finishedMatch));
+
+        MatchService serviceWithRepository = new MatchService(repository);
+
+        List<MatchResultDTO> results = serviceWithRepository.getFinishedMatchResults();
+
+        assertEquals(1, results.size());
+        MatchResultDTO result = results.get(0);
+        assertEquals(11L, result.matchId());
+        assertEquals("Arsenal", result.homeTeamName());
+        assertEquals("Chelsea", result.awayTeamName());
+        assertEquals(3, result.homeScore());
+        assertEquals(2, result.awayScore());
     }
 }

@@ -1,10 +1,15 @@
 package com.example.football_manager.service;
 
 import com.example.football_manager.dto.MatchRequestDTO;
-// import com.example.football_manager.repository.MatchRepository; 
+import com.example.football_manager.repository.MatchRepository; 
 // import com.example.football_manager.repository.TeamRepository;  
+import com.example.football_manager.dto.MatchResultDTO;
+import com.example.football_manager.model.Match;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Collections;
+import java.util.List;
 
 @Service
 public class MatchService {
@@ -14,6 +19,15 @@ public class MatchService {
     
     // @Autowired
     // private TeamRepository teamRepository;
+    private MatchRepository matchRepository;
+
+    public MatchService() {
+    }
+
+    @Autowired
+    public MatchService(MatchRepository matchRepository) {
+        this.matchRepository = matchRepository;
+    }
 
     /**
      * Schedule a new match with manual validations.
@@ -79,5 +93,27 @@ public class MatchService {
         // Requirement 2.6: Data integrity for finished matches
         // TODO: Update scores and set status to FINISHED
         return "Result registered for match " + id + ": " + homeScore + " - " + awayScore;
+    }
+    
+    /**
+     * Display teams and final score for finished matches.
+     */
+    public List<MatchResultDTO> getFinishedMatchResults() {
+        if (matchRepository == null) {
+            return Collections.emptyList();
+        }
+
+        List<Match> matches = matchRepository.findByFinishedTrueOrderByDatetimeDesc();
+
+        return matches.stream()
+                .map(match -> new MatchResultDTO(
+                        match.getId(),
+                        match.getLeftTeam().getName(),
+                        match.getRightTeam().getName(),
+                        match.getLeftScore(),
+                        match.getRightScore(),
+                        match.getDatetime()
+                ))
+                .toList();
     }
 }
