@@ -240,4 +240,13 @@ public class MatchService {
     public List<Match> getAllMatches() {
         return matchRepository.findAll();
     }
+
+    public Match getMatchById(Long id) {
+        return matchRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Match not found with id: " + id));
+    }
+
+    public List<MatchGoal> getGoalsByMatchId(Long matchId) {
+        return matchGoalRepository.findByMatchIdOrderByMinuteAscStoppageMinuteAscIdAsc(matchId);
+    }
 }
