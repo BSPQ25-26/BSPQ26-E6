@@ -1,16 +1,24 @@
 package com.example.football_manager.service;
 
+import com.example.football_manager.model.Team;
 import com.example.football_manager.model.User;
+import com.example.football_manager.repository.TeamRepository;
 import com.example.football_manager.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private TeamRepository teamRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -52,5 +60,43 @@ public class UserService {
     public User getUserByUsername(String username) {
         return userRepository.findByUsername(username)
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
+    }
+
+    public User addFavouriteTeam(Long userId, Long teamId) {
+        User user = getUserById(userId);
+        Team team = teamRepository.findById(teamId)
+                .orElseThrow(() -> new IllegalArgumentException("Team not found"));
+
+        Set<Team> favouriteTeams = user.getFavouriteTeams();
+        if (favouriteTeams == null) {
+            favouriteTeams = new HashSet<>();
+            user.setFavouriteTeams(favouriteTeams);
+        }
+
+        if (!favouriteTeams.add(team)) {
+            throw new IllegalArgumentException("Team already in favourites");
+        }
+
+        return userRepository.save(user);
+    }
+
+    public User removeFavouriteTeam(Long userId, Long teamId) {
+        User user = getUserById(userId);
+
+        if (!teamRepository.existsById(teamId)) {
+            throw new IllegalArgumentException("Team not found");
+        }
+
+        Set<Team> favouriteTeams = user.getFavouriteTeams();
+        if (favouriteTeams == null || favouriteTeams.isEmpty()) {
+            throw new IllegalArgumentException("Team not in favourites");
+        }
+
+        boolean removed = favouriteTeams.removeIf(team -> teamId.equals(team.getId()));
+        if (!removed) {
+            throw new IllegalArgumentException("Team not in favourites");
+        }
+
+        return userRepository.save(user);
     }
 }
