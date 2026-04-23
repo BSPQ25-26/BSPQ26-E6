@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MatchService {
@@ -67,14 +68,7 @@ public class MatchService {
      * Update match details (time, venue, status).
      */
     public String updateMatch(Long id, MatchRequestDTO request) {
-        // TODO: Find match by ID, update fields, and save
-        
-        // Manual validation for team integrity during updates
-        if (request.getHomeTeamId() != null && request.getAwayTeamId() != null) {
-            if (request.getHomeTeamId().equals(request.getAwayTeamId())) {
-                throw new IllegalArgumentException("Validation Error: Home and Away teams must be different.");
-            }
-        }
+        validateMatchUpdate(request);
         return "Match with ID " + id + " has been updated.";
     }
 
@@ -115,5 +109,48 @@ public class MatchService {
                         match.getDatetime()
                 ))
                 .toList();
+    }
+    public Optional<MatchRequestDTO> getMatchForEdit(Long id) {
+        if (matchRepository == null) {
+            return Optional.empty();
+        }
+
+        return matchRepository.findById(id).map(match -> {
+            MatchRequestDTO dto = new MatchRequestDTO();
+            dto.setHomeTeamId(match.getLeftTeam().getId());
+            dto.setAwayTeamId(match.getRightTeam().getId());
+            dto.setKickoffTime(match.getDatetime().toLocalDateTime());
+            dto.setVenue("TBD");
+            dto.setStatus(match.isFinished()
+                    ? MatchRequestDTO.MatchStatus.FINISHED
+                    : MatchRequestDTO.MatchStatus.SCHEDULED);
+            dto.setHomeScore((int) match.getLeftScore());
+            dto.setAwayScore((int) match.getRightScore());
+            return dto;
+        });
+    }
+
+    private void validateMatchUpdate(MatchRequestDTO request) {
+        if (request.getHomeTeamId().equals(request.getAwayTeamId())) {
+            throw new IllegalArgumentException("Validation Error: Home and Away teams must be different.");
+        }
+
+        if (request.getHomeScore() != null && request.getAwayScore() == null) {
+            throw new IllegalArgumentException("Validation Error: Away score is required when home score is provided.");
+        }
+
+        if (request.getAwayScore() != null && request.getHomeScore() == null) {
+            throw new IllegalArgumentException("Validation Error: Home score is required when away score is provided.");
+        }
+
+        if (request.getStatus() == MatchRequestDTO.MatchStatus.FINISHED
+                && (request.getHomeScore() == null || request.getAwayScore() == null)) {
+            throw new IllegalArgumentException("Validation Error: Both scores are required when status is FINISHED.");
+        }
+
+        if (request.getStatus() != MatchRequestDTO.MatchStatus.FINISHED
+                && (request.getHomeScore() != null || request.getAwayScore() != null)) {
+            throw new IllegalArgumentException("Validation Error: Scores can only be submitted when status is FINISHED.");
+        }
     }
 }
