@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -98,5 +100,21 @@ public class UserService {
         }
 
         return userRepository.save(user);
+    }
+
+    public Set<Long> getFavouriteTeamIdsByUserId(Long userId) {
+        if (userId == null) {
+            return Collections.emptySet();
+        }
+
+        User user = getUserById(userId);
+        Set<Team> favouriteTeams = user.getFavouriteTeams();
+        if (favouriteTeams == null || favouriteTeams.isEmpty()) {
+            return Collections.emptySet();
+        }
+
+        return favouriteTeams.stream()
+                .map(Team::getId)
+                .collect(Collectors.toSet());
     }
 }
