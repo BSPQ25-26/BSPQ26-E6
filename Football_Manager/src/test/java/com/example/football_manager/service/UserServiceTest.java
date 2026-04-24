@@ -15,10 +15,15 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+import com.example.football_manager.model.Team;
+import com.example.football_manager.repository.TeamRepository;
+import java.util.HashSet;
+import java.util.Set;
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceTest {
-
+    @Mock
+    private TeamRepository teamRepository;
     @Mock
     private UserRepository userRepository;
 
@@ -176,5 +181,105 @@ class UserServiceTest {
                 () -> userService.getUserByUsername("ghost"));
 
         assertEquals("User not found", ex.getMessage());
+    }
+
+    @Test
+    void addFavouriteTeam_shouldAddTeamSuccessfully() {
+        Team team = new Team();
+        team.setId(10L);
+        team.setName("Real Madrid");
+
+        normalUser.setFavouriteTeams(new HashSet<>());
+
+        when(userRepository.findById(1L)).thenReturn(Optional.of(normalUser));
+        when(teamRepository.findById(10L)).thenReturn(Optional.of(team));
+        when(userRepository.save(any(User.class))).thenAnswer(inv -> inv.getArgument(0));
+
+        User result = userService.addFavouriteTeam(1L, 10L);
+
+        assertEquals(1, result.getFavouriteTeams().size());
+        assertTrue(result.getFavouriteTeams().contains(team));
+        verify(userRepository).save(normalUser);
+    }
+
+    @Test
+    void addFavouriteTeam_shouldThrowWhenTeamAlreadyFavourite() {
+        Team team = new Team();
+        team.setId(10L);
+        team.setName("Real Madrid");
+
+        normalUser.setFavouriteTeams(new HashSet<>());
+        normalUser.getFavouriteTeams().add(team);
+
+        when(userRepository.findById(1L)).thenReturn(Optional.of(normalUser));
+        when(teamRepository.findById(10L)).thenReturn(Optional.of(team));
+
+        IllegalArgumentException ex = assertThrows(
+                IllegalArgumentException.class,
+                () -> userService.addFavouriteTeam(1L, 10L)
+        );
+
+        assertEquals("Team already in favourites", ex.getMessage());
+        verify(userRepository, never()).save(any(User.class));
+    }
+
+    @Test
+    void removeFavouriteTeam_shouldRemoveTeamSuccessfully() {
+        Team team = new Team();
+        team.setId(10L);
+        team.setName("Real Madrid");
+
+        normalUser.setFavouriteTeams(new HashSet<>());
+        normalUser.getFavouriteTeams().add(team);
+
+        when(userRepository.findById(1L)).thenReturn(Optional.of(normalUser));
+        when(teamRepository.existsById(10L)).thenReturn(true);
+        when(userRepository.save(any(User.class))).thenAnswer(inv -> inv.getArgument(0));
+
+        User result = userService.removeFavouriteTeam(1L, 10L);
+
+        assertTrue(result.getFavouriteTeams().isEmpty());
+        verify(userRepository).save(normalUser);
+    }
+
+    @Test
+    void removeFavouriteTeam_shouldThrowWhenTeamNotInFavourites() {
+        normalUser.setFavouriteTeams(new HashSet<>());
+
+        when(userRepository.findById(1L)).thenReturn(Optional.of(normalUser));
+        when(teamRepository.existsById(10L)).thenReturn(true);
+
+        IllegalArgumentException ex = assertThrows(
+                IllegalArgumentException.class,
+                () -> userService.removeFavouriteTeam(1L, 10L)
+        );
+
+        assertEquals("Team not in favourites", ex.getMessage());
+        verify(userRepository, never()).save(any(User.class));
+    }
+
+    @Test
+    void getFavouriteTeamIdsByUserId_shouldReturnFavouriteIds() {
+        Team team1 = new Team();
+        team1.setId(10L);
+
+        Team team2 = new Team();
+        team2.setId(20L);
+
+        normalUser.setFavouriteTeams(Set.of(team1, team2));
+
+        when(userRepository.findById(1L)).thenReturn(Optional.of(normalUser));
+
+        Set<Long> result = userService.getFavouriteTeamIdsByUserId(1L);
+
+        assertEquals(Set.of(10L, 20L), result);
+    }
+
+    @Test
+    void getFavouriteTeamIdsByUserId_shouldReturnEmptyWhenUserIdIsNull() {
+        Set<Long> result = userService.getFavouriteTeamIdsByUserId(null);
+
+        assertTrue(result.isEmpty());
+        verify(userRepository, never()).findById(anyLong());
     }
 }
