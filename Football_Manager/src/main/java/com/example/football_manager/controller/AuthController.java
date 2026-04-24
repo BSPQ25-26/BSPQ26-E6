@@ -42,6 +42,7 @@ public class AuthController {
         try {
             User user = userService.login(loginDTO.getUsername(), loginDTO.getPassword());
 
+            session.setAttribute("userId", user.getId());
             session.setAttribute("isAdmin", user.getIsAdmin());
 
             return ResponseEntity.ok(

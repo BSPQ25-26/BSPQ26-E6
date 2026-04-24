@@ -3,6 +3,7 @@ package com.example.football_manager.controller;
 import com.example.football_manager.dto.TeamRequestDTO;
 import com.example.football_manager.service.CountryService;
 import com.example.football_manager.service.TeamService;
+import com.example.football_manager.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.Set;
 
 @Controller
 public class TeamViewController {
@@ -21,13 +24,25 @@ public class TeamViewController {
     @Autowired
     private CountryService countryService;
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping("/teams")
     public String teamsPage(Model model, HttpSession session) {
         Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
+        Long userId = (Long) session.getAttribute("userId");
 
         model.addAttribute("isAdmin", isAdmin != null && isAdmin);
-
         model.addAttribute("teams", teamService.getAllTeams());
+
+        Set<Long> favouriteTeamIds = Set.of();
+        try {
+            favouriteTeamIds = userService.getFavouriteTeamIdsByUserId(userId);
+        } catch (IllegalArgumentException ignored) {
+            // If session contains an invalid user id, render page without favourites.
+        }
+        model.addAttribute("favouriteTeamIds", favouriteTeamIds);
+
         return "teams";
     }
 
