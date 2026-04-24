@@ -1,32 +1,25 @@
 package com.example.football_manager.service;
 
+import com.example.football_manager.model.Match;
 import com.example.football_manager.dto.MatchRequestDTO;
 import com.example.football_manager.repository.MatchRepository; 
-// import com.example.football_manager.repository.TeamRepository;  
-import com.example.football_manager.dto.MatchResultDTO;
-import com.example.football_manager.model.Match;
+import com.example.football_manager.repository.TeamRepository;  
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 
 @Service
 public class MatchService {
 
-    // @Autowired
-    // private MatchRepository matchRepository;
-    
-    // @Autowired
-    // private TeamRepository teamRepository;
-    private MatchRepository matchRepository;
-
-    public MatchService() {
-    }
-
     @Autowired
-    public MatchService(MatchRepository matchRepository) {
-        this.matchRepository = matchRepository;
+    private MatchRepository matchRepository;
+    
+    @Autowired
+    private TeamRepository teamRepository;
+
+    public List<Match> getAllMatches() {
+        return matchRepository.findAll();
     }
 
     /**
