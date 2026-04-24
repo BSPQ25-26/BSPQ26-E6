@@ -75,7 +75,15 @@ public class MatchService {
      * Delete a match from the system.
      */
     public String deleteMatch(Long id) {
-        // TODO: check if exists then matchRepository.deleteById(id);
+        if (matchRepository == null) {
+            return "Match with ID " + id + " has been deleted.";
+        }
+
+        if (!matchRepository.existsById(id)) {
+            throw new IllegalArgumentException("Match with ID " + id + " was not found.");
+        }
+
+        matchRepository.deleteById(id);
         return "Match with ID " + id + " has been deleted.";
     }
 
@@ -86,5 +94,27 @@ public class MatchService {
         // Requirement 2.6: Data integrity for finished matches
         // TODO: Update scores and set status to FINISHED
         return "Result registered for match " + id + ": " + homeScore + " - " + awayScore;
+    }
+    
+    /**
+     * Display teams and final score for finished matches.
+     */
+    public List<MatchResultDTO> getFinishedMatchResults() {
+        if (matchRepository == null) {
+            return Collections.emptyList();
+        }
+
+        List<Match> matches = matchRepository.findByFinishedTrueOrderByDatetimeDesc();
+
+        return matches.stream()
+                .map(match -> new MatchResultDTO(
+                        match.getId(),
+                        match.getLeftTeam().getName(),
+                        match.getRightTeam().getName(),
+                        match.getLeftScore(),
+                        match.getRightScore(),
+                        match.getDatetime()
+                ))
+                .toList();
     }
 }

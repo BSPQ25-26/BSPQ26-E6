@@ -2,12 +2,15 @@ package com.example.football_manager.controller;
 
 import com.example.football_manager.model.Match;
 import com.example.football_manager.dto.MatchRequestDTO;
+import com.example.football_manager.dto.MatchResultDTO;
 import com.example.football_manager.service.MatchService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
+
 import java.util.List;
 
 @RestController
@@ -32,6 +35,12 @@ public class MatchController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
+    
+    // Retrieve finished match results
+    @GetMapping("/results")
+    public ResponseEntity<List<MatchResultDTO>> getMatchResults() {
+        return ResponseEntity.ok(matchService.getFinishedMatchResults());
+    }
 
     // Edit match details
     @PutMapping("/{id}")
@@ -42,7 +51,11 @@ public class MatchController {
     // Delete a match
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteMatch(@PathVariable Long id) {
-        return ResponseEntity.ok(matchService.deleteMatch(id));
+        try {
+            return ResponseEntity.ok(matchService.deleteMatch(id));
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
     }
 
     // Register result (Score)

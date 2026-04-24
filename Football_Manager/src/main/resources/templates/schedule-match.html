@@ -12,13 +12,19 @@
         <form th:action="@{/api/matches}" th:object="${matchRequest}" method="POST" class="space-y-4">
             
             <div>
-                <label class="block text-sm font-medium">Home Team ID</label>
-                <input type="number" th:field="*{homeTeamId}" class="w-full border p-2 rounded" required>
+                <label class="block text-sm font-medium">Home Team</label>
+                <select th:field="*{homeTeamId}" class="w-full border p-2 rounded" required>
+                    <option value="" disabled selected>Select home team</option>
+                    <option th:each="team : ${teams}" th:value="${team.id}" th:text="${team.name}"></option>
+                </select>
             </div>
 
             <div>
-                <label class="block text-sm font-medium">Away Team ID</label>
-                <input type="number" th:field="*{awayTeamId}" class="w-full border p-2 rounded" required>
+                <label class="block text-sm font-medium">Away Team</label>
+                <select th:field="*{awayTeamId}" class="w-full border p-2 rounded" required>
+                    <option value="" disabled selected>Select away team</option>
+                    <option th:each="team : ${teams}" th:value="${team.id}" th:text="${team.name}"></option>
+                </select>
             </div>
 
             <div>

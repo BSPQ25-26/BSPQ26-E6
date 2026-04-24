@@ -10,6 +10,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class MatchViewController {
+    
+    @Autowired
+    private MatchService matchService;
+    
+    @Autowired
+    private TeamService teamService;
 
     @Autowired
     private MatchService matchService;
@@ -17,6 +23,7 @@ public class MatchViewController {
     @GetMapping("/matches/schedule")
     public String showScheduleForm(Model model) {
         model.addAttribute("matchRequest", new MatchRequestDTO());
+        model.addAttribute("teams", teamService.getAllTeams());
         return "schedule-match";
     }
 
