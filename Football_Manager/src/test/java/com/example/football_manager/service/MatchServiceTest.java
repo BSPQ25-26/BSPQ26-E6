@@ -14,6 +14,8 @@ import java.time.OffsetDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 
 class MatchServiceTest {
 
@@ -122,6 +124,33 @@ class MatchServiceTest {
         String result = matchService.deleteMatch(3L);
 
         assertEquals("Match with ID 3 has been deleted.", result);
+    }
+
+    @Test
+    void deleteMatch_shouldDeleteFromRepositoryWhenMatchExists() {
+        MatchRepository repository = Mockito.mock(MatchRepository.class);
+        Mockito.when(repository.existsById(3L)).thenReturn(true);
+
+        MatchService serviceWithRepository = new MatchService(repository);
+
+        String result = serviceWithRepository.deleteMatch(3L);
+
+        assertEquals("Match with ID 3 has been deleted.", result);
+        verify(repository).deleteById(3L);
+    }
+
+    @Test
+    void deleteMatch_shouldThrowWhenMatchDoesNotExist() {
+        MatchRepository repository = Mockito.mock(MatchRepository.class);
+        Mockito.when(repository.existsById(99L)).thenReturn(false);
+
+        MatchService serviceWithRepository = new MatchService(repository);
+
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class,
+                () -> serviceWithRepository.deleteMatch(99L));
+
+        assertEquals("Match with ID 99 was not found.", ex.getMessage());
+        verify(repository, never()).deleteById(99L);
     }
 
     @Test
