@@ -131,6 +131,18 @@ public class MatchService {
     }
 
     private void validateMatchUpdate(MatchRequestDTO request) {
+            if (request.getHomeTeamId() == null || request.getAwayTeamId() == null) {
+            throw new IllegalArgumentException("Validation Error: Both Home and Away team IDs are required.");
+        }
+
+        if (request.getKickoffTime() == null || request.getVenue() == null || request.getVenue().isBlank()) {
+            throw new IllegalArgumentException("Validation Error: Kickoff time and Venue are required.");
+        }
+
+        if (request.getStatus() == null) {
+            throw new IllegalArgumentException("Validation Error: Match status is required.");
+        }
+
         if (request.getHomeTeamId().equals(request.getAwayTeamId())) {
             throw new IllegalArgumentException("Validation Error: Home and Away teams must be different.");
         }

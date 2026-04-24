@@ -36,9 +36,13 @@ public class MatchController {
     }
 
     // Edit match details
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public ResponseEntity<String> updateMatch(@PathVariable Long id, @RequestBody MatchRequestDTO matchDTO) {
-        return ResponseEntity.ok(matchService.updateMatch(id, matchDTO));
+        try {
+            return ResponseEntity.ok(matchService.updateMatch(id, matchDTO));
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     // Delete a match

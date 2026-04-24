@@ -4,108 +4,183 @@
     <meta charset="UTF-8">
     <title>Football Manager - Edit Match</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .pitch-bg {
+            background-color: #f8fafc;
+            background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23e2e8f0" fill-opacity="0.4"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+        }
+    </style>
 </head>
-<body class="bg-slate-100 min-h-screen py-10 px-4">
-<div class="max-w-2xl mx-auto bg-white rounded-xl shadow-md p-8">
-    <h1 class="text-2xl font-bold text-slate-900 mb-2">Edit Match</h1>
-    <p class="text-slate-500 mb-6">Update match details and submit to apply changes.</p>
 
-    <div id="message" class="hidden mb-4 rounded-md px-4 py-3 text-sm font-medium"></div>
+<body class="pitch-bg min-h-screen font-sans text-slate-800">
 
-    <form id="editMatchForm" th:object="${matchRequest}" class="space-y-4">
-        <div>
-            <label class="block text-sm font-medium text-slate-700">Home Team ID</label>
-            <input type="number" th:field="*{homeTeamId}" required class="mt-1 w-full rounded border border-slate-300 px-3 py-2">
-        </div>
-
-        <div>
-            <label class="block text-sm font-medium text-slate-700">Away Team ID</label>
-            <input type="number" th:field="*{awayTeamId}" required class="mt-1 w-full rounded border border-slate-300 px-3 py-2">
-        </div>
-
-        <div>
-            <label class="block text-sm font-medium text-slate-700">Kickoff Time</label>
-            <input type="datetime-local" th:field="*{kickoffTime}" required class="mt-1 w-full rounded border border-slate-300 px-3 py-2">
-        </div>
-
-        <div>
-            <label class="block text-sm font-medium text-slate-700">Venue</label>
-            <input type="text" th:field="*{venue}" required class="mt-1 w-full rounded border border-slate-300 px-3 py-2">
-        </div>
-
-        <div>
-            <label class="block text-sm font-medium text-slate-700">Status</label>
-            <select id="status" th:field="*{status}" class="mt-1 w-full rounded border border-slate-300 px-3 py-2">
-                <option th:each="st : ${T(com.example.football_manager.dto.MatchRequestDTO.MatchStatus).values()}"
-                        th:value="${st}" th:text="${st}"></option>
-            </select>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-                <label class="block text-sm font-medium text-slate-700">Home Score</label>
-                <input type="number" min="0" th:field="*{homeScore}" class="mt-1 w-full rounded border border-slate-300 px-3 py-2">
+<nav class="bg-slate-900 border-b-2 border-emerald-600 shadow-md">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16 gap-3">
+            <div class="flex items-center gap-3">
+                <svg class="w-8 h-8 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 10a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z"></path>
+                </svg>
+                <span class="text-xl font-black text-white uppercase tracking-wider">
+                    Edit<span class="text-emerald-500">Match</span>
+                </span>
             </div>
-            <div>
-                <label class="block text-sm font-medium text-slate-700">Away Score</label>
-                <input type="number" min="0" th:field="*{awayScore}" class="mt-1 w-full rounded border border-slate-300 px-3 py-2">
-            </div>
+            <a href="/matches/results" class="px-4 py-2 bg-slate-800 text-slate-300 text-sm font-medium rounded-md hover:bg-slate-700 hover:text-white transition-colors border border-slate-700">
+                Back to Results
+            </a>
         </div>
+    </div>
+</nav>
 
-        <div class="pt-4 flex gap-3">
-            <button type="submit" class="bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-700">Save Match</button>
-            <a href="/matches/results" class="bg-slate-200 text-slate-800 px-5 py-2 rounded hover:bg-slate-300">Cancel</a>
-        </div>
-    </form>
-</div>
+<main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div class="mb-8 bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+        <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight uppercase">
+            Update Match Details
+        </h1>
+        <p class="text-slate-500 mt-1 font-medium">
+            Adjust teams, kickoff details, and the result status in one place.
+        </p>
+    </div>
+
+    <div class="max-w-3xl mx-auto bg-white rounded-2xl border border-slate-200 shadow-sm p-6 md:p-8">
+        <div id="message" class="hidden mb-6 rounded-md px-4 py-3 text-sm font-medium"></div>
+
+        <form id="editMatchForm" th:object="${matchRequest}" class="space-y-6">
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 tracking-wide">Home Team</label>
+                    <select id="homeTeamId" th:field="*{homeTeamId}" required class="mt-2 w-full rounded-lg border border-slate-300 px-3 py-2.5">
+                        <option value="">Select home team</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 tracking-wide">Away Team</label>
+                    <select id="awayTeamId" th:field="*{awayTeamId}" required class="mt-2 w-full rounded-lg border border-slate-300 px-3 py-2.5">
+                        <option value="">Select away team</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700">Kickoff Time</label>
+                    <input type="datetime-local" th:field="*{kickoffTime}" required class="mt-2 w-full rounded-lg border border-slate-300 px-3 py-2.5">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700">Venue</label>
+                    <input type="text" th:field="*{venue}" required class="mt-2 w-full rounded-lg border border-slate-300 px-3 py-2.5">
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold text-slate-700">Status</label>
+                <select id="status" th:field="*{status}" class="mt-2 w-full rounded-lg border border-slate-300 px-3 py-2.5">
+                    <option th:each="st : ${T(com.example.football_manager.dto.MatchRequestDTO.MatchStatus).values()}"
+                            th:value="${st}" th:text="${st}"></option>
+                </select>
+                <p class="mt-2 text-xs text-slate-500">
+                    Scores only allowed when status is <b>FINISHED</b>
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700">Home Score</label>
+                    <input id="homeScore" type="number" min="0" th:field="*{homeScore}" class="mt-2 w-full rounded-lg border px-3 py-2.5">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700">Away Score</label>
+                    <input id="awayScore" type="number" min="0" th:field="*{awayScore}" class="mt-2 w-full rounded-lg border px-3 py-2.5">
+                </div>
+            </div>
+
+            <div class="pt-2 flex gap-3">
+                <button type="submit" class="px-5 py-2 bg-emerald-600 text-white rounded-md hover:bg-emerald-700">
+                    Save Match
+                </button>
+                <a href="/matches/results" class="px-5 py-2 bg-slate-200 rounded-md">
+                    Cancel
+                </a>
+            </div>
+
+        </form>
+    </div>
+</main>
 
 <script th:inline="javascript">
     const form = document.getElementById('editMatchForm');
     const messageBox = document.getElementById('message');
+    const statusSelect = document.getElementById('status');
+    const homeTeamSelect = document.getElementById('homeTeamId');
+    const awayTeamSelect = document.getElementById('awayTeamId');
+    const homeScoreInput = document.getElementById('homeScore');
+    const awayScoreInput = document.getElementById('awayScore');
     const matchId = /*[[${matchId}]]*/ 0;
 
     function showMessage(text, isError) {
         messageBox.textContent = text;
         messageBox.classList.remove('hidden');
         messageBox.className = isError
-            ? 'mb-4 rounded-md px-4 py-3 text-sm font-medium bg-red-100 text-red-700'
-            : 'mb-4 rounded-md px-4 py-3 text-sm font-medium bg-emerald-100 text-emerald-700';
+            ? 'mb-6 bg-red-100 text-red-700 px-4 py-3'
+            : 'mb-6 bg-emerald-100 text-emerald-700 px-4 py-3';
     }
+
+    function toggleScoreInputs() {
+        const finished = statusSelect.value === 'FINISHED';
+        homeScoreInput.disabled = !finished;
+        awayScoreInput.disabled = !finished;
+
+        if (!finished) {
+            homeScoreInput.value = '';
+            awayScoreInput.value = '';
+        }
+    }
+
+    async function loadTeams() {
+        const response = await fetch('/api/teams');
+        const teams = await response.json();
+
+        homeTeamSelect.innerHTML = teams.map(t => `<option value="${t.id}">${t.name}</option>`).join('');
+        awayTeamSelect.innerHTML = homeTeamSelect.innerHTML;
+    }
+
+    statusSelect.addEventListener('change', toggleScoreInputs);
+    toggleScoreInputs();
+    loadTeams();
 
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
 
         const payload = {
-            homeTeamId: form.homeTeamId.value ? Number(form.homeTeamId.value) : null,
-            awayTeamId: form.awayTeamId.value ? Number(form.awayTeamId.value) : null,
-            kickoffTime: form.kickoffTime.value || null,
+            homeTeamId: Number(form.homeTeamId.value),
+            awayTeamId: Number(form.awayTeamId.value),
+            kickoffTime: form.kickoffTime.value,
             venue: form.venue.value,
-            status: form.status.value || null,
-            homeScore: form.homeScore.value ? Number(form.homeScore.value) : null,
-            awayScore: form.awayScore.value ? Number(form.awayScore.value) : null
+            status: form.status.value,
+            homeScore: homeScoreInput.value ? Number(homeScoreInput.value) : null,
+            awayScore: awayScoreInput.value ? Number(awayScoreInput.value) : null
         };
 
-        try {
-            const response = await fetch(`/api/matches/${matchId}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(payload)
-            });
+        const response = await fetch(`/api/matches/${matchId}`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(payload)
+        });
 
-            const responseText = await response.text();
+        const text = await response.text();
 
-            if (!response.ok) {
-                showMessage(responseText || 'Unable to update match.', true);
-                return;
-            }
-
-            showMessage(responseText || 'Match updated successfully.', false);
-        } catch (error) {
-            showMessage('Request failed. Please try again.', true);
+        if (!response.ok) {
+            showMessage(text, true);
+        } else {
+            showMessage(text || 'Updated successfully', false);
         }
     });
 </script>
+
 </body>
 </html>
