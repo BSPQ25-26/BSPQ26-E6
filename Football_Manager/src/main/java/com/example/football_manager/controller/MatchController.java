@@ -1,20 +1,16 @@
 package com.example.football_manager.controller;
 
-import com.example.football_manager.dto.MatchResultRequestDTO;
-import com.example.football_manager.model.Match;
 import com.example.football_manager.dto.MatchRequestDTO;
 import com.example.football_manager.dto.MatchResultDTO;
+import com.example.football_manager.dto.MatchResultRequestDTO;
+import com.example.football_manager.model.Match;
 import com.example.football_manager.service.MatchService;
 import jakarta.validation.Valid;
-
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
 import java.util.List;
 
@@ -30,7 +26,6 @@ public class MatchController {
         return ResponseEntity.ok(matchService.getAllMatches());
     }
 
-    // Schedule a match
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> createMatchFromJson(@Valid @RequestBody MatchRequestDTO matchDTO) {
         return createMatchResponse(matchDTO);
@@ -49,14 +44,12 @@ public class MatchController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
-    
-    // Retrieve finished match results
+
     @GetMapping("/results")
     public ResponseEntity<List<MatchResultDTO>> getMatchResults() {
         return ResponseEntity.ok(matchService.getFinishedMatchResults());
     }
 
-    // Edit match details
     @PutMapping("/{id}")
     public ResponseEntity<String> updateMatch(@PathVariable Long id, @RequestBody MatchRequestDTO matchDTO) {
         try {
@@ -66,7 +59,6 @@ public class MatchController {
         }
     }
 
-    // Delete a match
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteMatch(@PathVariable Long id) {
         try {
@@ -76,7 +68,6 @@ public class MatchController {
         }
     }
 
-    // Register result (Score)
     @PatchMapping("/{id}/result")
     public ResponseEntity<String> registerResult(
             @PathVariable Long id,
@@ -86,11 +77,5 @@ public class MatchController {
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
-    }
-    
-    @GetMapping
-    public ResponseEntity<List<Match>> getAllMatches() {
-        List<Match> matches = matchService.getAllMatches();
-        return ResponseEntity.ok(matches);
     }
 }

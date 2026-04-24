@@ -5,6 +5,7 @@ import com.example.football_manager.dto.MatchResultRequestDTO;
 import com.example.football_manager.model.Match;
 import com.example.football_manager.model.MatchGoal;
 import com.example.football_manager.service.MatchService;
+import com.example.football_manager.service.TeamService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,9 +21,11 @@ import java.util.List;
 public class MatchViewController {
 
     private final MatchService matchService;
+    private final TeamService teamService;
 
-    public MatchViewController(MatchService matchService) {
+    public MatchViewController(MatchService matchService, TeamService teamService) {
         this.matchService = matchService;
+        this.teamService = teamService;
     }
 
     @GetMapping("/matches/schedule")
@@ -56,6 +59,7 @@ public class MatchViewController {
             @ModelAttribute("resultRequest") MatchResultRequestDTO resultRequest,
             Model model,
             RedirectAttributes redirectAttributes) {
+
         Match match = matchService.getMatchById(id);
         model.addAttribute("match", match);
 
@@ -81,7 +85,9 @@ public class MatchViewController {
             MatchResultRequestDTO.GoalDTO goalDTO = new MatchResultRequestDTO.GoalDTO();
             goalDTO.setTeamId(goal.getTeam().getId());
             goalDTO.setMinute((int) goal.getMinute());
-            goalDTO.setStoppageMinute(goal.getStoppageMinute() == null ? null : (int) goal.getStoppageMinute());
+            goalDTO.setStoppageMinute(
+                    goal.getStoppageMinute() == null ? null : (int) goal.getStoppageMinute()
+            );
             goalDTOs.add(goalDTO);
         }
 

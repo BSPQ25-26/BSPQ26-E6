@@ -1,6 +1,5 @@
 package com.example.football_manager.service;
 
-import com.example.football_manager.model.Match;
 import com.example.football_manager.dto.MatchRequestDTO;
 import com.example.football_manager.dto.MatchResultDTO;
 import com.example.football_manager.dto.MatchResultRequestDTO;
@@ -15,10 +14,12 @@ import com.example.football_manager.repository.TeamRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Service
 public class MatchService {
@@ -28,25 +29,28 @@ public class MatchService {
     private final TeamRepository teamRepository;
     private final CompetitionRepository competitionRepository;
 
-    public MatchService(MatchRepository matchRepository, MatchGoalRepository matchGoalRepository,
-                        TeamRepository teamRepository, CompetitionRepository competitionRepository) {
+    public MatchService(
+            MatchRepository matchRepository,
+            MatchGoalRepository matchGoalRepository,
+            TeamRepository teamRepository,
+            CompetitionRepository competitionRepository
+    ) {
         this.matchRepository = matchRepository;
         this.matchGoalRepository = matchGoalRepository;
         this.teamRepository = teamRepository;
         this.competitionRepository = competitionRepository;
     }
 
-    /**
-     * Schedule a new match with manual validations.
-     */
     @Transactional
     public String createMatch(MatchRequestDTO request) {
         validateMatchRequest(request, true);
 
         Team homeTeam = teamRepository.findById(request.getHomeTeamId())
                 .orElseThrow(() -> new IllegalArgumentException("Home team not found with id: " + request.getHomeTeamId()));
+
         Team awayTeam = teamRepository.findById(request.getAwayTeamId())
                 .orElseThrow(() -> new IllegalArgumentException("Away team not found with id: " + request.getAwayTeamId()));
+
         Competition competition = competitionRepository.findById(request.getCompetitionId())
                 .orElseThrow(() -> new IllegalArgumentException("Competition not found with id: " + request.getCompetitionId()));
 
@@ -91,17 +95,16 @@ public class MatchService {
         }
     }
 
-    /**
-     * Update match details (time, venue, status).
-     */
     @Transactional
     public String updateMatch(Long id, MatchRequestDTO request) {
         validateMatchRequest(request, false);
 
         Match match = matchRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Match not found with id: " + id));
+
         Team homeTeam = teamRepository.findById(request.getHomeTeamId())
                 .orElseThrow(() -> new IllegalArgumentException("Home team not found with id: " + request.getHomeTeamId()));
+
         Team awayTeam = teamRepository.findById(request.getAwayTeamId())
                 .orElseThrow(() -> new IllegalArgumentException("Away team not found with id: " + request.getAwayTeamId()));
 
@@ -120,24 +123,21 @@ public class MatchService {
         }
 
         matchRepository.save(match);
+
         return "Match with ID " + id + " has been updated.";
     }
 
-    /**
-     * Delete a match from the system.
-     */
     @Transactional
     public String deleteMatch(Long id) {
         Match match = matchRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Match not found with id: " + id));
+
         matchGoalRepository.deleteByMatchId(id);
         matchRepository.delete(match);
+
         return "Match with ID " + id + " has been deleted.";
     }
 
-    /**
-     * Register final match result from the goals scored in the match.
-     */
     @Transactional
     public String registerResult(Long id, MatchResultRequestDTO request) {
         if (request == null || request.getGoals() == null) {
@@ -179,9 +179,6 @@ public class MatchService {
         return "Result registered for match " + id + ": " + leftScore + " - " + rightScore;
     }
 
-    /**
-     * Display teams and final score for finished matches.
-     */
     public List<MatchResultDTO> getFinishedMatchResults() {
         List<Match> matches = matchRepository.findByFinishedTrueOrderByDatetimeDesc();
 
@@ -195,6 +192,55 @@ public class MatchService {
                         match.getDatetime()
                 ))
                 .toList();
+    }
+
+    public List<Match> getAllMatches() {
+        return matchRepository.findAll();
+    }
+
+    public Match getMatchById(Long id) {
+        return matchRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Match not found with id: " + id));
+    }
+
+    public List<MatchGoal> getGoalsByMatchId(Long matchId) {
+        return matchGoalRepository.findByMatchIdOrderByMinuteAscStoppageMinuteAscIdAsc(matchId);
+    }
+
+    public List<Match> getRecentMatchesByTeamId(Long teamId) {
+        return matchRepository
+                .findByFinishedTrueAndLeftTeamIdOrFinishedTrueAndRightTeamIdOrderByDatetimeDesc(
+                        teamId,
+                        teamId
+                );
+    }
+
+    public List<Match> getFutureMatchesByTeamId(Long teamId) {
+        OffsetDateTime now = OffsetDateTime.now();
+
+        return matchRepository
+                .findByFinishedFalseAndDatetimeAfterAndLeftTeamIdOrFinishedFalseAndDatetimeAfterAndRightTeamIdOrderByDatetimeAsc(
+                        now,
+                        teamId,
+                        now,
+                        teamId
+                );
+    }
+
+    public List<Match> getFutureMatchesByFavouriteTeamIds(Set<Long> favouriteTeamIds) {
+        if (favouriteTeamIds == null || favouriteTeamIds.isEmpty()) {
+            return List.of();
+        }
+
+        OffsetDateTime now = OffsetDateTime.now();
+
+        return matchRepository
+                .findByFinishedFalseAndDatetimeAfterAndLeftTeamIdInOrFinishedFalseAndDatetimeAfterAndRightTeamIdInOrderByDatetimeAsc(
+                        now,
+                        favouriteTeamIds,
+                        now,
+                        favouriteTeamIds
+                );
     }
 
     private Team resolveScoringTeam(Match match, MatchResultRequestDTO.GoalDTO goalDTO) {
@@ -236,18 +282,5 @@ public class MatchService {
         }
 
         return score.shortValue();
-    }
-
-    public List<Match> getAllMatches() {
-        return matchRepository.findAll();
-    }
-
-    public Match getMatchById(Long id) {
-        return matchRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Match not found with id: " + id));
-    }
-
-    public List<MatchGoal> getGoalsByMatchId(Long matchId) {
-        return matchGoalRepository.findByMatchIdOrderByMinuteAscStoppageMinuteAscIdAsc(matchId);
     }
 }
