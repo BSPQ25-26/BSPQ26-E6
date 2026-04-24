@@ -2,7 +2,7 @@ package com.example.football_manager.service;
 
 import com.example.football_manager.dto.MatchRequestDTO;
 import com.example.football_manager.repository.MatchRepository; 
-// import com.example.football_manager.repository.TeamRepository;  
+import com.example.football_manager.repository.TeamRepository;  
 import com.example.football_manager.dto.MatchResultDTO;
 import com.example.football_manager.model.Match;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +15,11 @@ import java.util.Optional;
 @Service
 public class MatchService {
 
-    // @Autowired
-    // private MatchRepository matchRepository;
-    
-    // @Autowired
-    // private TeamRepository teamRepository;
+    @Autowired
     private MatchRepository matchRepository;
+    
+    @Autowired
+    private TeamRepository teamRepository;
 
     public MatchService() {
     }
@@ -68,7 +67,42 @@ public class MatchService {
      * Update match details (time, venue, status).
      */
     public String updateMatch(Long id, MatchRequestDTO request) {
+// 1. Validar que los datos son correctos (tu método está perfecto)
         validateMatchUpdate(request);
+
+        // 2. Buscar el partido antiguo en la base de datos
+        Match match = matchRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Match not found"));
+
+        // 3. Buscar los equipos nuevos
+        com.example.football_manager.model.Team homeTeam = teamRepository.findById(request.getHomeTeamId())
+                .orElseThrow(() -> new IllegalArgumentException("Home team not found"));
+        com.example.football_manager.model.Team awayTeam = teamRepository.findById(request.getAwayTeamId())
+                .orElseThrow(() -> new IllegalArgumentException("Away team not found"));
+
+        // 4. Actualizar todos los datos del partido
+        match.setLeftTeam(homeTeam);
+        match.setRightTeam(awayTeam);
+        
+        // CONVERSIÓN DE FECHA: Pasamos de LocalDateTime a OffsetDateTime (usando UTC)
+        if (request.getKickoffTime() != null) {
+            match.setDatetime(request.getKickoffTime().atOffset(java.time.ZoneOffset.UTC));
+        }
+        
+        // Si el estado es FINISHED (Terminado), marcamos finished a true
+        match.setFinished(request.getStatus() == MatchRequestDTO.MatchStatus.FINISHED);
+
+        // CONVERSIÓN DE GOLES: Transformamos el Integer en short
+        if (request.getHomeScore() != null) {
+            match.setLeftScore(request.getHomeScore().shortValue());
+        }
+        if (request.getAwayScore() != null) {
+            match.setRightScore(request.getAwayScore().shortValue());
+        }
+
+        // 5. ¡GUARDAR EN BASE DE DATOS!
+        matchRepository.save(match);
+
         return "Match with ID " + id + " has been updated.";
     }
 

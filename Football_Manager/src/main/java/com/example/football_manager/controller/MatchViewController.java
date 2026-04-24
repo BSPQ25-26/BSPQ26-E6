@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class MatchViewController {
@@ -33,5 +35,16 @@ public class MatchViewController {
         model.addAttribute("matchRequest", matchRequestDTO);
         model.addAttribute("matchId", id);
         return "edit-match";
+    }
+
+    @PostMapping("/matches/edit/{id}")
+    public String updateMatch(@PathVariable Long id, @ModelAttribute("matchRequest") MatchRequestDTO matchDTO) {
+        try {
+
+            matchService.updateMatch(id, matchDTO);
+            return "redirect:/matches/results";
+        } catch (IllegalArgumentException e) {
+            return "redirect:/matches/edit/" + id + "?error=true";
+        }
     }
 }
