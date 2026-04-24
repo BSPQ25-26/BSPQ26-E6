@@ -28,6 +28,7 @@ public class MatchViewController {
     @GetMapping("/matches/schedule")
     public String showScheduleForm(Model model) {
         model.addAttribute("matchRequest", new MatchRequestDTO());
+        model.addAttribute("teams", teamService.getAllTeams());
         return "schedule-match";
     }
 

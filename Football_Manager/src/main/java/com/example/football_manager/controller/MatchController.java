@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 import java.util.List;
 
@@ -23,6 +24,11 @@ public class MatchController {
 
     @Autowired
     private MatchService matchService;
+
+    @GetMapping
+    public ResponseEntity<List<Match>> getAllMatches() {
+        return ResponseEntity.ok(matchService.getAllMatches());
+    }
 
     // Schedule a match
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)

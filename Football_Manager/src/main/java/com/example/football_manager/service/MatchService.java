@@ -1,5 +1,6 @@
 package com.example.football_manager.service;
 
+import com.example.football_manager.model.Match;
 import com.example.football_manager.dto.MatchRequestDTO;
 import com.example.football_manager.dto.MatchResultDTO;
 import com.example.football_manager.dto.MatchResultRequestDTO;
