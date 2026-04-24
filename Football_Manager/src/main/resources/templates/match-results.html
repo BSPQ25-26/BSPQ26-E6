@@ -54,9 +54,78 @@
                     <p class="text-lg font-bold text-slate-900 uppercase" th:text="${result.awayTeamName}">Away Team</p>
                 </div>
             </div>
+            <div class="mt-5 flex justify-end">
+                <button type="button"
+                        th:attr="data-match-id=${result.matchId},data-home-team=${result.homeTeamName},data-away-team=${result.awayTeamName}"
+                        onclick="confirmDelete(this)"
+                        class="px-3 py-1.5 bg-red-50 text-red-600 hover:bg-red-100 hover:text-red-800 rounded text-sm font-semibold transition-colors border border-red-200">
+                    Delete
+                </button>
+            </div>
         </div>
     </div>
 </main>
+
+<div id="confirmModal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-50 transition-opacity">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-sm w-full mx-4 overflow-hidden transform transition-transform scale-95" id="modalContent">
+        <div class="bg-red-500 px-6 py-4">
+            <h3 class="text-lg font-bold text-white">Confirm Deletion</h3>
+        </div>
+        <div class="p-6">
+            <p id="confirmMessage" class="text-slate-600 mb-8 leading-relaxed"></p>
+            <div class="flex gap-3 justify-end">
+                <button type="button" onclick="closeModal()" class="px-4 py-2 text-sm font-bold text-slate-600 bg-slate-100 rounded-lg hover:bg-slate-200">Cancel</button>
+                <button type="button" onclick="deleteMatch()" class="px-4 py-2 text-sm font-bold text-white bg-red-600 rounded-lg hover:bg-red-700 shadow-md">Yes, Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let selectedMatchId = null;
+
+    function confirmDelete(button) {
+        selectedMatchId = button.dataset.matchId;
+        const homeTeam = button.dataset.homeTeam;
+        const awayTeam = button.dataset.awayTeam;
+
+        document.getElementById('confirmMessage').innerHTML = `Are you sure you want to delete <strong class="text-slate-900 uppercase">"${homeTeam} vs ${awayTeam}"</strong>?`;
+
+        const modal = document.getElementById('confirmModal');
+        const content = document.getElementById('modalContent');
+        modal.classList.remove('hidden');
+        setTimeout(() => {
+            content.classList.remove('scale-95');
+            content.classList.add('scale-100');
+        }, 10);
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('confirmModal');
+        const content = document.getElementById('modalContent');
+        content.classList.remove('scale-100');
+        content.classList.add('scale-95');
+        setTimeout(() => { modal.classList.add('hidden'); }, 150);
+    }
+
+    async function deleteMatch() {
+        if (!selectedMatchId) {
+            return;
+        }
+
+        const response = await fetch('/api/matches/' + selectedMatchId, {
+            method: 'DELETE'
+        });
+
+        if (response.ok) {
+            window.location.reload();
+            return;
+        }
+
+        closeModal();
+        alert(await response.text());
+    }
+</script>
 
 </body>
 </html>

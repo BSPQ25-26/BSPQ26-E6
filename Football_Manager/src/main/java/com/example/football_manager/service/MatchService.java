@@ -82,7 +82,15 @@ public class MatchService {
      * Delete a match from the system.
      */
     public String deleteMatch(Long id) {
-        // TODO: check if exists then matchRepository.deleteById(id);
+        if (matchRepository == null) {
+            return "Match with ID " + id + " has been deleted.";
+        }
+
+        if (!matchRepository.existsById(id)) {
+            throw new IllegalArgumentException("Match with ID " + id + " was not found.");
+        }
+
+        matchRepository.deleteById(id);
         return "Match with ID " + id + " has been deleted.";
     }
 

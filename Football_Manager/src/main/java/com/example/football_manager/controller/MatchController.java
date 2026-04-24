@@ -44,7 +44,11 @@ public class MatchController {
     // Delete a match
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteMatch(@PathVariable Long id) {
-        return ResponseEntity.ok(matchService.deleteMatch(id));
+        try {
+            return ResponseEntity.ok(matchService.deleteMatch(id));
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
     }
 
     // Register result (Score)
