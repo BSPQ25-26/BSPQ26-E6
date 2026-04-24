@@ -11,27 +11,38 @@
         }
     </style>
 </head>
+
 <body class="pitch-bg min-h-screen font-sans text-slate-800">
 
 <nav class="bg-slate-900 border-b-2 border-emerald-600 shadow-md">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
             <div class="flex items-center gap-3">
-                <svg class="w-8 h-8 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 10a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z"></path></svg>
-                <span class="text-xl font-black text-white uppercase tracking-wider">Football<span class="text-emerald-500">Manager</span></span>
+                <svg class="w-8 h-8 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M9 10a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z"></path>
+                </svg>
+                <span class="text-xl font-black text-white uppercase tracking-wider">
+                    Football<span class="text-emerald-500">Manager</span>
+                </span>
             </div>
-            <div class="flex gap-3">
 
-                <a href="/profile" class="px-4 py-2 bg-slate-800 text-slate-300 text-sm font-medium rounded-md hover:bg-slate-700 hover:text-white transition-colors border border-slate-700">
+            <div class="flex gap-3">
+                <a href="/profile"
+                   class="px-4 py-2 bg-slate-800 text-slate-300 text-sm font-medium rounded-md hover:bg-slate-700 hover:text-white transition-colors border border-slate-700">
                     My Profile
                 </a>
 
-                <a th:if="${isAdmin}" href="/admin" class="px-4 py-2 bg-slate-800 text-slate-300 text-sm font-medium rounded-md hover:bg-slate-700 hover:text-white transition-colors border border-slate-700">
+                <a th:if="${isAdmin}" href="/admin"
+                   class="px-4 py-2 bg-slate-800 text-slate-300 text-sm font-medium rounded-md hover:bg-slate-700 hover:text-white transition-colors border border-slate-700">
                     Admin Panel
                 </a>
 
                 <form th:action="@{/logout}" method="POST" class="m-0">
-                    <button type="submit" class="px-4 py-2 bg-red-500/10 text-red-500 text-sm font-medium rounded-md hover:bg-red-500 hover:text-white transition-colors border border-red-500/20">
+                    <button type="submit"
+                            class="px-4 py-2 bg-red-500/10 text-red-500 text-sm font-medium rounded-md hover:bg-red-500 hover:text-white transition-colors border border-red-500/20">
                         Logout
                     </button>
                 </form>
@@ -45,38 +56,103 @@
     <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4 bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
         <div>
             <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight uppercase">Database</h1>
-            <p class="text-slate-500 mt-1 font-medium">Explore all available teams and clubs.</p>
+            <p class="text-slate-500 mt-1 font-medium">
+                Explore all available teams and clubs. Click a team to see recent and future matches.
+            </p>
         </div>
 
         <div class="w-full md:w-96 relative">
             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <svg class="h-5 w-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                <svg class="h-5 w-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
             </div>
+
             <input type="text" id="searchInput" placeholder="Filter by team name or country..."
                    class="block w-full pl-10 pr-3 py-3 border border-slate-300 rounded-xl leading-5 bg-slate-50 placeholder-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all sm:text-sm">
         </div>
     </div>
 
+    <section class="mb-8 bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+        <div class="px-6 py-5 border-b border-slate-200 bg-slate-50">
+            <h2 class="text-2xl font-extrabold text-slate-900 uppercase">
+                Upcoming Matches From Your Favourite Teams
+            </h2>
+            <p class="text-slate-500 mt-1 font-medium">
+                These are the next matches involving teams you marked with the heart.
+            </p>
+        </div>
+
+        <div th:if="${#lists.isEmpty(favouriteUpcomingMatches)}" class="p-6 text-slate-500">
+            You do not have upcoming matches from favourite teams yet.
+        </div>
+
+        <div th:if="${!#lists.isEmpty(favouriteUpcomingMatches)}" class="divide-y divide-slate-200">
+            <a th:each="match : ${favouriteUpcomingMatches}"
+               th:href="@{/teams/{id}(id=${match.leftTeam.id})}"
+               class="block px-6 py-4 hover:bg-emerald-50 transition-colors">
+
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                    <div class="flex-1">
+                        <p class="text-sm text-slate-500 font-medium"
+                           th:text="${match.competition != null ? match.competition.name : 'Competition'}">
+                            Competition
+                        </p>
+
+                        <div class="mt-1 flex flex-wrap items-center gap-2 text-lg font-black text-slate-900">
+                            <span th:text="${match.leftTeam.name}">Home</span>
+                            <span class="text-emerald-600">vs</span>
+                            <span th:text="${match.rightTeam.name}">Away</span>
+                        </div>
+                    </div>
+
+                    <div class="md:text-right">
+                        <p class="text-sm font-bold text-slate-700"
+                           th:text="${#temporals.format(match.datetime, 'dd MMM yyyy HH:mm')}">
+                            Date
+                        </p>
+                        <p class="text-sm text-slate-500"
+                           th:text="${match.venue}">
+                            Venue
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </section>
+
     <div id="noResults" class="hidden bg-white p-12 rounded-2xl shadow-sm border border-slate-200 text-center">
         <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-slate-100 text-slate-400 mb-4">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
         </div>
         <h3 class="text-lg font-bold text-slate-900">No teams found</h3>
         <p class="text-slate-500 mt-1">Try adjusting your search filter.</p>
     </div>
 
-    <div id="favouriteError" class="hidden mb-6 p-4 rounded-xl border text-sm font-medium bg-red-50 border-red-200 text-red-700"></div>
+    <div id="favouriteError"
+         class="hidden mb-6 p-4 rounded-xl border text-sm font-medium bg-red-50 border-red-200 text-red-700"></div>
 
-    <div th:if="${#lists.isEmpty(teams)}" class="bg-white p-12 rounded-2xl shadow-sm border border-slate-200 text-center">
+    <div th:if="${#lists.isEmpty(teams)}"
+         class="bg-white p-12 rounded-2xl shadow-sm border border-slate-200 text-center">
         <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-slate-100 text-slate-400 mb-4">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path></svg>
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path>
+            </svg>
         </div>
         <h3 class="text-lg font-bold text-slate-900">Database empty</h3>
         <p class="text-slate-500 mt-1">No teams have been added to the system yet.</p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="teamsGrid">
-        <div th:each="team : ${teams}" class="team-card bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-lg hover:border-emerald-300 transition-all group">
+        <div th:each="team : ${teams}"
+             th:attr="data-url=@{/teams/{id}(id=${team.id})}"
+             onclick="window.location.href=this.dataset.url"
+             class="team-card bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-lg hover:border-emerald-300 transition-all group cursor-pointer">
 
             <div class="h-2 w-full bg-gradient-to-r from-emerald-400 to-emerald-600"></div>
 
@@ -90,9 +166,13 @@
 
                     <div class="flex-1 min-w-0">
                         <div class="flex items-start justify-between gap-3">
-                            <h2 class="team-name text-xl font-bold text-slate-900 truncate uppercase" th:text="${team.name}">Team Name</h2>
+                            <h2 class="team-name text-xl font-bold text-slate-900 truncate uppercase"
+                                th:text="${team.name}">
+                                Team Name
+                            </h2>
 
                             <button type="button"
+                                    onclick="event.stopPropagation()"
                                     class="favourite-toggle p-1 rounded-full text-slate-400 hover:text-red-500 transition-colors"
                                     th:attr="data-team-id=${team.id},data-favourite=${favouriteTeamIds != null and favouriteTeamIds.contains(team.id)}"
                                     aria-label="Toggle favourite">
@@ -103,9 +183,19 @@
                         </div>
 
                         <div class="flex items-center mt-1 text-sm text-slate-500 font-medium">
-                            <svg class="w-4 h-4 mr-1 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            <span class="team-country truncate" th:text="${team.country != null ? team.country.name : 'Unknown'}">Country</span>
+                            <svg class="w-4 h-4 mr-1 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <span class="team-country truncate"
+                                  th:text="${team.country != null ? team.country.name : 'Unknown'}">
+                                Country
+                            </span>
                         </div>
+
+                        <p class="mt-4 text-xs font-bold text-emerald-600 uppercase tracking-wide opacity-0 group-hover:opacity-100 transition-opacity">
+                            View matches →
+                        </p>
                     </div>
                 </div>
             </div>
@@ -128,6 +218,7 @@
             }
 
             button.dataset.favourite = String(isFavourite);
+
             if (isFavourite) {
                 icon.setAttribute('fill', 'currentColor');
                 button.classList.remove('text-slate-400');
@@ -143,6 +234,7 @@
             if (!favouriteError) {
                 return;
             }
+
             favouriteError.textContent = text;
             favouriteError.classList.remove('hidden');
         }
@@ -151,6 +243,7 @@
             if (!favouriteError) {
                 return;
             }
+
             favouriteError.textContent = '';
             favouriteError.classList.add('hidden');
         }
@@ -158,9 +251,12 @@
         favouriteButtons.forEach(button => {
             setHeartState(button, button.dataset.favourite === 'true');
 
-            button.addEventListener('click', async () => {
+            button.addEventListener('click', async (event) => {
+                event.stopPropagation();
+
                 const teamId = button.dataset.teamId;
                 const isFavourite = button.dataset.favourite === 'true';
+
                 if (!teamId) {
                     return;
                 }
@@ -177,18 +273,19 @@
 
                     if (response.ok) {
                         setHeartState(button, !isFavourite);
+                        window.location.reload();
                         return;
                     }
 
                     if (!isFavourite && response.status === 409) {
-                        // Server says it's already favourited, so sync UI to filled heart.
                         setHeartState(button, true);
+                        window.location.reload();
                         return;
                     }
 
                     if (isFavourite && response.status === 409) {
-                        // Server says it's already removed, so sync UI to outlined heart.
                         setHeartState(button, false);
+                        window.location.reload();
                         return;
                     }
 
@@ -201,9 +298,9 @@
             });
         });
 
-        if(searchInput) {
-            searchInput.addEventListener('input', (e) => {
-                const searchTerm = e.target.value.toLowerCase();
+        if (searchInput) {
+            searchInput.addEventListener('input', (event) => {
+                const searchTerm = event.target.value.toLowerCase();
                 let visibleCount = 0;
 
                 teamCards.forEach(card => {
@@ -230,4 +327,3 @@
 
 </body>
 </html>
-

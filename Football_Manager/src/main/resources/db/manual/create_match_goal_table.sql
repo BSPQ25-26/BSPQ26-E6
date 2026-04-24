@@ -1,3 +1,5 @@
+
+
 ALTER TABLE "match"
     ADD COLUMN IF NOT EXISTS venue VARCHAR(100) NOT NULL DEFAULT 'Unknown';
 
