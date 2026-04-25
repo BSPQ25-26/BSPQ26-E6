@@ -44,22 +44,27 @@
     </div>
 
     <div class="max-w-3xl mx-auto bg-white rounded-2xl border border-slate-200 shadow-sm p-6 md:p-8">
-        <div id="message" class="hidden mb-6 rounded-md px-4 py-3 text-sm font-medium"></div>
+        
+        <div th:if="${param.error}" class="mb-6 bg-red-100 text-red-700 px-4 py-3 rounded-md text-sm font-medium">
+            Error updating match. Please ensure teams are different and all required fields are filled.
+        </div>
 
-        <form id="editMatchForm" th:object="${matchRequest}" class="space-y-6">
+        <form id="editMatchForm" th:action="@{/matches/edit/{id}(id=${matchId})}" th:object="${matchRequest}" method="POST" class="space-y-6">
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label class="block text-sm font-semibold text-slate-700 tracking-wide">Home Team</label>
                     <select id="homeTeamId" th:field="*{homeTeamId}" required class="mt-2 w-full rounded-lg border border-slate-300 px-3 py-2.5">
-                        <option value="">Select home team</option>
+                        <option value="" disabled>Select home team</option>
+                        <option th:each="team : ${teams}" th:value="${team.id}" th:text="${team.name}"></option>
                     </select>
                 </div>
 
                 <div>
                     <label class="block text-sm font-semibold text-slate-700 tracking-wide">Away Team</label>
                     <select id="awayTeamId" th:field="*{awayTeamId}" required class="mt-2 w-full rounded-lg border border-slate-300 px-3 py-2.5">
-                        <option value="">Select away team</option>
+                        <option value="" disabled>Select away team</option>
+                        <option th:each="team : ${teams}" th:value="${team.id}" th:text="${team.name}"></option>
                     </select>
                 </div>
             </div>
@@ -90,20 +95,20 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label class="block text-sm font-semibold text-slate-700">Home Score</label>
-                    <input id="homeScore" type="number" min="0" th:field="*{homeScore}" class="mt-2 w-full rounded-lg border px-3 py-2.5">
+                    <input id="homeScore" type="number" min="0" th:field="*{homeScore}" class="mt-2 w-full rounded-lg border px-3 py-2.5 disabled:bg-slate-100 disabled:text-slate-400">
                 </div>
 
                 <div>
                     <label class="block text-sm font-semibold text-slate-700">Away Score</label>
-                    <input id="awayScore" type="number" min="0" th:field="*{awayScore}" class="mt-2 w-full rounded-lg border px-3 py-2.5">
+                    <input id="awayScore" type="number" min="0" th:field="*{awayScore}" class="mt-2 w-full rounded-lg border px-3 py-2.5 disabled:bg-slate-100 disabled:text-slate-400">
                 </div>
             </div>
 
             <div class="pt-2 flex gap-3">
-                <button type="submit" class="px-5 py-2 bg-emerald-600 text-white rounded-md hover:bg-emerald-700">
+                <button type="submit" class="px-5 py-2 bg-emerald-600 text-white rounded-md hover:bg-emerald-700 transition">
                     Save Match
                 </button>
-                <a href="/matches/results" class="px-5 py-2 bg-slate-200 rounded-md">
+                <a href="/matches/results" class="px-5 py-2 bg-slate-200 text-slate-700 rounded-md hover:bg-slate-300 transition text-center flex items-center">
                     Cancel
                 </a>
             </div>
@@ -112,23 +117,11 @@
     </div>
 </main>
 
-<script th:inline="javascript">
-    const form = document.getElementById('editMatchForm');
-    const messageBox = document.getElementById('message');
+<script>
+    // JS Limpio: Solo mantenemos la lógica visual para bloquear los goles si no está FINISHED
     const statusSelect = document.getElementById('status');
-    const homeTeamSelect = document.getElementById('homeTeamId');
-    const awayTeamSelect = document.getElementById('awayTeamId');
     const homeScoreInput = document.getElementById('homeScore');
     const awayScoreInput = document.getElementById('awayScore');
-    const matchId = /*[[${matchId}]]*/ 0;
-
-    function showMessage(text, isError) {
-        messageBox.textContent = text;
-        messageBox.classList.remove('hidden');
-        messageBox.className = isError
-            ? 'mb-6 bg-red-100 text-red-700 px-4 py-3'
-            : 'mb-6 bg-emerald-100 text-emerald-700 px-4 py-3';
-    }
 
     function toggleScoreInputs() {
         const finished = statusSelect.value === 'FINISHED';
@@ -141,45 +134,10 @@
         }
     }
 
-    async function loadTeams() {
-        const response = await fetch('/api/teams');
-        const teams = await response.json();
-
-        homeTeamSelect.innerHTML = teams.map(t => `<option value="${t.id}">${t.name}</option>`).join('');
-        awayTeamSelect.innerHTML = homeTeamSelect.innerHTML;
-    }
-
     statusSelect.addEventListener('change', toggleScoreInputs);
-    toggleScoreInputs();
-    loadTeams();
-
-    form.addEventListener('submit', async (event) => {
-        event.preventDefault();
-
-        const payload = {
-            homeTeamId: Number(form.homeTeamId.value),
-            awayTeamId: Number(form.awayTeamId.value),
-            kickoffTime: form.kickoffTime.value,
-            venue: form.venue.value,
-            status: form.status.value,
-            homeScore: homeScoreInput.value ? Number(homeScoreInput.value) : null,
-            awayScore: awayScoreInput.value ? Number(awayScoreInput.value) : null
-        };
-
-        const response = await fetch(`/api/matches/${matchId}`, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(payload)
-        });
-
-        const text = await response.text();
-
-        if (!response.ok) {
-            showMessage(text, true);
-        } else {
-            showMessage(text || 'Updated successfully', false);
-        }
-    });
+    
+    // Ejecutar al cargar la página por primera vez
+    document.addEventListener('DOMContentLoaded', toggleScoreInputs);
 </script>
 
 </body>
