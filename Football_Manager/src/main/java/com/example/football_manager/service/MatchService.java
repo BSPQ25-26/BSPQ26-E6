@@ -1,6 +1,8 @@
 package com.example.football_manager.service;
 
 import com.example.football_manager.dto.MatchRequestDTO;
+import com.example.football_manager.repository.MatchRepository; 
+import com.example.football_manager.repository.TeamRepository;  
 import com.example.football_manager.dto.MatchResultDTO;
 import com.example.football_manager.dto.MatchResultRequestDTO;
 import com.example.football_manager.model.Competition;
@@ -18,12 +20,18 @@ import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Objects;
 import java.util.Set;
 
 @Service
 public class MatchService {
 
+    @Autowired
+    private MatchRepository matchRepository;
+    
+    @Autowired
+    private TeamRepository teamRepository;
     private final MatchRepository matchRepository;
     private final MatchGoalRepository matchGoalRepository;
     private final TeamRepository teamRepository;
@@ -97,30 +105,39 @@ public class MatchService {
 
     @Transactional
     public String updateMatch(Long id, MatchRequestDTO request) {
-        validateMatchRequest(request, false);
+
+        validateMatchUpdate(request);
+
 
         Match match = matchRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Match not found with id: " + id));
+                .orElseThrow(() -> new IllegalArgumentException("Match not found"));
 
-        Team homeTeam = teamRepository.findById(request.getHomeTeamId())
-                .orElseThrow(() -> new IllegalArgumentException("Home team not found with id: " + request.getHomeTeamId()));
 
-        Team awayTeam = teamRepository.findById(request.getAwayTeamId())
-                .orElseThrow(() -> new IllegalArgumentException("Away team not found with id: " + request.getAwayTeamId()));
+        com.example.football_manager.model.Team homeTeam = teamRepository.findById(request.getHomeTeamId())
+                .orElseThrow(() -> new IllegalArgumentException("Home team not found"));
+        com.example.football_manager.model.Team awayTeam = teamRepository.findById(request.getAwayTeamId())
+                .orElseThrow(() -> new IllegalArgumentException("Away team not found"));
+
 
         match.setLeftTeam(homeTeam);
         match.setRightTeam(awayTeam);
-        match.setDatetime(request.getKickoffTime().atZone(ZoneId.systemDefault()).toOffsetDateTime());
-        match.setVenue(request.getVenue().trim());
-        match.setLeftScore(toShortScore(request.getHomeScore()));
-        match.setRightScore(toShortScore(request.getAwayScore()));
+        
+
+        if (request.getKickoffTime() != null) {
+            match.setDatetime(request.getKickoffTime().atOffset(java.time.ZoneOffset.UTC));
+        }
+        
+
         match.setFinished(request.getStatus() == MatchRequestDTO.MatchStatus.FINISHED);
 
-        if (request.getCompetitionId() != null) {
-            Competition competition = competitionRepository.findById(request.getCompetitionId())
-                    .orElseThrow(() -> new IllegalArgumentException("Competition not found with id: " + request.getCompetitionId()));
-            match.setCompetition(competition);
+
+        if (request.getHomeScore() != null) {
+            match.setLeftScore(request.getHomeScore().shortValue());
         }
+        if (request.getAwayScore() != null) {
+            match.setRightScore(request.getAwayScore().shortValue());
+        }
+
 
         matchRepository.save(match);
 
@@ -193,6 +210,60 @@ public class MatchService {
                 ))
                 .toList();
     }
+    public Optional<MatchRequestDTO> getMatchForEdit(Long id) {
+        if (matchRepository == null) {
+            return Optional.empty();
+        }
+
+        return matchRepository.findById(id).map(match -> {
+            MatchRequestDTO dto = new MatchRequestDTO();
+            dto.setHomeTeamId(match.getLeftTeam().getId());
+            dto.setAwayTeamId(match.getRightTeam().getId());
+            dto.setKickoffTime(match.getDatetime().toLocalDateTime());
+            dto.setVenue("TBD");
+            dto.setStatus(match.isFinished()
+                    ? MatchRequestDTO.MatchStatus.FINISHED
+                    : MatchRequestDTO.MatchStatus.SCHEDULED);
+            dto.setHomeScore((int) match.getLeftScore());
+            dto.setAwayScore((int) match.getRightScore());
+            return dto;
+        });
+    }
+
+    private void validateMatchUpdate(MatchRequestDTO request) {
+            if (request.getHomeTeamId() == null || request.getAwayTeamId() == null) {
+            throw new IllegalArgumentException("Validation Error: Both Home and Away team IDs are required.");
+        }
+
+        if (request.getKickoffTime() == null || request.getVenue() == null || request.getVenue().isBlank()) {
+            throw new IllegalArgumentException("Validation Error: Kickoff time and Venue are required.");
+        }
+
+        if (request.getStatus() == null) {
+            throw new IllegalArgumentException("Validation Error: Match status is required.");
+        }
+
+        if (request.getHomeTeamId().equals(request.getAwayTeamId())) {
+            throw new IllegalArgumentException("Validation Error: Home and Away teams must be different.");
+        }
+
+        if (request.getHomeScore() != null && request.getAwayScore() == null) {
+            throw new IllegalArgumentException("Validation Error: Away score is required when home score is provided.");
+        }
+
+        if (request.getAwayScore() != null && request.getHomeScore() == null) {
+            throw new IllegalArgumentException("Validation Error: Home score is required when away score is provided.");
+        }
+
+        if (request.getStatus() == MatchRequestDTO.MatchStatus.FINISHED
+                && (request.getHomeScore() == null || request.getAwayScore() == null)) {
+            throw new IllegalArgumentException("Validation Error: Both scores are required when status is FINISHED.");
+        }
+
+        if (request.getStatus() != MatchRequestDTO.MatchStatus.FINISHED
+                && (request.getHomeScore() != null || request.getAwayScore() != null)) {
+            throw new IllegalArgumentException("Validation Error: Scores can only be submitted when status is FINISHED.");
+        }
 
     public List<Match> getAllMatches() {
         return matchRepository.findAll();

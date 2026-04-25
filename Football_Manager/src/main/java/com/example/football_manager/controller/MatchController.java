@@ -50,7 +50,8 @@ public class MatchController {
         return ResponseEntity.ok(matchService.getFinishedMatchResults());
     }
 
-    @PutMapping("/{id}")
+    // Edit match details
+    @PostMapping("/{id}")
     public ResponseEntity<String> updateMatch(@PathVariable Long id, @RequestBody MatchRequestDTO matchDTO) {
         try {
             return ResponseEntity.ok(matchService.updateMatch(id, matchDTO));

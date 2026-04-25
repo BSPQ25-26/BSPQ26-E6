@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Football Manager - Edit Match</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .pitch-bg {
+            background-color: #f8fafc;
+            background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23e2e8f0" fill-opacity="0.4"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+        }
+    </style>
+</head>
+
+<body class="pitch-bg min-h-screen font-sans text-slate-800">
+
+<nav class="bg-slate-900 border-b-2 border-emerald-600 shadow-md">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16 gap-3">
+            <div class="flex items-center gap-3">
+                <svg class="w-8 h-8 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 10a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z"></path>
+                </svg>
+                <span class="text-xl font-black text-white uppercase tracking-wider">
+                    Edit<span class="text-emerald-500">Match</span>
+                </span>
+            </div>
+            <a href="/matches/results" class="px-4 py-2 bg-slate-800 text-slate-300 text-sm font-medium rounded-md hover:bg-slate-700 hover:text-white transition-colors border border-slate-700">
+                Back to Results
+            </a>
+        </div>
+    </div>
+</nav>
+
+<main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div class="mb-8 bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+        <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight uppercase">
+            Update Match Details
+        </h1>
+        <p class="text-slate-500 mt-1 font-medium">
+            Adjust teams, kickoff details, and the result status in one place.
+        </p>
+    </div>
+
+    <div class="max-w-3xl mx-auto bg-white rounded-2xl border border-slate-200 shadow-sm p-6 md:p-8">
+        
+        <div th:if="${param.error}" class="mb-6 bg-red-100 text-red-700 px-4 py-3 rounded-md text-sm font-medium">
+            Error updating match. Please ensure teams are different and all required fields are filled.
+        </div>
+
+        <form id="editMatchForm" th:action="@{/matches/edit/{id}(id=${matchId})}" th:object="${matchRequest}" method="POST" class="space-y-6">
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 tracking-wide">Home Team</label>
+                    <select id="homeTeamId" th:field="*{homeTeamId}" required class="mt-2 w-full rounded-lg border border-slate-300 px-3 py-2.5">
+                        <option value="" disabled>Select home team</option>
+                        <option th:each="team : ${teams}" th:value="${team.id}" th:text="${team.name}"></option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 tracking-wide">Away Team</label>
+                    <select id="awayTeamId" th:field="*{awayTeamId}" required class="mt-2 w-full rounded-lg border border-slate-300 px-3 py-2.5">
+                        <option value="" disabled>Select away team</option>
+                        <option th:each="team : ${teams}" th:value="${team.id}" th:text="${team.name}"></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700">Kickoff Time</label>
+                    <input type="datetime-local" th:field="*{kickoffTime}" required class="mt-2 w-full rounded-lg border border-slate-300 px-3 py-2.5">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700">Venue</label>
+                    <input type="text" th:field="*{venue}" required class="mt-2 w-full rounded-lg border border-slate-300 px-3 py-2.5">
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold text-slate-700">Status</label>
+                <select id="status" th:field="*{status}" class="mt-2 w-full rounded-lg border border-slate-300 px-3 py-2.5">
+                    <option th:each="st : ${T(com.example.football_manager.dto.MatchRequestDTO.MatchStatus).values()}"
+                            th:value="${st}" th:text="${st}"></option>
+                </select>
+                <p class="mt-2 text-xs text-slate-500">
+                    Scores only allowed when status is <b>FINISHED</b>
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700">Home Score</label>
+                    <input id="homeScore" type="number" min="0" th:field="*{homeScore}" class="mt-2 w-full rounded-lg border px-3 py-2.5 disabled:bg-slate-100 disabled:text-slate-400">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700">Away Score</label>
+                    <input id="awayScore" type="number" min="0" th:field="*{awayScore}" class="mt-2 w-full rounded-lg border px-3 py-2.5 disabled:bg-slate-100 disabled:text-slate-400">
+                </div>
+            </div>
+
+            <div class="pt-2 flex gap-3">
+                <button type="submit" class="px-5 py-2 bg-emerald-600 text-white rounded-md hover:bg-emerald-700 transition">
+                    Save Match
+                </button>
+                <a href="/matches/results" class="px-5 py-2 bg-slate-200 text-slate-700 rounded-md hover:bg-slate-300 transition text-center flex items-center">
+                    Cancel
+                </a>
+            </div>
+
+        </form>
+    </div>
+</main>
+
+<script>
+    // JS Limpio: Solo mantenemos la lógica visual para bloquear los goles si no está FINISHED
+    const statusSelect = document.getElementById('status');
+    const homeScoreInput = document.getElementById('homeScore');
+    const awayScoreInput = document.getElementById('awayScore');
+
+    function toggleScoreInputs() {
+        const finished = statusSelect.value === 'FINISHED';
+        homeScoreInput.disabled = !finished;
+        awayScoreInput.disabled = !finished;
+
+        if (!finished) {
+            homeScoreInput.value = '';
+            awayScoreInput.value = '';
+        }
+    }
+
+    statusSelect.addEventListener('change', toggleScoreInputs);
+    
+    // Ejecutar al cargar la página por primera vez
+    document.addEventListener('DOMContentLoaded', toggleScoreInputs);
+</script>
+
+</body>
+</html>
