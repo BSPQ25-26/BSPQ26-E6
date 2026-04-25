@@ -16,6 +16,7 @@ public class MatchRequestDTO {
 
     private Long homeTeamId;
     private Long awayTeamId;
+    private Long competitionId;
     private LocalDateTime kickoffTime;
     private String venue;
     
@@ -30,6 +31,9 @@ public class MatchRequestDTO {
 
     public Long getAwayTeamId() { return awayTeamId; }
     public void setAwayTeamId(Long awayTeamId) { this.awayTeamId = awayTeamId; }
+
+    public Long getCompetitionId() { return competitionId; }
+    public void setCompetitionId(Long competitionId) { this.competitionId = competitionId; }
 
     public LocalDateTime getKickoffTime() { return kickoffTime; }
     public void setKickoffTime(LocalDateTime kickoffTime) { this.kickoffTime = kickoffTime; }

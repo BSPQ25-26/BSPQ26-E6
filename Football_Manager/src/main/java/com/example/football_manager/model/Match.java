@@ -30,6 +30,9 @@ public class Match {
     @Column(nullable = false)
     private OffsetDateTime datetime;
 
+    @Column(nullable = false, length = 100)
+    private String venue;
+
     @Column(name = "left_score", nullable = false)
     private short leftScore;
 

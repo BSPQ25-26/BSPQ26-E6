@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Football Manager - Enter Result</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8 font-sans">
+
+    <div class="sm:mx-auto sm:w-full sm:max-w-3xl">
+        <h2 class="mt-6 text-center text-3xl font-extrabold text-slate-900">
+            Enter Match Result
+        </h2>
+        <p class="mt-2 text-center text-sm text-slate-600">
+            Add goals with their scoring team and minute
+        </p>
+    </div>
+
+    <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-3xl">
+        <div class="bg-white py-8 px-4 shadow-xl sm:rounded-xl sm:px-10 border-t-4 border-emerald-500">
+            <div class="mb-6 rounded-xl border border-slate-200 bg-slate-50 p-5">
+                <div class="flex items-center justify-between gap-4">
+                    <div class="min-w-0">
+                        <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Home</p>
+                        <p class="truncate text-lg font-extrabold uppercase text-slate-900"
+                           th:text="${match.leftTeam != null ? match.leftTeam.name : 'Home team'}">Home team</p>
+                    </div>
+                    <span class="shrink-0 rounded-full bg-slate-900 px-3 py-1 text-xs font-black uppercase text-white">vs</span>
+                    <div class="min-w-0 text-right">
+                        <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Away</p>
+                        <p class="truncate text-lg font-extrabold uppercase text-slate-900"
+                           th:text="${match.rightTeam != null ? match.rightTeam.name : 'Away team'}">Away team</p>
+                    </div>
+                </div>
+                <div class="mt-4 grid grid-cols-2 gap-3 text-sm text-slate-600">
+                    <div>
+                        <span class="font-semibold text-slate-800">Venue:</span>
+                        <span th:text="${match.venue}">Stadium</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="font-semibold text-slate-800">Current:</span>
+                        <span th:text="${match.leftScore + ' - ' + match.rightScore}">0 - 0</span>
+                    </div>
+                </div>
+            </div>
+
+            <div th:if="${successMessage}" class="mb-5 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-700"
+                 th:text="${successMessage}">
+                Result saved successfully.
+            </div>
+
+            <div th:if="${errorMessage}" class="mb-5 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm font-semibold text-red-700"
+                 th:text="${errorMessage}">
+                Validation error.
+            </div>
+
+            <form th:action="@{/matches/{id}/score(id=${match.id})}" th:object="${resultRequest}" method="POST" class="space-y-6" id="resultForm">
+                <div class="overflow-hidden rounded-xl border border-slate-200">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50 border-b border-slate-200 text-slate-500 uppercase text-xs font-bold tracking-wider">
+                                <th class="px-4 py-3">Team</th>
+                                <th class="px-4 py-3 w-28">Minute</th>
+                                <th class="px-4 py-3 w-36">Stoppage</th>
+                                <th class="px-4 py-3 w-20 text-right">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="goalRows" class="divide-y divide-slate-200">
+                            <tr th:each="goal, stat : *{goals}" data-goal-row class="bg-white">
+                                <td class="px-4 py-3">
+                                    <select th:name="|goals[${stat.index}].teamId|" required
+                                            class="block w-full px-3 py-2 border border-slate-300 rounded-lg bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm transition duration-200">
+                                        <option value="" disabled>Select team</option>
+                                        <option th:value="${match.leftTeam.id}" th:text="${match.leftTeam.name}" th:selected="${goal.teamId == match.leftTeam.id}">Home team</option>
+                                        <option th:value="${match.rightTeam.id}" th:text="${match.rightTeam.name}" th:selected="${goal.teamId == match.rightTeam.id}">Away team</option>
+                                    </select>
+                                </td>
+                                <td class="px-4 py-3">
+                                    <input type="number" th:name="|goals[${stat.index}].minute|" th:value="${goal.minute}" required min="1" max="120" step="1"
+                                           class="block w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm transition duration-200">
+                                </td>
+                                <td class="px-4 py-3">
+                                    <input type="number" th:name="|goals[${stat.index}].stoppageMinute|" th:value="${goal.stoppageMinute}" min="0" max="30" step="1"
+                                           class="block w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm transition duration-200">
+                                </td>
+                                <td class="px-4 py-3 text-right">
+                                    <button type="button" onclick="removeGoal(this)"
+                                            class="inline-flex items-center justify-center rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm font-bold text-red-600 hover:bg-red-100 transition-colors">
+                                        Remove
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <button type="button" onclick="addGoalRow()"
+                            class="inline-flex flex-1 justify-center py-3 px-4 border border-emerald-200 rounded-lg shadow-sm text-sm font-bold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-colors duration-200">
+                        <svg class="w-5 h-5 mr-2 -ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12m6-6H6"></path>
+                        </svg>
+                        Add Goal
+                    </button>
+                    <button type="submit"
+                            class="inline-flex flex-1 justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-colors duration-200">
+                        <svg class="w-5 h-5 mr-2 -ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        Save Result
+                    </button>
+                </div>
+
+                <a th:href="@{/matches/schedule}"
+                   class="w-full flex justify-center py-3 px-4 border border-slate-300 rounded-lg shadow-sm text-sm font-medium text-slate-700 bg-white hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-colors duration-200">
+                    Back to Matches
+                </a>
+            </form>
+        </div>
+    </div>
+
+    <template id="goalRowTemplate">
+        <tr data-goal-row class="bg-white">
+            <td class="px-4 py-3">
+                <select name="goals[__index__].teamId" required
+                        class="block w-full px-3 py-2 border border-slate-300 rounded-lg bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm transition duration-200">
+                    <option value="" disabled selected>Select team</option>
+                    <option th:value="${match.leftTeam.id}" th:text="${match.leftTeam.name}">Home team</option>
+                    <option th:value="${match.rightTeam.id}" th:text="${match.rightTeam.name}">Away team</option>
+                </select>
+            </td>
+            <td class="px-4 py-3">
+                <input type="number" name="goals[__index__].minute" required min="1" max="120" step="1"
+                       class="block w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm transition duration-200">
+            </td>
+            <td class="px-4 py-3">
+                <input type="number" name="goals[__index__].stoppageMinute" min="0" max="30" step="1"
+                       class="block w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm transition duration-200">
+            </td>
+            <td class="px-4 py-3 text-right">
+                <button type="button" onclick="removeGoal(this)"
+                        class="inline-flex items-center justify-center rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm font-bold text-red-600 hover:bg-red-100 transition-colors">
+                    Remove
+                </button>
+            </td>
+        </tr>
+    </template>
+
+    <script>
+        function addGoalRow() {
+            const goalRows = document.getElementById('goalRows');
+            const template = document.getElementById('goalRowTemplate');
+            const row = template.content.firstElementChild.cloneNode(true);
+            const index = goalRows.querySelectorAll('[data-goal-row]').length;
+
+            row.querySelectorAll('[name]').forEach((field) => {
+                field.name = field.name.replace('__index__', index);
+            });
+
+            goalRows.appendChild(row);
+        }
+
+        function removeGoal(button) {
+            button.closest('[data-goal-row]').remove();
+            reindexGoalRows();
+        }
+
+        function reindexGoalRows() {
+            document.querySelectorAll('#goalRows [data-goal-row]').forEach((row, index) => {
+                row.querySelectorAll('[name]').forEach((field) => {
+                    field.name = field.name.replace(/goals\[\d+]/, `goals[${index}]`);
+                });
+            });
+        }
+
+        document.getElementById('resultForm').addEventListener('submit', reindexGoalRows);
+    </script>
+</body>
+</html>
