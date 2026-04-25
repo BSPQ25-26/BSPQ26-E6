@@ -54,16 +54,16 @@
                     <p class="text-lg font-bold text-slate-900 uppercase" th:text="${result.awayTeamName}">Away Team</p>
                 </div>
             </div>
-            <div class="mt-4 flex justify-end">
+                <div class="mt-4 flex justify-end gap-3">
                 <a th:href="@{/matches/edit/{id}(id=${result.matchId})}"
-                   class="inline-flex items-center px-4 py-2 text-sm font-medium rounded-md bg-blue-600 text-white hover:bg-blue-700 transition-colors">
+                   class="w-32 inline-flex justify-center items-center py-2 text-sm font-bold rounded-md bg-blue-600 text-white hover:bg-blue-700 transition-colors">
                     Edit Match
                 </a>
-            <div class="mt-5 flex justify-end">
+                
                 <button type="button"
                         th:attr="data-match-id=${result.matchId},data-home-team=${result.homeTeamName},data-away-team=${result.awayTeamName}"
                         onclick="confirmDelete(this)"
-                        class="px-3 py-1.5 bg-red-50 text-red-600 hover:bg-red-100 hover:text-red-800 rounded text-sm font-semibold transition-colors border border-red-200">
+                        class="w-32 inline-flex justify-center items-center py-2 text-sm font-bold rounded-md bg-red-50 text-red-600 border border-red-200 hover:bg-red-100 hover:text-red-800 transition-colors">
                     Delete
                 </button>
             </div>

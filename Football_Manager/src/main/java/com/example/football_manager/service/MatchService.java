@@ -1,8 +1,6 @@
 package com.example.football_manager.service;
 
 import com.example.football_manager.dto.MatchRequestDTO;
-import com.example.football_manager.repository.MatchRepository; 
-import com.example.football_manager.repository.TeamRepository;  
 import com.example.football_manager.dto.MatchResultDTO;
 import com.example.football_manager.dto.MatchResultRequestDTO;
 import com.example.football_manager.model.Competition;
@@ -13,6 +11,7 @@ import com.example.football_manager.repository.CompetitionRepository;
 import com.example.football_manager.repository.MatchGoalRepository;
 import com.example.football_manager.repository.MatchRepository;
 import com.example.football_manager.repository.TeamRepository;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,23 +19,19 @@ import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
 public class MatchService {
-
-    @Autowired
-    private MatchRepository matchRepository;
     
-    @Autowired
-    private TeamRepository teamRepository;
     private final MatchRepository matchRepository;
     private final MatchGoalRepository matchGoalRepository;
     private final TeamRepository teamRepository;
     private final CompetitionRepository competitionRepository;
 
+    
     public MatchService(
             MatchRepository matchRepository,
             MatchGoalRepository matchGoalRepository,
@@ -105,31 +100,30 @@ public class MatchService {
 
     @Transactional
     public String updateMatch(Long id, MatchRequestDTO request) {
-
         validateMatchUpdate(request);
-
 
         Match match = matchRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Match not found"));
 
-
-        com.example.football_manager.model.Team homeTeam = teamRepository.findById(request.getHomeTeamId())
+        Team homeTeam = teamRepository.findById(request.getHomeTeamId())
                 .orElseThrow(() -> new IllegalArgumentException("Home team not found"));
-        com.example.football_manager.model.Team awayTeam = teamRepository.findById(request.getAwayTeamId())
+        Team awayTeam = teamRepository.findById(request.getAwayTeamId())
                 .orElseThrow(() -> new IllegalArgumentException("Away team not found"));
-
 
         match.setLeftTeam(homeTeam);
         match.setRightTeam(awayTeam);
         
-
+        // Actualizamos la fecha usando la zona horaria del sistema de tu compañero
         if (request.getKickoffTime() != null) {
-            match.setDatetime(request.getKickoffTime().atOffset(java.time.ZoneOffset.UTC));
+            match.setDatetime(request.getKickoffTime().atZone(ZoneId.systemDefault()).toOffsetDateTime());
         }
-        
+
+        // Actualizamos la sede (venue)
+        if (request.getVenue() != null && !request.getVenue().isBlank()) {
+            match.setVenue(request.getVenue().trim());
+        }
 
         match.setFinished(request.getStatus() == MatchRequestDTO.MatchStatus.FINISHED);
-
 
         if (request.getHomeScore() != null) {
             match.setLeftScore(request.getHomeScore().shortValue());
@@ -137,7 +131,6 @@ public class MatchService {
         if (request.getAwayScore() != null) {
             match.setRightScore(request.getAwayScore().shortValue());
         }
-
 
         matchRepository.save(match);
 
@@ -210,6 +203,7 @@ public class MatchService {
                 ))
                 .toList();
     }
+    
     public Optional<MatchRequestDTO> getMatchForEdit(Long id) {
         if (matchRepository == null) {
             return Optional.empty();
@@ -220,7 +214,7 @@ public class MatchService {
             dto.setHomeTeamId(match.getLeftTeam().getId());
             dto.setAwayTeamId(match.getRightTeam().getId());
             dto.setKickoffTime(match.getDatetime().toLocalDateTime());
-            dto.setVenue("TBD");
+            dto.setVenue(match.getVenue()); // Carga el venue real, no "TBD"
             dto.setStatus(match.isFinished()
                     ? MatchRequestDTO.MatchStatus.FINISHED
                     : MatchRequestDTO.MatchStatus.SCHEDULED);
@@ -231,7 +225,7 @@ public class MatchService {
     }
 
     private void validateMatchUpdate(MatchRequestDTO request) {
-            if (request.getHomeTeamId() == null || request.getAwayTeamId() == null) {
+        if (request.getHomeTeamId() == null || request.getAwayTeamId() == null) {
             throw new IllegalArgumentException("Validation Error: Both Home and Away team IDs are required.");
         }
 
@@ -264,6 +258,7 @@ public class MatchService {
                 && (request.getHomeScore() != null || request.getAwayScore() != null)) {
             throw new IllegalArgumentException("Validation Error: Scores can only be submitted when status is FINISHED.");
         }
+    } // <-- ESTA ES LA LLAVE QUE FALTABA
 
     public List<Match> getAllMatches() {
         return matchRepository.findAll();

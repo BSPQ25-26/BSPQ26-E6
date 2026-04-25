@@ -23,7 +23,7 @@ import java.util.List;
 public class MatchViewController {
 
     private final MatchService matchService;
-    private final TeamService teamService;
+
 
     public MatchViewController(MatchService matchService, TeamService teamService) {
         this.matchService = matchService;
@@ -63,7 +63,7 @@ public class MatchViewController {
         matchService.updateMatch(id, matchDTO);
         return "redirect:/matches/results";
     }
-}
+
 
     @GetMapping("/matches/{id}/score")
     public String showScoreForm(@PathVariable Long id, Model model) {
