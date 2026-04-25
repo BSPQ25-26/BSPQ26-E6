@@ -118,4 +118,15 @@ public class MatchViewController {
         resultRequest.setGoals(goalDTOs);
         return resultRequest;
     }
+
+    @PostMapping("/matches/{id}/results")
+    public String saveMatchResult(@PathVariable Long id, @ModelAttribute MatchResultRequestDTO requestDTO) {
+        try {
+            matchService.registerResult(id, requestDTO);
+            
+            return "redirect:/admin/matches"; 
+        } catch (IllegalArgumentException e) {
+            return "redirect:/matches/" + id + "/results?error=true";
+        }
+    }
 }
