@@ -4,70 +4,113 @@
     <meta charset="UTF-8">
     <title>Football Manager - Add Team</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .pitch-bg {
+            background-color: #f8fafc;
+            background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23e2e8f0" fill-opacity="0.4"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+        }
+    </style>
 </head>
-<body class="bg-slate-50 min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8 font-sans">
-    
-    <div class="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 class="mt-6 text-center text-3xl font-extrabold text-slate-900">
-            Add a New Team
-        </h2>
-        <p class="mt-2 text-center text-sm text-slate-600">
-            Register a new football club to the system
-        </p>
-    </div>
 
-    <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div class="bg-white py-8 px-4 shadow-xl sm:rounded-xl sm:px-10 border border-slate-100">
-            <form th:action="@{/teams/add}" th:object="${teamRequest}" method="POST" class="space-y-6">
-                
-                <div>
-                    <label for="name" class="block text-sm font-medium text-slate-700">Team Name</label>
-                    <div class="mt-1">
-                        <input id="name" type="text" th:field="*{name}" required maxlength="30" placeholder="e.g., Athletic Club"
-                            class="appearance-none block w-full px-4 py-3 border border-slate-300 rounded-lg shadow-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm transition duration-200">
-                        <p class="mt-1 text-xs text-slate-400">Maximum 30 characters</p>
-                    </div>
-                </div>
+<body class="pitch-bg min-h-screen font-sans text-slate-800 pb-10">
 
-                <div>
-                    <label for="logoUrl" class="block text-sm font-medium text-slate-700">Logo URL</label>
-                    <div class="mt-1">
-                        <input id="logoUrl" type="url" th:field="*{logoUrl}" required placeholder="https://example.com/logo.png"
-                            class="appearance-none block w-full px-4 py-3 border border-slate-300 rounded-lg shadow-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm transition duration-200">
-                    </div>
-                </div>
+<nav class="bg-slate-900 border-b-2 border-emerald-600 shadow-md mb-10">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+            <div class="flex items-center gap-3">
+                <svg class="w-8 h-8 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z">
+                    </path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
+                    </path>
+                </svg>
+                <span class="text-xl font-black text-white uppercase tracking-wider">
+                    Control<span class="text-emerald-500">Center</span>
+                </span>
+            </div>
 
-                <div>
-                    <label for="countryId" class="block text-sm font-medium text-slate-700">Country</label>
-                    <div class="relative mt-1">
-                        <select id="countryId" th:field="*{countryId}" required
-                            class="appearance-none block w-full px-4 py-3 border border-slate-300 rounded-lg shadow-sm bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm transition duration-200 cursor-pointer">
-                            
-                            <option value="" disabled selected>Select a country</option>
-                            
-                            <option th:each="country : ${countries}" 
-                                    th:value="${country.id}" 
-                                    th:text="${country.name}">
-                            </option>
-
-                            </select>
-                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
-                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="pt-2">
-                    <button type="submit"
-                        class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-colors duration-200">
-                        <svg class="w-5 h-5 mr-2 -ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
-                        Register Team
-                    </button>
-                </div>
-            </form>
+            <a href="/admin"
+               class="px-4 py-2 bg-slate-800 text-slate-300 text-sm font-medium rounded-md hover:bg-slate-700 hover:text-white transition-colors border border-slate-700">
+                Back to Admin
+            </a>
         </div>
     </div>
+</nav>
+
+<div class="sm:mx-auto sm:w-full sm:max-w-md">
+    <h2 class="mt-6 text-center text-3xl font-extrabold text-slate-900">
+        Add a New Team
+    </h2>
+    <p class="mt-2 text-center text-sm text-slate-600">
+        Register a new football club to the system
+    </p>
+</div>
+
+<div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+    <div class="bg-white py-8 px-4 shadow-xl sm:rounded-xl sm:px-10 border border-slate-100">
+        <form th:action="@{/teams/add}" th:object="${teamRequest}" method="POST" class="space-y-6">
+
+            <div>
+                <label for="name" class="block text-sm font-medium text-slate-700">Team Name</label>
+                <div class="mt-1">
+                    <input id="name" type="text" th:field="*{name}" required maxlength="30"
+                           placeholder="e.g., Athletic Club"
+                           class="appearance-none block w-full px-4 py-3 border border-slate-300 rounded-lg shadow-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm transition duration-200">
+                    <p class="mt-1 text-xs text-slate-400">Maximum 30 characters</p>
+                </div>
+            </div>
+
+            <div>
+                <label for="logoUrl" class="block text-sm font-medium text-slate-700">Logo URL</label>
+                <div class="mt-1">
+                    <input id="logoUrl" type="url" th:field="*{logoUrl}" required
+                           placeholder="https://example.com/logo.png"
+                           class="appearance-none block w-full px-4 py-3 border border-slate-300 rounded-lg shadow-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm transition duration-200">
+                </div>
+            </div>
+
+            <div>
+                <label for="countryId" class="block text-sm font-medium text-slate-700">Country</label>
+                <div class="relative mt-1">
+                    <select id="countryId" th:field="*{countryId}" required
+                            class="appearance-none block w-full px-4 py-3 border border-slate-300 rounded-lg shadow-sm bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm transition duration-200 cursor-pointer">
+
+                        <option value="" disabled selected>Select a country</option>
+
+                        <option th:each="country : ${countries}"
+                                th:value="${country.id}"
+                                th:text="${country.name}">
+                        </option>
+                    </select>
+
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-2">
+                <button type="submit"
+                        class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-colors duration-200">
+                    <svg class="w-5 h-5 mr-2 -ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M12 6v6m0 0v6m0-6h6m-6 0H6">
+                        </path>
+                    </svg>
+                    Register Team
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
 </body>
 </html>
