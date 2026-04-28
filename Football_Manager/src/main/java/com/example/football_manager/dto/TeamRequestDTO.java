@@ -3,17 +3,21 @@ package com.example.football_manager.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 public class TeamRequestDTO {
 
     @NotBlank(message = "Team name is required")
     @Size(max = 30, message = "Team name must be at most 30 characters")
+    @Schema(description = "Team name", example = "Real Sociedad")
     private String name;
 
     @NotBlank(message = "Logo URL is required")
+    @Schema(description = "Public logo URL", example = "https://cdn.example.com/logos/real-sociedad.png")
     private String logoUrl;
 
     @NotNull(message = "Country ID is required")
+    @Schema(description = "Identifier of the country the team belongs to", example = "34")
     private Long countryId;
 
     public TeamRequestDTO() {
