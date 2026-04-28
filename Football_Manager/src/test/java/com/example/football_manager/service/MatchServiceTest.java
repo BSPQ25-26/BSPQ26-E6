@@ -69,6 +69,7 @@ class MatchServiceTest {
         validRequest.setCompetitionId(1L);
         validRequest.setKickoffTime(LocalDateTime.of(2026, 4, 1, 20, 30));
         validRequest.setVenue("Emirates Stadium");
+        validRequest.setStatus(MatchRequestDTO.MatchStatus.SCHEDULED);
 
         when(teamRepository.findById(1L)).thenReturn(Optional.of(homeTeam));
         when(teamRepository.findById(2L)).thenReturn(Optional.of(awayTeam));
