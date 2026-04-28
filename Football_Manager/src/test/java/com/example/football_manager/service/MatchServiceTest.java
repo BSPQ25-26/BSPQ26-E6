@@ -69,6 +69,7 @@ class MatchServiceTest {
         validRequest.setCompetitionId(1L);
         validRequest.setKickoffTime(LocalDateTime.of(2026, 4, 1, 20, 30));
         validRequest.setVenue("Emirates Stadium");
+        validRequest.setStatus(MatchRequestDTO.MatchStatus.SCHEDULED);
 
         when(teamRepository.findById(1L)).thenReturn(Optional.of(homeTeam));
         when(teamRepository.findById(2L)).thenReturn(Optional.of(awayTeam));
@@ -198,6 +199,8 @@ class MatchServiceTest {
 
     @Test
     void updateMatch_shouldReturnSuccessMessage() {
+        validRequest.setStatus(MatchRequestDTO.MatchStatus.SCHEDULED);
+
         Match existingMatch = new Match();
         existingMatch.setId(8L);
 
@@ -216,6 +219,7 @@ class MatchServiceTest {
     void updateMatch_shouldThrowWhenBothTeamsAreEqual() {
         validRequest.setHomeTeamId(5L);
         validRequest.setAwayTeamId(5L);
+        validRequest.setStatus(MatchRequestDTO.MatchStatus.SCHEDULED);
 
         IllegalArgumentException ex = assertThrows(
                 IllegalArgumentException.class,
