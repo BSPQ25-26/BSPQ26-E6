@@ -75,7 +75,7 @@
 
                     <div class="flex justify-between items-center gap-4">
                         <div class="font-bold text-slate-900"
-                             th:text="#{teamDetails.home}">
+                             th:text="${match.leftTeam != null ? match.leftTeam.name : #messages.msg('teamDetails.home')}">
                             Home
                         </div>
 
@@ -85,7 +85,7 @@
                         </div>
 
                         <div class="font-bold text-slate-900 text-right"
-                             th:text="#{teamDetails.away}">
+                             th:text="${match.rightTeam != null ? match.rightTeam.name : #messages.msg('teamDetails.away')}">
                             Away
                         </div>
                     </div>
@@ -118,7 +118,7 @@
 
                     <div class="flex justify-between items-center gap-4">
                         <div class="font-bold text-slate-900"
-                             th:text="#{teamDetails.home}">
+                             th:text="${match.leftTeam != null ? match.leftTeam.name : #messages.msg('teamDetails.home')}">
                             Home
                         </div>
 
@@ -127,7 +127,7 @@
                         </div>
 
                         <div class="font-bold text-slate-900 text-right"
-                             th:text="#{teamDetails.away}">
+                             th:text="${match.rightTeam != null ? match.rightTeam.name : #messages.msg('teamDetails.away')}">
                             Away
                         </div>
                     </div>
