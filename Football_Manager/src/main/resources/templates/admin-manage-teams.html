@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}">
 <head>
   <meta charset="UTF-8">
-  <title>Manage Teams - Admin</title>
+  <title th:text="#{adminTeams.title}">Manage Teams - Admin</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     .pitch-bg { background-color: #f8fafc; }
@@ -14,11 +14,19 @@
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-16">
       <div class="flex items-center gap-3">
-        <span class="text-xl font-black text-white uppercase tracking-wider">Control<span class="text-emerald-500">Center</span></span>
+        <span class="text-xl font-black text-white uppercase tracking-wider"><span th:text="#{brand.control}">Control</span><span class="text-emerald-500" th:text="#{brand.center}">Center</span></span>
       </div>
-      <a href="/admin" class="px-4 py-2 bg-slate-800 text-slate-300 text-sm font-medium rounded-md hover:bg-slate-700 hover:text-white transition-colors border border-slate-700">
-        Back to Panel
-      </a>
+      <div class="flex items-center gap-3">
+        <select id="langSelect"
+                class="px-4 py-[0.55rem] bg-slate-800 text-slate-300 text-sm font-medium rounded-md border border-slate-700"
+                onchange="window.location.href = window.location.pathname + '?lang=' + this.value;">
+            <option value="es" th:selected="${#locale.language == 'es'}" th:text="#{global.lang.es}">Espanol</option>
+            <option value="en" th:selected="${#locale.language == 'en'}" th:text="#{global.lang.en}">English</option>
+        </select>
+        <a href="/admin" class="px-4 py-2 bg-slate-800 text-slate-300 text-sm font-medium rounded-md hover:bg-slate-700 hover:text-white transition-colors border border-slate-700" th:text="#{adminTeams.backToPanel}">
+          Back to Panel
+        </a>
+      </div>
     </div>
   </div>
 </nav>
@@ -26,10 +34,10 @@
 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
   <div class="flex justify-between items-center mb-8">
     <div>
-      <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight uppercase">Manage Teams</h1>
-      <p class="text-slate-500 mt-1 font-medium">Edit or remove teams from the database.</p>
+      <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight uppercase" th:text="#{adminTeams.heading}">Manage Teams</h1>
+      <p class="text-slate-500 mt-1 font-medium" th:text="#{adminTeams.subtitle}">Edit or remove teams from the database.</p>
     </div>
-    <a th:href="@{/teams/add}" class="bg-emerald-600 text-white px-5 py-2.5 rounded-lg hover:bg-emerald-700 font-bold shadow-md shadow-emerald-500/30 transition-all">
+    <a th:href="@{/teams/add}" class="bg-emerald-600 text-white px-5 py-2.5 rounded-lg hover:bg-emerald-700 font-bold shadow-md shadow-emerald-500/30 transition-all" th:text="#{adminTeams.newTeam}">
       + New Team
     </a>
   </div>
@@ -39,11 +47,11 @@
       <table class="w-full text-left border-collapse">
         <thead>
         <tr class="bg-slate-50 border-b border-slate-200 text-slate-500 uppercase text-xs font-bold tracking-wider">
-          <th class="px-6 py-4">ID</th>
-          <th class="px-6 py-4">Logo</th>
-          <th class="px-6 py-4">Name</th>
-          <th class="px-6 py-4">Country</th>
-          <th class="px-6 py-4 text-right">Actions</th>
+          <th class="px-6 py-4" th:text="#{adminTeams.table.id}">ID</th>
+          <th class="px-6 py-4" th:text="#{adminTeams.table.logo}">Logo</th>
+          <th class="px-6 py-4" th:text="#{adminTeams.table.name}">Name</th>
+          <th class="px-6 py-4" th:text="#{adminTeams.table.country}">Country</th>
+          <th class="px-6 py-4 text-right" th:text="#{adminTeams.table.actions}">Actions</th>
         </tr>
         </thead>
         <tbody class="divide-y divide-slate-200">
@@ -51,26 +59,26 @@
           <td class="px-6 py-4 text-sm font-medium text-slate-500" th:text="${team.id}">1</td>
           <td class="px-6 py-4">
             <img th:src="${team.logoUrl != null && !team.logoUrl.isEmpty() ? team.logoUrl : 'https://via.placeholder.com/150?text=Logo'}"
-                 class="w-10 h-10 object-contain bg-white border border-slate-200 rounded p-1" alt="Logo">
+                 class="w-10 h-10 object-contain bg-white border border-slate-200 rounded p-1" th:alt="#{adminTeams.logoAlt}">
           </td>
           <td class="px-6 py-4 font-bold text-slate-900 uppercase" th:text="${team.name}">Name</td>
           <td class="px-6 py-4 text-sm text-slate-600" th:text="${team.country != null ? team.country.name : '-'}">Country</td>
           <td class="px-6 py-4 text-right">
             <div class="flex justify-end gap-2">
-              <a th:href="@{/teams/edit/{id}(id=${team.id})}" class="w-20 text-center py-1.5 bg-indigo-50 text-indigo-600 hover:bg-indigo-100 hover:text-indigo-800 rounded text-sm font-semibold transition-colors border border-indigo-200">
+              <a th:href="@{/teams/edit/{id}(id=${team.id})}" class="w-20 text-center py-1.5 bg-indigo-50 text-indigo-600 hover:bg-indigo-100 hover:text-indigo-800 rounded text-sm font-semibold transition-colors border border-indigo-200" th:text="#{adminTeams.edit}">
                 Edit
               </a>
               <button type="button"
                       th:attr="data-team-id=${team.id},data-team-name=${team.name}"
                       onclick="confirmDelete(this)"
-                      class="w-20 text-center py-1.5 bg-red-50 text-red-600 hover:bg-red-100 hover:text-red-800 rounded text-sm font-semibold transition-colors border border-red-200">
+                      class="w-20 text-center py-1.5 bg-red-50 text-red-600 hover:bg-red-100 hover:text-red-800 rounded text-sm font-semibold transition-colors border border-red-200" th:text="#{adminTeams.delete}">
                 Delete
               </button>
             </div>
           </td>
         </tr>
         <tr th:if="${#lists.isEmpty(teams)}">
-          <td colspan="5" class="px-6 py-8 text-center text-slate-500">No teams found in the database.</td>
+          <td colspan="5" class="px-6 py-8 text-center text-slate-500" th:text="#{adminTeams.empty}">No teams found in the database.</td>
         </tr>
         </tbody>
       </table>
@@ -81,27 +89,28 @@
 <div id="confirmModal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-50 transition-opacity">
   <div class="bg-white rounded-2xl shadow-2xl max-w-sm w-full mx-4 overflow-hidden transform transition-transform scale-95" id="modalContent">
     <div class="bg-red-500 px-6 py-4">
-      <h3 class="text-lg font-bold text-white">Confirm Deletion</h3>
+      <h3 class="text-lg font-bold text-white" th:text="#{adminTeams.modal.title}">Confirm Deletion</h3>
     </div>
     <div class="p-6">
       <p id="confirmMessage" class="text-slate-600 mb-8 leading-relaxed"></p>
       <div class="flex gap-3 justify-end">
-        <button type="button" onclick="closeModal()" class="px-4 py-2 text-sm font-bold text-slate-600 bg-slate-100 rounded-lg hover:bg-slate-200">Cancel</button>
+        <button type="button" onclick="closeModal()" class="px-4 py-2 text-sm font-bold text-slate-600 bg-slate-100 rounded-lg hover:bg-slate-200" th:text="#{adminTeams.modal.cancel}">Cancel</button>
         <form id="deleteForm" method="POST" class="m-0">
           <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-          <button type="submit" class="px-4 py-2 text-sm font-bold text-white bg-red-600 rounded-lg hover:bg-red-700 shadow-md">Yes, Delete</button>
+          <button type="submit" class="px-4 py-2 text-sm font-bold text-white bg-red-600 rounded-lg hover:bg-red-700 shadow-md" th:text="#{adminTeams.modal.confirm}">Yes, Delete</button>
         </form>
       </div>
     </div>
   </div>
 </div>
 
-<script>
+<script th:inline="javascript">
   function confirmDelete(button) {
     const id = button.dataset.teamId;
     const name = button.dataset.teamName;
+    const template = /*[[#{adminTeams.modal.message}]]*/ 'Are you sure you want to delete <strong class="text-slate-900 uppercase">"__NAME__"</strong>?';
 
-    document.getElementById('confirmMessage').innerHTML = `Are you sure you want to delete <strong class="text-slate-900 uppercase">"${name}"</strong>?`;
+    document.getElementById('confirmMessage').innerHTML = template.replace('__NAME__', name);
     document.getElementById('deleteForm').action = '/teams/delete/' + id;
 
     const modal = document.getElementById('confirmModal');

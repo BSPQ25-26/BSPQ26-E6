@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}">
 <head>
     <meta charset="UTF-8">
-    <title>Football Manager - Add Team</title>
+    <title th:text="#{addTeam.title}">Football Manager - Add Team</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .pitch-bg {
@@ -27,23 +27,31 @@
                     </path>
                 </svg>
                 <span class="text-xl font-black text-white uppercase tracking-wider">
-                    Control<span class="text-emerald-500">Center</span>
+                    <span th:text="#{brand.control}">Control</span><span class="text-emerald-500" th:text="#{brand.center}">Center</span>
                 </span>
             </div>
 
-            <a href="/admin"
-               class="px-4 py-2 bg-slate-800 text-slate-300 text-sm font-medium rounded-md hover:bg-slate-700 hover:text-white transition-colors border border-slate-700">
-                Back to Admin
-            </a>
+            <div class="flex items-center gap-3">
+                <select id="langSelect"
+                        class="px-4 py-[0.55rem] bg-slate-800 text-slate-300 text-sm font-medium rounded-md border border-slate-700"
+                        onchange="window.location.href = window.location.pathname + '?lang=' + this.value;">
+                    <option value="es" th:selected="${#locale.language == 'es'}" th:text="#{global.lang.es}">Espanol</option>
+                    <option value="en" th:selected="${#locale.language == 'en'}" th:text="#{global.lang.en}">English</option>
+                </select>
+                <a href="/admin"
+                   class="px-4 py-2 bg-slate-800 text-slate-300 text-sm font-medium rounded-md hover:bg-slate-700 hover:text-white transition-colors border border-slate-700" th:text="#{nav.backToAdmin}">
+                    Back to Admin
+                </a>
+            </div>
         </div>
     </div>
 </nav>
 
 <div class="sm:mx-auto sm:w-full sm:max-w-md">
-    <h2 class="mt-6 text-center text-3xl font-extrabold text-slate-900">
+    <h2 class="mt-6 text-center text-3xl font-extrabold text-slate-900" th:text="#{addTeam.heading}">
         Add a New Team
     </h2>
-    <p class="mt-2 text-center text-sm text-slate-600">
+    <p class="mt-2 text-center text-sm text-slate-600" th:text="#{addTeam.subtitle}">
         Register a new football club to the system
     </p>
 </div>
@@ -53,31 +61,31 @@
         <form th:action="@{/teams/add}" th:object="${teamRequest}" method="POST" class="space-y-6">
 
             <div>
-                <label for="name" class="block text-sm font-medium text-slate-700">Team Name</label>
+                <label for="name" class="block text-sm font-medium text-slate-700" th:text="#{addTeam.teamName}">Team Name</label>
                 <div class="mt-1">
                     <input id="name" type="text" th:field="*{name}" required maxlength="30"
-                           placeholder="e.g., Athletic Club"
+                           th:placeholder="#{addTeam.teamName.placeholder}"
                            class="appearance-none block w-full px-4 py-3 border border-slate-300 rounded-lg shadow-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm transition duration-200">
-                    <p class="mt-1 text-xs text-slate-400">Maximum 30 characters</p>
+                    <p class="mt-1 text-xs text-slate-400" th:text="#{addTeam.teamName.help}">Maximum 30 characters</p>
                 </div>
             </div>
 
             <div>
-                <label for="logoUrl" class="block text-sm font-medium text-slate-700">Logo URL</label>
+                <label for="logoUrl" class="block text-sm font-medium text-slate-700" th:text="#{addTeam.logoUrl}">Logo URL</label>
                 <div class="mt-1">
                     <input id="logoUrl" type="url" th:field="*{logoUrl}" required
-                           placeholder="https://example.com/logo.png"
+                           th:placeholder="#{addTeam.logoUrl.placeholder}"
                            class="appearance-none block w-full px-4 py-3 border border-slate-300 rounded-lg shadow-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm transition duration-200">
                 </div>
             </div>
 
             <div>
-                <label for="countryId" class="block text-sm font-medium text-slate-700">Country</label>
+                <label for="countryId" class="block text-sm font-medium text-slate-700" th:text="#{addTeam.country}">Country</label>
                 <div class="relative mt-1">
                     <select id="countryId" th:field="*{countryId}" required
                             class="appearance-none block w-full px-4 py-3 border border-slate-300 rounded-lg shadow-sm bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm transition duration-200 cursor-pointer">
 
-                        <option value="" disabled selected>Select a country</option>
+                        <option value="" disabled selected th:text="#{addTeam.country.select}">Select a country</option>
 
                         <option th:each="country : ${countries}"
                                 th:value="${country.id}"
@@ -105,7 +113,7 @@
                               d="M12 6v6m0 0v6m0-6h6m-6 0H6">
                         </path>
                     </svg>
-                    Register Team
+                    <span th:text="#{addTeam.submit}">Register Team</span>
                 </button>
             </div>
         </form>

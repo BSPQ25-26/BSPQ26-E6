@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}">
 <head>
     <meta charset="UTF-8">
-    <title>Football Manager - My Profile</title>
+    <title th:text="#{profile.title}">Football Manager - My Profile</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-slate-100 min-h-screen text-slate-800">
@@ -10,11 +10,17 @@
 <nav class="bg-slate-900 border-b-2 border-emerald-600 shadow-md">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
-            <span class="text-xl font-black text-white uppercase tracking-wider">My<span class="text-emerald-500">Profile</span></span>
-            <div class="flex gap-3">
-                <a href="/teams" class="px-4 py-2 bg-slate-800 text-slate-300 text-sm font-medium rounded-md hover:bg-slate-700 hover:text-white transition-colors border border-slate-700">Teams</a>
+            <span class="text-xl font-black text-white uppercase tracking-wider" th:text="#{profile.navTitle}">My<span class="text-emerald-500">Profile</span></span>
+            <div class="flex gap-3 items-center">
+                <select id="langSelect"
+        class="px-4 py-[0.55rem] bg-slate-800 text-slate-300 text-sm font-medium rounded-md border border-slate-700"
+        onchange="window.location.href = window.location.pathname + '?lang=' + this.value;">
+    <option value="es" th:selected="${#locale.language == 'es'}" th:text="#{global.lang.es}">Espanol</option>
+    <option value="en" th:selected="${#locale.language == 'en'}" th:text="#{global.lang.en}">English</option>
+</select>
+                <a href="/teams" class="px-4 py-2 bg-slate-800 text-slate-300 text-sm font-medium rounded-md hover:bg-slate-700 hover:text-white transition-colors border border-slate-700" th:text="#{nav.teams}">Teams</a>
                 <form th:action="@{/logout}" method="POST" class="m-0">
-                    <button type="submit" class="px-4 py-2 bg-red-500/10 text-red-500 text-sm font-medium rounded-md hover:bg-red-500 hover:text-white transition-colors border border-red-500/20">Logout</button>
+                    <button type="submit" class="px-4 py-2 bg-red-500/10 text-red-500 text-sm font-medium rounded-md hover:bg-red-500 hover:text-white transition-colors border border-red-500/20" th:text="#{nav.logout}">Logout</button>
                 </form>
             </div>
         </div>
@@ -23,55 +29,55 @@
 
 <main class="max-w-5xl mx-auto p-6 md:p-10 grid grid-cols-1 lg:grid-cols-3 gap-6">
     <section class="lg:col-span-2 bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-        <h1 class="text-2xl font-bold mb-4">User Data</h1>
+        <h1 class="text-2xl font-bold mb-4" th:text="#{profile.userData}">User Data</h1>
 
         <div th:if="${errorMessage}" class="mb-4 p-3 rounded-lg border border-red-200 bg-red-50 text-red-700 text-sm" th:text="${errorMessage}"></div>
         <div th:if="${successMessage}" class="mb-4 p-3 rounded-lg border border-emerald-200 bg-emerald-50 text-emerald-700 text-sm" th:text="${successMessage}"></div>
 
         <form th:action="@{/profile}" th:object="${profileForm}" method="post" class="space-y-4">
             <div>
-                <label class="block text-sm font-semibold mb-1" for="username">Username</label>
+                <label class="block text-sm font-semibold mb-1" for="username" th:text="#{profile.username}">Username</label>
                 <input id="username" type="text" th:field="*{username}" class="w-full border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500">
                 <p class="text-sm text-red-600 mt-1" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
             </div>
 
             <div>
-                <label class="block text-sm font-semibold mb-1" for="email">Email</label>
+                <label class="block text-sm font-semibold mb-1" for="email" th:text="#{profile.email}">Email</label>
                 <input id="email" type="email" th:field="*{email}" class="w-full border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500">
                 <p class="text-sm text-red-600 mt-1" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
             </div>
 
             <div class="pt-2 border-t border-slate-200">
-                <p class="text-sm font-semibold text-slate-700 mb-3">Change Password (optional)</p>
+                <p class="text-sm font-semibold text-slate-700 mb-3" th:text="#{profile.changePassword}">Change Password (optional)</p>
 
                 <div class="mb-3">
-                    <label class="block text-sm font-semibold mb-1" for="currentPassword">Current password</label>
+                    <label class="block text-sm font-semibold mb-1" for="currentPassword" th:text="#{profile.currentPassword}">Current password</label>
                     <input id="currentPassword" type="password" th:field="*{currentPassword}" autocomplete="current-password" class="w-full border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500">
                 </div>
 
                 <div class="mb-3">
-                    <label class="block text-sm font-semibold mb-1" for="newPassword">New password</label>
+                    <label class="block text-sm font-semibold mb-1" for="newPassword" th:text="#{profile.newPassword}">New password</label>
                     <input id="newPassword" type="password" th:field="*{newPassword}" autocomplete="new-password" class="w-full border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500">
                     <p class="text-sm text-red-600 mt-1" th:if="${#fields.hasErrors('newPassword')}" th:errors="*{newPassword}"></p>
                 </div>
 
                 <div>
-                    <label class="block text-sm font-semibold mb-1" for="confirmNewPassword">Confirm new password</label>
+                    <label class="block text-sm font-semibold mb-1" for="confirmNewPassword" th:text="#{profile.confirmNewPassword}">Confirm new password</label>
                     <input id="confirmNewPassword" type="password" th:field="*{confirmNewPassword}" autocomplete="new-password" class="w-full border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500">
                 </div>
 
                 <p class="text-sm text-red-600 mt-2" th:if="${#fields.hasErrors('passwordConfirmationValid')}" th:errors="*{passwordConfirmationValid}"></p>
             </div>
 
-            <button type="submit" class="bg-emerald-600 text-white font-semibold px-4 py-2 rounded-lg hover:bg-emerald-700 transition-colors">Save changes</button>
+            <button type="submit" class="bg-emerald-600 text-white font-semibold px-4 py-2 rounded-lg hover:bg-emerald-700 transition-colors" th:text="#{profile.save}">Save changes</button>
         </form>
     </section>
 
     <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-        <h2 class="text-xl font-bold mb-4">Favourite Teams</h2>
+        <h2 class="text-xl font-bold mb-4" th:text="#{profile.favourites}">Favourite Teams</h2>
         <div id="favouriteRemoveError" class="hidden mb-4 p-3 rounded-lg border border-red-200 bg-red-50 text-red-700 text-sm"></div>
 
-        <div th:if="${#sets.isEmpty(favouriteTeams)}" class="text-sm text-slate-500">
+        <div th:if="${#sets.isEmpty(favouriteTeams)}" class="text-sm text-slate-500" th:text="#{profile.favourites.empty}">
             No favourite teams yet.
         </div>
 
@@ -80,11 +86,11 @@
                 <img th:src="${team.logoUrl}" alt="Team logo" class="w-10 h-10 object-contain bg-slate-50 rounded">
                 <div class="flex-1 min-w-0">
                     <p class="font-semibold" th:text="${team.name}">Team</p>
-                    <p class="text-xs text-slate-500" th:text="${team.country != null ? team.country.name : 'Unknown'}">Country</p>
+                    <p class="text-xs text-slate-500" th:text="${team.country != null ? team.country.name : #messages.msg('profile.country.unknown')}">Country</p>
                 </div>
                 <button type="button"
                         class="remove-favourite-btn text-xs font-semibold text-red-600 hover:text-red-700 bg-red-50 hover:bg-red-100 border border-red-200 rounded px-2 py-1 transition-colors"
-                        th:attr="data-team-id=${team.id}">
+                        th:attr="data-team-id=${team.id}" th:text="#{profile.favourites.remove}">
                     Remove
                 </button>
             </li>
@@ -92,10 +98,14 @@
     </section>
 </main>
 
-<script>
+<script th:inline="javascript">
     document.addEventListener('DOMContentLoaded', () => {
         const errorBox = document.getElementById('favouriteRemoveError');
         const removeButtons = document.querySelectorAll('.remove-favourite-btn');
+        const messages = {
+            removeError: /*[[#{profile.error.removeFavourite}]]*/ 'Could not remove favourite team.',
+            networkError: /*[[#{profile.error.network}]]*/ 'Network error. Please try again.'
+        };
 
         function showError(message) {
             if (!errorBox) {
@@ -142,9 +152,9 @@
                     }
 
                     const message = await response.text();
-                    showError(message || 'Could not remove favourite team.');
+                    showError(message || messages.removeError);
                 } catch (error) {
-                    showError('Network error. Please try again.');
+                    showError(messages.networkError);
                 } finally {
                     button.disabled = false;
                 }

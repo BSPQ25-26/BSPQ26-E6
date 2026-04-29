@@ -1,29 +1,37 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}">
 <head>
     <meta charset="UTF-8">
-    <title>Manage Users</title>
+    <title th:text="#{adminUsers.title}">Manage Users</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-slate-100 p-10">
 <div class="max-w-3xl mx-auto">
     <div class="flex justify-between items-center mb-6">
-        <h1 class="text-2xl font-bold">Create User / Admin</h1>
-        <a href="/admin" class="bg-gray-600 text-white px-4 py-2 rounded">Back</a>
+        <h1 class="text-2xl font-bold" th:text="#{adminUsers.heading}">Create User / Admin</h1>
+        <div class="flex items-center gap-3">
+            <select id="langSelect"
+                    class="px-4 py-[0.6rem] bg-slate-100 text-slate-700 text-sm font-medium rounded-md border border-slate-700"
+                    onchange="window.location.href = window.location.pathname + '?lang=' + this.value;">
+                <option value="es" th:selected="${#locale.language == 'es'}" th:text="#{global.lang.es}">Espanol</option>
+                <option value="en" th:selected="${#locale.language == 'en'}" th:text="#{global.lang.en}">English</option>
+            </select>
+            <a href="/admin" class="bg-gray-600 text-white px-4 py-2 rounded-md" th:text="#{adminUsers.back}">Back</a>
+        </div>
     </div>
 
     <div class="bg-white p-6 rounded shadow">
         <form action="/admin/users" method="post" class="space-y-4">
-            <input type="text" name="username" placeholder="Username" class="w-full border p-2 rounded" required>
-            <input type="email" name="email" placeholder="Email" class="w-full border p-2 rounded" required>
-            <input type="password" name="password" placeholder="Password" class="w-full border p-2 rounded" required>
+            <input type="text" name="username" th:placeholder="#{adminUsers.username}" class="w-full border p-2 rounded" required>
+            <input type="email" name="email" th:placeholder="#{adminUsers.email}" class="w-full border p-2 rounded" required>
+            <input type="password" name="password" th:placeholder="#{adminUsers.password}" class="w-full border p-2 rounded" required>
 
             <label class="flex items-center gap-2">
                 <input type="checkbox" name="isAdmin" value="true">
-                <span>Make this user admin</span>
+                <span th:text="#{adminUsers.admin}">Make this user admin</span>
             </label>
 
-            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">
+            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded" th:text="#{adminUsers.submit}">
                 Create user
             </button>
         </form>

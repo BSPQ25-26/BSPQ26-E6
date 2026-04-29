@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}">
 <head>
     <meta charset="UTF-8">
-    <title>Football Manager - Schedule</title>
+    <title th:text="#{scheduleMatch.title}">Football Manager - Schedule</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .pitch-bg {
@@ -27,56 +27,64 @@
                     </path>
                 </svg>
                 <span class="text-xl font-black text-white uppercase tracking-wider">
-                    Control<span class="text-emerald-500">Center</span>
+                    <span th:text="#{brand.control}">Control</span><span class="text-emerald-500" th:text="#{brand.center}">Center</span>
                 </span>
             </div>
 
-            <a href="/admin"
-               class="px-4 py-2 bg-slate-800 text-slate-300 text-sm font-medium rounded-md hover:bg-slate-700 hover:text-white transition-colors border border-slate-700">
-                Back to Admin
-            </a>
+            <div class="flex items-center gap-3">
+                <select id="langSelect"
+        class="px-4 py-[0.55rem] bg-slate-800 text-slate-300 text-sm font-medium rounded-md border border-slate-700"
+        onchange="window.location.href = window.location.pathname + '?lang=' + this.value;">
+    <option value="es" th:selected="${#locale.language == 'es'}" th:text="#{global.lang.es}">Espanol</option>
+    <option value="en" th:selected="${#locale.language == 'en'}" th:text="#{global.lang.en}">English</option>
+</select>
+                <a href="/admin"
+                   class="px-4 py-2 bg-slate-800 text-slate-300 text-sm font-medium rounded-md hover:bg-slate-700 hover:text-white transition-colors border border-slate-700" th:text="#{nav.backToAdmin}">
+                    Back to Admin
+                </a>
+            </div>
         </div>
     </div>
 </nav>
 
 <div class="max-w-lg mx-auto bg-white p-8 rounded-lg shadow border border-slate-200">
-    <h2 class="text-2xl font-bold mb-6 text-slate-900">Schedule New Match</h2>
+    <h2 class="text-2xl font-bold mb-6 text-slate-900" th:text="#{scheduleMatch.heading}">Schedule New Match</h2>
 
     <form th:action="@{/api/matches}" th:object="${matchRequest}" method="POST" class="space-y-4">
 
         <div>
-            <label class="block text-sm font-medium text-slate-700">Home Team</label>
+            <label class="block text-sm font-medium text-slate-700" th:text="#{scheduleMatch.homeTeam}">Home Team</label>
             <select th:field="*{homeTeamId}" class="w-full border p-2 rounded" required>
-                <option value="" disabled selected>Select home team</option>
+                <option value="" disabled selected th:text="#{scheduleMatch.selectHome}">Select home team</option>
                 <option th:each="team : ${teams}" th:value="${team.id}" th:text="${team.name}"></option>
             </select>
         </div>
 
         <div>
-            <label class="block text-sm font-medium text-slate-700">Away Team</label>
+            <label class="block text-sm font-medium text-slate-700" th:text="#{scheduleMatch.awayTeam}">Away Team</label>
             <select th:field="*{awayTeamId}" class="w-full border p-2 rounded" required>
-                <option value="" disabled selected>Select away team</option>
+                <option value="" disabled selected th:text="#{scheduleMatch.selectAway}">Select away team</option>
                 <option th:each="team : ${teams}" th:value="${team.id}" th:text="${team.name}"></option>
             </select>
         </div>
 
         <div>
-            <label class="block text-sm font-medium text-slate-700">Competition ID</label>
+            <label class="block text-sm font-medium text-slate-700" th:text="#{scheduleMatch.competitionId}">Competition ID</label>
             <input type="number" th:field="*{competitionId}" class="w-full border p-2 rounded" required>
         </div>
 
         <div>
-            <label class="block text-sm font-medium text-slate-700">Kickoff Time</label>
+            <label class="block text-sm font-medium text-slate-700" th:text="#{scheduleMatch.kickoff}">Kickoff Time</label>
             <input type="datetime-local" th:field="*{kickoffTime}" class="w-full border p-2 rounded" required>
         </div>
 
         <div>
-            <label class="block text-sm font-medium text-slate-700">Venue</label>
+            <label class="block text-sm font-medium text-slate-700" th:text="#{scheduleMatch.venue}">Venue</label>
             <input type="text" th:field="*{venue}" class="w-full border p-2 rounded" required>
         </div>
 
         <div>
-            <label class="block text-sm font-medium text-slate-700">Status</label>
+            <label class="block text-sm font-medium text-slate-700" th:text="#{scheduleMatch.status}">Status</label>
             <select th:field="*{status}" class="w-full border p-2 rounded">
                 <option th:each="st : ${T(com.example.football_manager.dto.MatchRequestDTO.MatchStatus).values()}"
                         th:value="${st}" th:text="${st}">
@@ -85,7 +93,7 @@
         </div>
 
         <button type="submit"
-                class="w-full bg-emerald-600 text-white py-2 rounded hover:bg-emerald-700 font-bold transition-colors">
+                class="w-full bg-emerald-600 text-white py-2 rounded hover:bg-emerald-700 font-bold transition-colors" th:text="#{scheduleMatch.submit}">
             Schedule Match
         </button>
     </form>

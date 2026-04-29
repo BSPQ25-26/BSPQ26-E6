@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}">
 <head>
     <meta charset="UTF-8">
-    <title>Football Manager - Login</title>
+    <title th:text="#{login.title}">Football Manager - Login</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .pitch-bg {
@@ -12,7 +12,16 @@
         }
     </style>
 </head>
-<body class="pitch-bg min-h-screen flex items-center justify-center p-4 font-sans text-slate-100">
+<body class="pitch-bg min-h-screen flex items-center justify-center p-4 font-sans text-slate-100 relative">
+
+<div class="absolute top-4 right-4 flex items-center gap-2 text-slate-300 text-xs font-semibold">
+    <select id="langSelect"
+        class="px-4 py-[0.55rem] bg-slate-800 text-slate-300 text-sm font-medium rounded-md border border-slate-700"
+        onchange="window.location.href = window.location.pathname + '?lang=' + this.value;">
+    <option value="es" th:selected="${#locale.language == 'es'}" th:text="#{global.lang.es}">Espanol</option>
+    <option value="en" th:selected="${#locale.language == 'en'}" th:text="#{global.lang.en}">English</option>
+</select>
+</div>
 
 <div class="max-w-md w-full bg-slate-800/80 backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden border border-slate-700">
     <div class="p-8">
@@ -20,41 +29,46 @@
             <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 mb-4 shadow-inner">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 00-1-1H4a1 1 0 01-1-1V4a1 1 0 011-1h3a1 1 0 001-1v-1z"></path></svg>
             </div>
-            <h2 class="text-3xl font-extrabold text-white tracking-tight uppercase">Football Manager</h2>
-            <p class="text-sm text-slate-400 mt-2">Enter your credentials to access the database.</p>
+            <h2 class="text-3xl font-extrabold text-white tracking-tight uppercase" th:text="#{app.name}">Football Manager</h2>
+            <p class="text-sm text-slate-400 mt-2" th:text="#{login.subtitle}">Enter your credentials to access the database.</p>
         </div>
 
         <div id="message" class="hidden mb-4 p-3 rounded-lg text-sm text-center font-medium"></div>
 
         <form id="loginForm" class="space-y-6">
             <div>
-                <label for="username" class="block text-sm font-medium text-slate-300 mb-1">Username</label>
+                <label for="username" class="block text-sm font-medium text-slate-300 mb-1" th:text="#{login.username}">Username</label>
                 <input type="text" id="username" name="username" required
                        class="w-full px-4 py-3 rounded-lg bg-slate-900 border border-slate-600 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all">
             </div>
 
             <div>
-                <label for="password" class="block text-sm font-medium text-slate-300 mb-1">Password</label>
+                <label for="password" class="block text-sm font-medium text-slate-300 mb-1" th:text="#{login.password}">Password</label>
                 <input type="password" id="password" name="password" required
                        class="w-full px-4 py-3 rounded-lg bg-slate-900 border border-slate-600 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all">
             </div>
 
-            <button type="submit" class="w-full py-3 px-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-lg shadow-lg shadow-emerald-600/30 transition-all transform hover:-translate-y-0.5 uppercase tracking-wide">
+            <button type="submit" class="w-full py-3 px-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-lg shadow-lg shadow-emerald-600/30 transition-all transform hover:-translate-y-0.5 uppercase tracking-wide" th:text="#{login.button}">
                 Log In
             </button>
         </form>
     </div>
     <div class="px-8 py-4 bg-slate-900/50 border-t border-slate-700 text-center">
         <p class="text-sm text-slate-400">
-            New to the platform?
-            <a href="/register" class="font-medium text-emerald-400 hover:text-emerald-300 transition-colors">Register here</a>
+            <span th:text="#{login.new}">New to the platform?</span>
+            <a href="/register" class="font-medium text-emerald-400 hover:text-emerald-300 transition-colors" th:text="#{login.register}">Register here</a>
         </p>
     </div>
 </div>
 
-<script>
+<script th:inline="javascript">
     const loginForm = document.getElementById('loginForm');
     const message = document.getElementById('message');
+    const messages = {
+        loginFailed: /*[[#{login.error.failed}]]*/ 'Login failed',
+        loginSuccess: /*[[#{login.success}]]*/ 'Login successful. Redirecting...',
+        networkError: /*[[#{login.error.network}]]*/ 'Network error. Please try again.'
+    };
 
     function showMessage(text, isError) {
         message.textContent = text;
@@ -83,14 +97,14 @@
 
             const data = await response.json();
             if (!response.ok) {
-                showMessage(data.message || 'Login failed', true);
+                showMessage(data.message || messages.loginFailed, true);
                 return;
             }
 
-            showMessage('Login successful. Redirecting...', false);
+            showMessage(messages.loginSuccess, false);
             window.location.href = '/teams';
         } catch (error) {
-            showMessage('Network error. Please try again.', true);
+            showMessage(messages.networkError, true);
         }
     });
 </script>

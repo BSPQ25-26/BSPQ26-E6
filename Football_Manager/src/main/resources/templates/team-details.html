@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${team.name + ' - Football Manager'}">Team Details</title>
+    <title th:text="${team.name + ' - ' + #messages.msg('app.name')}">Team Details</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
@@ -15,13 +15,19 @@
                 Football<span class="text-emerald-500">Manager</span>
             </a>
 
-            <div class="flex gap-3">
-                <a href="/teams" class="px-4 py-2 bg-slate-800 text-slate-300 rounded-md hover:bg-slate-700">
+            <div class="flex gap-3 items-center">
+                <select id="langSelect"
+        class="px-4 py-[0.55rem] bg-slate-800 text-slate-300 text-sm font-medium rounded-md border border-slate-700"
+        onchange="window.location.href = window.location.pathname + '?lang=' + this.value;">
+    <option value="es" th:selected="${#locale.language == 'es'}" th:text="#{global.lang.es}">Espanol</option>
+    <option value="en" th:selected="${#locale.language == 'en'}" th:text="#{global.lang.en}">English</option>
+</select>
+                <a href="/teams" class="px-4 py-2 bg-slate-800 text-slate-300 rounded-md hover:bg-slate-700" th:text="#{teamDetails.navBack}">
                     Back to Teams
                 </a>
 
                 <a th:if="${isAdmin}" href="/admin"
-                   class="px-4 py-2 bg-slate-800 text-slate-300 rounded-md hover:bg-slate-700">
+                   class="px-4 py-2 bg-slate-800 text-slate-300 rounded-md hover:bg-slate-700" th:text="#{teamDetails.adminPanel}">
                     Admin Panel
                 </a>
             </div>
@@ -36,7 +42,7 @@
             <div class="w-28 h-28 bg-slate-50 rounded-2xl border p-3 flex items-center justify-center">
                 <img th:src="${team.logoUrl != null && !team.logoUrl.isEmpty() ? team.logoUrl : 'https://via.placeholder.com/150?text=Logo'}"
                      class="w-full h-full object-contain"
-                     alt="Team logo">
+                     th:alt="#{teamDetails.teamLogoAlt}">
             </div>
 
             <div class="text-center md:text-left">
@@ -45,7 +51,7 @@
                 </h1>
 
                 <p class="text-slate-500 mt-2 font-medium"
-                   th:text="${team.country != null ? team.country.name : 'Unknown country'}">
+                   th:text="${team.country != null ? team.country.name : #messages.msg('teamDetails.country.unknown')}">
                     Country
                 </p>
             </div>
@@ -55,11 +61,11 @@
     <section class="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
         <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
-            <h2 class="text-2xl font-extrabold text-slate-900 uppercase mb-4">
+            <h2 class="text-2xl font-extrabold text-slate-900 uppercase mb-4" th:text="#{teamDetails.recent}">
                 Recent Matches
             </h2>
 
-            <div th:if="${#lists.isEmpty(recentMatches)}" class="text-slate-500">
+            <div th:if="${#lists.isEmpty(recentMatches)}" class="text-slate-500" th:text="#{teamDetails.recent.empty}">
                 No recent matches for this team.
             </div>
 
@@ -69,7 +75,7 @@
 
                     <div class="flex justify-between items-center gap-4">
                         <div class="font-bold text-slate-900"
-                             th:text="${match.leftTeam.name}">
+                             th:text="#{teamDetails.home}">
                             Home
                         </div>
 
@@ -79,7 +85,7 @@
                         </div>
 
                         <div class="font-bold text-slate-900 text-right"
-                             th:text="${match.rightTeam.name}">
+                             th:text="#{teamDetails.away}">
                             Away
                         </div>
                     </div>
@@ -98,11 +104,11 @@
         </div>
 
         <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
-            <h2 class="text-2xl font-extrabold text-slate-900 uppercase mb-4">
+            <h2 class="text-2xl font-extrabold text-slate-900 uppercase mb-4" th:text="#{teamDetails.future}">
                 Future Matches
             </h2>
 
-            <div th:if="${#lists.isEmpty(futureMatches)}" class="text-slate-500">
+            <div th:if="${#lists.isEmpty(futureMatches)}" class="text-slate-500" th:text="#{teamDetails.future.empty}">
                 No future matches for this team.
             </div>
 
@@ -112,16 +118,16 @@
 
                     <div class="flex justify-between items-center gap-4">
                         <div class="font-bold text-slate-900"
-                             th:text="${match.leftTeam.name}">
+                             th:text="#{teamDetails.home}">
                             Home
                         </div>
 
-                        <div class="text-sm font-black text-slate-500 uppercase">
+                        <div class="text-sm font-black text-slate-500 uppercase" th:text="#{teamDetails.vs}">
                             VS
                         </div>
 
                         <div class="font-bold text-slate-900 text-right"
-                             th:text="${match.rightTeam.name}">
+                             th:text="#{teamDetails.away}">
                             Away
                         </div>
                     </div>

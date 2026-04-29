@@ -1,17 +1,26 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}">
 <head>
     <meta charset="UTF-8">
-    <title>Football Manager - Enter Result</title>
+    <title th:text="#{enterResult.title}">Football Manager - Enter Result</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-slate-50 min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8 font-sans">
+<body class="bg-slate-50 min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8 font-sans relative">
+
+    <div class="absolute top-4 right-4 flex items-center gap-2 text-xs font-semibold text-slate-600">
+        <select id="langSelect"
+                class="px-4 py-[0.55rem] bg-slate-800 text-slate-300 text-sm font-medium rounded-md border border-slate-700"
+                onchange="window.location.href = window.location.pathname + '?lang=' + this.value;">
+            <option value="es" th:selected="${#locale.language == 'es'}" th:text="#{global.lang.es}">Espanol</option>
+            <option value="en" th:selected="${#locale.language == 'en'}" th:text="#{global.lang.en}">English</option>
+        </select>
+    </div>
 
     <div class="sm:mx-auto sm:w-full sm:max-w-3xl">
-        <h2 class="mt-6 text-center text-3xl font-extrabold text-slate-900">
+        <h2 class="mt-6 text-center text-3xl font-extrabold text-slate-900" th:text="#{enterResult.heading}">
             Enter Match Result
         </h2>
-        <p class="mt-2 text-center text-sm text-slate-600">
+        <p class="mt-2 text-center text-sm text-slate-600" th:text="#{enterResult.subtitle}">
             Add goals with their scoring team and minute
         </p>
     </div>
@@ -21,24 +30,24 @@
             <div class="mb-6 rounded-xl border border-slate-200 bg-slate-50 p-5">
                 <div class="flex items-center justify-between gap-4">
                     <div class="min-w-0">
-                        <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Home</p>
+                        <p class="text-xs font-bold uppercase tracking-wider text-slate-500" th:text="#{enterResult.home}">Home</p>
                         <p class="truncate text-lg font-extrabold uppercase text-slate-900"
-                           th:text="${match.leftTeam != null ? match.leftTeam.name : 'Home team'}">Home team</p>
+                           th:text="${match.leftTeam != null ? match.leftTeam.name : #messages.msg('enterResult.homeFallback')}">Home team</p>
                     </div>
-                    <span class="shrink-0 rounded-full bg-slate-900 px-3 py-1 text-xs font-black uppercase text-white">vs</span>
+                    <span class="shrink-0 rounded-full bg-slate-900 px-3 py-1 text-xs font-black uppercase text-white" th:text="#{teams.match.vs}">vs</span>
                     <div class="min-w-0 text-right">
-                        <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Away</p>
+                        <p class="text-xs font-bold uppercase tracking-wider text-slate-500" th:text="#{enterResult.away}">Away</p>
                         <p class="truncate text-lg font-extrabold uppercase text-slate-900"
-                           th:text="${match.rightTeam != null ? match.rightTeam.name : 'Away team'}">Away team</p>
+                           th:text="${match.rightTeam != null ? match.rightTeam.name : #messages.msg('enterResult.awayFallback')}">Away team</p>
                     </div>
                 </div>
                 <div class="mt-4 grid grid-cols-2 gap-3 text-sm text-slate-600">
                     <div>
-                        <span class="font-semibold text-slate-800">Venue:</span>
+                        <span class="font-semibold text-slate-800" th:text="#{enterResult.venue}">Venue:</span>
                         <span th:text="${match.venue}">Stadium</span>
                     </div>
                     <div class="text-right">
-                        <span class="font-semibold text-slate-800">Current:</span>
+                        <span class="font-semibold text-slate-800" th:text="#{enterResult.current}">Current:</span>
                         <span th:text="${match.leftScore + ' - ' + match.rightScore}">0 - 0</span>
                     </div>
                 </div>
@@ -59,10 +68,10 @@
                     <table class="w-full text-left border-collapse">
                         <thead>
                             <tr class="bg-slate-50 border-b border-slate-200 text-slate-500 uppercase text-xs font-bold tracking-wider">
-                                <th class="px-4 py-3">Team</th>
-                                <th class="px-4 py-3 w-28">Minute</th>
-                                <th class="px-4 py-3 w-36">Stoppage</th>
-                                <th class="px-4 py-3 w-20 text-right">Action</th>
+                                <th class="px-4 py-3" th:text="#{enterResult.table.team}">Team</th>
+                                <th class="px-4 py-3 w-28" th:text="#{enterResult.table.minute}">Minute</th>
+                                <th class="px-4 py-3 w-36" th:text="#{enterResult.table.stoppage}">Stoppage</th>
+                                <th class="px-4 py-3 w-20 text-right" th:text="#{enterResult.table.action}">Action</th>
                             </tr>
                         </thead>
                         <tbody id="goalRows" class="divide-y divide-slate-200">
@@ -70,7 +79,7 @@
                                 <td class="px-4 py-3">
                                     <select th:name="|goals[${stat.index}].teamId|" required
                                             class="block w-full px-3 py-2 border border-slate-300 rounded-lg bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm transition duration-200">
-                                        <option value="" disabled>Select team</option>
+                                        <option value="" disabled th:text="#{enterResult.selectTeam}">Select team</option>
                                         <option th:value="${match.leftTeam.id}" th:text="${match.leftTeam.name}" th:selected="${goal.teamId == match.leftTeam.id}">Home team</option>
                                         <option th:value="${match.rightTeam.id}" th:text="${match.rightTeam.name}" th:selected="${goal.teamId == match.rightTeam.id}">Away team</option>
                                     </select>
@@ -85,7 +94,7 @@
                                 </td>
                                 <td class="px-4 py-3 text-right">
                                     <button type="button" onclick="removeGoal(this)"
-                                            class="inline-flex items-center justify-center rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm font-bold text-red-600 hover:bg-red-100 transition-colors">
+                                            class="inline-flex items-center justify-center rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm font-bold text-red-600 hover:bg-red-100 transition-colors" th:text="#{enterResult.remove}">
                                         Remove
                                     </button>
                                 </td>
@@ -100,19 +109,19 @@
                         <svg class="w-5 h-5 mr-2 -ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12m6-6H6"></path>
                         </svg>
-                        Add Goal
+                        <span th:text="#{enterResult.addGoal}">Add Goal</span>
                     </button>
                     <button type="submit"
                             class="inline-flex flex-1 justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-colors duration-200">
                         <svg class="w-5 h-5 mr-2 -ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                         </svg>
-                        Save Result
+                        <span th:text="#{enterResult.saveResult}">Save Result</span>
                     </button>
                 </div>
 
                 <a th:href="@{/matches/schedule}"
-                   class="w-full flex justify-center py-3 px-4 border border-slate-300 rounded-lg shadow-sm text-sm font-medium text-slate-700 bg-white hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-colors duration-200">
+                   class="w-full flex justify-center py-3 px-4 border border-slate-300 rounded-lg shadow-sm text-sm font-medium text-slate-700 bg-white hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-colors duration-200" th:text="#{enterResult.backToMatches}">
                     Back to Matches
                 </a>
             </form>
@@ -124,7 +133,7 @@
             <td class="px-4 py-3">
                 <select name="goals[__index__].teamId" required
                         class="block w-full px-3 py-2 border border-slate-300 rounded-lg bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm transition duration-200">
-                    <option value="" disabled selected>Select team</option>
+                    <option value="" disabled selected th:text="#{enterResult.selectTeam}">Select team</option>
                     <option th:value="${match.leftTeam.id}" th:text="${match.leftTeam.name}">Home team</option>
                     <option th:value="${match.rightTeam.id}" th:text="${match.rightTeam.name}">Away team</option>
                 </select>
@@ -139,7 +148,7 @@
             </td>
             <td class="px-4 py-3 text-right">
                 <button type="button" onclick="removeGoal(this)"
-                        class="inline-flex items-center justify-center rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm font-bold text-red-600 hover:bg-red-100 transition-colors">
+                        class="inline-flex items-center justify-center rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm font-bold text-red-600 hover:bg-red-100 transition-colors" th:text="#{enterResult.remove}">
                     Remove
                 </button>
             </td>
