@@ -339,6 +339,24 @@ docs/doxygen/latex/refman.pdf
 
 ---
 
+## Swagger/OpenAPI Documentation
+
+The project includes Swagger/OpenAPI documentation for the REST API.
+
+The Swagger documentation is available at:
+
+```text
+/swagger-ui/index.html
+```
+
+The OpenAPI specification is available at:
+
+```text
+/v3/api-docs
+```
+
+---
+
 ## Maven Site
 
 To generate the Maven Site:
@@ -520,13 +538,13 @@ Group E6
 
 Team members:
 
-- Member 1
-- Member 2
-- Member 3
-- Member 4
-- Member 5
-- Member 6
-- Member 7
+- Alba Delgado Ortega
+- Alejandro Vicente Milla Tinajero
+- Alex Ramarathinam Aguirre
+- Elena Torralbo Jiménez
+- Iker Castillo Peiteado
+- Jaime Etxebarria Ugarte
+- Javier Gómez Martínez
 
 ---
 
