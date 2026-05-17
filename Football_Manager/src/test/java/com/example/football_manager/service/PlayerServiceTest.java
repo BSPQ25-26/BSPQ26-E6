@@ -132,6 +132,49 @@ class PlayerServiceTest {
     }
 
     @Test
+    void createPlayers_shouldCreateAllPlayersSuccessfully() {
+        PlayerRequestDTO player1 = new PlayerRequestDTO(" Unai Simon ", 1, PlayerPosition.GOALKEEPER);
+        PlayerRequestDTO player2 = new PlayerRequestDTO(" Inaki Williams ", 9, PlayerPosition.FORWARD);
+
+        when(teamRepository.findById(10L)).thenReturn(Optional.of(team));
+        when(playerRepository.existsByTeamIdAndNumber(10L, 1)).thenReturn(false);
+        when(playerRepository.existsByTeamIdAndNumber(10L, 9)).thenReturn(false);
+        when(playerRepository.saveAll(any())).thenAnswer(invocation -> invocation.getArgument(0));
+
+        List<Player> result = playerService.createPlayers(10L, List.of(player1, player2));
+
+        assertEquals(2, result.size());
+        assertEquals("Unai Simon", result.get(0).getName());
+        assertEquals("Inaki Williams", result.get(1).getName());
+        assertEquals(2, team.getPlayers().size());
+        verify(playerRepository).saveAll(any());
+    }
+
+    @Test
+    void createPlayers_shouldThrowExceptionWhenRequestContainsDuplicatedNumbers() {
+        PlayerRequestDTO player1 = new PlayerRequestDTO("Unai Simon", 1, PlayerPosition.GOALKEEPER);
+        PlayerRequestDTO player2 = new PlayerRequestDTO("Julen Agirrezabala", 1, PlayerPosition.GOALKEEPER);
+
+        when(teamRepository.findById(10L)).thenReturn(Optional.of(team));
+        when(playerRepository.existsByTeamIdAndNumber(10L, 1)).thenReturn(false);
+
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class,
+                () -> playerService.createPlayers(10L, List.of(player1, player2)));
+
+        assertEquals("Validation Error: Request contains duplicated player number 1.", ex.getMessage());
+        verify(playerRepository, never()).saveAll(any());
+    }
+
+    @Test
+    void createPlayers_shouldThrowExceptionWhenListIsEmpty() {
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class,
+                () -> playerService.createPlayers(10L, List.of()));
+
+        assertEquals("Validation Error: Player list is required.", ex.getMessage());
+        verify(teamRepository, never()).findById(any());
+    }
+
+    @Test
     void getPlayersByTeamId_shouldReturnOrderedPlayers() {
         Player player1 = new Player(1L, "Alex Remiro", 1, PlayerPosition.GOALKEEPER, team);
         Player player2 = new Player(2L, "Mikel Oyarzabal", 10, PlayerPosition.FORWARD, team);

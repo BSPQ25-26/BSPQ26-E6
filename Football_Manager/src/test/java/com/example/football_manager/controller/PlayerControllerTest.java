@@ -1,5 +1,6 @@
 package com.example.football_manager.controller;
 
+import com.example.football_manager.dto.PlayerBulkRequestDTO;
 import com.example.football_manager.dto.PlayerRequestDTO;
 import com.example.football_manager.model.Player;
 import com.example.football_manager.model.PlayerPosition;
@@ -60,6 +61,44 @@ class PlayerControllerTest {
 
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
         assertEquals("Validation Error: Team already has a player with number 14.", response.getBody());
+    }
+
+    @Test
+    void createPlayers_shouldReturnCreatedWhenPlayersAreCreated() {
+        Team team = new Team();
+        team.setId(10L);
+
+        PlayerRequestDTO player1 = new PlayerRequestDTO("Unai Simon", 1, PlayerPosition.GOALKEEPER);
+        PlayerRequestDTO player2 = new PlayerRequestDTO("Inaki Williams", 9, PlayerPosition.FORWARD);
+        PlayerBulkRequestDTO dto = new PlayerBulkRequestDTO(List.of(player1, player2));
+
+        Player savedPlayer1 = new Player(1L, "Unai Simon", 1, PlayerPosition.GOALKEEPER, team);
+        Player savedPlayer2 = new Player(2L, "Inaki Williams", 9, PlayerPosition.FORWARD, team);
+
+        when(playerService.createPlayers(10L, dto.getPlayers())).thenReturn(List.of(savedPlayer1, savedPlayer2));
+
+        ResponseEntity<?> response = playerController.createPlayers(10L, dto);
+
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
+        assertInstanceOf(List.class, response.getBody());
+        assertEquals(2, ((List<?>) response.getBody()).size());
+        verify(playerService).createPlayers(10L, dto.getPlayers());
+    }
+
+    @Test
+    void createPlayers_shouldReturnBadRequestWhenBulkValidationFails() {
+        PlayerBulkRequestDTO dto = new PlayerBulkRequestDTO(List.of(
+                new PlayerRequestDTO("Unai Simon", 1, PlayerPosition.GOALKEEPER),
+                new PlayerRequestDTO("Julen Agirrezabala", 1, PlayerPosition.GOALKEEPER)
+        ));
+
+        when(playerService.createPlayers(10L, dto.getPlayers()))
+                .thenThrow(new IllegalArgumentException("Validation Error: Request contains duplicated player number 1."));
+
+        ResponseEntity<?> response = playerController.createPlayers(10L, dto);
+
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+        assertEquals("Validation Error: Request contains duplicated player number 1.", response.getBody());
     }
 
     @Test
