@@ -1,0 +1,106 @@
+\doxysection{com.\+example.\+football\+\_\+manager.\+repository.\+Match\+Repository Interface Reference}
+\hypertarget{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository}{}\label{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository}\index{com.example.football\_manager.repository.MatchRepository@{com.example.football\_manager.repository.MatchRepository}}
+Inheritance diagram for com.\+example.\+football\+\_\+manager.\+repository.\+Match\+Repository\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}} $>$ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository_a181d3e68370b9b9d99e5c0ded5340816}{find\+By\+Filters}} ( @Param("{}team\+Id"{}) Long team\+Id, @Param("{}finished"{}) Boolean finished, @Param("{}competition\+Id"{}) Long competition\+Id)
+\item 
+List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}} $>$ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository_afefd59131ed9a195b1b8039734fd280c}{find\+By\+Finished\+True\+Order\+By\+Datetime\+Desc}} ()
+\item 
+List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}} $>$ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository_a116c12af879e3e3bd1bcd8cc31d7a79c}{find\+By\+Finished\+True\+And\+Left\+Team\+Id\+Or\+Finished\+True\+And\+Right\+Team\+Id\+Order\+By\+Datetime\+Desc}} (Long left\+Team\+Id, Long right\+Team\+Id)
+\item 
+List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}} $>$ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository_a6adc0b137d27fca5e90006e84f0760a7}{find\+By\+Finished\+False\+And\+Datetime\+After\+And\+Left\+Team\+Id\+Or\+Finished\+False\+And\+Datetime\+After\+And\+Right\+Team\+Id\+Order\+By\+Datetime\+Asc}} (Offset\+Date\+Time now1, Long left\+Team\+Id, Offset\+Date\+Time now2, Long right\+Team\+Id)
+\item 
+List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}} $>$ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository_a46478a6c202676f688f7ece1fb006932}{find\+By\+Finished\+False\+And\+Datetime\+After\+And\+Left\+Team\+Id\+In\+Or\+Finished\+False\+And\+Datetime\+After\+And\+Right\+Team\+Id\+In\+Order\+By\+Datetime\+Asc}} (Offset\+Date\+Time now1, Collection$<$ Long $>$ left\+Team\+Ids, Offset\+Date\+Time now2, Collection$<$ Long $>$ right\+Team\+Ids)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{MatchRepository_8java_source_l00014}{14}} of file \mbox{\hyperlink{MatchRepository_8java_source}{Match\+Repository.\+java}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository_a181d3e68370b9b9d99e5c0ded5340816}\index{com.example.football\_manager.repository.MatchRepository@{com.example.football\_manager.repository.MatchRepository}!findByFilters@{findByFilters}}
+\index{findByFilters@{findByFilters}!com.example.football\_manager.repository.MatchRepository@{com.example.football\_manager.repository.MatchRepository}}
+\doxysubsubsection{\texorpdfstring{findByFilters()}{findByFilters()}}
+{\footnotesize\ttfamily \label{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository_a181d3e68370b9b9d99e5c0ded5340816} 
+List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}} $>$ com.\+example.\+football\+\_\+manager.\+repository.\+Match\+Repository.\+find\+By\+Filters (\begin{DoxyParamCaption}\item[{@Param("{}team\+Id"{}) Long}]{team\+Id}{, }\item[{@Param("{}finished"{}) Boolean}]{finished}{, }\item[{@Param("{}competition\+Id"{}) Long}]{competition\+Id}{}\end{DoxyParamCaption})}
+
+
+
+References \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository_a181d3e68370b9b9d99e5c0ded5340816}{find\+By\+Filters()}}.
+
+
+
+Referenced by \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository_a181d3e68370b9b9d99e5c0ded5340816}{find\+By\+Filters()}}.
+
+\Hypertarget{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository_a46478a6c202676f688f7ece1fb006932}\index{com.example.football\_manager.repository.MatchRepository@{com.example.football\_manager.repository.MatchRepository}!findByFinishedFalseAndDatetimeAfterAndLeftTeamIdInOrFinishedFalseAndDatetimeAfterAndRightTeamIdInOrderByDatetimeAsc@{findByFinishedFalseAndDatetimeAfterAndLeftTeamIdInOrFinishedFalseAndDatetimeAfterAndRightTeamIdInOrderByDatetimeAsc}}
+\index{findByFinishedFalseAndDatetimeAfterAndLeftTeamIdInOrFinishedFalseAndDatetimeAfterAndRightTeamIdInOrderByDatetimeAsc@{findByFinishedFalseAndDatetimeAfterAndLeftTeamIdInOrFinishedFalseAndDatetimeAfterAndRightTeamIdInOrderByDatetimeAsc}!com.example.football\_manager.repository.MatchRepository@{com.example.football\_manager.repository.MatchRepository}}
+\doxysubsubsection{\texorpdfstring{findByFinishedFalseAndDatetimeAfterAndLeftTeamIdInOrFinishedFalseAndDatetimeAfterAndRightTeamIdInOrderByDatetimeAsc()}{findByFinishedFalseAndDatetimeAfterAndLeftTeamIdInOrFinishedFalseAndDatetimeAfterAndRightTeamIdInOrderByDatetimeAsc()}}
+{\footnotesize\ttfamily \label{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository_a46478a6c202676f688f7ece1fb006932} 
+List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}} $>$ com.\+example.\+football\+\_\+manager.\+repository.\+Match\+Repository.\+find\+By\+Finished\+False\+And\+Datetime\+After\+And\+Left\+Team\+Id\+In\+Or\+Finished\+False\+And\+Datetime\+After\+And\+Right\+Team\+Id\+In\+Order\+By\+Datetime\+Asc (\begin{DoxyParamCaption}\item[{Offset\+Date\+Time}]{now1}{, }\item[{Collection$<$ Long $>$}]{left\+Team\+Ids}{, }\item[{Offset\+Date\+Time}]{now2}{, }\item[{Collection$<$ Long $>$}]{right\+Team\+Ids}{}\end{DoxyParamCaption})}
+
+
+
+References \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository_a46478a6c202676f688f7ece1fb006932}{find\+By\+Finished\+False\+And\+Datetime\+After\+And\+Left\+Team\+Id\+In\+Or\+Finished\+False\+And\+Datetime\+After\+And\+Right\+Team\+Id\+In\+Order\+By\+Datetime\+Asc()}}.
+
+
+
+Referenced by \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository_a46478a6c202676f688f7ece1fb006932}{find\+By\+Finished\+False\+And\+Datetime\+After\+And\+Left\+Team\+Id\+In\+Or\+Finished\+False\+And\+Datetime\+After\+And\+Right\+Team\+Id\+In\+Order\+By\+Datetime\+Asc()}}.
+
+\Hypertarget{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository_a6adc0b137d27fca5e90006e84f0760a7}\index{com.example.football\_manager.repository.MatchRepository@{com.example.football\_manager.repository.MatchRepository}!findByFinishedFalseAndDatetimeAfterAndLeftTeamIdOrFinishedFalseAndDatetimeAfterAndRightTeamIdOrderByDatetimeAsc@{findByFinishedFalseAndDatetimeAfterAndLeftTeamIdOrFinishedFalseAndDatetimeAfterAndRightTeamIdOrderByDatetimeAsc}}
+\index{findByFinishedFalseAndDatetimeAfterAndLeftTeamIdOrFinishedFalseAndDatetimeAfterAndRightTeamIdOrderByDatetimeAsc@{findByFinishedFalseAndDatetimeAfterAndLeftTeamIdOrFinishedFalseAndDatetimeAfterAndRightTeamIdOrderByDatetimeAsc}!com.example.football\_manager.repository.MatchRepository@{com.example.football\_manager.repository.MatchRepository}}
+\doxysubsubsection{\texorpdfstring{findByFinishedFalseAndDatetimeAfterAndLeftTeamIdOrFinishedFalseAndDatetimeAfterAndRightTeamIdOrderByDatetimeAsc()}{findByFinishedFalseAndDatetimeAfterAndLeftTeamIdOrFinishedFalseAndDatetimeAfterAndRightTeamIdOrderByDatetimeAsc()}}
+{\footnotesize\ttfamily \label{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository_a6adc0b137d27fca5e90006e84f0760a7} 
+List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}} $>$ com.\+example.\+football\+\_\+manager.\+repository.\+Match\+Repository.\+find\+By\+Finished\+False\+And\+Datetime\+After\+And\+Left\+Team\+Id\+Or\+Finished\+False\+And\+Datetime\+After\+And\+Right\+Team\+Id\+Order\+By\+Datetime\+Asc (\begin{DoxyParamCaption}\item[{Offset\+Date\+Time}]{now1}{, }\item[{Long}]{left\+Team\+Id}{, }\item[{Offset\+Date\+Time}]{now2}{, }\item[{Long}]{right\+Team\+Id}{}\end{DoxyParamCaption})}
+
+
+
+References \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository_a6adc0b137d27fca5e90006e84f0760a7}{find\+By\+Finished\+False\+And\+Datetime\+After\+And\+Left\+Team\+Id\+Or\+Finished\+False\+And\+Datetime\+After\+And\+Right\+Team\+Id\+Order\+By\+Datetime\+Asc()}}.
+
+
+
+Referenced by \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository_a6adc0b137d27fca5e90006e84f0760a7}{find\+By\+Finished\+False\+And\+Datetime\+After\+And\+Left\+Team\+Id\+Or\+Finished\+False\+And\+Datetime\+After\+And\+Right\+Team\+Id\+Order\+By\+Datetime\+Asc()}}.
+
+\Hypertarget{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository_a116c12af879e3e3bd1bcd8cc31d7a79c}\index{com.example.football\_manager.repository.MatchRepository@{com.example.football\_manager.repository.MatchRepository}!findByFinishedTrueAndLeftTeamIdOrFinishedTrueAndRightTeamIdOrderByDatetimeDesc@{findByFinishedTrueAndLeftTeamIdOrFinishedTrueAndRightTeamIdOrderByDatetimeDesc}}
+\index{findByFinishedTrueAndLeftTeamIdOrFinishedTrueAndRightTeamIdOrderByDatetimeDesc@{findByFinishedTrueAndLeftTeamIdOrFinishedTrueAndRightTeamIdOrderByDatetimeDesc}!com.example.football\_manager.repository.MatchRepository@{com.example.football\_manager.repository.MatchRepository}}
+\doxysubsubsection{\texorpdfstring{findByFinishedTrueAndLeftTeamIdOrFinishedTrueAndRightTeamIdOrderByDatetimeDesc()}{findByFinishedTrueAndLeftTeamIdOrFinishedTrueAndRightTeamIdOrderByDatetimeDesc()}}
+{\footnotesize\ttfamily \label{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository_a116c12af879e3e3bd1bcd8cc31d7a79c} 
+List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}} $>$ com.\+example.\+football\+\_\+manager.\+repository.\+Match\+Repository.\+find\+By\+Finished\+True\+And\+Left\+Team\+Id\+Or\+Finished\+True\+And\+Right\+Team\+Id\+Order\+By\+Datetime\+Desc (\begin{DoxyParamCaption}\item[{Long}]{left\+Team\+Id}{, }\item[{Long}]{right\+Team\+Id}{}\end{DoxyParamCaption})}
+
+
+
+References \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository_a116c12af879e3e3bd1bcd8cc31d7a79c}{find\+By\+Finished\+True\+And\+Left\+Team\+Id\+Or\+Finished\+True\+And\+Right\+Team\+Id\+Order\+By\+Datetime\+Desc()}}.
+
+
+
+Referenced by \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository_a116c12af879e3e3bd1bcd8cc31d7a79c}{find\+By\+Finished\+True\+And\+Left\+Team\+Id\+Or\+Finished\+True\+And\+Right\+Team\+Id\+Order\+By\+Datetime\+Desc()}}.
+
+\Hypertarget{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository_afefd59131ed9a195b1b8039734fd280c}\index{com.example.football\_manager.repository.MatchRepository@{com.example.football\_manager.repository.MatchRepository}!findByFinishedTrueOrderByDatetimeDesc@{findByFinishedTrueOrderByDatetimeDesc}}
+\index{findByFinishedTrueOrderByDatetimeDesc@{findByFinishedTrueOrderByDatetimeDesc}!com.example.football\_manager.repository.MatchRepository@{com.example.football\_manager.repository.MatchRepository}}
+\doxysubsubsection{\texorpdfstring{findByFinishedTrueOrderByDatetimeDesc()}{findByFinishedTrueOrderByDatetimeDesc()}}
+{\footnotesize\ttfamily \label{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository_afefd59131ed9a195b1b8039734fd280c} 
+List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}} $>$ com.\+example.\+football\+\_\+manager.\+repository.\+Match\+Repository.\+find\+By\+Finished\+True\+Order\+By\+Datetime\+Desc (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+References \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository_afefd59131ed9a195b1b8039734fd280c}{find\+By\+Finished\+True\+Order\+By\+Datetime\+Desc()}}.
+
+
+
+Referenced by \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository_afefd59131ed9a195b1b8039734fd280c}{find\+By\+Finished\+True\+Order\+By\+Datetime\+Desc()}}.
+
+
+
+The documentation for this interface was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Football\+\_\+\+Manager/src/main/java/com/example/football\+\_\+manager/repository/\mbox{\hyperlink{MatchRepository_8java}{Match\+Repository.\+java}}\end{DoxyCompactItemize}

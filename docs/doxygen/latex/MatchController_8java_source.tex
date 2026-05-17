@@ -1,0 +1,178 @@
+\doxysection{Match\+Controller.\+java}
+\hypertarget{MatchController_8java_source}{}\label{MatchController_8java_source}\index{Football\_Manager/src/main/java/com/example/football\_manager/controller/MatchController.java@{Football\_Manager/src/main/java/com/example/football\_manager/controller/MatchController.java}}
+\mbox{\hyperlink{MatchController_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00001}00001\ \textcolor{keyword}{package\ }com.example.football\_manager.controller;}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00003}00003\ \textcolor{keyword}{import}\ com.example.football\_manager.dto.MatchRequestDTO;}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00004}00004\ \textcolor{keyword}{import}\ com.example.football\_manager.dto.MatchResultDTO;}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00005}00005\ \textcolor{keyword}{import}\ com.example.football\_manager.dto.MatchResultRequestDTO;}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00006}00006\ \textcolor{keyword}{import}\ com.example.football\_manager.model.Match;}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00007}00007\ \textcolor{keyword}{import}\ com.example.football\_manager.service.MatchService;}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00008}00008\ \textcolor{keyword}{import}\ jakarta.validation.Valid;}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00009}00009\ \textcolor{keyword}{import}\ io.swagger.v3.oas.annotations.Operation;}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00010}00010\ \textcolor{keyword}{import}\ io.swagger.v3.oas.annotations.media.Content;}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00011}00011\ \textcolor{keyword}{import}\ io.swagger.v3.oas.annotations.media.Schema;}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00012}00012\ \textcolor{keyword}{import}\ io.swagger.v3.oas.annotations.responses.ApiResponse;}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00013}00013\ \textcolor{keyword}{import}\ io.swagger.v3.oas.annotations.responses.ApiResponses;}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00014}00014\ \textcolor{keyword}{import}\ io.swagger.v3.oas.annotations.tags.Tag;}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00015}00015\ \textcolor{keyword}{import}\ org.springframework.beans.factory.annotation.Autowired;}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00016}00016\ \textcolor{keyword}{import}\ org.springframework.http.HttpStatus;}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00017}00017\ \textcolor{keyword}{import}\ org.springframework.http.MediaType;}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00018}00018\ \textcolor{keyword}{import}\ org.springframework.http.ResponseEntity;}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00019}00019\ \textcolor{keyword}{import}\ org.springframework.web.server.ResponseStatusException;}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00020}00020\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.*;}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00022}00022\ \textcolor{keyword}{import}\ java.util.List;}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00024}00024\ @RestController}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00025}00025\ @RequestMapping(\textcolor{stringliteral}{"{}/api/matches"{}})}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00026}00026\ @Tag(name\ =\ \textcolor{stringliteral}{"{}Matches"{}})}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00027}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchController}{00027}}\ public\ class\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchController}{MatchController}}\ \{}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00029}00029\ \ \ \ \ @Autowired}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00030}00030\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService}{MatchService}}\ matchService;}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00032}00032\ \ \ \ \ @GetMapping}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00033}00033\ \ \ \ \ @Operation(}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ summary\ =\ \textcolor{stringliteral}{"{}List\ matches"{}},}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ description\ =\ \textcolor{stringliteral}{"{}Returns\ matches,\ optionally\ filtered\ by\ team,\ status,\ or\ competition."{}}}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00036}00036\ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00037}00037\ \ \ \ \ @ApiResponses(\{}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ @ApiResponse(responseCode\ =\ \textcolor{stringliteral}{"{}200"{}},\ description\ =\ \textcolor{stringliteral}{"{}Match\ list"{}}),}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ @ApiResponse(responseCode\ =\ \textcolor{stringliteral}{"{}400"{}},\ description\ =\ \textcolor{stringliteral}{"{}Unsupported\ filter\ value"{}})}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00040}00040\ \ \ \ \ \})}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00041}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchController_afd91ad50df56e045893f7360bc7a6dc5}{00041}}\ \ \ \ \ \textcolor{keyword}{public}\ ResponseEntity<List<Match>>\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchController_afd91ad50df56e045893f7360bc7a6dc5}{getMatches}}(}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ @RequestParam(required\ =\ \textcolor{keyword}{false})\ Long\ teamId,}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ @RequestParam(required\ =\ \textcolor{keyword}{false})\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO}{MatchRequestDTO}}.\mbox{\hyperlink{enumcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_1_1MatchStatus}{MatchStatus}}\ status,}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ @RequestParam(required\ =\ \textcolor{keyword}{false})\ Long\ competitionId)\ \{}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00045}00045\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ResponseEntity.ok(matchService.getMatches(teamId,\ status,\ competitionId));}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00047}00047\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (IllegalArgumentException\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ ResponseStatusException(HttpStatus.BAD\_REQUEST,\ e.getMessage(),\ e);}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00049}00049\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00050}00050\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00052}00052\ \ \ \ \ @PostMapping(consumes\ =\ MediaType.APPLICATION\_JSON\_VALUE)}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00053}00053\ \ \ \ \ @Operation(}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ summary\ =\ \textcolor{stringliteral}{"{}Create\ a\ match\ (JSON)"{}},}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ description\ =\ \textcolor{stringliteral}{"{}Creates\ a\ match\ using\ a\ JSON\ body.\ Use\ this\ for\ API\ clients."{}},}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ requestBody\ =\ @io.swagger.v3.oas.annotations.parameters.RequestBody(}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ required\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ description\ =\ \textcolor{stringliteral}{"{}Match\ details"{}},}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ content\ =\ @Content(schema\ =\ @Schema(implementation\ =\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO}{MatchRequestDTO}}.class))}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00061}00061\ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00062}00062\ \ \ \ \ @ApiResponses(\{}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ @ApiResponse(responseCode\ =\ \textcolor{stringliteral}{"{}201"{}},\ description\ =\ \textcolor{stringliteral}{"{}Match\ created"{}}),}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ @ApiResponse(responseCode\ =\ \textcolor{stringliteral}{"{}400"{}},\ description\ =\ \textcolor{stringliteral}{"{}Validation\ or\ business\ rule\ error"{}})}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00065}00065\ \ \ \ \ \})}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00066}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchController_aff8b88b8f717b307206c271b99413a24}{00066}}\ \ \ \ \ \textcolor{keyword}{public}\ ResponseEntity<String>\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchController_aff8b88b8f717b307206c271b99413a24}{createMatchFromJson}}(@Valid\ @RequestBody\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO}{MatchRequestDTO}}\ matchDTO)\ \{}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00067}00067\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ createMatchResponse(matchDTO);}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00068}00068\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00070}00070\ \ \ \ \ @PostMapping(consumes\ =\ MediaType.APPLICATION\_FORM\_URLENCODED\_VALUE)}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00071}00071\ \ \ \ \ @Operation(}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ summary\ =\ \textcolor{stringliteral}{"{}Create\ a\ match\ (form)"{}},}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ description\ =\ \textcolor{stringliteral}{"{}Creates\ a\ match\ using\ form-\/encoded\ fields.\ Useful\ for\ HTML\ form\ submissions."{}},}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ requestBody\ =\ @io.swagger.v3.oas.annotations.parameters.RequestBody(}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ required\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ description\ =\ \textcolor{stringliteral}{"{}Match\ form\ fields"{}},}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ content\ =\ @Content(schema\ =\ @Schema(implementation\ =\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO}{MatchRequestDTO}}.class))}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00079}00079\ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00080}00080\ \ \ \ \ @ApiResponses(\{}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ @ApiResponse(responseCode\ =\ \textcolor{stringliteral}{"{}201"{}},\ description\ =\ \textcolor{stringliteral}{"{}Match\ created"{}}),}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ @ApiResponse(responseCode\ =\ \textcolor{stringliteral}{"{}400"{}},\ description\ =\ \textcolor{stringliteral}{"{}Validation\ or\ business\ rule\ error"{}})}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00083}00083\ \ \ \ \ \})}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00084}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchController_a9a7ac9ab22f6f929054a772c0f59a0ea}{00084}}\ \ \ \ \ \textcolor{keyword}{public}\ ResponseEntity<String>\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchController_a9a7ac9ab22f6f929054a772c0f59a0ea}{createMatchFromForm}}(@Valid\ @ModelAttribute\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO}{MatchRequestDTO}}\ matchDTO)\ \{}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00085}00085\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ createMatchResponse(matchDTO);}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00086}00086\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00088}00088\ \ \ \ \ \textcolor{keyword}{private}\ ResponseEntity<String>\ createMatchResponse(\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO}{MatchRequestDTO}}\ matchDTO)\ \{}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00089}00089\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ String\ response\ =\ matchService.createMatch(matchDTO);}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ ResponseEntity<>(response,\ HttpStatus.CREATED);}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00092}00092\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (IllegalArgumentException\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ ResponseEntity<>(e.getMessage(),\ HttpStatus.BAD\_REQUEST);}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00094}00094\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00095}00095\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00097}00097\ \ \ \ \ @GetMapping(\textcolor{stringliteral}{"{}/results"{}})}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00098}00098\ \ \ \ \ @Operation(}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ summary\ =\ \textcolor{stringliteral}{"{}List\ finished\ match\ results"{}},}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ description\ =\ \textcolor{stringliteral}{"{}Returns\ results\ for\ matches\ with\ registered\ scores."{}}}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00101}00101\ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00102}00102\ \ \ \ \ @ApiResponses(\{}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ @ApiResponse(responseCode\ =\ \textcolor{stringliteral}{"{}200"{}},\ description\ =\ \textcolor{stringliteral}{"{}Match\ results"{}})}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00104}00104\ \ \ \ \ \})}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00105}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchController_afe9f4c66097e6726ee9df6a890437378}{00105}}\ \ \ \ \ \textcolor{keyword}{public}\ ResponseEntity<List<MatchResultDTO>>\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchController_afe9f4c66097e6726ee9df6a890437378}{getMatchResults}}()\ \{}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00106}00106\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ResponseEntity.ok(matchService.getFinishedMatchResults());}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00107}00107\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00109}00109\ \ \ \ \ \textcolor{comment}{//\ Edit\ match\ details}}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00110}00110\ \ \ \ \ @PostMapping(\textcolor{stringliteral}{"{}/\{id\}"{}})}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00111}00111\ \ \ \ \ @Operation(}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ summary\ =\ \textcolor{stringliteral}{"{}Update\ match\ details"{}},}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ description\ =\ \textcolor{stringliteral}{"{}Edits\ match\ details\ such\ as\ kickoff\ time,\ venue,\ or\ participants."{}},}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ requestBody\ =\ @io.swagger.v3.oas.annotations.parameters.RequestBody(}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ required\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ description\ =\ \textcolor{stringliteral}{"{}Match\ updates"{}},}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ content\ =\ @Content(schema\ =\ @Schema(implementation\ =\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO}{MatchRequestDTO}}.class))}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00119}00119\ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00120}00120\ \ \ \ \ @ApiResponses(\{}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ @ApiResponse(responseCode\ =\ \textcolor{stringliteral}{"{}200"{}},\ description\ =\ \textcolor{stringliteral}{"{}Match\ updated"{}}),}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ @ApiResponse(responseCode\ =\ \textcolor{stringliteral}{"{}400"{}},\ description\ =\ \textcolor{stringliteral}{"{}Validation\ or\ business\ rule\ error"{}})}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00123}00123\ \ \ \ \ \})}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00124}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchController_ae7c7daa4e1b8e97e71f9b4099ea641aa}{00124}}\ \ \ \ \ \textcolor{keyword}{public}\ ResponseEntity<String>\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchController_ae7c7daa4e1b8e97e71f9b4099ea641aa}{updateMatch}}(@PathVariable\ Long\ \textcolor{keywordtype}{id},\ @RequestBody\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO}{MatchRequestDTO}}\ matchDTO)\ \{}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00125}00125\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ResponseEntity.ok(matchService.updateMatch(\textcolor{keywordtype}{id},\ matchDTO));}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00127}00127\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (IllegalArgumentException\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ ResponseEntity<>(e.getMessage(),\ HttpStatus.BAD\_REQUEST);}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00129}00129\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00130}00130\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00131}00131\ }
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00132}00132\ \ \ \ \ @DeleteMapping(\textcolor{stringliteral}{"{}/\{id\}"{}})}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00133}00133\ \ \ \ \ @Operation(}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ summary\ =\ \textcolor{stringliteral}{"{}Delete\ a\ match"{}},}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ description\ =\ \textcolor{stringliteral}{"{}Removes\ a\ match\ by\ its\ identifier."{}}}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00136}00136\ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00137}00137\ \ \ \ \ @ApiResponses(\{}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \ \ @ApiResponse(responseCode\ =\ \textcolor{stringliteral}{"{}200"{}},\ description\ =\ \textcolor{stringliteral}{"{}Match\ deleted"{}}),}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00139}00139\ \ \ \ \ \ \ \ \ \ \ \ \ @ApiResponse(responseCode\ =\ \textcolor{stringliteral}{"{}400"{}},\ description\ =\ \textcolor{stringliteral}{"{}Match\ not\ found\ or\ cannot\ be\ deleted"{}})}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00140}00140\ \ \ \ \ \})}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00141}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchController_a79c52a0144e633e8c8767323da58a809}{00141}}\ \ \ \ \ \textcolor{keyword}{public}\ ResponseEntity<String>\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchController_a79c52a0144e633e8c8767323da58a809}{deleteMatch}}(@PathVariable\ Long\ \textcolor{keywordtype}{id})\ \{}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00142}00142\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ResponseEntity.ok(matchService.deleteMatch(\textcolor{keywordtype}{id}));}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00144}00144\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (IllegalArgumentException\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ ResponseEntity<>(e.getMessage(),\ HttpStatus.BAD\_REQUEST);}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00146}00146\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00147}00147\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00148}00148\ }
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00149}00149\ \ \ \ \ @PatchMapping(\textcolor{stringliteral}{"{}/\{id\}/result"{}})}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00150}00150\ \ \ \ \ @Operation(}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00151}00151\ \ \ \ \ \ \ \ \ \ \ \ \ summary\ =\ \textcolor{stringliteral}{"{}Register\ match\ result"{}},}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \ \ description\ =\ \textcolor{stringliteral}{"{}Registers\ goals\ and\ final\ score\ for\ a\ match."{}},}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00153}00153\ \ \ \ \ \ \ \ \ \ \ \ \ requestBody\ =\ @io.swagger.v3.oas.annotations.parameters.RequestBody(}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00154}00154\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ required\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00155}00155\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ description\ =\ \textcolor{stringliteral}{"{}List\ of\ goals\ to\ register"{}},}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00156}00156\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ content\ =\ @Content(schema\ =\ @Schema(implementation\ =\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO}{MatchResultRequestDTO}}.class))}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00157}00157\ \ \ \ \ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00158}00158\ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00159}00159\ \ \ \ \ @ApiResponses(\{}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ @ApiResponse(responseCode\ =\ \textcolor{stringliteral}{"{}200"{}},\ description\ =\ \textcolor{stringliteral}{"{}Result\ registered"{}}),}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00161}00161\ \ \ \ \ \ \ \ \ \ \ \ \ @ApiResponse(responseCode\ =\ \textcolor{stringliteral}{"{}400"{}},\ description\ =\ \textcolor{stringliteral}{"{}Validation\ or\ business\ rule\ error"{}})}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00162}00162\ \ \ \ \ \})}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00163}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchController_ad4811d08ad205fbf02c888876c4cceec}{00163}}\ \ \ \ \ \textcolor{keyword}{public}\ ResponseEntity<String>\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchController_ad4811d08ad205fbf02c888876c4cceec}{registerResult}}(}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \ \ @PathVariable\ Long\ \textcolor{keywordtype}{id},}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00165}00165\ \ \ \ \ \ \ \ \ \ \ \ \ @Valid\ @RequestBody\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO}{MatchResultRequestDTO}}\ resultDTO)\ \{}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00166}00166\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ResponseEntity.ok(matchService.registerResult(\textcolor{keywordtype}{id},\ resultDTO));}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00168}00168\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (IllegalArgumentException\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00169}00169\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ ResponseEntity<>(e.getMessage(),\ HttpStatus.BAD\_REQUEST);}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00170}00170\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00171}00171\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchController_8java_source_l00172}00172\ \}}
+
+\end{DoxyCode}

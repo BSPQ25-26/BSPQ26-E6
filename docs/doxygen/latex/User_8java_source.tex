@@ -1,0 +1,46 @@
+\doxysection{User.\+java}
+\hypertarget{User_8java_source}{}\label{User_8java_source}\index{Football\_Manager/src/main/java/com/example/football\_manager/model/User.java@{Football\_Manager/src/main/java/com/example/football\_manager/model/User.java}}
+\mbox{\hyperlink{User_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{User_8java_source_l00001}00001\ \textcolor{keyword}{package\ }com.example.football\_manager.model;}
+\DoxyCodeLine{\Hypertarget{User_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{User_8java_source_l00003}00003\ \textcolor{keyword}{import}\ jakarta.persistence.*;}
+\DoxyCodeLine{\Hypertarget{User_8java_source_l00004}00004\ \textcolor{keyword}{import}\ lombok.AllArgsConstructor;}
+\DoxyCodeLine{\Hypertarget{User_8java_source_l00005}00005\ \textcolor{keyword}{import}\ lombok.Data;}
+\DoxyCodeLine{\Hypertarget{User_8java_source_l00006}00006\ \textcolor{keyword}{import}\ lombok.NoArgsConstructor;}
+\DoxyCodeLine{\Hypertarget{User_8java_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{User_8java_source_l00008}00008\ \textcolor{keyword}{import}\ java.util.Set;}
+\DoxyCodeLine{\Hypertarget{User_8java_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{User_8java_source_l00010}00010\ @Entity}
+\DoxyCodeLine{\Hypertarget{User_8java_source_l00011}00011\ @Table(name\ =\ \textcolor{stringliteral}{"{}\(\backslash\)"{}user\(\backslash\)"{}"{}})}
+\DoxyCodeLine{\Hypertarget{User_8java_source_l00012}00012\ @Data}
+\DoxyCodeLine{\Hypertarget{User_8java_source_l00013}00013\ @NoArgsConstructor}
+\DoxyCodeLine{\Hypertarget{User_8java_source_l00014}00014\ @AllArgsConstructor}
+\DoxyCodeLine{\Hypertarget{User_8java_source_l00015}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1User}{00015}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1User}{User}}\ \{}
+\DoxyCodeLine{\Hypertarget{User_8java_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{User_8java_source_l00017}00017\ \ \ \ \ @Id}
+\DoxyCodeLine{\Hypertarget{User_8java_source_l00018}00018\ \ \ \ \ @GeneratedValue(strategy\ =\ GenerationType.IDENTITY)}
+\DoxyCodeLine{\Hypertarget{User_8java_source_l00019}00019\ \ \ \ \ \textcolor{keyword}{private}\ Long\ id;}
+\DoxyCodeLine{\Hypertarget{User_8java_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{User_8java_source_l00021}00021\ \ \ \ \ @Column(nullable\ =\ \textcolor{keyword}{false},\ length\ =\ 30)}
+\DoxyCodeLine{\Hypertarget{User_8java_source_l00022}00022\ \ \ \ \ \textcolor{keyword}{private}\ String\ username;}
+\DoxyCodeLine{\Hypertarget{User_8java_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{User_8java_source_l00024}00024\ \ \ \ \ @Column(nullable\ =\ \textcolor{keyword}{false},\ columnDefinition\ =\ \textcolor{stringliteral}{"{}TEXT"{}})}
+\DoxyCodeLine{\Hypertarget{User_8java_source_l00025}00025\ \ \ \ \ \textcolor{keyword}{private}\ String\ email;}
+\DoxyCodeLine{\Hypertarget{User_8java_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{User_8java_source_l00027}00027\ \ \ \ \ @Column(name\ =\ \textcolor{stringliteral}{"{}hashed\_password"{}},\ nullable\ =\ \textcolor{keyword}{false},\ columnDefinition\ =\ \textcolor{stringliteral}{"{}TEXT"{}})}
+\DoxyCodeLine{\Hypertarget{User_8java_source_l00028}00028\ \ \ \ \ \textcolor{keyword}{private}\ String\ hashedPassword;}
+\DoxyCodeLine{\Hypertarget{User_8java_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{User_8java_source_l00030}00030\ \ \ \ \ @Column(name\ =\ \textcolor{stringliteral}{"{}is\_admin"{}},\ nullable\ =\ \textcolor{keyword}{false})}
+\DoxyCodeLine{\Hypertarget{User_8java_source_l00031}00031\ \ \ \ \ \textcolor{keyword}{private}\ Boolean\ isAdmin\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{User_8java_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{User_8java_source_l00033}00033\ \ \ \ \ @ManyToMany}
+\DoxyCodeLine{\Hypertarget{User_8java_source_l00034}00034\ \ \ \ \ @JoinTable(}
+\DoxyCodeLine{\Hypertarget{User_8java_source_l00035}00035\ \ \ \ \ \ \ \ \ name\ =\ \textcolor{stringliteral}{"{}favourite\_team"{}},}
+\DoxyCodeLine{\Hypertarget{User_8java_source_l00036}00036\ \ \ \ \ \ \ \ \ joinColumns\ =\ @JoinColumn(name\ =\ \textcolor{stringliteral}{"{}fk\_user\_id"{}}),}
+\DoxyCodeLine{\Hypertarget{User_8java_source_l00037}00037\ \ \ \ \ \ \ \ \ inverseJoinColumns\ =\ @JoinColumn(name\ =\ \textcolor{stringliteral}{"{}fk\_team\_id"{}})}
+\DoxyCodeLine{\Hypertarget{User_8java_source_l00038}00038\ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{User_8java_source_l00039}00039\ \ \ \ \ \textcolor{keyword}{private}\ Set<Team>\ favouriteTeams;}
+\DoxyCodeLine{\Hypertarget{User_8java_source_l00040}00040\ \}}
+
+\end{DoxyCode}

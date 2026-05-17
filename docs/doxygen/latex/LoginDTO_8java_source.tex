@@ -1,0 +1,38 @@
+\doxysection{Login\+DTO.\+java}
+\hypertarget{LoginDTO_8java_source}{}\label{LoginDTO_8java_source}\index{Football\_Manager/src/main/java/com/example/football\_manager/dto/LoginDTO.java@{Football\_Manager/src/main/java/com/example/football\_manager/dto/LoginDTO.java}}
+\mbox{\hyperlink{LoginDTO_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{LoginDTO_8java_source_l00001}00001\ \textcolor{keyword}{package\ }com.example.football\_manager.dto;}
+\DoxyCodeLine{\Hypertarget{LoginDTO_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{LoginDTO_8java_source_l00003}00003\ \textcolor{keyword}{import}\ jakarta.validation.constraints.NotBlank;}
+\DoxyCodeLine{\Hypertarget{LoginDTO_8java_source_l00004}00004\ \textcolor{keyword}{import}\ io.swagger.v3.oas.annotations.media.Schema;}
+\DoxyCodeLine{\Hypertarget{LoginDTO_8java_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{LoginDTO_8java_source_l00006}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1LoginDTO}{00006}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1LoginDTO}{LoginDTO}}\ \{}
+\DoxyCodeLine{\Hypertarget{LoginDTO_8java_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{LoginDTO_8java_source_l00008}00008\ \ \ \ \ @NotBlank(message\ =\ \textcolor{stringliteral}{"{}Username\ is\ required"{}})}
+\DoxyCodeLine{\Hypertarget{LoginDTO_8java_source_l00009}00009\ \ \ \ \ @Schema(description\ =\ \textcolor{stringliteral}{"{}Username"{}},\ example\ =\ \textcolor{stringliteral}{"{}user123"{}})}
+\DoxyCodeLine{\Hypertarget{LoginDTO_8java_source_l00010}00010\ \ \ \ \ \textcolor{keyword}{private}\ String\ username;}
+\DoxyCodeLine{\Hypertarget{LoginDTO_8java_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{LoginDTO_8java_source_l00012}00012\ \ \ \ \ @NotBlank(message\ =\ \textcolor{stringliteral}{"{}Password\ is\ required"{}})}
+\DoxyCodeLine{\Hypertarget{LoginDTO_8java_source_l00013}00013\ \ \ \ \ @Schema(description\ =\ \textcolor{stringliteral}{"{}User\ password"{}},\ example\ =\ \textcolor{stringliteral}{"{}P@ssw0rd123"{}})}
+\DoxyCodeLine{\Hypertarget{LoginDTO_8java_source_l00014}00014\ \ \ \ \ \textcolor{keyword}{private}\ String\ password;}
+\DoxyCodeLine{\Hypertarget{LoginDTO_8java_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{LoginDTO_8java_source_l00016}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1LoginDTO_addd12274ec35474422c152e6ca9bdfae}{00016}}\ \ \ \ \ \textcolor{keyword}{public}\ String\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1LoginDTO_addd12274ec35474422c152e6ca9bdfae}{getUsername}}()\ \{}
+\DoxyCodeLine{\Hypertarget{LoginDTO_8java_source_l00017}00017\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ username;}
+\DoxyCodeLine{\Hypertarget{LoginDTO_8java_source_l00018}00018\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{LoginDTO_8java_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{LoginDTO_8java_source_l00020}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1LoginDTO_a5848b9bbac25b074c6418e43db051300}{00020}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1LoginDTO_a5848b9bbac25b074c6418e43db051300}{setUsername}}(String\ username)\ \{}
+\DoxyCodeLine{\Hypertarget{LoginDTO_8java_source_l00021}00021\ \ \ \ \ \ \ \ \ this.username\ =\ username;}
+\DoxyCodeLine{\Hypertarget{LoginDTO_8java_source_l00022}00022\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{LoginDTO_8java_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{LoginDTO_8java_source_l00024}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1LoginDTO_a6afddcc62c403106b3cdd6a96e781bb5}{00024}}\ \ \ \ \ \textcolor{keyword}{public}\ String\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1LoginDTO_a6afddcc62c403106b3cdd6a96e781bb5}{getPassword}}()\ \{}
+\DoxyCodeLine{\Hypertarget{LoginDTO_8java_source_l00025}00025\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ password;}
+\DoxyCodeLine{\Hypertarget{LoginDTO_8java_source_l00026}00026\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{LoginDTO_8java_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{LoginDTO_8java_source_l00028}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1LoginDTO_a5821242650f118586fdf970267bbe7ea}{00028}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1LoginDTO_a5821242650f118586fdf970267bbe7ea}{setPassword}}(String\ password)\ \{}
+\DoxyCodeLine{\Hypertarget{LoginDTO_8java_source_l00029}00029\ \ \ \ \ \ \ \ \ this.password\ =\ password;}
+\DoxyCodeLine{\Hypertarget{LoginDTO_8java_source_l00030}00030\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{LoginDTO_8java_source_l00031}00031\ \}}
+\DoxyCodeLine{\Hypertarget{LoginDTO_8java_source_l00032}00032\ }
+
+\end{DoxyCode}

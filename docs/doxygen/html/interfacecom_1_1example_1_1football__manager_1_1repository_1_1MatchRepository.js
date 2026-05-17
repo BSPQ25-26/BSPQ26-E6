@@ -1,0 +1,8 @@
+var interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository =
+[
+    [ "findByFilters", "interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository.html#a181d3e68370b9b9d99e5c0ded5340816", null ],
+    [ "findByFinishedFalseAndDatetimeAfterAndLeftTeamIdInOrFinishedFalseAndDatetimeAfterAndRightTeamIdInOrderByDatetimeAsc", "interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository.html#a46478a6c202676f688f7ece1fb006932", null ],
+    [ "findByFinishedFalseAndDatetimeAfterAndLeftTeamIdOrFinishedFalseAndDatetimeAfterAndRightTeamIdOrderByDatetimeAsc", "interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository.html#a6adc0b137d27fca5e90006e84f0760a7", null ],
+    [ "findByFinishedTrueAndLeftTeamIdOrFinishedTrueAndRightTeamIdOrderByDatetimeDesc", "interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository.html#a116c12af879e3e3bd1bcd8cc31d7a79c", null ],
+    [ "findByFinishedTrueOrderByDatetimeDesc", "interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository.html#afefd59131ed9a195b1b8039734fd280c", null ]
+];

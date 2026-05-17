@@ -1,0 +1,215 @@
+\doxysection{com.\+example.\+football\+\_\+manager.\+service.\+Match\+Service Class Reference}
+\hypertarget{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService}{}\label{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService}\index{com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_af90d691f8ee642dccc9c9ecb147443fc}{Match\+Service}} (\mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository}{Match\+Repository}} match\+Repository, \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchGoalRepository}{Match\+Goal\+Repository}} match\+Goal\+Repository, \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1TeamRepository}{Team\+Repository}} team\+Repository, \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1CompetitionRepository}{Competition\+Repository}} competition\+Repository)
+\item 
+String \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_aeb3bfc0d77a6720adaa834ac08cb87b2}{create\+Match}} (\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO}{Match\+Request\+DTO}} request)
+\item 
+String \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a29a97f0da2fe4a950291db609bee986f}{update\+Match}} (Long id, \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO}{Match\+Request\+DTO}} request)
+\item 
+String \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a11920c73281f64f81e0ce4d36d8bb208}{delete\+Match}} (Long id)
+\item 
+String \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a5ab09f54e5258ea8786775dace75b662}{register\+Result}} (Long id, \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO}{Match\+Result\+Request\+DTO}} request)
+\item 
+List$<$ Match\+Result\+DTO $>$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_ad33b25c0df2261d7df5309bb08dc428a}{get\+Finished\+Match\+Results}} ()
+\item 
+Optional$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO}{Match\+Request\+DTO}} $>$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_ac098037788db4a971140caba8887c7ba}{get\+Match\+For\+Edit}} (Long id)
+\item 
+List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}} $>$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a2fd28e3d0901517233996dcc4cd94de4}{get\+All\+Matches}} ()
+\item 
+List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}} $>$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a0bb976d48d9d5fdf63fd95f4822b2850}{get\+Matches}} (Long team\+Id, Match\+Request\+DTO.\+Match\+Status status, Long competition\+Id)
+\item 
+\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}} \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a770134eee6ba9d451c6c125094e58a6d}{get\+Match\+By\+Id}} (Long id)
+\item 
+List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1MatchGoal}{Match\+Goal}} $>$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a317cc552896456fe5572f34f651e580a}{get\+Goals\+By\+Match\+Id}} (Long match\+Id)
+\item 
+List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}} $>$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a63f11b2245ea33304a45fd5fd5be7c02}{get\+Recent\+Matches\+By\+Team\+Id}} (Long team\+Id)
+\item 
+List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}} $>$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a4846b07a9e09105fc00a2a9449a2f051}{get\+Future\+Matches\+By\+Team\+Id}} (Long team\+Id)
+\item 
+List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}} $>$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_ae5308e68df3538942e7cb8ca4da2b454}{get\+Future\+Matches\+By\+Favourite\+Team\+Ids}} (Set$<$ Long $>$ favourite\+Team\+Ids)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{MatchService_8java_source_l00027}{27}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_af90d691f8ee642dccc9c9ecb147443fc}\index{com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}!MatchService@{MatchService}}
+\index{MatchService@{MatchService}!com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}}
+\doxysubsubsection{\texorpdfstring{MatchService()}{MatchService()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_af90d691f8ee642dccc9c9ecb147443fc} 
+com.\+example.\+football\+\_\+manager.\+service.\+Match\+Service.\+Match\+Service (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository}{Match\+Repository}}}]{match\+Repository}{, }\item[{\mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchGoalRepository}{Match\+Goal\+Repository}}}]{match\+Goal\+Repository}{, }\item[{\mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1TeamRepository}{Team\+Repository}}}]{team\+Repository}{, }\item[{\mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1CompetitionRepository}{Competition\+Repository}}}]{competition\+Repository}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{MatchService_8java_source_l00035}{35}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_aeb3bfc0d77a6720adaa834ac08cb87b2}\index{com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}!createMatch@{createMatch}}
+\index{createMatch@{createMatch}!com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}}
+\doxysubsubsection{\texorpdfstring{createMatch()}{createMatch()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_aeb3bfc0d77a6720adaa834ac08cb87b2} 
+String com.\+example.\+football\+\_\+manager.\+service.\+Match\+Service.\+create\+Match (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO}{Match\+Request\+DTO}}}]{request}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{MatchService_8java_source_l00048}{48}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
+
+
+
+References \mbox{\hyperlink{MatchRequestDTO_8java_source_l00014}{com.\+example.\+football\+\_\+manager.\+dto.\+Match\+Request\+DTO.\+Match\+Status.\+FINISHED}}, \mbox{\hyperlink{MatchRequestDTO_8java_source_l00059}{com.\+example.\+football\+\_\+manager.\+dto.\+Match\+Request\+DTO.\+get\+Away\+Score()}}, \mbox{\hyperlink{MatchRequestDTO_8java_source_l00041}{com.\+example.\+football\+\_\+manager.\+dto.\+Match\+Request\+DTO.\+get\+Away\+Team\+Id()}}, \mbox{\hyperlink{MatchRequestDTO_8java_source_l00044}{com.\+example.\+football\+\_\+manager.\+dto.\+Match\+Request\+DTO.\+get\+Competition\+Id()}}, \mbox{\hyperlink{MatchRequestDTO_8java_source_l00056}{com.\+example.\+football\+\_\+manager.\+dto.\+Match\+Request\+DTO.\+get\+Home\+Score()}}, \mbox{\hyperlink{MatchRequestDTO_8java_source_l00038}{com.\+example.\+football\+\_\+manager.\+dto.\+Match\+Request\+DTO.\+get\+Home\+Team\+Id()}}, \mbox{\hyperlink{MatchRequestDTO_8java_source_l00047}{com.\+example.\+football\+\_\+manager.\+dto.\+Match\+Request\+DTO.\+get\+Kickoff\+Time()}}, \mbox{\hyperlink{MatchRequestDTO_8java_source_l00053}{com.\+example.\+football\+\_\+manager.\+dto.\+Match\+Request\+DTO.\+get\+Status()}}, and \mbox{\hyperlink{MatchRequestDTO_8java_source_l00050}{com.\+example.\+football\+\_\+manager.\+dto.\+Match\+Request\+DTO.\+get\+Venue()}}.
+
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a11920c73281f64f81e0ce4d36d8bb208}\index{com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}!deleteMatch@{deleteMatch}}
+\index{deleteMatch@{deleteMatch}!com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}}
+\doxysubsubsection{\texorpdfstring{deleteMatch()}{deleteMatch()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a11920c73281f64f81e0ce4d36d8bb208} 
+String com.\+example.\+football\+\_\+manager.\+service.\+Match\+Service.\+delete\+Match (\begin{DoxyParamCaption}\item[{Long}]{id}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{MatchService_8java_source_l00141}{141}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a2fd28e3d0901517233996dcc4cd94de4}\index{com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}!getAllMatches@{getAllMatches}}
+\index{getAllMatches@{getAllMatches}!com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}}
+\doxysubsubsection{\texorpdfstring{getAllMatches()}{getAllMatches()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a2fd28e3d0901517233996dcc4cd94de4} 
+List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}} $>$ com.\+example.\+football\+\_\+manager.\+service.\+Match\+Service.\+get\+All\+Matches (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{MatchService_8java_source_l00263}{263}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
+
+
+
+Referenced by \mbox{\hyperlink{MatchService_8java_source_l00267}{get\+Matches()}}.
+
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_ad33b25c0df2261d7df5309bb08dc428a}\index{com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}!getFinishedMatchResults@{getFinishedMatchResults}}
+\index{getFinishedMatchResults@{getFinishedMatchResults}!com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}}
+\doxysubsubsection{\texorpdfstring{getFinishedMatchResults()}{getFinishedMatchResults()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_ad33b25c0df2261d7df5309bb08dc428a} 
+List$<$ Match\+Result\+DTO $>$ com.\+example.\+football\+\_\+manager.\+service.\+Match\+Service.\+get\+Finished\+Match\+Results (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{MatchService_8java_source_l00192}{192}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_ae5308e68df3538942e7cb8ca4da2b454}\index{com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}!getFutureMatchesByFavouriteTeamIds@{getFutureMatchesByFavouriteTeamIds}}
+\index{getFutureMatchesByFavouriteTeamIds@{getFutureMatchesByFavouriteTeamIds}!com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}}
+\doxysubsubsection{\texorpdfstring{getFutureMatchesByFavouriteTeamIds()}{getFutureMatchesByFavouriteTeamIds()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_ae5308e68df3538942e7cb8ca4da2b454} 
+List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}} $>$ com.\+example.\+football\+\_\+manager.\+service.\+Match\+Service.\+get\+Future\+Matches\+By\+Favourite\+Team\+Ids (\begin{DoxyParamCaption}\item[{Set$<$ Long $>$}]{favourite\+Team\+Ids}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{MatchService_8java_source_l00306}{306}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a4846b07a9e09105fc00a2a9449a2f051}\index{com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}!getFutureMatchesByTeamId@{getFutureMatchesByTeamId}}
+\index{getFutureMatchesByTeamId@{getFutureMatchesByTeamId}!com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}}
+\doxysubsubsection{\texorpdfstring{getFutureMatchesByTeamId()}{getFutureMatchesByTeamId()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a4846b07a9e09105fc00a2a9449a2f051} 
+List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}} $>$ com.\+example.\+football\+\_\+manager.\+service.\+Match\+Service.\+get\+Future\+Matches\+By\+Team\+Id (\begin{DoxyParamCaption}\item[{Long}]{team\+Id}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{MatchService_8java_source_l00294}{294}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a317cc552896456fe5572f34f651e580a}\index{com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}!getGoalsByMatchId@{getGoalsByMatchId}}
+\index{getGoalsByMatchId@{getGoalsByMatchId}!com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}}
+\doxysubsubsection{\texorpdfstring{getGoalsByMatchId()}{getGoalsByMatchId()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a317cc552896456fe5572f34f651e580a} 
+List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1MatchGoal}{Match\+Goal}} $>$ com.\+example.\+football\+\_\+manager.\+service.\+Match\+Service.\+get\+Goals\+By\+Match\+Id (\begin{DoxyParamCaption}\item[{Long}]{match\+Id}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{MatchService_8java_source_l00282}{282}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a770134eee6ba9d451c6c125094e58a6d}\index{com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}!getMatchById@{getMatchById}}
+\index{getMatchById@{getMatchById}!com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}}
+\doxysubsubsection{\texorpdfstring{getMatchById()}{getMatchById()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a770134eee6ba9d451c6c125094e58a6d} 
+\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}} com.\+example.\+football\+\_\+manager.\+service.\+Match\+Service.\+get\+Match\+By\+Id (\begin{DoxyParamCaption}\item[{Long}]{id}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{MatchService_8java_source_l00277}{277}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a0bb976d48d9d5fdf63fd95f4822b2850}\index{com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}!getMatches@{getMatches}}
+\index{getMatches@{getMatches}!com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}}
+\doxysubsubsection{\texorpdfstring{getMatches()}{getMatches()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a0bb976d48d9d5fdf63fd95f4822b2850} 
+List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}} $>$ com.\+example.\+football\+\_\+manager.\+service.\+Match\+Service.\+get\+Matches (\begin{DoxyParamCaption}\item[{Long}]{team\+Id}{, }\item[{Match\+Request\+DTO.\+Match\+Status}]{status}{, }\item[{Long}]{competition\+Id}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{MatchService_8java_source_l00267}{267}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
+
+
+
+References \mbox{\hyperlink{MatchService_8java_source_l00263}{get\+All\+Matches()}}.
+
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_ac098037788db4a971140caba8887c7ba}\index{com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}!getMatchForEdit@{getMatchForEdit}}
+\index{getMatchForEdit@{getMatchForEdit}!com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}}
+\doxysubsubsection{\texorpdfstring{getMatchForEdit()}{getMatchForEdit()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_ac098037788db4a971140caba8887c7ba} 
+Optional$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO}{Match\+Request\+DTO}} $>$ com.\+example.\+football\+\_\+manager.\+service.\+Match\+Service.\+get\+Match\+For\+Edit (\begin{DoxyParamCaption}\item[{Long}]{id}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{MatchService_8java_source_l00207}{207}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
+
+
+
+References \mbox{\hyperlink{MatchRequestDTO_8java_source_l00014}{com.\+example.\+football\+\_\+manager.\+dto.\+Match\+Request\+DTO.\+Match\+Status.\+FINISHED}}, and \mbox{\hyperlink{MatchRequestDTO_8java_source_l00012}{com.\+example.\+football\+\_\+manager.\+dto.\+Match\+Request\+DTO.\+Match\+Status.\+SCHEDULED}}.
+
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a63f11b2245ea33304a45fd5fd5be7c02}\index{com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}!getRecentMatchesByTeamId@{getRecentMatchesByTeamId}}
+\index{getRecentMatchesByTeamId@{getRecentMatchesByTeamId}!com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}}
+\doxysubsubsection{\texorpdfstring{getRecentMatchesByTeamId()}{getRecentMatchesByTeamId()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a63f11b2245ea33304a45fd5fd5be7c02} 
+List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}} $>$ com.\+example.\+football\+\_\+manager.\+service.\+Match\+Service.\+get\+Recent\+Matches\+By\+Team\+Id (\begin{DoxyParamCaption}\item[{Long}]{team\+Id}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{MatchService_8java_source_l00286}{286}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a5ab09f54e5258ea8786775dace75b662}\index{com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}!registerResult@{registerResult}}
+\index{registerResult@{registerResult}!com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}}
+\doxysubsubsection{\texorpdfstring{registerResult()}{registerResult()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a5ab09f54e5258ea8786775dace75b662} 
+String com.\+example.\+football\+\_\+manager.\+service.\+Match\+Service.\+register\+Result (\begin{DoxyParamCaption}\item[{Long}]{id}{, }\item[{\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO}{Match\+Result\+Request\+DTO}}}]{request}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{MatchService_8java_source_l00152}{152}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
+
+
+
+References \mbox{\hyperlink{MatchResultRequestDTO_8java_source_l00017}{com.\+example.\+football\+\_\+manager.\+dto.\+Match\+Result\+Request\+DTO.\+get\+Goals()}}.
+
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a29a97f0da2fe4a950291db609bee986f}\index{com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}!updateMatch@{updateMatch}}
+\index{updateMatch@{updateMatch}!com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}}
+\doxysubsubsection{\texorpdfstring{updateMatch()}{updateMatch()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a29a97f0da2fe4a950291db609bee986f} 
+String com.\+example.\+football\+\_\+manager.\+service.\+Match\+Service.\+update\+Match (\begin{DoxyParamCaption}\item[{Long}]{id}{, }\item[{\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO}{Match\+Request\+DTO}}}]{request}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{MatchService_8java_source_l00102}{102}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
+
+
+
+References \mbox{\hyperlink{MatchRequestDTO_8java_source_l00014}{com.\+example.\+football\+\_\+manager.\+dto.\+Match\+Request\+DTO.\+Match\+Status.\+FINISHED}}, \mbox{\hyperlink{MatchRequestDTO_8java_source_l00059}{com.\+example.\+football\+\_\+manager.\+dto.\+Match\+Request\+DTO.\+get\+Away\+Score()}}, \mbox{\hyperlink{MatchRequestDTO_8java_source_l00041}{com.\+example.\+football\+\_\+manager.\+dto.\+Match\+Request\+DTO.\+get\+Away\+Team\+Id()}}, \mbox{\hyperlink{MatchRequestDTO_8java_source_l00056}{com.\+example.\+football\+\_\+manager.\+dto.\+Match\+Request\+DTO.\+get\+Home\+Score()}}, \mbox{\hyperlink{MatchRequestDTO_8java_source_l00038}{com.\+example.\+football\+\_\+manager.\+dto.\+Match\+Request\+DTO.\+get\+Home\+Team\+Id()}}, \mbox{\hyperlink{MatchRequestDTO_8java_source_l00047}{com.\+example.\+football\+\_\+manager.\+dto.\+Match\+Request\+DTO.\+get\+Kickoff\+Time()}}, \mbox{\hyperlink{MatchRequestDTO_8java_source_l00053}{com.\+example.\+football\+\_\+manager.\+dto.\+Match\+Request\+DTO.\+get\+Status()}}, and \mbox{\hyperlink{MatchRequestDTO_8java_source_l00050}{com.\+example.\+football\+\_\+manager.\+dto.\+Match\+Request\+DTO.\+get\+Venue()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Football\+\_\+\+Manager/src/main/java/com/example/football\+\_\+manager/service/\mbox{\hyperlink{MatchService_8java}{Match\+Service.\+java}}\end{DoxyCompactItemize}

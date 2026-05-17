@@ -1,0 +1,72 @@
+\doxysection{Match\+Result\+Request\+DTO.\+java}
+\hypertarget{MatchResultRequestDTO_8java_source}{}\label{MatchResultRequestDTO_8java_source}\index{Football\_Manager/src/main/java/com/example/football\_manager/dto/MatchResultRequestDTO.java@{Football\_Manager/src/main/java/com/example/football\_manager/dto/MatchResultRequestDTO.java}}
+\mbox{\hyperlink{MatchResultRequestDTO_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00001}00001\ \textcolor{keyword}{package\ }com.example.football\_manager.dto;}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00003}00003\ \textcolor{keyword}{import}\ jakarta.validation.Valid;}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00004}00004\ \textcolor{keyword}{import}\ jakarta.validation.constraints.Max;}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00005}00005\ \textcolor{keyword}{import}\ jakarta.validation.constraints.Min;}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00006}00006\ \textcolor{keyword}{import}\ jakarta.validation.constraints.NotNull;}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00007}00007\ \textcolor{keyword}{import}\ io.swagger.v3.oas.annotations.media.Schema;}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00009}00009\ \textcolor{keyword}{import}\ java.util.List;}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00011}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO}{00011}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO}{MatchResultRequestDTO}}\ \{}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00013}00013\ \ \ \ \ @NotNull}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00014}00014\ \ \ \ \ @Schema(description\ =\ \textcolor{stringliteral}{"{}List\ of\ goals\ scored\ during\ the\ match"{}})}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00015}00015\ \ \ \ \ \textcolor{keyword}{private}\ List<@Valid\ GoalDTO>\ goals;}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00017}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO_ad58707241323060bb9c02b3f00911d4f}{00017}}\ \ \ \ \ \textcolor{keyword}{public}\ List<GoalDTO>\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO_ad58707241323060bb9c02b3f00911d4f}{getGoals}}()\ \{}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00018}00018\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ goals;}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00019}00019\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00021}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO_abf51f1f5989b75d61e4d222b82999fb7}{00021}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO_abf51f1f5989b75d61e4d222b82999fb7}{setGoals}}(List<GoalDTO>\ goals)\ \{}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00022}00022\ \ \ \ \ \ \ \ \ this.goals\ =\ goals;}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00023}00023\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00025}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO_1_1GoalDTO}{00025}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO_1_1GoalDTO}{GoalDTO}}\ \{}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00027}00027\ \ \ \ \ \ \ \ \ @NotNull}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00028}00028\ \ \ \ \ \ \ \ \ @Schema(description\ =\ \textcolor{stringliteral}{"{}Identifier\ of\ the\ scoring\ team"{}},\ example\ =\ \textcolor{stringliteral}{"{}12"{}})}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00029}00029\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ Long\ teamId;}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00031}00031\ \ \ \ \ \ \ \ \ @NotNull}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00032}00032\ \ \ \ \ \ \ \ \ @Min(1)}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00033}00033\ \ \ \ \ \ \ \ \ @Max(120)}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00034}00034\ \ \ \ \ \ \ \ \ @Schema(description\ =\ \textcolor{stringliteral}{"{}Minute\ of\ the\ goal\ (1-\/120)"{}},\ example\ =\ \textcolor{stringliteral}{"{}67"{}})}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00035}00035\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ Integer\ minute;}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00037}00037\ \ \ \ \ \ \ \ \ @Min(0)}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00038}00038\ \ \ \ \ \ \ \ \ @Max(30)}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00039}00039\ \ \ \ \ \ \ \ \ @Schema(description\ =\ \textcolor{stringliteral}{"{}Stoppage\ minute\ (optional)"{}},\ example\ =\ \textcolor{stringliteral}{"{}2"{}})}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00040}00040\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ Integer\ stoppageMinute;}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00042}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO_1_1GoalDTO_a95fae7941885fb750964d1a4aaa2e69c}{00042}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ Long\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO_1_1GoalDTO_a95fae7941885fb750964d1a4aaa2e69c}{getTeamId}}()\ \{}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ teamId;}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00044}00044\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00046}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO_1_1GoalDTO_a076b0dea27765d2cf5542633d36e58c0}{00046}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO_1_1GoalDTO_a076b0dea27765d2cf5542633d36e58c0}{setTeamId}}(Long\ teamId)\ \{}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ this.teamId\ =\ teamId;}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00048}00048\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00050}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO_1_1GoalDTO_a39d6581227052fc7b1f60f50455bbd02}{00050}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ Integer\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO_1_1GoalDTO_a39d6581227052fc7b1f60f50455bbd02}{getMinute}}()\ \{}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ minute;}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00052}00052\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00054}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO_1_1GoalDTO_ab3dced48cac293d6226c909a2c7dbb6d}{00054}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO_1_1GoalDTO_ab3dced48cac293d6226c909a2c7dbb6d}{setMinute}}(Integer\ minute)\ \{}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ this.minute\ =\ minute;}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00056}00056\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00058}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO_1_1GoalDTO_aad6a26f45705e0e448aa90a74c8bd614}{00058}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ Integer\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO_1_1GoalDTO_aad6a26f45705e0e448aa90a74c8bd614}{getStoppageMinute}}()\ \{}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ stoppageMinute;}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00060}00060\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00062}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO_1_1GoalDTO_a89de9b976a266a143625b9263bff7c68}{00062}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO_1_1GoalDTO_a89de9b976a266a143625b9263bff7c68}{setStoppageMinute}}(Integer\ stoppageMinute)\ \{}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ this.stoppageMinute\ =\ stoppageMinute;}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00064}00064\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00065}00065\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchResultRequestDTO_8java_source_l00066}00066\ \}}
+
+\end{DoxyCode}
