@@ -258,10 +258,17 @@ public class MatchService {
                 && (request.getHomeScore() != null || request.getAwayScore() != null)) {
             throw new IllegalArgumentException("Validation Error: Scores can only be submitted when status is FINISHED.");
         }
-    } // <-- ESTA ES LA LLAVE QUE FALTABA
+    } 
 
     public List<Match> getAllMatches() {
         return matchRepository.findAll();
+    }
+
+    public List<Match> getUpcomingMatches() {
+        return matchRepository.findAll().stream()
+                .filter(match -> !match.isFinished()) 
+                .sorted((m1, m2) -> m1.getDatetime().compareTo(m2.getDatetime()))
+                .toList();
     }
 
     public Match getMatchById(Long id) {

@@ -129,4 +129,10 @@ public class MatchViewController {
             return "redirect:/matches/" + id + "/results?error=true";
         }
     }
+
+    @GetMapping("/matches/upcoming")
+    public String showUpcomingMatchesPage(Model model) {
+        model.addAttribute("matches", matchService.getUpcomingMatches());
+        return "upcoming-matches";
+    }
 }
