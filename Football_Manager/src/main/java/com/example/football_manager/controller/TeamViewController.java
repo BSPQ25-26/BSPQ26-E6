@@ -4,6 +4,7 @@ import com.example.football_manager.dto.TeamRequestDTO;
 import com.example.football_manager.model.Team;
 import com.example.football_manager.service.CountryService;
 import com.example.football_manager.service.MatchService;
+import com.example.football_manager.service.PlayerService;
 import com.example.football_manager.service.TeamService;
 import com.example.football_manager.service.UserService;
 import jakarta.servlet.http.HttpSession;
@@ -31,6 +32,9 @@ public class TeamViewController {
 
     @Autowired
     private MatchService matchService;
+
+    @Autowired
+    private PlayerService playerService;
 
     @GetMapping("/teams")
     public String teamsPage(Model model, HttpSession session) {
@@ -61,6 +65,7 @@ public class TeamViewController {
 
         model.addAttribute("isAdmin", isAdmin != null && isAdmin);
         model.addAttribute("team", team);
+        model.addAttribute("players", playerService.getPlayersByTeamId(id));
         model.addAttribute("recentMatches", matchService.getRecentMatchesByTeamId(id));
         model.addAttribute("futureMatches", matchService.getFutureMatchesByTeamId(id));
 
