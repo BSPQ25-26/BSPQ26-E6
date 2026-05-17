@@ -38,6 +38,9 @@
     <option value="es" th:selected="${#locale.language == 'es'}" th:text="#{global.lang.es}">Espanol</option>
     <option value="en" th:selected="${#locale.language == 'en'}" th:text="#{global.lang.en}">English</option>
 </select>
+                <a href="/standings" class="px-4 py-2 bg-slate-800 text-slate-300 text-sm font-medium rounded-md hover:bg-emerald-600 hover:text-white transition-colors border border-slate-700" th:text="#{nav.standings}">
+                    Standings
+                </a>
                 <a href="/admin"
                    class="px-4 py-2 bg-slate-800 text-slate-300 text-sm font-medium rounded-md hover:bg-slate-700 hover:text-white transition-colors border border-slate-700" th:text="#{nav.backToAdmin}">
                     Back to Admin

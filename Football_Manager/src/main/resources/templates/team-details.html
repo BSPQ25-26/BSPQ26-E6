@@ -26,6 +26,9 @@
                     Back to Teams
                 </a>
 
+                <a href="/standings" class="px-4 py-2 bg-slate-800 text-slate-300 text-sm font-medium rounded-md hover:bg-emerald-600 hover:text-white transition-colors border border-slate-700" th:text="#{nav.standings}">
+                    Standings
+                </a>
                 <a th:if="${isAdmin}" href="/admin"
                    class="px-4 py-2 bg-slate-800 text-slate-300 rounded-md hover:bg-slate-700" th:text="#{teamDetails.adminPanel}">
                     Admin Panel
