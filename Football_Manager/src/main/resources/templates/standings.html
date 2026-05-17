@@ -51,10 +51,29 @@
 
     <!-- Page heading card -->
     <div class="mb-8 bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-        <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight uppercase" th:text="#{standings.heading}">League Standings</h1>
-        <p class="text-slate-500 mt-1 font-medium" th:text="#{standings.subtitle}">
-            Current league table ordered by points. Goal difference is shown for tie-breaking context.
-        </p>
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+            <div>
+                <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight uppercase" th:text="#{standings.heading}">League Standings</h1>
+                <p class="text-slate-500 mt-1 font-medium" th:text="#{standings.subtitle}">
+                    Current league table ordered by points. Goal difference is shown for tie-breaking context.
+                </p>
+            </div>
+
+            <div th:if="${!#lists.isEmpty(competitions)}"
+                 class="flex flex-col gap-1 md:min-w-[16rem]">
+                <label for="leagueSelect"
+                       class="text-xs font-bold uppercase tracking-wider text-slate-500"
+                       th:text="#{standings.selectLeague}">League</label>
+                <select id="leagueSelect"
+                        class="px-4 py-2 bg-white text-slate-800 text-sm font-bold rounded-md border border-slate-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                        onchange="window.location.href = window.location.pathname + '?competitionId=' + this.value;">
+                    <option th:each="c : ${competitions}"
+                            th:value="${c.id}"
+                            th:text="${c.name}"
+                            th:selected="${c.id == selectedCompetitionId}">Competition name</option>
+                </select>
+            </div>
+        </div>
     </div>
 
     <!-- Standings table card -->
