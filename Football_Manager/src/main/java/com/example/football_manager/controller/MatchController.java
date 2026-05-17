@@ -49,6 +49,15 @@ public class MatchController {
         }
     }
 
+    @GetMapping("/upcoming")
+    @Operation(
+            summary = "List all upcoming matches",
+            description = "Returns matches that have not finished yet, sorted by date ascending."
+    )
+    public ResponseEntity<List<Match>> getUpcomingMatches() {
+        return ResponseEntity.ok(matchService.getUpcomingMatches());
+    }
+
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(
             summary = "Create a match (JSON)",
