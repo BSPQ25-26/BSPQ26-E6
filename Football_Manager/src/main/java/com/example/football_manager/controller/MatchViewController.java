@@ -7,13 +7,16 @@ import com.example.football_manager.model.MatchGoal;
 import com.example.football_manager.service.MatchService;
 import com.example.football_manager.service.TeamService;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
@@ -23,15 +26,33 @@ import java.util.List;
 public class MatchViewController {
 
     private final MatchService matchService;
-
+    private final TeamService teamService;
 
     public MatchViewController(MatchService matchService, TeamService teamService) {
         this.matchService = matchService;
         this.teamService = teamService;
     }
 
-    @Autowired
-    private TeamService teamService;
+    @GetMapping("/matches")
+    public String showMatchesPage(
+            @RequestParam(required = false) Long teamId,
+            @RequestParam(required = false) MatchRequestDTO.MatchStatus status,
+            @RequestParam(required = false) Long competitionId,
+            Model model,
+            HttpSession session) {
+        Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
+
+        model.addAttribute("isAdmin", isAdmin != null && isAdmin);
+        try {
+            model.addAttribute("matches", matchService.getMatches(teamId, status, competitionId));
+        } catch (IllegalArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage(), e);
+        }
+        model.addAttribute("teams", teamService.getAllTeams());
+        model.addAttribute("selectedTeamId", teamId);
+
+        return "matches";
+    }
 
     @GetMapping("/matches/schedule")
     public String showScheduleForm(Model model) {
@@ -46,7 +67,7 @@ public class MatchViewController {
         return "match-results";
     }
     
-@GetMapping("/matches/edit/{id}")
+    @GetMapping("/matches/edit/{id}")
     public String showEditForm(@PathVariable Long id, Model model) {
         MatchRequestDTO matchRequestDTO = matchService.getMatchForEdit(id)
                 .orElseThrow(() -> new IllegalArgumentException("Match not found."));
@@ -54,7 +75,7 @@ public class MatchViewController {
         model.addAttribute("matchRequest", matchRequestDTO);
         model.addAttribute("matchId", id);
         // PASAR LA LISTA DE EQUIPOS PARA LOS DESPLEGABLES
-        model.addAttribute("teams", teamService.getAllTeams()); 
+        model.addAttribute("teams", teamService.getAllTeams());
         return "edit-match";
     }
 
