@@ -1,9 +1,15 @@
 package com.example.football_manager.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "team")
@@ -25,5 +31,19 @@ public class Team {
     @ManyToOne
     @JoinColumn(name = "fk_country_id", nullable = false)
     private Country country;
+
+    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OrderBy("number ASC")
+    @JsonManagedReference
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private List<Player> players = new ArrayList<>();
+
+    public Team(Long id, String name, String logoUrl, Country country) {
+        this.id = id;
+        this.name = name;
+        this.logoUrl = logoUrl;
+        this.country = country;
+    }
 }
 

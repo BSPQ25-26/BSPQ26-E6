@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{adminTeamPlayers.title}">Manage Team Players - Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .pitch-bg { background-color: #f8fafc; }
+    </style>
+</head>
+<body class="pitch-bg min-h-screen font-sans text-slate-800 pb-10">
+
+<nav class="bg-slate-900 border-b-2 border-emerald-600 shadow-md mb-10">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+            <div class="flex items-center gap-3">
+                <span class="text-xl font-black text-white uppercase tracking-wider"><span th:text="#{brand.control}">Control</span><span class="text-emerald-500" th:text="#{brand.center}">Center</span></span>
+            </div>
+            <div class="flex items-center gap-3">
+                <select id="langSelect"
+                        class="px-4 py-[0.55rem] bg-slate-800 text-slate-300 text-sm font-medium rounded-md border border-slate-700"
+                        onchange="window.location.href = window.location.pathname + '?lang=' + this.value;">
+                    <option value="es" th:selected="${#locale.language == 'es'}" th:text="#{global.lang.es}">Espanol</option>
+                    <option value="en" th:selected="${#locale.language == 'en'}" th:text="#{global.lang.en}">English</option>
+                </select>
+                <a href="/admin/manage-teams" class="px-4 py-2 bg-slate-800 text-slate-300 text-sm font-medium rounded-md hover:bg-slate-700 hover:text-white transition-colors border border-slate-700" th:text="#{adminTeamPlayers.backToTeams}">
+                    Back to Teams
+                </a>
+                <a href="/admin" class="px-4 py-2 bg-slate-800 text-slate-300 text-sm font-medium rounded-md hover:bg-slate-700 hover:text-white transition-colors border border-slate-700" th:text="#{adminTeamPlayers.backToPanel}">
+                    Back to Panel
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="mb-8">
+        <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight uppercase" th:text="#{adminTeamPlayers.heading(${team.name})}">Manage Athletic Club Squad</h1>
+        <p class="text-slate-500 mt-1 font-medium" th:text="#{adminTeamPlayers.subtitle}">Create, edit and delete players for this team.</p>
+    </div>
+
+    <div th:if="${successMessage}" class="mb-6 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-800" th:text="${successMessage}">
+        Operation completed successfully.
+    </div>
+
+    <div th:if="${errorMessage}" class="mb-6 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-800" th:text="${errorMessage}">
+        An error occurred.
+    </div>
+
+    <div class="grid grid-cols-1 xl:grid-cols-[360px,1fr] gap-6">
+        <div class="bg-white py-8 px-6 shadow-xl rounded-xl border border-slate-100 self-start">
+            <h2 class="text-lg font-bold text-slate-900 mb-5" th:text="#{adminTeamPlayers.addHeading}">Add New Player</h2>
+
+            <form th:action="@{/admin/teams/{teamId}/players(teamId=${team.id})}" th:object="${playerRequest}" method="POST" class="space-y-5">
+                <div>
+                    <label for="name" class="block text-sm font-medium text-slate-700" th:text="#{adminTeamPlayers.playerName}">Player Name</label>
+                    <input id="name" type="text" th:field="*{name}" required maxlength="30"
+                           th:placeholder="#{adminTeamPlayers.playerName.placeholder}"
+                           class="mt-1 appearance-none block w-full px-4 py-3 border border-slate-300 rounded-lg shadow-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm transition duration-200">
+                    <p class="mt-1 text-xs text-red-600" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</p>
+                </div>
+
+                <div>
+                    <label for="number" class="block text-sm font-medium text-slate-700" th:text="#{adminTeamPlayers.playerNumber}">Number</label>
+                    <input id="number" type="number" th:field="*{number}" required min="1"
+                           th:placeholder="#{adminTeamPlayers.playerNumber.placeholder}"
+                           class="mt-1 appearance-none block w-full px-4 py-3 border border-slate-300 rounded-lg shadow-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm transition duration-200">
+                    <p class="mt-1 text-xs text-red-600" th:if="${#fields.hasErrors('number')}" th:errors="*{number}">Number error</p>
+                </div>
+
+                <div>
+                    <label for="position" class="block text-sm font-medium text-slate-700" th:text="#{adminTeamPlayers.playerPosition}">Position</label>
+                    <div class="relative mt-1">
+                        <select id="position" th:field="*{position}" required
+                                class="appearance-none block w-full px-4 py-3 border border-slate-300 rounded-lg shadow-sm bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm transition duration-200 cursor-pointer">
+                            <option value="" disabled th:text="#{adminTeamPlayers.playerPosition.select}">Select a position</option>
+                            <option th:each="position : ${positions}"
+                                    th:value="${position}"
+                                    th:text="${#messages.msgOrNull('playerPosition.' + position.name()) != null ? #messages.msgOrNull('playerPosition.' + position.name()) : position.name()}">
+                                FORWARD
+                            </option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
+                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <p class="mt-1 text-xs text-red-600" th:if="${#fields.hasErrors('position')}" th:errors="*{position}">Position error</p>
+                </div>
+
+                <button type="submit"
+                        class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-colors duration-200"
+                        th:text="#{adminTeamPlayers.addButton}">
+                    Add Player
+                </button>
+            </form>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                    <tr class="bg-slate-50 border-b border-slate-200 text-slate-500 uppercase text-xs font-bold tracking-wider">
+                        <th class="px-6 py-4" th:text="#{adminTeamPlayers.table.id}">ID</th>
+                        <th class="px-6 py-4" th:text="#{adminTeamPlayers.table.name}">Name</th>
+                        <th class="px-6 py-4" th:text="#{adminTeamPlayers.table.number}">Number</th>
+                        <th class="px-6 py-4" th:text="#{adminTeamPlayers.table.position}">Position</th>
+                        <th class="px-6 py-4 text-right" th:text="#{adminTeamPlayers.table.actions}">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200">
+                    <tr th:each="player : ${players}" class="hover:bg-slate-50 transition-colors">
+                        <td class="px-6 py-4 text-sm font-medium text-slate-500" th:text="${player.id}">1</td>
+                        <td class="px-6 py-4 font-bold text-slate-900" th:text="${player.name}">Inaki Williams</td>
+                        <td class="px-6 py-4 text-sm text-slate-700" th:text="${player.number}">9</td>
+                        <td class="px-6 py-4 text-sm text-slate-700"
+                            th:text="${#messages.msgOrNull('playerPosition.' + player.position.name()) != null ? #messages.msgOrNull('playerPosition.' + player.position.name()) : player.position.name()}">
+                            Forward
+                        </td>
+                        <td class="px-6 py-4 text-right">
+                            <div class="flex justify-end gap-2">
+                                <a th:href="@{/admin/teams/{teamId}/players/edit/{playerId}(teamId=${team.id},playerId=${player.id})}"
+                                   class="w-20 text-center py-1.5 bg-indigo-50 text-indigo-600 hover:bg-indigo-100 hover:text-indigo-800 rounded text-sm font-semibold transition-colors border border-indigo-200"
+                                   th:text="#{adminTeamPlayers.edit}">
+                                    Edit
+                                </a>
+                                <button type="button"
+                                        th:attr="data-player-id=${player.id},data-player-name=${player.name},data-delete-url=@{/admin/teams/{teamId}/players/delete/{playerId}(teamId=${team.id},playerId=${player.id})}"
+                                        onclick="confirmDelete(this)"
+                                        class="w-20 text-center py-1.5 bg-red-50 text-red-600 hover:bg-red-100 hover:text-red-800 rounded text-sm font-semibold transition-colors border border-red-200"
+                                        th:text="#{adminTeamPlayers.delete}">
+                                    Delete
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(players)}">
+                        <td colspan="5" class="px-6 py-8 text-center text-slate-500" th:text="#{adminTeamPlayers.empty}">
+                            No players found for this team.
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="confirmModal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-50 transition-opacity">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-sm w-full mx-4 overflow-hidden transform transition-transform scale-95" id="modalContent">
+        <div class="bg-red-500 px-6 py-4">
+            <h3 class="text-lg font-bold text-white" th:text="#{adminTeamPlayers.modal.title}">Confirm Deletion</h3>
+        </div>
+        <div class="p-6">
+            <p id="confirmMessage" class="text-slate-600 mb-8 leading-relaxed"></p>
+            <div class="flex gap-3 justify-end">
+                <button type="button" onclick="closeModal()" class="px-4 py-2 text-sm font-bold text-slate-600 bg-slate-100 rounded-lg hover:bg-slate-200" th:text="#{adminTeamPlayers.modal.cancel}">Cancel</button>
+                <form id="deleteForm" method="POST" class="m-0">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                    <button type="submit" class="px-4 py-2 text-sm font-bold text-white bg-red-600 rounded-lg hover:bg-red-700 shadow-md" th:text="#{adminTeamPlayers.modal.confirm}">Yes, Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:inline="javascript">
+    function confirmDelete(button) {
+      const name = button.dataset.playerName;
+      const deleteUrl = button.dataset.deleteUrl;
+      const template = /*[[#{adminTeamPlayers.modal.message}]]*/ 'Are you sure you want to delete <strong class="text-slate-900">"__NAME__"</strong>?';
+
+      document.getElementById('confirmMessage').innerHTML = template.replace('__NAME__', name);
+      document.getElementById('deleteForm').action = deleteUrl;
+
+      const modal = document.getElementById('confirmModal');
+      const content = document.getElementById('modalContent');
+      modal.classList.remove('hidden');
+      setTimeout(() => {
+        content.classList.remove('scale-95');
+        content.classList.add('scale-100');
+      }, 10);
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('confirmModal');
+      const content = document.getElementById('modalContent');
+      content.classList.remove('scale-100');
+      content.classList.add('scale-95');
+      setTimeout(() => { modal.classList.add('hidden'); }, 150);
+    }
+</script>
+
+</body>
+</html>
