@@ -1,0 +1,148 @@
+\doxysection{com.\+example.\+football\+\_\+manager.\+service.\+User\+Service Class Reference}
+\hypertarget{classcom_1_1example_1_1football__manager_1_1service_1_1UserService}{}\label{classcom_1_1example_1_1football__manager_1_1service_1_1UserService}\index{com.example.football\_manager.service.UserService@{com.example.football\_manager.service.UserService}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1User}{User}} \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1UserService_a8cdd7200caf91a1164f160a806880f30}{register\+User}} (String username, String email, String raw\+Password, Boolean is\+Admin)
+\item 
+\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1User}{User}} \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1UserService_a94e24188238b0fee941e2087a63df79c}{login}} (String username, String raw\+Password)
+\item 
+\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1User}{User}} \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1UserService_a1789e46082a6a7203de938586661e07b}{get\+User\+By\+Id}} (Long id)
+\item 
+\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1User}{User}} \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1UserService_a73599bed641f9ee010602de69ba9a080}{get\+User\+By\+Username}} (String username)
+\item 
+\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1User}{User}} \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1UserService_a190b9f9bf4f004033b236a9c895e2e4e}{add\+Favourite\+Team}} (Long user\+Id, Long team\+Id)
+\item 
+\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1User}{User}} \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1UserService_aa018242893b9e05b656facfa8e6b38ef}{remove\+Favourite\+Team}} (Long user\+Id, Long team\+Id)
+\item 
+Set$<$ Long $>$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1UserService_af6924be2e6f2a82c8fffc7c28aeca0f5}{get\+Favourite\+Team\+Ids\+By\+User\+Id}} (Long user\+Id)
+\item 
+\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1User}{User}} \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1UserService_aee7315ac148bb244b9a9b25a9c5f8cdd}{get\+User\+Profile}} (Long user\+Id)
+\item 
+\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1User}{User}} \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1UserService_a6c107b612f30dea6e63008da695b7a93}{update\+Profile}} (Long user\+Id, String username, String email, String current\+Password, String new\+Password, String confirm\+New\+Password)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{UserService_8java_source_l00018}{18}} of file \mbox{\hyperlink{UserService_8java_source}{User\+Service.\+java}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1service_1_1UserService_a190b9f9bf4f004033b236a9c895e2e4e}\index{com.example.football\_manager.service.UserService@{com.example.football\_manager.service.UserService}!addFavouriteTeam@{addFavouriteTeam}}
+\index{addFavouriteTeam@{addFavouriteTeam}!com.example.football\_manager.service.UserService@{com.example.football\_manager.service.UserService}}
+\doxysubsubsection{\texorpdfstring{addFavouriteTeam()}{addFavouriteTeam()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1service_1_1UserService_a190b9f9bf4f004033b236a9c895e2e4e} 
+\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1User}{User}} com.\+example.\+football\+\_\+manager.\+service.\+User\+Service.\+add\+Favourite\+Team (\begin{DoxyParamCaption}\item[{Long}]{user\+Id}{, }\item[{Long}]{team\+Id}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{UserService_8java_source_l00068}{68}} of file \mbox{\hyperlink{UserService_8java_source}{User\+Service.\+java}}.
+
+
+
+References \mbox{\hyperlink{UserService_8java_source_l00058}{get\+User\+By\+Id()}}.
+
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1service_1_1UserService_af6924be2e6f2a82c8fffc7c28aeca0f5}\index{com.example.football\_manager.service.UserService@{com.example.football\_manager.service.UserService}!getFavouriteTeamIdsByUserId@{getFavouriteTeamIdsByUserId}}
+\index{getFavouriteTeamIdsByUserId@{getFavouriteTeamIdsByUserId}!com.example.football\_manager.service.UserService@{com.example.football\_manager.service.UserService}}
+\doxysubsubsection{\texorpdfstring{getFavouriteTeamIdsByUserId()}{getFavouriteTeamIdsByUserId()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1service_1_1UserService_af6924be2e6f2a82c8fffc7c28aeca0f5} 
+Set$<$ Long $>$ com.\+example.\+football\+\_\+manager.\+service.\+User\+Service.\+get\+Favourite\+Team\+Ids\+By\+User\+Id (\begin{DoxyParamCaption}\item[{Long}]{user\+Id}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{UserService_8java_source_l00106}{106}} of file \mbox{\hyperlink{UserService_8java_source}{User\+Service.\+java}}.
+
+
+
+References \mbox{\hyperlink{UserService_8java_source_l00058}{get\+User\+By\+Id()}}.
+
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1service_1_1UserService_a1789e46082a6a7203de938586661e07b}\index{com.example.football\_manager.service.UserService@{com.example.football\_manager.service.UserService}!getUserById@{getUserById}}
+\index{getUserById@{getUserById}!com.example.football\_manager.service.UserService@{com.example.football\_manager.service.UserService}}
+\doxysubsubsection{\texorpdfstring{getUserById()}{getUserById()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1service_1_1UserService_a1789e46082a6a7203de938586661e07b} 
+\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1User}{User}} com.\+example.\+football\+\_\+manager.\+service.\+User\+Service.\+get\+User\+By\+Id (\begin{DoxyParamCaption}\item[{Long}]{id}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{UserService_8java_source_l00058}{58}} of file \mbox{\hyperlink{UserService_8java_source}{User\+Service.\+java}}.
+
+
+
+Referenced by \mbox{\hyperlink{UserService_8java_source_l00068}{add\+Favourite\+Team()}}, \mbox{\hyperlink{UserService_8java_source_l00106}{get\+Favourite\+Team\+Ids\+By\+User\+Id()}}, \mbox{\hyperlink{UserService_8java_source_l00086}{remove\+Favourite\+Team()}}, and \mbox{\hyperlink{UserService_8java_source_l00127}{update\+Profile()}}.
+
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1service_1_1UserService_a73599bed641f9ee010602de69ba9a080}\index{com.example.football\_manager.service.UserService@{com.example.football\_manager.service.UserService}!getUserByUsername@{getUserByUsername}}
+\index{getUserByUsername@{getUserByUsername}!com.example.football\_manager.service.UserService@{com.example.football\_manager.service.UserService}}
+\doxysubsubsection{\texorpdfstring{getUserByUsername()}{getUserByUsername()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1service_1_1UserService_a73599bed641f9ee010602de69ba9a080} 
+\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1User}{User}} com.\+example.\+football\+\_\+manager.\+service.\+User\+Service.\+get\+User\+By\+Username (\begin{DoxyParamCaption}\item[{String}]{username}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{UserService_8java_source_l00063}{63}} of file \mbox{\hyperlink{UserService_8java_source}{User\+Service.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1service_1_1UserService_aee7315ac148bb244b9a9b25a9c5f8cdd}\index{com.example.football\_manager.service.UserService@{com.example.football\_manager.service.UserService}!getUserProfile@{getUserProfile}}
+\index{getUserProfile@{getUserProfile}!com.example.football\_manager.service.UserService@{com.example.football\_manager.service.UserService}}
+\doxysubsubsection{\texorpdfstring{getUserProfile()}{getUserProfile()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1service_1_1UserService_aee7315ac148bb244b9a9b25a9c5f8cdd} 
+\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1User}{User}} com.\+example.\+football\+\_\+manager.\+service.\+User\+Service.\+get\+User\+Profile (\begin{DoxyParamCaption}\item[{Long}]{user\+Id}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{UserService_8java_source_l00122}{122}} of file \mbox{\hyperlink{UserService_8java_source}{User\+Service.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1service_1_1UserService_a94e24188238b0fee941e2087a63df79c}\index{com.example.football\_manager.service.UserService@{com.example.football\_manager.service.UserService}!login@{login}}
+\index{login@{login}!com.example.football\_manager.service.UserService@{com.example.football\_manager.service.UserService}}
+\doxysubsubsection{\texorpdfstring{login()}{login()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1service_1_1UserService_a94e24188238b0fee941e2087a63df79c} 
+\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1User}{User}} com.\+example.\+football\+\_\+manager.\+service.\+User\+Service.\+login (\begin{DoxyParamCaption}\item[{String}]{username}{, }\item[{String}]{raw\+Password}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{UserService_8java_source_l00047}{47}} of file \mbox{\hyperlink{UserService_8java_source}{User\+Service.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1service_1_1UserService_a8cdd7200caf91a1164f160a806880f30}\index{com.example.football\_manager.service.UserService@{com.example.football\_manager.service.UserService}!registerUser@{registerUser}}
+\index{registerUser@{registerUser}!com.example.football\_manager.service.UserService@{com.example.football\_manager.service.UserService}}
+\doxysubsubsection{\texorpdfstring{registerUser()}{registerUser()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1service_1_1UserService_a8cdd7200caf91a1164f160a806880f30} 
+\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1User}{User}} com.\+example.\+football\+\_\+manager.\+service.\+User\+Service.\+register\+User (\begin{DoxyParamCaption}\item[{String}]{username}{, }\item[{String}]{email}{, }\item[{String}]{raw\+Password}{, }\item[{Boolean}]{is\+Admin}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{UserService_8java_source_l00029}{29}} of file \mbox{\hyperlink{UserService_8java_source}{User\+Service.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1service_1_1UserService_aa018242893b9e05b656facfa8e6b38ef}\index{com.example.football\_manager.service.UserService@{com.example.football\_manager.service.UserService}!removeFavouriteTeam@{removeFavouriteTeam}}
+\index{removeFavouriteTeam@{removeFavouriteTeam}!com.example.football\_manager.service.UserService@{com.example.football\_manager.service.UserService}}
+\doxysubsubsection{\texorpdfstring{removeFavouriteTeam()}{removeFavouriteTeam()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1service_1_1UserService_aa018242893b9e05b656facfa8e6b38ef} 
+\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1User}{User}} com.\+example.\+football\+\_\+manager.\+service.\+User\+Service.\+remove\+Favourite\+Team (\begin{DoxyParamCaption}\item[{Long}]{user\+Id}{, }\item[{Long}]{team\+Id}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{UserService_8java_source_l00086}{86}} of file \mbox{\hyperlink{UserService_8java_source}{User\+Service.\+java}}.
+
+
+
+References \mbox{\hyperlink{UserService_8java_source_l00058}{get\+User\+By\+Id()}}.
+
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1service_1_1UserService_a6c107b612f30dea6e63008da695b7a93}\index{com.example.football\_manager.service.UserService@{com.example.football\_manager.service.UserService}!updateProfile@{updateProfile}}
+\index{updateProfile@{updateProfile}!com.example.football\_manager.service.UserService@{com.example.football\_manager.service.UserService}}
+\doxysubsubsection{\texorpdfstring{updateProfile()}{updateProfile()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1service_1_1UserService_a6c107b612f30dea6e63008da695b7a93} 
+\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1User}{User}} com.\+example.\+football\+\_\+manager.\+service.\+User\+Service.\+update\+Profile (\begin{DoxyParamCaption}\item[{Long}]{user\+Id}{, }\item[{String}]{username}{, }\item[{String}]{email}{, }\item[{String}]{current\+Password}{, }\item[{String}]{new\+Password}{, }\item[{String}]{confirm\+New\+Password}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{UserService_8java_source_l00127}{127}} of file \mbox{\hyperlink{UserService_8java_source}{User\+Service.\+java}}.
+
+
+
+References \mbox{\hyperlink{UserService_8java_source_l00058}{get\+User\+By\+Id()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Football\+\_\+\+Manager/src/main/java/com/example/football\+\_\+manager/service/\mbox{\hyperlink{UserService_8java}{User\+Service.\+java}}\end{DoxyCompactItemize}

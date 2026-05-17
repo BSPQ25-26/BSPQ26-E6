@@ -1,0 +1,51 @@
+\doxysection{Player.\+java}
+\hypertarget{Player_8java_source}{}\label{Player_8java_source}\index{Football\_Manager/src/main/java/com/example/football\_manager/model/Player.java@{Football\_Manager/src/main/java/com/example/football\_manager/model/Player.java}}
+\mbox{\hyperlink{Player_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00001}00001\ \textcolor{keyword}{package\ }com.example.football\_manager.model;}
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00003}00003\ \textcolor{keyword}{import}\ com.fasterxml.jackson.annotation.JsonBackReference;}
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00004}00004\ \textcolor{keyword}{import}\ jakarta.persistence.*;}
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00005}00005\ \textcolor{keyword}{import}\ lombok.AllArgsConstructor;}
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00006}00006\ \textcolor{keyword}{import}\ lombok.Data;}
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00007}00007\ \textcolor{keyword}{import}\ lombok.EqualsAndHashCode;}
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00008}00008\ \textcolor{keyword}{import}\ lombok.NoArgsConstructor;}
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00009}00009\ \textcolor{keyword}{import}\ lombok.ToString;}
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00011}00011\ @Entity}
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00012}00012\ @Table(}
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00013}00013\ \ \ \ \ \ \ \ \ name\ =\ \textcolor{stringliteral}{"{}player"{}},}
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00014}00014\ \ \ \ \ \ \ \ \ uniqueConstraints\ =\ @UniqueConstraint(}
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00015}00015\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ name\ =\ \textcolor{stringliteral}{"{}uk\_player\_team\_number"{}},}
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00016}00016\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ columnNames\ =\ \{\textcolor{stringliteral}{"{}fk\_team\_id"{}},\ \textcolor{stringliteral}{"{}number"{}}\}}
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00017}00017\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00018}00018\ )}
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00019}00019\ @Data}
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00020}00020\ @NoArgsConstructor}
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00021}00021\ @AllArgsConstructor}
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00022}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Player}{00022}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Player}{Player}}\ \{}
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00024}00024\ \ \ \ \ @Id}
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00025}00025\ \ \ \ \ @GeneratedValue(strategy\ =\ GenerationType.IDENTITY)}
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00026}00026\ \ \ \ \ \textcolor{keyword}{private}\ Long\ id;}
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00028}00028\ \ \ \ \ @Column(nullable\ =\ \textcolor{keyword}{false},\ length\ =\ 30)}
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00029}00029\ \ \ \ \ \textcolor{keyword}{private}\ String\ name;}
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00031}00031\ \ \ \ \ @Column(nullable\ =\ \textcolor{keyword}{false})}
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00032}00032\ \ \ \ \ \textcolor{keyword}{private}\ Integer\ number;}
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00034}00034\ \ \ \ \ @Enumerated(EnumType.STRING)}
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00035}00035\ \ \ \ \ @Column(nullable\ =\ \textcolor{keyword}{false},\ length\ =\ 30)}
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00036}00036\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{enumcom_1_1example_1_1football__manager_1_1model_1_1PlayerPosition}{PlayerPosition}}\ position;}
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00038}00038\ \ \ \ \ @ManyToOne(fetch\ =\ FetchType.LAZY)}
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00039}00039\ \ \ \ \ @JoinColumn(name\ =\ \textcolor{stringliteral}{"{}fk\_team\_id"{}},\ nullable\ =\ \textcolor{keyword}{false})}
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00040}00040\ \ \ \ \ @JsonBackReference}
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00041}00041\ \ \ \ \ @ToString.Exclude}
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00042}00042\ \ \ \ \ @EqualsAndHashCode.Exclude}
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00043}00043\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Team}{Team}}\ team;}
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00044}00044\ \}}
+\DoxyCodeLine{\Hypertarget{Player_8java_source_l00045}00045\ }
+
+\end{DoxyCode}

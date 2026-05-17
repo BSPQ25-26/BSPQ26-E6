@@ -40,17 +40,32 @@
 
 <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
     
-    <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4 bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+    <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-8 gap-4 bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
         <div>
             <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight uppercase" th:text="#{matches.heading}">Match Schedule</h1>
             <p class="text-slate-500 mt-1 font-medium" th:text="#{matches.subtitle}">Track all upcoming fixtures and final results.</p>
         </div>
-        <a href="/matches/schedule" class="px-6 py-3 bg-emerald-600 text-white font-bold rounded-xl hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-200 uppercase text-sm tracking-widest" th:text="#{matches.scheduleNew}">
-            Schedule New Match
-        </a>
+        <div class="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
+            <label class="sr-only" for="matchTeamFilter" th:text="#{matches.filters.team}">Team</label>
+            <select id="matchTeamFilter"
+                    class="w-full sm:w-72 px-4 py-3 border border-slate-300 rounded-xl bg-slate-50 text-sm font-bold text-slate-700 focus:outline-none focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all">
+                <option value="" th:selected="${selectedTeamId == null}" th:text="#{matches.filters.allTeams}">All teams</option>
+                <option th:each="team : ${teams}"
+                        th:value="${team.id}"
+                        th:selected="${selectedTeamId != null and selectedTeamId == team.id}"
+                        th:text="${team.name}">
+                    Team
+                </option>
+            </select>
+            <a href="/matches/schedule" class="px-6 py-3 bg-emerald-600 text-white font-bold rounded-xl hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-200 uppercase text-sm tracking-widest text-center" th:text="#{matches.scheduleNew}">
+                Schedule New Match
+            </a>
+        </div>
     </div>
 
-    <div th:if="${#lists.isEmpty(matches)}" class="bg-white p-12 rounded-2xl shadow-sm border border-slate-200 text-center">
+    <div id="matchesEmptyState"
+         th:classappend="${#lists.isEmpty(matches)} ? '' : ' hidden'"
+         class="bg-white p-12 rounded-2xl shadow-sm border border-slate-200 text-center">
         <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-slate-100 text-slate-400 mb-4">
             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
         </div>
@@ -58,7 +73,9 @@
         <p class="text-slate-500 mt-1" th:text="#{matches.empty.subtitle}">Check back later or schedule a new game.</p>
     </div>
 
-    <div th:unless="${#lists.isEmpty(matches)}" class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+    <div id="matchesTableWrapper"
+         th:classappend="${#lists.isEmpty(matches)} ? ' hidden' : ''"
+         class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
         <table class="w-full text-left">
             <thead>
                 <tr class="bg-slate-50 border-b border-slate-200">
@@ -69,7 +86,7 @@
                     <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider" th:text="#{matches.table.competition}">Competition</th>
                 </tr>
             </thead>
-            <tbody class="divide-y divide-slate-100">
+            <tbody id="matchesTableBody" class="divide-y divide-slate-100">
                 <tr th:each="match : ${matches}" class="hover:bg-emerald-50/30 transition-colors group">
                     <td class="px-6 py-4 whitespace-nowrap">
                         <div class="text-sm font-bold text-slate-900" th:text="${#temporals.format(match.datetime, 'dd MMM yyyy')}"></div>
@@ -99,6 +116,154 @@
         </table>
     </div>
 </main>
+
+<script th:inline="javascript">
+    document.addEventListener('DOMContentLoaded', () => {
+        const teamFilter = document.getElementById('matchTeamFilter');
+        const tableWrapper = document.getElementById('matchesTableWrapper');
+        const tableBody = document.getElementById('matchesTableBody');
+        const emptyState = document.getElementById('matchesEmptyState');
+        const locale = document.documentElement.lang || undefined;
+        const dateFormatter = new Intl.DateTimeFormat(locale, {
+            day: '2-digit',
+            month: 'short',
+            year: 'numeric'
+        });
+        const timeFormatter = new Intl.DateTimeFormat(locale, {
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+        const messages = {
+            final: /*[[#{matches.final}]]*/ 'FT',
+            competitionPlaceholder: /*[[#{matches.competition.placeholder}]]*/ 'Competition',
+            loadError: /*[[#{matches.filters.error}]]*/ 'Could not load matches.'
+        };
+
+        function appendCell(row, className) {
+            const cell = document.createElement('td');
+            cell.className = className;
+            row.appendChild(cell);
+            return cell;
+        }
+
+        function formatDateTime(value) {
+            const date = new Date(value);
+
+            if (Number.isNaN(date.getTime())) {
+                return { date: '', time: '' };
+            }
+
+            return {
+                date: dateFormatter.format(date),
+                time: timeFormatter.format(date)
+            };
+        }
+
+        function createTextElement(tagName, className, text) {
+            const element = document.createElement(tagName);
+            element.className = className;
+            element.textContent = text || '';
+            return element;
+        }
+
+        function createMatchRow(match) {
+            const row = document.createElement('tr');
+            row.className = 'hover:bg-emerald-50/30 transition-colors group';
+
+            const dateCell = appendCell(row, 'px-6 py-4 whitespace-nowrap');
+            const formattedDate = formatDateTime(match.datetime);
+            dateCell.appendChild(createTextElement('div', 'text-sm font-bold text-slate-900', formattedDate.date));
+            dateCell.appendChild(createTextElement('div', 'text-xs text-slate-500', formattedDate.time));
+
+            const homeCell = appendCell(row, 'px-6 py-4 text-right');
+            homeCell.appendChild(createTextElement(
+                    'span',
+                    'text-sm font-black text-slate-700 uppercase',
+                    match.leftTeam?.name
+            ));
+
+            const scoreCell = appendCell(row, 'px-6 py-4 text-center');
+            const scoreWrapper = document.createElement('div');
+            scoreWrapper.className = 'inline-flex items-center px-3 py-1 rounded-lg bg-slate-900 text-emerald-400 font-mono font-bold shadow-inner';
+            scoreWrapper.appendChild(createTextElement('span', '', String(match.leftScore ?? 0)));
+            scoreWrapper.appendChild(createTextElement('span', 'mx-2 opacity-50', '-'));
+            scoreWrapper.appendChild(createTextElement('span', '', String(match.rightScore ?? 0)));
+            scoreCell.appendChild(scoreWrapper);
+
+            const awayCell = appendCell(row, 'px-6 py-4 text-left');
+            awayCell.appendChild(createTextElement(
+                    'span',
+                    'text-sm font-black text-slate-700 uppercase',
+                    match.rightTeam?.name
+            ));
+
+            const competitionCell = appendCell(row, 'px-6 py-4');
+            const competitionWrapper = document.createElement('div');
+            competitionWrapper.className = 'flex items-center gap-2';
+            competitionWrapper.appendChild(createTextElement(
+                    'span',
+                    'text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded',
+                    match.competition?.name || messages.competitionPlaceholder
+            ));
+
+            if (match.finished) {
+                competitionWrapper.appendChild(createTextElement(
+                        'span',
+                        'text-[10px] uppercase font-black text-slate-400',
+                        messages.final
+                ));
+            }
+
+            competitionCell.appendChild(competitionWrapper);
+
+            return row;
+        }
+
+        function renderMatches(matches) {
+            tableBody.replaceChildren();
+
+            matches.forEach(match => {
+                tableBody.appendChild(createMatchRow(match));
+            });
+
+            const hasMatches = matches.length > 0;
+            tableWrapper.classList.toggle('hidden', !hasMatches);
+            emptyState.classList.toggle('hidden', hasMatches);
+        }
+
+        async function loadMatches() {
+            const params = new URLSearchParams(window.location.search);
+
+            if (teamFilter.value) {
+                params.set('teamId', teamFilter.value);
+            } else {
+                params.delete('teamId');
+            }
+
+            const query = params.toString();
+            teamFilter.disabled = true;
+
+            try {
+                const response = await fetch(`/api/matches${query ? `?${query}` : ''}`);
+
+                if (!response.ok) {
+                    throw new Error('Request failed');
+                }
+
+                renderMatches(await response.json());
+                window.history.replaceState(null, '', `${window.location.pathname}${query ? `?${query}` : ''}`);
+            } catch (error) {
+                window.alert(messages.loadError);
+            } finally {
+                teamFilter.disabled = false;
+            }
+        }
+
+        if (teamFilter) {
+            teamFilter.addEventListener('change', loadMatches);
+        }
+    });
+</script>
 
 </body>
 </html>

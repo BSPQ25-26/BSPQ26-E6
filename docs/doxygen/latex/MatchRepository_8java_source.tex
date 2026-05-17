@@ -1,0 +1,54 @@
+\doxysection{Match\+Repository.\+java}
+\hypertarget{MatchRepository_8java_source}{}\label{MatchRepository_8java_source}\index{Football\_Manager/src/main/java/com/example/football\_manager/repository/MatchRepository.java@{Football\_Manager/src/main/java/com/example/football\_manager/repository/MatchRepository.java}}
+\mbox{\hyperlink{MatchRepository_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00001}00001\ \textcolor{keyword}{package\ }com.example.football\_manager.repository;}
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00003}00003\ \textcolor{keyword}{import}\ com.example.football\_manager.model.Match;}
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00004}00004\ \textcolor{keyword}{import}\ org.springframework.data.jpa.repository.JpaRepository;}
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00005}00005\ \textcolor{keyword}{import}\ org.springframework.data.jpa.repository.Query;}
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00006}00006\ \textcolor{keyword}{import}\ org.springframework.data.repository.query.Param;}
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00007}00007\ \textcolor{keyword}{import}\ org.springframework.stereotype.Repository;}
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00009}00009\ \textcolor{keyword}{import}\ java.time.OffsetDateTime;}
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00010}00010\ \textcolor{keyword}{import}\ java.util.Collection;}
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00011}00011\ \textcolor{keyword}{import}\ java.util.List;}
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00013}00013\ @Repository}
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00014}\mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository}{00014}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{interface\ }\mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository}{MatchRepository}}\ \textcolor{keyword}{extends}\ JpaRepository<Match,\ Long>\ \{}
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00016}00016\ \ \ \ \ @Query(\textcolor{stringliteral}{"{}"{}}\textcolor{stringliteral}{"{}}}
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00017}00017\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ SELECT\ m\ FROM\ Match\ m}}
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00018}00018\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ WHERE\ (:teamId\ IS\ NULL\ OR\ m.leftTeam.id\ =\ :teamId\ OR\ m.rightTeam.id\ =\ :teamId)}}
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00019}00019\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ AND\ (:finished\ IS\ NULL\ OR\ m.finished\ =\ :finished)}}
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00020}00020\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ AND\ (:competitionId\ IS\ NULL\ OR\ m.competition.id\ =\ :competitionId)}}
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00021}00021\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ "{}}\textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00022}\mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository_a181d3e68370b9b9d99e5c0ded5340816}{00022}}\ \ \ \ \ List<\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}}>\ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository_a181d3e68370b9b9d99e5c0ded5340816}{findByFilters}}(}
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00023}00023\ \ \ \ \ \ \ \ \ \ \ \ \ @Param(\textcolor{stringliteral}{"{}teamId"{}})\ Long\ teamId,}
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ @Param(\textcolor{stringliteral}{"{}finished"{}})\ Boolean\ finished,}
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ @Param(\textcolor{stringliteral}{"{}competitionId"{}})\ Long\ competitionId}
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00026}00026\ \ \ \ \ );}
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00028}\mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository_afefd59131ed9a195b1b8039734fd280c}{00028}}\ \ \ \ \ List<\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}}>\ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository_afefd59131ed9a195b1b8039734fd280c}{findByFinishedTrueOrderByDatetimeDesc}}();}
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00030}\mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository_a116c12af879e3e3bd1bcd8cc31d7a79c}{00030}}\ \ \ \ \ List<\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}}>\ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository_a116c12af879e3e3bd1bcd8cc31d7a79c}{findByFinishedTrueAndLeftTeamIdOrFinishedTrueAndRightTeamIdOrderByDatetimeDesc}}(}
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ Long\ leftTeamId,}
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ Long\ rightTeamId}
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00033}00033\ \ \ \ \ );}
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00035}\mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository_a6adc0b137d27fca5e90006e84f0760a7}{00035}}\ \ \ \ \ List<\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}}>\ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository_a6adc0b137d27fca5e90006e84f0760a7}{findByFinishedFalseAndDatetimeAfterAndLeftTeamIdOrFinishedFalseAndDatetimeAfterAndRightTeamIdOrderByDatetimeAsc}}(}
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ OffsetDateTime\ now1,}
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ Long\ leftTeamId,}
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ OffsetDateTime\ now2,}
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ Long\ rightTeamId}
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00040}00040\ \ \ \ \ );}
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00042}\mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository_a46478a6c202676f688f7ece1fb006932}{00042}}\ \ \ \ \ List<\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}}>\ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository_a46478a6c202676f688f7ece1fb006932}{findByFinishedFalseAndDatetimeAfterAndLeftTeamIdInOrFinishedFalseAndDatetimeAfterAndRightTeamIdInOrderByDatetimeAsc}}(}
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ OffsetDateTime\ now1,}
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ Collection<Long>\ leftTeamIds,}
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ OffsetDateTime\ now2,}
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ Collection<Long>\ rightTeamIds}
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00047}00047\ \ \ \ \ );}
+\DoxyCodeLine{\Hypertarget{MatchRepository_8java_source_l00048}00048\ \}}
+
+\end{DoxyCode}

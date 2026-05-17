@@ -1,0 +1,195 @@
+\doxysection{com.\+example.\+football\+\_\+manager.\+controller.\+Match\+View\+Controller Class Reference}
+\hypertarget{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController}{}\label{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController}\index{com.example.football\_manager.controller.MatchViewController@{com.example.football\_manager.controller.MatchViewController}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_aaacba571202d183144b1c02c44d6061a}{Match\+View\+Controller}} (\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService}{Match\+Service}} match\+Service, \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1TeamService}{Team\+Service}} team\+Service)
+\item 
+String \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_ab7de02f5f461112b059a71b06f42446a}{show\+Matches\+Page}} ( @Request\+Param(required=false) Long team\+Id, @Request\+Param(required=false) Match\+Request\+DTO.\+Match\+Status status, @Request\+Param(required=false) Long competition\+Id, Model model, Http\+Session session)
+\item 
+String \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_a4259930870e55951ea5036c87bebc3ce}{show\+Schedule\+Form}} (Model model)
+\item 
+String \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_a114bf4908d7e6f239e822045edc314cb}{show\+Results\+Page}} (Model model)
+\item 
+String \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_a0b052c3f46ac34fd7ff8577925e98671}{show\+Edit\+Form}} (@Path\+Variable Long id, Model model)
+\item 
+String \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_ae8147b733292ce8c886de5b4afb594f1}{update\+Match}} (@Path\+Variable Long id, @Model\+Attribute("{}match\+Request"{}) \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO}{Match\+Request\+DTO}} match\+DTO)
+\item 
+String \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_a531901bb000f98f83069f7de1bf8eb34}{show\+Score\+Form}} (@Path\+Variable Long id, Model model)
+\item 
+String \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_a8f05de52f1c2f3de22c42902b1788463}{submit\+Score\+Form}} ( @Path\+Variable Long id, @Model\+Attribute("{}result\+Request"{}) \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO}{Match\+Result\+Request\+DTO}} result\+Request, Model model, Redirect\+Attributes redirect\+Attributes)
+\item 
+String \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_a75d0a6f76d58370d8529d08d60a52c7f}{save\+Match\+Result}} (@Path\+Variable Long id, @Model\+Attribute \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO}{Match\+Result\+Request\+DTO}} request\+DTO)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{MatchViewController_8java_source_l00026}{26}} of file \mbox{\hyperlink{MatchViewController_8java_source}{Match\+View\+Controller.\+java}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_aaacba571202d183144b1c02c44d6061a}\index{com.example.football\_manager.controller.MatchViewController@{com.example.football\_manager.controller.MatchViewController}!MatchViewController@{MatchViewController}}
+\index{MatchViewController@{MatchViewController}!com.example.football\_manager.controller.MatchViewController@{com.example.football\_manager.controller.MatchViewController}}
+\doxysubsubsection{\texorpdfstring{MatchViewController()}{MatchViewController()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_aaacba571202d183144b1c02c44d6061a} 
+com.\+example.\+football\+\_\+manager.\+controller.\+Match\+View\+Controller.\+Match\+View\+Controller (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService}{Match\+Service}}}]{match\+Service}{, }\item[{\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1TeamService}{Team\+Service}}}]{team\+Service}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{MatchViewController_8java_source_l00031}{31}} of file \mbox{\hyperlink{MatchViewController_8java_source}{Match\+View\+Controller.\+java}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_a75d0a6f76d58370d8529d08d60a52c7f}\index{com.example.football\_manager.controller.MatchViewController@{com.example.football\_manager.controller.MatchViewController}!saveMatchResult@{saveMatchResult}}
+\index{saveMatchResult@{saveMatchResult}!com.example.football\_manager.controller.MatchViewController@{com.example.football\_manager.controller.MatchViewController}}
+\doxysubsubsection{\texorpdfstring{saveMatchResult()}{saveMatchResult()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_a75d0a6f76d58370d8529d08d60a52c7f} 
+String com.\+example.\+football\+\_\+manager.\+controller.\+Match\+View\+Controller.\+save\+Match\+Result (\begin{DoxyParamCaption}\item[{@Path\+Variable Long}]{id}{, }\item[{@Model\+Attribute \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO}{Match\+Result\+Request\+DTO}}}]{request\+DTO}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{MatchViewController_8java_source_l00144}{144}} of file \mbox{\hyperlink{MatchViewController_8java_source}{Match\+View\+Controller.\+java}}.
+
+
+
+References \mbox{\hyperlink{MatchViewController_8java_source_l00144}{save\+Match\+Result()}}.
+
+
+
+Referenced by \mbox{\hyperlink{MatchViewController_8java_source_l00144}{save\+Match\+Result()}}.
+
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_a0b052c3f46ac34fd7ff8577925e98671}\index{com.example.football\_manager.controller.MatchViewController@{com.example.football\_manager.controller.MatchViewController}!showEditForm@{showEditForm}}
+\index{showEditForm@{showEditForm}!com.example.football\_manager.controller.MatchViewController@{com.example.football\_manager.controller.MatchViewController}}
+\doxysubsubsection{\texorpdfstring{showEditForm()}{showEditForm()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_a0b052c3f46ac34fd7ff8577925e98671} 
+String com.\+example.\+football\+\_\+manager.\+controller.\+Match\+View\+Controller.\+show\+Edit\+Form (\begin{DoxyParamCaption}\item[{@Path\+Variable Long}]{id}{, }\item[{Model}]{model}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{MatchViewController_8java_source_l00071}{71}} of file \mbox{\hyperlink{MatchViewController_8java_source}{Match\+View\+Controller.\+java}}.
+
+
+
+References \mbox{\hyperlink{MatchViewController_8java_source_l00071}{show\+Edit\+Form()}}.
+
+
+
+Referenced by \mbox{\hyperlink{MatchViewController_8java_source_l00071}{show\+Edit\+Form()}}.
+
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_ab7de02f5f461112b059a71b06f42446a}\index{com.example.football\_manager.controller.MatchViewController@{com.example.football\_manager.controller.MatchViewController}!showMatchesPage@{showMatchesPage}}
+\index{showMatchesPage@{showMatchesPage}!com.example.football\_manager.controller.MatchViewController@{com.example.football\_manager.controller.MatchViewController}}
+\doxysubsubsection{\texorpdfstring{showMatchesPage()}{showMatchesPage()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_ab7de02f5f461112b059a71b06f42446a} 
+String com.\+example.\+football\+\_\+manager.\+controller.\+Match\+View\+Controller.\+show\+Matches\+Page (\begin{DoxyParamCaption}\item[{@Request\+Param(required=false) Long}]{team\+Id}{, }\item[{@Request\+Param(required=false) Match\+Request\+DTO.\+Match\+Status}]{status}{, }\item[{@Request\+Param(required=false) Long}]{competition\+Id}{, }\item[{Model}]{model}{, }\item[{Http\+Session}]{session}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{MatchViewController_8java_source_l00037}{37}} of file \mbox{\hyperlink{MatchViewController_8java_source}{Match\+View\+Controller.\+java}}.
+
+
+
+References \mbox{\hyperlink{MatchViewController_8java_source_l00037}{show\+Matches\+Page()}}.
+
+
+
+Referenced by \mbox{\hyperlink{MatchViewController_8java_source_l00037}{show\+Matches\+Page()}}.
+
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_a114bf4908d7e6f239e822045edc314cb}\index{com.example.football\_manager.controller.MatchViewController@{com.example.football\_manager.controller.MatchViewController}!showResultsPage@{showResultsPage}}
+\index{showResultsPage@{showResultsPage}!com.example.football\_manager.controller.MatchViewController@{com.example.football\_manager.controller.MatchViewController}}
+\doxysubsubsection{\texorpdfstring{showResultsPage()}{showResultsPage()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_a114bf4908d7e6f239e822045edc314cb} 
+String com.\+example.\+football\+\_\+manager.\+controller.\+Match\+View\+Controller.\+show\+Results\+Page (\begin{DoxyParamCaption}\item[{Model}]{model}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{MatchViewController_8java_source_l00065}{65}} of file \mbox{\hyperlink{MatchViewController_8java_source}{Match\+View\+Controller.\+java}}.
+
+
+
+References \mbox{\hyperlink{MatchViewController_8java_source_l00065}{show\+Results\+Page()}}.
+
+
+
+Referenced by \mbox{\hyperlink{MatchViewController_8java_source_l00065}{show\+Results\+Page()}}.
+
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_a4259930870e55951ea5036c87bebc3ce}\index{com.example.football\_manager.controller.MatchViewController@{com.example.football\_manager.controller.MatchViewController}!showScheduleForm@{showScheduleForm}}
+\index{showScheduleForm@{showScheduleForm}!com.example.football\_manager.controller.MatchViewController@{com.example.football\_manager.controller.MatchViewController}}
+\doxysubsubsection{\texorpdfstring{showScheduleForm()}{showScheduleForm()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_a4259930870e55951ea5036c87bebc3ce} 
+String com.\+example.\+football\+\_\+manager.\+controller.\+Match\+View\+Controller.\+show\+Schedule\+Form (\begin{DoxyParamCaption}\item[{Model}]{model}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{MatchViewController_8java_source_l00058}{58}} of file \mbox{\hyperlink{MatchViewController_8java_source}{Match\+View\+Controller.\+java}}.
+
+
+
+References \mbox{\hyperlink{MatchViewController_8java_source_l00058}{show\+Schedule\+Form()}}.
+
+
+
+Referenced by \mbox{\hyperlink{MatchViewController_8java_source_l00058}{show\+Schedule\+Form()}}.
+
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_a531901bb000f98f83069f7de1bf8eb34}\index{com.example.football\_manager.controller.MatchViewController@{com.example.football\_manager.controller.MatchViewController}!showScoreForm@{showScoreForm}}
+\index{showScoreForm@{showScoreForm}!com.example.football\_manager.controller.MatchViewController@{com.example.football\_manager.controller.MatchViewController}}
+\doxysubsubsection{\texorpdfstring{showScoreForm()}{showScoreForm()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_a531901bb000f98f83069f7de1bf8eb34} 
+String com.\+example.\+football\+\_\+manager.\+controller.\+Match\+View\+Controller.\+show\+Score\+Form (\begin{DoxyParamCaption}\item[{@Path\+Variable Long}]{id}{, }\item[{Model}]{model}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{MatchViewController_8java_source_l00090}{90}} of file \mbox{\hyperlink{MatchViewController_8java_source}{Match\+View\+Controller.\+java}}.
+
+
+
+References \mbox{\hyperlink{MatchViewController_8java_source_l00090}{show\+Score\+Form()}}.
+
+
+
+Referenced by \mbox{\hyperlink{MatchViewController_8java_source_l00090}{show\+Score\+Form()}}.
+
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_a8f05de52f1c2f3de22c42902b1788463}\index{com.example.football\_manager.controller.MatchViewController@{com.example.football\_manager.controller.MatchViewController}!submitScoreForm@{submitScoreForm}}
+\index{submitScoreForm@{submitScoreForm}!com.example.football\_manager.controller.MatchViewController@{com.example.football\_manager.controller.MatchViewController}}
+\doxysubsubsection{\texorpdfstring{submitScoreForm()}{submitScoreForm()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_a8f05de52f1c2f3de22c42902b1788463} 
+String com.\+example.\+football\+\_\+manager.\+controller.\+Match\+View\+Controller.\+submit\+Score\+Form (\begin{DoxyParamCaption}\item[{@Path\+Variable Long}]{id}{, }\item[{@Model\+Attribute("{}result\+Request"{}) \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO}{Match\+Result\+Request\+DTO}}}]{result\+Request}{, }\item[{Model}]{model}{, }\item[{Redirect\+Attributes}]{redirect\+Attributes}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{MatchViewController_8java_source_l00102}{102}} of file \mbox{\hyperlink{MatchViewController_8java_source}{Match\+View\+Controller.\+java}}.
+
+
+
+References \mbox{\hyperlink{MatchViewController_8java_source_l00102}{submit\+Score\+Form()}}.
+
+
+
+Referenced by \mbox{\hyperlink{MatchViewController_8java_source_l00102}{submit\+Score\+Form()}}.
+
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_ae8147b733292ce8c886de5b4afb594f1}\index{com.example.football\_manager.controller.MatchViewController@{com.example.football\_manager.controller.MatchViewController}!updateMatch@{updateMatch}}
+\index{updateMatch@{updateMatch}!com.example.football\_manager.controller.MatchViewController@{com.example.football\_manager.controller.MatchViewController}}
+\doxysubsubsection{\texorpdfstring{updateMatch()}{updateMatch()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_ae8147b733292ce8c886de5b4afb594f1} 
+String com.\+example.\+football\+\_\+manager.\+controller.\+Match\+View\+Controller.\+update\+Match (\begin{DoxyParamCaption}\item[{@Path\+Variable Long}]{id}{, }\item[{@Model\+Attribute("{}match\+Request"{}) \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO}{Match\+Request\+DTO}}}]{match\+DTO}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{MatchViewController_8java_source_l00083}{83}} of file \mbox{\hyperlink{MatchViewController_8java_source}{Match\+View\+Controller.\+java}}.
+
+
+
+References \mbox{\hyperlink{MatchViewController_8java_source_l00083}{update\+Match()}}.
+
+
+
+Referenced by \mbox{\hyperlink{MatchViewController_8java_source_l00083}{update\+Match()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Football\+\_\+\+Manager/src/main/java/com/example/football\+\_\+manager/controller/\mbox{\hyperlink{MatchViewController_8java}{Match\+View\+Controller.\+java}}\end{DoxyCompactItemize}

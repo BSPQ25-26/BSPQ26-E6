@@ -1,0 +1,163 @@
+\doxysection{Player\+Service.\+java}
+\hypertarget{PlayerService_8java_source}{}\label{PlayerService_8java_source}\index{Football\_Manager/src/main/java/com/example/football\_manager/service/PlayerService.java@{Football\_Manager/src/main/java/com/example/football\_manager/service/PlayerService.java}}
+\mbox{\hyperlink{PlayerService_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00001}00001\ \textcolor{keyword}{package\ }com.example.football\_manager.service;}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00003}00003\ \textcolor{keyword}{import}\ com.example.football\_manager.dto.PlayerRequestDTO;}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00004}00004\ \textcolor{keyword}{import}\ com.example.football\_manager.model.Player;}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00005}00005\ \textcolor{keyword}{import}\ com.example.football\_manager.model.Team;}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00006}00006\ \textcolor{keyword}{import}\ com.example.football\_manager.repository.PlayerRepository;}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00007}00007\ \textcolor{keyword}{import}\ com.example.football\_manager.repository.TeamRepository;}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00008}00008\ \textcolor{keyword}{import}\ org.springframework.stereotype.Service;}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00010}00010\ \textcolor{keyword}{import}\ java.util.List;}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00012}00012\ @Service}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00013}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1PlayerService}{00013}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1PlayerService_aba73034ee61e3931e7eb519c19bf3422}{PlayerService}}\ \{}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00015}00015\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1PlayerRepository}{PlayerRepository}}\ playerRepository;}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00016}00016\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1TeamRepository}{TeamRepository}}\ teamRepository;}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00018}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1PlayerService_aba73034ee61e3931e7eb519c19bf3422}{00018}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1PlayerService_aba73034ee61e3931e7eb519c19bf3422}{PlayerService}}(\mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1PlayerRepository}{PlayerRepository}}\ playerRepository,\ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1TeamRepository}{TeamRepository}}\ teamRepository)\ \{}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00019}00019\ \ \ \ \ \ \ \ \ this.playerRepository\ =\ playerRepository;}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00020}00020\ \ \ \ \ \ \ \ \ this.teamRepository\ =\ teamRepository;}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00021}00021\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00023}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1PlayerService_a35fbe49737e20fbb2410443d6bc2c241}{00023}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Player}{Player}}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1PlayerService_a35fbe49737e20fbb2410443d6bc2c241}{createPlayer}}(Long\ teamId,\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1PlayerRequestDTO}{PlayerRequestDTO}}\ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}})\ \{}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00024}00024\ \ \ \ \ \ \ \ \ validatePlayerRequest(teamId,\ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}});}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00026}00026\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Team}{Team}}\ team\ =\ teamRepository.findById(teamId)}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Team\ not\ found\ with\ id:\ "{}}\ +\ teamId));}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00029}00029\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (playerRepository.existsByTeamIdAndNumber(teamId,\ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}.getNumber()))\ \{}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Validation\ Error:\ Team\ already\ has\ a\ player\ with\ number\ "{}}\ +\ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}.getNumber()\ +\ \textcolor{stringliteral}{"{}."{}}}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00033}00033\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00035}00035\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Player}{Player}}\ player\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Player}{Player}}();}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00036}00036\ \ \ \ \ \ \ \ \ player.setName(\mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}.getName().trim());}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00037}00037\ \ \ \ \ \ \ \ \ player.setNumber(\mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}.getNumber());}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00038}00038\ \ \ \ \ \ \ \ \ player.setPosition(\mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}.getPosition());}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00039}00039\ \ \ \ \ \ \ \ \ player.setTeam(team);}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00041}00041\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Player}{Player}}\ savedPlayer\ =\ playerRepository.save(player);}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00042}00042\ \ \ \ \ \ \ \ \ team.getPlayers().add(savedPlayer);}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00044}00044\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ savedPlayer;}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00045}00045\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00047}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1PlayerService_a02eb184c0ce5c96d26ba9ed63cf625df}{00047}}\ \ \ \ \ \textcolor{keyword}{public}\ List<Player>\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1PlayerService_a02eb184c0ce5c96d26ba9ed63cf625df}{getPlayersByTeamId}}(Long\ teamId)\ \{}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00048}00048\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (teamId\ ==\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Team\ ID\ is\ required."{}});}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00050}00050\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00052}00052\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!teamRepository.existsById(teamId))\ \{}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Team\ not\ found\ with\ id:\ "{}}\ +\ teamId);}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00054}00054\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00056}00056\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ playerRepository.findByTeamIdOrderByNumberAsc(teamId);}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00057}00057\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00059}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1PlayerService_a2bb720d687f80330289b7e256425e6a6}{00059}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Player}{Player}}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1PlayerService_a2bb720d687f80330289b7e256425e6a6}{getPlayerByTeamId}}(Long\ teamId,\ Long\ playerId)\ \{}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00060}00060\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (teamId\ ==\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Team\ ID\ is\ required."{}});}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00062}00062\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00064}00064\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (playerId\ ==\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Player\ ID\ is\ required."{}});}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00066}00066\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00068}00068\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!teamRepository.existsById(teamId))\ \{}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Team\ not\ found\ with\ id:\ "{}}\ +\ teamId);}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00070}00070\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00072}00072\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ playerRepository.findByIdAndTeamId(playerId,\ teamId)}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ IllegalArgumentException(}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Player\ not\ found\ with\ id:\ "{}}\ +\ playerId\ +\ \textcolor{stringliteral}{"{}\ for\ team\ id:\ "{}}\ +\ teamId}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ));}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00076}00076\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00078}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1PlayerService_ab9f71c576c0e0b995d49d537cfa11db3}{00078}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Player}{Player}}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1PlayerService_ab9f71c576c0e0b995d49d537cfa11db3}{updatePlayer}}(Long\ teamId,\ Long\ playerId,\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1PlayerRequestDTO}{PlayerRequestDTO}}\ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}})\ \{}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00079}00079\ \ \ \ \ \ \ \ \ validatePlayerRequest(teamId,\ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}});}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00081}00081\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (playerId\ ==\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Player\ ID\ is\ required."{}});}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00083}00083\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00085}00085\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Team}{Team}}\ team\ =\ teamRepository.findById(teamId)}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Team\ not\ found\ with\ id:\ "{}}\ +\ teamId));}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00088}00088\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Player}{Player}}\ player\ =\ playerRepository.findByIdAndTeamId(playerId,\ teamId)}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ IllegalArgumentException(}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Player\ not\ found\ with\ id:\ "{}}\ +\ playerId\ +\ \textcolor{stringliteral}{"{}\ for\ team\ id:\ "{}}\ +\ teamId}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ));}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00093}00093\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (playerRepository.existsByTeamIdAndNumberAndIdNot(teamId,\ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}.getNumber(),\ playerId))\ \{}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Validation\ Error:\ Team\ already\ has\ a\ player\ with\ number\ "{}}\ +\ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}.getNumber()\ +\ \textcolor{stringliteral}{"{}."{}}}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00097}00097\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00099}00099\ \ \ \ \ \ \ \ \ player.setName(\mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}.getName().trim());}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00100}00100\ \ \ \ \ \ \ \ \ player.setNumber(\mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}.getNumber());}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00101}00101\ \ \ \ \ \ \ \ \ player.setPosition(\mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}.getPosition());}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00102}00102\ \ \ \ \ \ \ \ \ player.setTeam(team);}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00103}00103\ }
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00104}00104\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ playerRepository.save(player);}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00105}00105\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00107}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1PlayerService_a4ec24669a4de26f7aa285ac84d34e78b}{00107}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1PlayerService_a4ec24669a4de26f7aa285ac84d34e78b}{deletePlayer}}(Long\ teamId,\ Long\ playerId)\ \{}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00108}00108\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (teamId\ ==\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Team\ ID\ is\ required."{}});}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00110}00110\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00112}00112\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (playerId\ ==\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Player\ ID\ is\ required."{}});}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00114}00114\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00115}00115\ }
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00116}00116\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Team}{Team}}\ team\ =\ teamRepository.findById(teamId)}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Team\ not\ found\ with\ id:\ "{}}\ +\ teamId));}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00118}00118\ }
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00119}00119\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Player}{Player}}\ player\ =\ playerRepository.findByIdAndTeamId(playerId,\ teamId)}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ IllegalArgumentException(}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Player\ not\ found\ with\ id:\ "{}}\ +\ playerId\ +\ \textcolor{stringliteral}{"{}\ for\ team\ id:\ "{}}\ +\ teamId}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ));}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00124}00124\ \ \ \ \ \ \ \ \ team.getPlayers().remove(player);}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00125}00125\ \ \ \ \ \ \ \ \ playerRepository.delete(player);}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00126}00126\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00127}00127\ }
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00128}00128\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ validatePlayerRequest(Long\ teamId,\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1PlayerRequestDTO}{PlayerRequestDTO}}\ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}})\ \{}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00129}00129\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (teamId\ ==\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00130}00130\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Team\ ID\ is\ required."{}});}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00131}00131\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00132}00132\ }
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00133}00133\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}\ ==\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Player\ data\ is\ required."{}});}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00135}00135\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00136}00136\ }
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00137}00137\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (dto.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1PlayerRequestDTO_acca798d2c2263d708eb317bb12d1f2eb}{getName}}()\ ==\ \textcolor{keyword}{null}\ ||\ dto.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1PlayerRequestDTO_acca798d2c2263d708eb317bb12d1f2eb}{getName}}().trim().isEmpty())\ \{}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Player\ name\ is\ required."{}});}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00139}00139\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00141}00141\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (dto.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1PlayerRequestDTO_acca798d2c2263d708eb317bb12d1f2eb}{getName}}().trim().length()\ >\ 30)\ \{}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Player\ name\ must\ be\ at\ most\ 30\ characters."{}});}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00143}00143\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00144}00144\ }
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00145}00145\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (dto.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1PlayerRequestDTO_accfa2f77c63b3607d55786ece40ea361}{getNumber}}()\ ==\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Player\ number\ is\ required."{}});}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00147}00147\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00148}00148\ }
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00149}00149\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (dto.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1PlayerRequestDTO_accfa2f77c63b3607d55786ece40ea361}{getNumber}}()\ <=\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00150}00150\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Player\ number\ must\ be\ greater\ than\ 0."{}});}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00151}00151\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00152}00152\ }
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00153}00153\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (dto.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1PlayerRequestDTO_ae7190cceb7c6f6a231efda6bf5a9f2a3}{getPosition}}()\ ==\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00154}00154\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Player\ position\ is\ required."{}});}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00155}00155\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00156}00156\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{PlayerService_8java_source_l00157}00157\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,155 @@
+\doxysection{com.\+example.\+football\+\_\+manager.\+controller.\+Admin\+Player\+View\+Controller Class Reference}
+\hypertarget{classcom_1_1example_1_1football__manager_1_1controller_1_1AdminPlayerViewController}{}\label{classcom_1_1example_1_1football__manager_1_1controller_1_1AdminPlayerViewController}\index{com.example.football\_manager.controller.AdminPlayerViewController@{com.example.football\_manager.controller.AdminPlayerViewController}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1AdminPlayerViewController_aa113604c1403008b74f8928a1405e30f}{Admin\+Player\+View\+Controller}} (\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1TeamService}{Team\+Service}} team\+Service, \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1PlayerService}{Player\+Service}} player\+Service)
+\item 
+String \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1AdminPlayerViewController_a520512f85d1566eb3f88c2dc06bcb694}{manage\+Players\+Landing}} (Model model)
+\item 
+String \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1AdminPlayerViewController_a493ea36cea8eedb58a9d468a35ed4df1}{manage\+Team\+Players}} (@Path\+Variable Long team\+Id, Model model, Redirect\+Attributes redirect\+Attributes)
+\item 
+String \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1AdminPlayerViewController_acee2462816cc1d5580ef4552b1156988}{create\+Player}} ( @Path\+Variable Long team\+Id, @Valid @Model\+Attribute("{}player\+Request"{}) \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1PlayerRequestDTO}{Player\+Request\+DTO}} player\+Request, Binding\+Result binding\+Result, Model model, Redirect\+Attributes redirect\+Attributes)
+\item 
+String \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1AdminPlayerViewController_a106c9078ecaccf686026684d55c868d4}{show\+Edit\+Player\+Form}} ( @Path\+Variable Long team\+Id, @Path\+Variable Long player\+Id, Model model, Redirect\+Attributes redirect\+Attributes)
+\item 
+String \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1AdminPlayerViewController_a333a14b1f81849624a9fbc6f7c5aaec6}{update\+Player}} ( @Path\+Variable Long team\+Id, @Path\+Variable Long player\+Id, @Valid @Model\+Attribute("{}player\+Request"{}) \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1PlayerRequestDTO}{Player\+Request\+DTO}} player\+Request, Binding\+Result binding\+Result, Model model, Redirect\+Attributes redirect\+Attributes)
+\item 
+String \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1AdminPlayerViewController_af1b585ba1c56a20fd8518974f8ac8558}{delete\+Player}} ( @Path\+Variable Long team\+Id, @Path\+Variable Long player\+Id, Redirect\+Attributes redirect\+Attributes)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{AdminPlayerViewController_8java_source_l00020}{20}} of file \mbox{\hyperlink{AdminPlayerViewController_8java_source}{Admin\+Player\+View\+Controller.\+java}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1controller_1_1AdminPlayerViewController_aa113604c1403008b74f8928a1405e30f}\index{com.example.football\_manager.controller.AdminPlayerViewController@{com.example.football\_manager.controller.AdminPlayerViewController}!AdminPlayerViewController@{AdminPlayerViewController}}
+\index{AdminPlayerViewController@{AdminPlayerViewController}!com.example.football\_manager.controller.AdminPlayerViewController@{com.example.football\_manager.controller.AdminPlayerViewController}}
+\doxysubsubsection{\texorpdfstring{AdminPlayerViewController()}{AdminPlayerViewController()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1controller_1_1AdminPlayerViewController_aa113604c1403008b74f8928a1405e30f} 
+com.\+example.\+football\+\_\+manager.\+controller.\+Admin\+Player\+View\+Controller.\+Admin\+Player\+View\+Controller (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1TeamService}{Team\+Service}}}]{team\+Service}{, }\item[{\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1PlayerService}{Player\+Service}}}]{player\+Service}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{AdminPlayerViewController_8java_source_l00025}{25}} of file \mbox{\hyperlink{AdminPlayerViewController_8java_source}{Admin\+Player\+View\+Controller.\+java}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1controller_1_1AdminPlayerViewController_acee2462816cc1d5580ef4552b1156988}\index{com.example.football\_manager.controller.AdminPlayerViewController@{com.example.football\_manager.controller.AdminPlayerViewController}!createPlayer@{createPlayer}}
+\index{createPlayer@{createPlayer}!com.example.football\_manager.controller.AdminPlayerViewController@{com.example.football\_manager.controller.AdminPlayerViewController}}
+\doxysubsubsection{\texorpdfstring{createPlayer()}{createPlayer()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1controller_1_1AdminPlayerViewController_acee2462816cc1d5580ef4552b1156988} 
+String com.\+example.\+football\+\_\+manager.\+controller.\+Admin\+Player\+View\+Controller.\+create\+Player (\begin{DoxyParamCaption}\item[{@Path\+Variable Long}]{team\+Id}{, }\item[{@Valid @Model\+Attribute("{}player\+Request"{}) \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1PlayerRequestDTO}{Player\+Request\+DTO}}}]{player\+Request}{, }\item[{Binding\+Result}]{binding\+Result}{, }\item[{Model}]{model}{, }\item[{Redirect\+Attributes}]{redirect\+Attributes}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{AdminPlayerViewController_8java_source_l00052}{52}} of file \mbox{\hyperlink{AdminPlayerViewController_8java_source}{Admin\+Player\+View\+Controller.\+java}}.
+
+
+
+References \mbox{\hyperlink{AdminPlayerViewController_8java_source_l00052}{create\+Player()}}.
+
+
+
+Referenced by \mbox{\hyperlink{AdminPlayerViewController_8java_source_l00052}{create\+Player()}}.
+
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1controller_1_1AdminPlayerViewController_af1b585ba1c56a20fd8518974f8ac8558}\index{com.example.football\_manager.controller.AdminPlayerViewController@{com.example.football\_manager.controller.AdminPlayerViewController}!deletePlayer@{deletePlayer}}
+\index{deletePlayer@{deletePlayer}!com.example.football\_manager.controller.AdminPlayerViewController@{com.example.football\_manager.controller.AdminPlayerViewController}}
+\doxysubsubsection{\texorpdfstring{deletePlayer()}{deletePlayer()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1controller_1_1AdminPlayerViewController_af1b585ba1c56a20fd8518974f8ac8558} 
+String com.\+example.\+football\+\_\+manager.\+controller.\+Admin\+Player\+View\+Controller.\+delete\+Player (\begin{DoxyParamCaption}\item[{@Path\+Variable Long}]{team\+Id}{, }\item[{@Path\+Variable Long}]{player\+Id}{, }\item[{Redirect\+Attributes}]{redirect\+Attributes}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{AdminPlayerViewController_8java_source_l00151}{151}} of file \mbox{\hyperlink{AdminPlayerViewController_8java_source}{Admin\+Player\+View\+Controller.\+java}}.
+
+
+
+References \mbox{\hyperlink{AdminPlayerViewController_8java_source_l00151}{delete\+Player()}}.
+
+
+
+Referenced by \mbox{\hyperlink{AdminPlayerViewController_8java_source_l00151}{delete\+Player()}}.
+
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1controller_1_1AdminPlayerViewController_a520512f85d1566eb3f88c2dc06bcb694}\index{com.example.football\_manager.controller.AdminPlayerViewController@{com.example.football\_manager.controller.AdminPlayerViewController}!managePlayersLanding@{managePlayersLanding}}
+\index{managePlayersLanding@{managePlayersLanding}!com.example.football\_manager.controller.AdminPlayerViewController@{com.example.football\_manager.controller.AdminPlayerViewController}}
+\doxysubsubsection{\texorpdfstring{managePlayersLanding()}{managePlayersLanding()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1controller_1_1AdminPlayerViewController_a520512f85d1566eb3f88c2dc06bcb694} 
+String com.\+example.\+football\+\_\+manager.\+controller.\+Admin\+Player\+View\+Controller.\+manage\+Players\+Landing (\begin{DoxyParamCaption}\item[{Model}]{model}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{AdminPlayerViewController_8java_source_l00031}{31}} of file \mbox{\hyperlink{AdminPlayerViewController_8java_source}{Admin\+Player\+View\+Controller.\+java}}.
+
+
+
+References \mbox{\hyperlink{AdminPlayerViewController_8java_source_l00031}{manage\+Players\+Landing()}}.
+
+
+
+Referenced by \mbox{\hyperlink{AdminPlayerViewController_8java_source_l00031}{manage\+Players\+Landing()}}.
+
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1controller_1_1AdminPlayerViewController_a493ea36cea8eedb58a9d468a35ed4df1}\index{com.example.football\_manager.controller.AdminPlayerViewController@{com.example.football\_manager.controller.AdminPlayerViewController}!manageTeamPlayers@{manageTeamPlayers}}
+\index{manageTeamPlayers@{manageTeamPlayers}!com.example.football\_manager.controller.AdminPlayerViewController@{com.example.football\_manager.controller.AdminPlayerViewController}}
+\doxysubsubsection{\texorpdfstring{manageTeamPlayers()}{manageTeamPlayers()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1controller_1_1AdminPlayerViewController_a493ea36cea8eedb58a9d468a35ed4df1} 
+String com.\+example.\+football\+\_\+manager.\+controller.\+Admin\+Player\+View\+Controller.\+manage\+Team\+Players (\begin{DoxyParamCaption}\item[{@Path\+Variable Long}]{team\+Id}{, }\item[{Model}]{model}{, }\item[{Redirect\+Attributes}]{redirect\+Attributes}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{AdminPlayerViewController_8java_source_l00036}{36}} of file \mbox{\hyperlink{AdminPlayerViewController_8java_source}{Admin\+Player\+View\+Controller.\+java}}.
+
+
+
+References \mbox{\hyperlink{AdminPlayerViewController_8java_source_l00036}{manage\+Team\+Players()}}.
+
+
+
+Referenced by \mbox{\hyperlink{AdminPlayerViewController_8java_source_l00036}{manage\+Team\+Players()}}.
+
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1controller_1_1AdminPlayerViewController_a106c9078ecaccf686026684d55c868d4}\index{com.example.football\_manager.controller.AdminPlayerViewController@{com.example.football\_manager.controller.AdminPlayerViewController}!showEditPlayerForm@{showEditPlayerForm}}
+\index{showEditPlayerForm@{showEditPlayerForm}!com.example.football\_manager.controller.AdminPlayerViewController@{com.example.football\_manager.controller.AdminPlayerViewController}}
+\doxysubsubsection{\texorpdfstring{showEditPlayerForm()}{showEditPlayerForm()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1controller_1_1AdminPlayerViewController_a106c9078ecaccf686026684d55c868d4} 
+String com.\+example.\+football\+\_\+manager.\+controller.\+Admin\+Player\+View\+Controller.\+show\+Edit\+Player\+Form (\begin{DoxyParamCaption}\item[{@Path\+Variable Long}]{team\+Id}{, }\item[{@Path\+Variable Long}]{player\+Id}{, }\item[{Model}]{model}{, }\item[{Redirect\+Attributes}]{redirect\+Attributes}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{AdminPlayerViewController_8java_source_l00082}{82}} of file \mbox{\hyperlink{AdminPlayerViewController_8java_source}{Admin\+Player\+View\+Controller.\+java}}.
+
+
+
+References \mbox{\hyperlink{AdminPlayerViewController_8java_source_l00082}{show\+Edit\+Player\+Form()}}.
+
+
+
+Referenced by \mbox{\hyperlink{AdminPlayerViewController_8java_source_l00082}{show\+Edit\+Player\+Form()}}.
+
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1controller_1_1AdminPlayerViewController_a333a14b1f81849624a9fbc6f7c5aaec6}\index{com.example.football\_manager.controller.AdminPlayerViewController@{com.example.football\_manager.controller.AdminPlayerViewController}!updatePlayer@{updatePlayer}}
+\index{updatePlayer@{updatePlayer}!com.example.football\_manager.controller.AdminPlayerViewController@{com.example.football\_manager.controller.AdminPlayerViewController}}
+\doxysubsubsection{\texorpdfstring{updatePlayer()}{updatePlayer()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1controller_1_1AdminPlayerViewController_a333a14b1f81849624a9fbc6f7c5aaec6} 
+String com.\+example.\+football\+\_\+manager.\+controller.\+Admin\+Player\+View\+Controller.\+update\+Player (\begin{DoxyParamCaption}\item[{@Path\+Variable Long}]{team\+Id}{, }\item[{@Path\+Variable Long}]{player\+Id}{, }\item[{@Valid @Model\+Attribute("{}player\+Request"{}) \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1PlayerRequestDTO}{Player\+Request\+DTO}}}]{player\+Request}{, }\item[{Binding\+Result}]{binding\+Result}{, }\item[{Model}]{model}{, }\item[{Redirect\+Attributes}]{redirect\+Attributes}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{AdminPlayerViewController_8java_source_l00116}{116}} of file \mbox{\hyperlink{AdminPlayerViewController_8java_source}{Admin\+Player\+View\+Controller.\+java}}.
+
+
+
+References \mbox{\hyperlink{AdminPlayerViewController_8java_source_l00116}{update\+Player()}}.
+
+
+
+Referenced by \mbox{\hyperlink{AdminPlayerViewController_8java_source_l00116}{update\+Player()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Football\+\_\+\+Manager/src/main/java/com/example/football\+\_\+manager/controller/\mbox{\hyperlink{AdminPlayerViewController_8java}{Admin\+Player\+View\+Controller.\+java}}\end{DoxyCompactItemize}

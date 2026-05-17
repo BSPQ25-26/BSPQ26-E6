@@ -1,0 +1,54 @@
+\doxysection{Competition\+Service.\+java}
+\hypertarget{CompetitionService_8java_source}{}\label{CompetitionService_8java_source}\index{Football\_Manager/src/main/java/com/example/football\_manager/service/CompetitionService.java@{Football\_Manager/src/main/java/com/example/football\_manager/service/CompetitionService.java}}
+\mbox{\hyperlink{CompetitionService_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00001}\mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1service}{00001}}\ \textcolor{keyword}{package\ }com.example.football\_manager.service;}
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00003}00003\ \textcolor{keyword}{import}\ com.example.football\_manager.dto.CompetitionRequestDTO;}
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00004}00004\ \textcolor{keyword}{import}\ com.example.football\_manager.model.Competition;}
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00005}00005\ \textcolor{keyword}{import}\ com.example.football\_manager.repository.CompetitionRepository;}
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00006}00006\ \textcolor{keyword}{import}\ org.springframework.stereotype.Service;}
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00008}00008\ \textcolor{keyword}{import}\ java.util.List;}
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00009}00009\ \textcolor{keyword}{import}\ java.util.Optional;}
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00011}00011\ @Service}
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00012}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1CompetitionService}{00012}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1CompetitionService_ab43a2d60b3816a0ab7f3593ca4b57d93}{CompetitionService}}\ \{}
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00014}00014\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1CompetitionRepository}{CompetitionRepository}}\ competitionRepository;}
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00016}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1CompetitionService_ab43a2d60b3816a0ab7f3593ca4b57d93}{00016}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1CompetitionService_ab43a2d60b3816a0ab7f3593ca4b57d93}{CompetitionService}}(\mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1CompetitionRepository}{CompetitionRepository}}\ competitionRepository)\ \{}
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00017}00017\ \ \ \ \ \ \ \ \ this.competitionRepository\ =\ competitionRepository;}
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00018}00018\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00020}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1CompetitionService_a753b10d927c55d69e7a92b7a3bf69ffd}{00020}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Competition}{Competition}}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1CompetitionService_a753b10d927c55d69e7a92b7a3bf69ffd}{createCompetition}}(\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1CompetitionRequestDTO}{CompetitionRequestDTO}}\ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}})\ \{}
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00021}00021\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Competition}{Competition}}\ competition\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Competition}{Competition}}();}
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00022}00022\ \ \ \ \ \ \ \ \ competition.setName(\mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}.getName().trim());}
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00023}00023\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ competitionRepository.save(competition);}
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00024}00024\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00026}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1CompetitionService_a17a8cbd57a96e58c882ef87da8953ef4}{00026}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Competition}{Competition}}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1CompetitionService_a17a8cbd57a96e58c882ef87da8953ef4}{updateCompetition}}(Long\ \textcolor{keywordtype}{id},\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1CompetitionRequestDTO}{CompetitionRequestDTO}}\ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}})\ \{}
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00027}00027\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Competition}{Competition}}\ competition\ =\ competitionRepository.findById(\textcolor{keywordtype}{id})}
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ RuntimeException(\textcolor{stringliteral}{"{}Competition\ not\ found\ with\ id:\ "{}}\ +\ \textcolor{keywordtype}{id}));}
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00030}00030\ \ \ \ \ \ \ \ \ competition.setName(\mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}.getName().trim());}
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00031}00031\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ competitionRepository.save(competition);}
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00032}00032\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00034}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1CompetitionService_a52881430d573fc675b2855a3e934863c}{00034}}\ \ \ \ \ \textcolor{keyword}{public}\ Optional<Competition>\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1CompetitionService_a52881430d573fc675b2855a3e934863c}{getCompetitionById}}(Long\ \textcolor{keywordtype}{id})\ \{}
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00035}00035\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ competitionRepository.findById(\textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00036}00036\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00038}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1CompetitionService_aa8c2d9c69cc27311ac783b3734c4d51b}{00038}}\ \ \ \ \ \textcolor{keyword}{public}\ List<Competition>\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1CompetitionService_aa8c2d9c69cc27311ac783b3734c4d51b}{getAllCompetitions}}()\ \{}
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00039}00039\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ competitionRepository.findAll();}
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00040}00040\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00042}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1CompetitionService_a0c51f511ea488ac8574b66c59cfddf49}{00042}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1CompetitionService_a0c51f511ea488ac8574b66c59cfddf49}{deleteCompetition}}(Long\ \textcolor{keywordtype}{id})\ \{}
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00043}00043\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Competition}{Competition}}\ competition\ =\ competitionRepository.findById(\textcolor{keywordtype}{id})}
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ RuntimeException(\textcolor{stringliteral}{"{}Competition\ not\ found\ with\ id:\ "{}}\ +\ \textcolor{keywordtype}{id}));}
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00046}00046\ \ \ \ \ \ \ \ \ competitionRepository.delete(competition);}
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00047}00047\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{CompetitionService_8java_source_l00048}00048\ \}}
+
+\end{DoxyCode}

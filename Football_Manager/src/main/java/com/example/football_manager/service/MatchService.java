@@ -269,6 +269,15 @@ public class MatchService {
                 .filter(match -> !match.isFinished()) 
                 .sorted((m1, m2) -> m1.getDatetime().compareTo(m2.getDatetime()))
                 .toList();
+      
+    public List<Match> getMatches(Long teamId, MatchRequestDTO.MatchStatus status, Long competitionId) {
+        Boolean finished = toFinishedFilter(status);
+
+        if (teamId == null && finished == null && competitionId == null) {
+            return getAllMatches();
+        }
+
+        return matchRepository.findByFilters(teamId, finished, competitionId);
     }
 
     public Match getMatchById(Long id) {
@@ -355,5 +364,17 @@ public class MatchService {
         }
 
         return score.shortValue();
+    }
+
+    private Boolean toFinishedFilter(MatchRequestDTO.MatchStatus status) {
+        if (status == null) {
+            return null;
+        }
+
+        return switch (status) {
+            case FINISHED -> true;
+            case SCHEDULED -> false;
+            default -> throw new IllegalArgumentException("Validation Error: Match status filter must be FINISHED or SCHEDULED.");
+        };
     }
 }

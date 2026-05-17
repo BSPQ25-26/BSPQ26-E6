@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,14 +31,22 @@ public class MatchController {
 
     @GetMapping
     @Operation(
-            summary = "List all matches",
-            description = "Returns all matches, including scheduled and finished ones."
+            summary = "List matches",
+            description = "Returns matches, optionally filtered by team, status, or competition."
     )
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Match list")
+            @ApiResponse(responseCode = "200", description = "Match list"),
+            @ApiResponse(responseCode = "400", description = "Unsupported filter value")
     })
-    public ResponseEntity<List<Match>> getAllMatches() {
-        return ResponseEntity.ok(matchService.getAllMatches());
+    public ResponseEntity<List<Match>> getMatches(
+            @RequestParam(required = false) Long teamId,
+            @RequestParam(required = false) MatchRequestDTO.MatchStatus status,
+            @RequestParam(required = false) Long competitionId) {
+        try {
+            return ResponseEntity.ok(matchService.getMatches(teamId, status, competitionId));
+        } catch (IllegalArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage(), e);
+        }
     }
 
     @GetMapping("/upcoming")
