@@ -65,6 +65,9 @@
           <td class="px-6 py-4 text-sm text-slate-600" th:text="${team.country != null ? team.country.name : '-'}">Country</td>
           <td class="px-6 py-4 text-right">
             <div class="flex justify-end gap-2">
+              <a th:href="@{/admin/teams/{id}/players(id=${team.id})}" class="w-20 text-center py-1.5 bg-emerald-50 text-emerald-600 hover:bg-emerald-100 hover:text-emerald-800 rounded text-sm font-semibold transition-colors border border-emerald-200" th:text="#{adminTeams.players}">
+                Players
+              </a>
               <a th:href="@{/teams/edit/{id}(id=${team.id})}" class="w-20 text-center py-1.5 bg-indigo-50 text-indigo-600 hover:bg-indigo-100 hover:text-indigo-800 rounded text-sm font-semibold transition-colors border border-indigo-200" th:text="#{adminTeams.edit}">
                 Edit
               </a>

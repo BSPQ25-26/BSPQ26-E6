@@ -64,4 +64,43 @@ public class PlayerController {
             return ResponseEntity.badRequest().body(ex.getMessage());
         }
     }
+
+    @PutMapping("/{playerId}")
+    @Operation(
+            summary = "Update a player of a team",
+            description = "Updates the details of a player that belongs to the given team."
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Player updated"),
+            @ApiResponse(responseCode = "400", description = "Validation or business rule error")
+    })
+    public ResponseEntity<?> updatePlayer(
+            @PathVariable Long teamId,
+            @PathVariable Long playerId,
+            @Valid @RequestBody PlayerRequestDTO dto) {
+        try {
+            Player updatedPlayer = playerService.updatePlayer(teamId, playerId, dto);
+            return ResponseEntity.ok(updatedPlayer);
+        } catch (IllegalArgumentException ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
+    }
+
+    @DeleteMapping("/{playerId}")
+    @Operation(
+            summary = "Delete a player from a team",
+            description = "Deletes a player that belongs to the given team."
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "204", description = "Player deleted"),
+            @ApiResponse(responseCode = "400", description = "Validation or business rule error")
+    })
+    public ResponseEntity<?> deletePlayer(@PathVariable Long teamId, @PathVariable Long playerId) {
+        try {
+            playerService.deletePlayer(teamId, playerId);
+            return ResponseEntity.noContent().build();
+        } catch (IllegalArgumentException ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
+    }
 }

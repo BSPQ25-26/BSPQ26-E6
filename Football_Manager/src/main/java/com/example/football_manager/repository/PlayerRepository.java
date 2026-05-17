@@ -10,6 +10,10 @@ import java.util.List;
 public interface PlayerRepository extends JpaRepository<Player, Long> {
     boolean existsByTeamIdAndNumber(Long teamId, Integer number);
 
+    boolean existsByTeamIdAndNumberAndIdNot(Long teamId, Integer number, Long id);
+
     List<Player> findByTeamIdOrderByNumberAsc(Long teamId);
+
+    java.util.Optional<Player> findByIdAndTeamId(Long id, Long teamId);
 }
 

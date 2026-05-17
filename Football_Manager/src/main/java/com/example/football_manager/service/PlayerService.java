@@ -56,6 +56,75 @@ public class PlayerService {
         return playerRepository.findByTeamIdOrderByNumberAsc(teamId);
     }
 
+    public Player getPlayerByTeamId(Long teamId, Long playerId) {
+        if (teamId == null) {
+            throw new IllegalArgumentException("Validation Error: Team ID is required.");
+        }
+
+        if (playerId == null) {
+            throw new IllegalArgumentException("Validation Error: Player ID is required.");
+        }
+
+        if (!teamRepository.existsById(teamId)) {
+            throw new IllegalArgumentException("Team not found with id: " + teamId);
+        }
+
+        return playerRepository.findByIdAndTeamId(playerId, teamId)
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "Player not found with id: " + playerId + " for team id: " + teamId
+                ));
+    }
+
+    public Player updatePlayer(Long teamId, Long playerId, PlayerRequestDTO dto) {
+        validatePlayerRequest(teamId, dto);
+
+        if (playerId == null) {
+            throw new IllegalArgumentException("Validation Error: Player ID is required.");
+        }
+
+        Team team = teamRepository.findById(teamId)
+                .orElseThrow(() -> new IllegalArgumentException("Team not found with id: " + teamId));
+
+        Player player = playerRepository.findByIdAndTeamId(playerId, teamId)
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "Player not found with id: " + playerId + " for team id: " + teamId
+                ));
+
+        if (playerRepository.existsByTeamIdAndNumberAndIdNot(teamId, dto.getNumber(), playerId)) {
+            throw new IllegalArgumentException(
+                    "Validation Error: Team already has a player with number " + dto.getNumber() + "."
+            );
+        }
+
+        player.setName(dto.getName().trim());
+        player.setNumber(dto.getNumber());
+        player.setPosition(dto.getPosition());
+        player.setTeam(team);
+
+        return playerRepository.save(player);
+    }
+
+    public void deletePlayer(Long teamId, Long playerId) {
+        if (teamId == null) {
+            throw new IllegalArgumentException("Validation Error: Team ID is required.");
+        }
+
+        if (playerId == null) {
+            throw new IllegalArgumentException("Validation Error: Player ID is required.");
+        }
+
+        Team team = teamRepository.findById(teamId)
+                .orElseThrow(() -> new IllegalArgumentException("Team not found with id: " + teamId));
+
+        Player player = playerRepository.findByIdAndTeamId(playerId, teamId)
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "Player not found with id: " + playerId + " for team id: " + teamId
+                ));
+
+        team.getPlayers().remove(player);
+        playerRepository.delete(player);
+    }
+
     private void validatePlayerRequest(Long teamId, PlayerRequestDTO dto) {
         if (teamId == null) {
             throw new IllegalArgumentException("Validation Error: Team ID is required.");
