@@ -266,10 +266,10 @@ public class MatchService {
 
     public List<Match> getUpcomingMatches() {
         return matchRepository.findAll().stream()
-                .filter(match -> !match.isFinished()) 
+                .filter(match -> !match.isFinished())
                 .sorted((m1, m2) -> m1.getDatetime().compareTo(m2.getDatetime()))
                 .toList();
-      
+    }
     public List<Match> getMatches(Long teamId, MatchRequestDTO.MatchStatus status, Long competitionId) {
         Boolean finished = toFinishedFilter(status);
 
