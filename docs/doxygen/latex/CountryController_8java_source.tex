@@ -1,0 +1,81 @@
+\doxysection{Country\+Controller.\+java}
+\hypertarget{CountryController_8java_source}{}\label{CountryController_8java_source}\index{Football\_Manager/src/main/java/com/example/football\_manager/controller/CountryController.java@{Football\_Manager/src/main/java/com/example/football\_manager/controller/CountryController.java}}
+\mbox{\hyperlink{CountryController_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00001}00001\ \textcolor{keyword}{package\ }com.example.football\_manager.controller;}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00003}00003\ \textcolor{keyword}{import}\ com.example.football\_manager.dto.CountryRequestDTO;}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00004}00004\ \textcolor{keyword}{import}\ com.example.football\_manager.model.Country;}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00005}00005\ \textcolor{keyword}{import}\ com.example.football\_manager.service.CountryService;}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00006}00006\ \textcolor{keyword}{import}\ jakarta.validation.Valid;}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00007}00007\ \textcolor{keyword}{import}\ io.swagger.v3.oas.annotations.Operation;}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00008}00008\ \textcolor{keyword}{import}\ io.swagger.v3.oas.annotations.media.Content;}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00009}00009\ \textcolor{keyword}{import}\ io.swagger.v3.oas.annotations.media.Schema;}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00010}00010\ \textcolor{keyword}{import}\ io.swagger.v3.oas.annotations.responses.ApiResponse;}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00011}00011\ \textcolor{keyword}{import}\ io.swagger.v3.oas.annotations.responses.ApiResponses;}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00012}00012\ \textcolor{keyword}{import}\ io.swagger.v3.oas.annotations.tags.Tag;}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00013}00013\ \textcolor{keyword}{import}\ org.springframework.http.HttpStatus;}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00014}00014\ \textcolor{keyword}{import}\ org.springframework.http.ResponseEntity;}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00015}00015\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.*;}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00017}00017\ \textcolor{keyword}{import}\ java.util.List;}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00019}00019\ @RestController}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00020}00020\ @RequestMapping(\textcolor{stringliteral}{"{}/api/countries"{}})}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00021}00021\ @Tag(name\ =\ \textcolor{stringliteral}{"{}Countries"{}})}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00022}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1CountryController}{00022}}\ public\ class\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1CountryController_ad9ece0c1330f9b9271a3d9dbde7488c5}{CountryController}}\ \{}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00024}00024\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1CountryService}{CountryService}}\ countryService;}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00026}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1CountryController_ad9ece0c1330f9b9271a3d9dbde7488c5}{00026}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1CountryController_ad9ece0c1330f9b9271a3d9dbde7488c5}{CountryController}}(\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1CountryService}{CountryService}}\ countryService)\ \{}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00027}00027\ \ \ \ \ \ \ \ \ this.countryService\ =\ countryService;}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00028}00028\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00030}00030\ \ \ \ \ @PostMapping}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00031}00031\ \ \ \ \ @Operation(}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ summary\ =\ \textcolor{stringliteral}{"{}Create\ a\ country"{}},}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ description\ =\ \textcolor{stringliteral}{"{}Creates\ a\ new\ country\ entry."{}},}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ requestBody\ =\ @io.swagger.v3.oas.annotations.parameters.RequestBody(}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ required\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ description\ =\ \textcolor{stringliteral}{"{}Country\ details"{}},}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ content\ =\ @Content(schema\ =\ @Schema(implementation\ =\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1CountryRequestDTO}{CountryRequestDTO}}.class))}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00039}00039\ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00040}00040\ \ \ \ \ @ApiResponses(\{}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ @ApiResponse(responseCode\ =\ \textcolor{stringliteral}{"{}201"{}},\ description\ =\ \textcolor{stringliteral}{"{}Country\ created"{}}),}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ @ApiResponse(responseCode\ =\ \textcolor{stringliteral}{"{}400"{}},\ description\ =\ \textcolor{stringliteral}{"{}Validation\ error"{}})}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00043}00043\ \ \ \ \ \})}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00044}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1CountryController_a1d755046d61c6933c7795597e3758435}{00044}}\ \ \ \ \ \textcolor{keyword}{public}\ ResponseEntity<Country>\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1CountryController_a1d755046d61c6933c7795597e3758435}{createCountry}}(@Valid\ @RequestBody\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1CountryRequestDTO}{CountryRequestDTO}}\ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}})\ \{}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00045}00045\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Country}{Country}}\ createdCountry\ =\ countryService.createCountry(\mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}});}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00046}00046\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ ResponseEntity<>(createdCountry,\ HttpStatus.CREATED);}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00047}00047\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00049}00049\ \ \ \ \ @GetMapping}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00050}00050\ \ \ \ \ @Operation(}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ summary\ =\ \textcolor{stringliteral}{"{}List\ all\ countries"{}},}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ description\ =\ \textcolor{stringliteral}{"{}Returns\ every\ country\ currently\ in\ the\ system."{}}}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00053}00053\ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00054}00054\ \ \ \ \ @ApiResponses(\{}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ @ApiResponse(responseCode\ =\ \textcolor{stringliteral}{"{}200"{}},\ description\ =\ \textcolor{stringliteral}{"{}Country\ list"{}})}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00056}00056\ \ \ \ \ \})}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00057}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1CountryController_a545cf313b13e23b70af928de797c725b}{00057}}\ \ \ \ \ \textcolor{keyword}{public}\ ResponseEntity<List<Country>>\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1CountryController_a545cf313b13e23b70af928de797c725b}{getAllCountries}}()\ \{}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00058}00058\ \ \ \ \ \ \ \ \ List<Country>\ countries\ =\ countryService.getAllCountries();}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00059}00059\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ResponseEntity.ok(countries);}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00060}00060\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00061}00061\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00062}00062\ \ \ \ \ @DeleteMapping(\textcolor{stringliteral}{"{}/\{id\}"{}})}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00063}00063\ \ \ \ \ @Operation(}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ summary\ =\ \textcolor{stringliteral}{"{}Delete\ a\ country"{}},}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ description\ =\ \textcolor{stringliteral}{"{}Deletes\ a\ country\ by\ its\ identifier."{}}}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00066}00066\ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00067}00067\ \ \ \ \ @ApiResponses(\{}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ @ApiResponse(responseCode\ =\ \textcolor{stringliteral}{"{}204"{}},\ description\ =\ \textcolor{stringliteral}{"{}Country\ deleted"{}}),}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ @ApiResponse(responseCode\ =\ \textcolor{stringliteral}{"{}404"{}},\ description\ =\ \textcolor{stringliteral}{"{}Country\ not\ found"{}})}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00070}00070\ \ \ \ \ \})}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00071}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1CountryController_a176de07a3ba59ea160c417db7b9d4b62}{00071}}\ \ \ \ \ \textcolor{keyword}{public}\ ResponseEntity<Void>\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1CountryController_a176de07a3ba59ea160c417db7b9d4b62}{deleteCountry}}(@PathVariable\ Long\ \textcolor{keywordtype}{id})\ \{}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00072}00072\ \ \ \ \ \ \ \ \ countryService.deleteCountry(\textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00073}00073\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ResponseEntity.noContent().build();}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00074}00074\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{CountryController_8java_source_l00075}00075\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{adminPlayers.title}">Manage Players - Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .pitch-bg { background-color: #f8fafc; }
+    </style>
+</head>
+<body class="pitch-bg min-h-screen font-sans text-slate-800 pb-10">
+
+<nav class="bg-slate-900 border-b-2 border-emerald-600 shadow-md mb-10">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+            <div class="flex items-center gap-3">
+                <span class="text-xl font-black text-white uppercase tracking-wider"><span th:text="#{brand.control}">Control</span><span class="text-emerald-500" th:text="#{brand.center}">Center</span></span>
+            </div>
+            <div class="flex items-center gap-3">
+                <select id="langSelect"
+                        class="px-4 py-[0.55rem] bg-slate-800 text-slate-300 text-sm font-medium rounded-md border border-slate-700"
+                        onchange="window.location.href = window.location.pathname + '?lang=' + this.value;">
+                    <option value="es" th:selected="${#locale.language == 'es'}" th:text="#{global.lang.es}">Espanol</option>
+                    <option value="en" th:selected="${#locale.language == 'en'}" th:text="#{global.lang.en}">English</option>
+                </select>
+                <a href="/admin" class="px-4 py-2 bg-slate-800 text-slate-300 text-sm font-medium rounded-md hover:bg-slate-700 hover:text-white transition-colors border border-slate-700" th:text="#{adminPlayers.backToPanel}">
+                    Back to Panel
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="mb-8">
+        <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight uppercase" th:text="#{adminPlayers.heading}">Manage Squad Players</h1>
+        <p class="text-slate-500 mt-1 font-medium" th:text="#{adminPlayers.subtitle}">Choose a team to manage its squad players.</p>
+    </div>
+
+    <div th:if="${successMessage}" class="mb-6 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-800" th:text="${successMessage}">
+        Operation completed successfully.
+    </div>
+
+    <div th:if="${errorMessage}" class="mb-6 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-800" th:text="${errorMessage}">
+        An error occurred.
+    </div>
+
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                <tr class="bg-slate-50 border-b border-slate-200 text-slate-500 uppercase text-xs font-bold tracking-wider">
+                    <th class="px-6 py-4" th:text="#{adminPlayers.table.id}">ID</th>
+                    <th class="px-6 py-4" th:text="#{adminPlayers.table.logo}">Logo</th>
+                    <th class="px-6 py-4" th:text="#{adminPlayers.table.name}">Name</th>
+                    <th class="px-6 py-4" th:text="#{adminPlayers.table.country}">Country</th>
+                    <th class="px-6 py-4 text-right" th:text="#{adminPlayers.table.actions}">Actions</th>
+                </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200">
+                <tr th:each="team : ${teams}" class="hover:bg-slate-50 transition-colors">
+                    <td class="px-6 py-4 text-sm font-medium text-slate-500" th:text="${team.id}">1</td>
+                    <td class="px-6 py-4">
+                        <img th:src="${team.logoUrl != null && !team.logoUrl.isEmpty() ? team.logoUrl : 'https://via.placeholder.com/150?text=Logo'}"
+                             class="w-10 h-10 object-contain bg-white border border-slate-200 rounded p-1" th:alt="#{adminTeams.logoAlt}">
+                    </td>
+                    <td class="px-6 py-4 font-bold text-slate-900 uppercase" th:text="${team.name}">Athletic Club</td>
+                    <td class="px-6 py-4 text-sm text-slate-600" th:text="${team.country != null ? team.country.name : '-'}">Spain</td>
+                    <td class="px-6 py-4 text-right">
+                        <a th:href="@{/admin/teams/{id}/players(id=${team.id})}"
+                           class="inline-flex items-center justify-center px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 text-sm font-semibold shadow-md shadow-emerald-500/20 transition-colors"
+                           th:text="#{adminPlayers.manage}">
+                            Manage Squad
+                        </a>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(teams)}">
+                    <td colspan="5" class="px-6 py-8 text-center text-slate-500" th:text="#{adminPlayers.empty}">No teams found in the database.</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

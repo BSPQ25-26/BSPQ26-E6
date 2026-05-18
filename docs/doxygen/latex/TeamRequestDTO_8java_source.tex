@@ -1,0 +1,61 @@
+\doxysection{Team\+Request\+DTO.\+java}
+\hypertarget{TeamRequestDTO_8java_source}{}\label{TeamRequestDTO_8java_source}\index{Football\_Manager/src/main/java/com/example/football\_manager/dto/TeamRequestDTO.java@{Football\_Manager/src/main/java/com/example/football\_manager/dto/TeamRequestDTO.java}}
+\mbox{\hyperlink{TeamRequestDTO_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00001}00001\ \textcolor{keyword}{package\ }com.example.football\_manager.dto;}
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00003}00003\ \textcolor{keyword}{import}\ jakarta.validation.constraints.NotBlank;}
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00004}00004\ \textcolor{keyword}{import}\ jakarta.validation.constraints.NotNull;}
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00005}00005\ \textcolor{keyword}{import}\ jakarta.validation.constraints.Size;}
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00006}00006\ \textcolor{keyword}{import}\ io.swagger.v3.oas.annotations.media.Schema;}
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00008}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1TeamRequestDTO}{00008}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1TeamRequestDTO_a506aa709f0b8ae1782f24abd680c2a1c}{TeamRequestDTO}}\ \{}
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00010}00010\ \ \ \ \ @NotBlank(message\ =\ \textcolor{stringliteral}{"{}Team\ name\ is\ required"{}})}
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00011}00011\ \ \ \ \ @Size(max\ =\ 30,\ message\ =\ \textcolor{stringliteral}{"{}Team\ name\ must\ be\ at\ most\ 30\ characters"{}})}
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00012}00012\ \ \ \ \ @Schema(description\ =\ \textcolor{stringliteral}{"{}Team\ name"{}},\ example\ =\ \textcolor{stringliteral}{"{}Real\ Sociedad"{}})}
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00013}00013\ \ \ \ \ \textcolor{keyword}{private}\ String\ name;}
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00015}00015\ \ \ \ \ @NotBlank(message\ =\ \textcolor{stringliteral}{"{}Logo\ URL\ is\ required"{}})}
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00016}00016\ \ \ \ \ @Schema(description\ =\ \textcolor{stringliteral}{"{}Public\ logo\ URL"{}},\ example\ =\ \textcolor{stringliteral}{"{}https://cdn.example.com/logos/real-\/sociedad.png"{}})}
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00017}00017\ \ \ \ \ \textcolor{keyword}{private}\ String\ logoUrl;}
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00019}00019\ \ \ \ \ @NotNull(message\ =\ \textcolor{stringliteral}{"{}Country\ ID\ is\ required"{}})}
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00020}00020\ \ \ \ \ @Schema(description\ =\ \textcolor{stringliteral}{"{}Identifier\ of\ the\ country\ the\ team\ belongs\ to"{}},\ example\ =\ \textcolor{stringliteral}{"{}34"{}})}
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00021}00021\ \ \ \ \ \textcolor{keyword}{private}\ Long\ countryId;}
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00023}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1TeamRequestDTO_a506aa709f0b8ae1782f24abd680c2a1c}{00023}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1TeamRequestDTO_a506aa709f0b8ae1782f24abd680c2a1c}{TeamRequestDTO}}()\ \{}
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00024}00024\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00026}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1TeamRequestDTO_a6b40e5c1934b591d0ef183833dd9f948}{00026}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1TeamRequestDTO_a6b40e5c1934b591d0ef183833dd9f948}{TeamRequestDTO}}(String\ name,\ String\ logoUrl,\ Long\ countryId)\ \{}
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00027}00027\ \ \ \ \ \ \ \ \ this.name\ =\ name;}
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00028}00028\ \ \ \ \ \ \ \ \ this.logoUrl\ =\ logoUrl;}
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00029}00029\ \ \ \ \ \ \ \ \ this.countryId\ =\ countryId;}
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00030}00030\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00032}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1TeamRequestDTO_ab6b68bd89c54122f778c3f8cc34d5c43}{00032}}\ \ \ \ \ \textcolor{keyword}{public}\ String\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1TeamRequestDTO_ab6b68bd89c54122f778c3f8cc34d5c43}{getName}}()\ \{}
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00033}00033\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ name;}
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00034}00034\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00036}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1TeamRequestDTO_afe3b87be0bd3497b619467949de09ae5}{00036}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1TeamRequestDTO_afe3b87be0bd3497b619467949de09ae5}{setName}}(String\ name)\ \{}
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00037}00037\ \ \ \ \ \ \ \ \ this.name\ =\ name;}
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00038}00038\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00040}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1TeamRequestDTO_ae15041b387352ba741b60c6419f6f3f6}{00040}}\ \ \ \ \ \textcolor{keyword}{public}\ String\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1TeamRequestDTO_ae15041b387352ba741b60c6419f6f3f6}{getLogoUrl}}()\ \{}
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00041}00041\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ logoUrl;}
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00042}00042\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00044}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1TeamRequestDTO_afb00a2a641833dfd2d664e2552c673fa}{00044}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1TeamRequestDTO_afb00a2a641833dfd2d664e2552c673fa}{setLogoUrl}}(String\ logoUrl)\ \{}
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00045}00045\ \ \ \ \ \ \ \ \ this.logoUrl\ =\ logoUrl;}
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00046}00046\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00048}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1TeamRequestDTO_a1128f30165bc8f287f80e1efa5d04361}{00048}}\ \ \ \ \ \textcolor{keyword}{public}\ Long\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1TeamRequestDTO_a1128f30165bc8f287f80e1efa5d04361}{getCountryId}}()\ \{}
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00049}00049\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ countryId;}
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00050}00050\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00052}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1TeamRequestDTO_aedc007c9f344d4b851d264762ac10511}{00052}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1TeamRequestDTO_aedc007c9f344d4b851d264762ac10511}{setCountryId}}(Long\ countryId)\ \{}
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00053}00053\ \ \ \ \ \ \ \ \ this.countryId\ =\ countryId;}
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00054}00054\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{TeamRequestDTO_8java_source_l00055}00055\ \}}
+
+\end{DoxyCode}

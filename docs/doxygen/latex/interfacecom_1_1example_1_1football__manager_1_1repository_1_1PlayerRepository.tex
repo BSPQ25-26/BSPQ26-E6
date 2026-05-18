@@ -1,0 +1,58 @@
+\doxysection{com.\+example.\+football\+\_\+manager.\+repository.\+Player\+Repository Interface Reference}
+\hypertarget{interfacecom_1_1example_1_1football__manager_1_1repository_1_1PlayerRepository}{}\label{interfacecom_1_1example_1_1football__manager_1_1repository_1_1PlayerRepository}\index{com.example.football\_manager.repository.PlayerRepository@{com.example.football\_manager.repository.PlayerRepository}}
+Inheritance diagram for com.\+example.\+football\+\_\+manager.\+repository.\+Player\+Repository\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{interfacecom_1_1example_1_1football__manager_1_1repository_1_1PlayerRepository}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+boolean \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1PlayerRepository_a5ccf4ded2dbfe230fb334b90ea1e56ed}{exists\+By\+Team\+Id\+And\+Number}} (Long team\+Id, Integer number)
+\item 
+boolean \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1PlayerRepository_a754b9bdef018bc51c6015b855d17e61e}{exists\+By\+Team\+Id\+And\+Number\+And\+Id\+Not}} (Long team\+Id, Integer number, Long id)
+\item 
+List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Player}{Player}} $>$ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1PlayerRepository_ae5f41d08a705fd837a9a56616e5d7c34}{find\+By\+Team\+Id\+Order\+By\+Number\+Asc}} (Long team\+Id)
+\item 
+java.\+util.\+Optional$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Player}{Player}} $>$ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1PlayerRepository_a9e01ab3c11951131bd2e54f8758ae9ac}{find\+By\+Id\+And\+Team\+Id}} (Long id, Long team\+Id)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{PlayerRepository_8java_source_l00010}{10}} of file \mbox{\hyperlink{PlayerRepository_8java_source}{Player\+Repository.\+java}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{interfacecom_1_1example_1_1football__manager_1_1repository_1_1PlayerRepository_a5ccf4ded2dbfe230fb334b90ea1e56ed}\index{com.example.football\_manager.repository.PlayerRepository@{com.example.football\_manager.repository.PlayerRepository}!existsByTeamIdAndNumber@{existsByTeamIdAndNumber}}
+\index{existsByTeamIdAndNumber@{existsByTeamIdAndNumber}!com.example.football\_manager.repository.PlayerRepository@{com.example.football\_manager.repository.PlayerRepository}}
+\doxysubsubsection{\texorpdfstring{existsByTeamIdAndNumber()}{existsByTeamIdAndNumber()}}
+{\footnotesize\ttfamily \label{interfacecom_1_1example_1_1football__manager_1_1repository_1_1PlayerRepository_a5ccf4ded2dbfe230fb334b90ea1e56ed} 
+boolean com.\+example.\+football\+\_\+manager.\+repository.\+Player\+Repository.\+exists\+By\+Team\+Id\+And\+Number (\begin{DoxyParamCaption}\item[{Long}]{team\+Id}{, }\item[{Integer}]{number}{}\end{DoxyParamCaption})}
+
+\Hypertarget{interfacecom_1_1example_1_1football__manager_1_1repository_1_1PlayerRepository_a754b9bdef018bc51c6015b855d17e61e}\index{com.example.football\_manager.repository.PlayerRepository@{com.example.football\_manager.repository.PlayerRepository}!existsByTeamIdAndNumberAndIdNot@{existsByTeamIdAndNumberAndIdNot}}
+\index{existsByTeamIdAndNumberAndIdNot@{existsByTeamIdAndNumberAndIdNot}!com.example.football\_manager.repository.PlayerRepository@{com.example.football\_manager.repository.PlayerRepository}}
+\doxysubsubsection{\texorpdfstring{existsByTeamIdAndNumberAndIdNot()}{existsByTeamIdAndNumberAndIdNot()}}
+{\footnotesize\ttfamily \label{interfacecom_1_1example_1_1football__manager_1_1repository_1_1PlayerRepository_a754b9bdef018bc51c6015b855d17e61e} 
+boolean com.\+example.\+football\+\_\+manager.\+repository.\+Player\+Repository.\+exists\+By\+Team\+Id\+And\+Number\+And\+Id\+Not (\begin{DoxyParamCaption}\item[{Long}]{team\+Id}{, }\item[{Integer}]{number}{, }\item[{Long}]{id}{}\end{DoxyParamCaption})}
+
+\Hypertarget{interfacecom_1_1example_1_1football__manager_1_1repository_1_1PlayerRepository_a9e01ab3c11951131bd2e54f8758ae9ac}\index{com.example.football\_manager.repository.PlayerRepository@{com.example.football\_manager.repository.PlayerRepository}!findByIdAndTeamId@{findByIdAndTeamId}}
+\index{findByIdAndTeamId@{findByIdAndTeamId}!com.example.football\_manager.repository.PlayerRepository@{com.example.football\_manager.repository.PlayerRepository}}
+\doxysubsubsection{\texorpdfstring{findByIdAndTeamId()}{findByIdAndTeamId()}}
+{\footnotesize\ttfamily \label{interfacecom_1_1example_1_1football__manager_1_1repository_1_1PlayerRepository_a9e01ab3c11951131bd2e54f8758ae9ac} 
+java.\+util.\+Optional$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Player}{Player}} $>$ com.\+example.\+football\+\_\+manager.\+repository.\+Player\+Repository.\+find\+By\+Id\+And\+Team\+Id (\begin{DoxyParamCaption}\item[{Long}]{id}{, }\item[{Long}]{team\+Id}{}\end{DoxyParamCaption})}
+
+\Hypertarget{interfacecom_1_1example_1_1football__manager_1_1repository_1_1PlayerRepository_ae5f41d08a705fd837a9a56616e5d7c34}\index{com.example.football\_manager.repository.PlayerRepository@{com.example.football\_manager.repository.PlayerRepository}!findByTeamIdOrderByNumberAsc@{findByTeamIdOrderByNumberAsc}}
+\index{findByTeamIdOrderByNumberAsc@{findByTeamIdOrderByNumberAsc}!com.example.football\_manager.repository.PlayerRepository@{com.example.football\_manager.repository.PlayerRepository}}
+\doxysubsubsection{\texorpdfstring{findByTeamIdOrderByNumberAsc()}{findByTeamIdOrderByNumberAsc()}}
+{\footnotesize\ttfamily \label{interfacecom_1_1example_1_1football__manager_1_1repository_1_1PlayerRepository_ae5f41d08a705fd837a9a56616e5d7c34} 
+List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Player}{Player}} $>$ com.\+example.\+football\+\_\+manager.\+repository.\+Player\+Repository.\+find\+By\+Team\+Id\+Order\+By\+Number\+Asc (\begin{DoxyParamCaption}\item[{Long}]{team\+Id}{}\end{DoxyParamCaption})}
+
+
+
+The documentation for this interface was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Football\+\_\+\+Manager/src/main/java/com/example/football\+\_\+manager/repository/\mbox{\hyperlink{PlayerRepository_8java}{Player\+Repository.\+java}}\end{DoxyCompactItemize}

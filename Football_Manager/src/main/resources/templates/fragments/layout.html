@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:lang="${#locale.language}"
+      th:fragment="page(title, active, content)">
+<head th:replace="~{fragments/head :: head(title=${title})}"></head>
+<body class="pitch-bg min-h-screen font-sans text-fm-text antialiased flex flex-col">
+    <nav th:replace="~{fragments/navbar :: navbar(active=${active})}"></nav>
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <th:block th:replace="${content}"></th:block>
+    </main>
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+</body>
+</html>

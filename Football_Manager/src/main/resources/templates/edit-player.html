@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{editPlayer.title}">Football Manager - Edit Player</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8 font-sans relative">
+
+<div class="absolute top-4 right-4 flex items-center gap-2 text-xs font-semibold text-slate-600">
+    <select id="langSelect"
+            class="px-4 py-[0.55rem] bg-slate-100 text-slate-700 text-sm font-medium rounded-md border border-slate-700"
+            onchange="window.location.href = window.location.pathname + '?lang=' + this.value;">
+        <option value="es" th:selected="${#locale.language == 'es'}" th:text="#{global.lang.es}">Espanol</option>
+        <option value="en" th:selected="${#locale.language == 'en'}" th:text="#{global.lang.en}">English</option>
+    </select>
+</div>
+
+<div class="sm:mx-auto sm:w-full sm:max-w-md">
+    <h2 class="mt-6 text-center text-3xl font-extrabold text-slate-900" th:text="#{editPlayer.heading}">Edit Player</h2>
+    <p class="mt-2 text-center text-sm text-slate-600" th:text="#{editPlayer.subtitle(${team.name})}">Update player details for this team.</p>
+</div>
+
+<div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+    <div class="bg-white py-8 px-4 shadow-xl sm:rounded-xl sm:px-10 border-t-4 border-indigo-500">
+        <div th:if="${errorMessage}" class="mb-5 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-800" th:text="${errorMessage}">
+            Validation error.
+        </div>
+
+        <form th:action="@{/admin/teams/{teamId}/players/edit/{playerId}(teamId=${team.id},playerId=${playerId})}" th:object="${playerRequest}" method="POST" class="space-y-6">
+            <div>
+                <label for="name" class="block text-sm font-medium text-slate-700" th:text="#{editPlayer.playerName}">Player Name</label>
+                <div class="mt-1">
+                    <input id="name" type="text" th:field="*{name}" required maxlength="30"
+                           class="appearance-none block w-full px-4 py-3 border border-slate-300 rounded-lg shadow-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition duration-200">
+                    <p class="mt-1 text-xs text-red-600" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</p>
+                </div>
+            </div>
+
+            <div>
+                <label for="number" class="block text-sm font-medium text-slate-700" th:text="#{editPlayer.playerNumber}">Number</label>
+                <div class="mt-1">
+                    <input id="number" type="number" th:field="*{number}" required min="1"
+                           class="appearance-none block w-full px-4 py-3 border border-slate-300 rounded-lg shadow-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition duration-200">
+                    <p class="mt-1 text-xs text-red-600" th:if="${#fields.hasErrors('number')}" th:errors="*{number}">Number error</p>
+                </div>
+            </div>
+
+            <div>
+                <label for="position" class="block text-sm font-medium text-slate-700" th:text="#{editPlayer.playerPosition}">Position</label>
+                <div class="relative mt-1">
+                    <select id="position" th:field="*{position}" required
+                            class="appearance-none block w-full px-4 py-3 border border-slate-300 rounded-lg shadow-sm bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition duration-200 cursor-pointer">
+                        <option value="" disabled th:text="#{editPlayer.playerPosition.select}">Select a position</option>
+                        <option th:each="position : ${positions}"
+                                th:value="${position}"
+                                th:text="${#messages.msgOrNull('playerPosition.' + position.name()) != null ? #messages.msgOrNull('playerPosition.' + position.name()) : position.name()}">
+                            MIDFIELDER
+                        </option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                </div>
+                <p class="mt-1 text-xs text-red-600" th:if="${#fields.hasErrors('position')}" th:errors="*{position}">Position error</p>
+            </div>
+
+            <div class="pt-4 flex flex-col space-y-3">
+                <button type="submit"
+                        class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-bold text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200"
+                        th:text="#{editPlayer.save}">
+                    Save Changes
+                </button>
+
+                <a th:href="@{/admin/teams/{teamId}/players(teamId=${team.id})}"
+                   class="w-full flex justify-center py-3 px-4 border border-slate-300 rounded-lg shadow-sm text-sm font-medium text-slate-700 bg-white hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200">
+                    <span th:text="#{editPlayer.cancel}">Cancel</span>
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+PROJECT_NAME           = "Football Manager"
+PROJECT_BRIEF          = "Spring Boot web application for managing football teams, matches, results and standings."
+PROJECT_NUMBER         = "Sprint 3"
+
+OUTPUT_DIRECTORY       = docs/doxygen
+CREATE_SUBDIRS         = NO
+
+INPUT                  = Football_Manager/src/main/java \
+                         README.md \
+                         docs/doxygen_mainpage.md
+
+RECURSIVE              = YES
+FILE_PATTERNS          = *.java *.md
+EXCLUDE                = Football_Manager/target \
+                         Football_Manager/build \
+                         .git
+
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = NO
+EXTRACT_STATIC         = YES
+
+SOURCE_BROWSER         = YES
+INLINE_SOURCES         = NO
+REFERENCED_BY_RELATION = YES
+REFERENCES_RELATION    = YES
+
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+
+GENERATE_LATEX         = YES
+LATEX_OUTPUT           = latex
+PDF_HYPERLINKS         = YES
+USE_PDFLATEX           = YES
+
+GENERATE_TREEVIEW      = YES
+DISABLE_INDEX          = NO
+FULL_SIDEBAR           = NO
+
+HAVE_DOT               = NO
+CLASS_DIAGRAMS         = YES
+UML_LOOK               = YES
+
+JAVADOC_AUTOBRIEF      = YES
+OPTIMIZE_OUTPUT_JAVA   = YES
+
+QUIET                  = NO
+WARNINGS               = YES
+WARN_IF_UNDOCUMENTED   = NO
+WARN_IF_DOC_ERROR      = YES

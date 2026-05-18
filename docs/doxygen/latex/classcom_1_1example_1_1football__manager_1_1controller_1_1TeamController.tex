@@ -1,0 +1,107 @@
+\doxysection{com.\+example.\+football\+\_\+manager.\+controller.\+Team\+Controller Class Reference}
+\hypertarget{classcom_1_1example_1_1football__manager_1_1controller_1_1TeamController}{}\label{classcom_1_1example_1_1football__manager_1_1controller_1_1TeamController}\index{com.example.football\_manager.controller.TeamController@{com.example.football\_manager.controller.TeamController}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1TeamController_ac571d84d7f89b7fecdaf1666739871c5}{Team\+Controller}} (\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1TeamService}{Team\+Service}} team\+Service)
+\item 
+Response\+Entity$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Team}{Team}} $>$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1TeamController_aa11051f51218b646d76b6f1d3dccc878}{create\+Team}} (@Valid @Request\+Body \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1TeamRequestDTO}{Team\+Request\+DTO}} dto)
+\item 
+Response\+Entity$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Team}{Team}} $>$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1TeamController_a15d859209638e1d46391cb390e2f592e}{update\+Team}} (@Path\+Variable Long id, @Valid @Request\+Body \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1TeamRequestDTO}{Team\+Request\+DTO}} dto)
+\item 
+Response\+Entity$<$ Void $>$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1TeamController_a1cc6a5a0aca79237d0bc982c24751d54}{delete\+Team}} (@Path\+Variable Long id)
+\item 
+Response\+Entity$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Team}{Team}} $>$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1TeamController_a0c2610b6ff83d868a5160459ba8c90e9}{get\+Team\+By\+Id}} (@Path\+Variable Long id)
+\item 
+Response\+Entity$<$ List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Team}{Team}} $>$ $>$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1TeamController_a48f48b6f1d97b05517ab1c3533fa5565}{get\+Teams\+Containing\+Name}} (@Request\+Param String name)
+\item 
+Response\+Entity$<$ List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Team}{Team}} $>$ $>$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1TeamController_ac7db9085e259192a26a419daefb2d03c}{get\+All\+Teams}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{TeamController_8java_source_l00023}{23}} of file \mbox{\hyperlink{TeamController_8java_source}{Team\+Controller.\+java}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1controller_1_1TeamController_ac571d84d7f89b7fecdaf1666739871c5}\index{com.example.football\_manager.controller.TeamController@{com.example.football\_manager.controller.TeamController}!TeamController@{TeamController}}
+\index{TeamController@{TeamController}!com.example.football\_manager.controller.TeamController@{com.example.football\_manager.controller.TeamController}}
+\doxysubsubsection{\texorpdfstring{TeamController()}{TeamController()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1controller_1_1TeamController_ac571d84d7f89b7fecdaf1666739871c5} 
+com.\+example.\+football\+\_\+manager.\+controller.\+Team\+Controller.\+Team\+Controller (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1TeamService}{Team\+Service}}}]{team\+Service}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{TeamController_8java_source_l00027}{27}} of file \mbox{\hyperlink{TeamController_8java_source}{Team\+Controller.\+java}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1controller_1_1TeamController_aa11051f51218b646d76b6f1d3dccc878}\index{com.example.football\_manager.controller.TeamController@{com.example.football\_manager.controller.TeamController}!createTeam@{createTeam}}
+\index{createTeam@{createTeam}!com.example.football\_manager.controller.TeamController@{com.example.football\_manager.controller.TeamController}}
+\doxysubsubsection{\texorpdfstring{createTeam()}{createTeam()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1controller_1_1TeamController_aa11051f51218b646d76b6f1d3dccc878} 
+Response\+Entity$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Team}{Team}} $>$ com.\+example.\+football\+\_\+manager.\+controller.\+Team\+Controller.\+create\+Team (\begin{DoxyParamCaption}\item[{@Valid @Request\+Body \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1TeamRequestDTO}{Team\+Request\+DTO}}}]{dto}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{TeamController_8java_source_l00045}{45}} of file \mbox{\hyperlink{TeamController_8java_source}{Team\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1controller_1_1TeamController_a1cc6a5a0aca79237d0bc982c24751d54}\index{com.example.football\_manager.controller.TeamController@{com.example.football\_manager.controller.TeamController}!deleteTeam@{deleteTeam}}
+\index{deleteTeam@{deleteTeam}!com.example.football\_manager.controller.TeamController@{com.example.football\_manager.controller.TeamController}}
+\doxysubsubsection{\texorpdfstring{deleteTeam()}{deleteTeam()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1controller_1_1TeamController_a1cc6a5a0aca79237d0bc982c24751d54} 
+Response\+Entity$<$ Void $>$ com.\+example.\+football\+\_\+manager.\+controller.\+Team\+Controller.\+delete\+Team (\begin{DoxyParamCaption}\item[{@Path\+Variable Long}]{id}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{TeamController_8java_source_l00080}{80}} of file \mbox{\hyperlink{TeamController_8java_source}{Team\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1controller_1_1TeamController_ac7db9085e259192a26a419daefb2d03c}\index{com.example.football\_manager.controller.TeamController@{com.example.football\_manager.controller.TeamController}!getAllTeams@{getAllTeams}}
+\index{getAllTeams@{getAllTeams}!com.example.football\_manager.controller.TeamController@{com.example.football\_manager.controller.TeamController}}
+\doxysubsubsection{\texorpdfstring{getAllTeams()}{getAllTeams()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1controller_1_1TeamController_ac7db9085e259192a26a419daefb2d03c} 
+Response\+Entity$<$ List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Team}{Team}} $>$ $>$ com.\+example.\+football\+\_\+manager.\+controller.\+Team\+Controller.\+get\+All\+Teams (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{TeamController_8java_source_l00118}{118}} of file \mbox{\hyperlink{TeamController_8java_source}{Team\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1controller_1_1TeamController_a0c2610b6ff83d868a5160459ba8c90e9}\index{com.example.football\_manager.controller.TeamController@{com.example.football\_manager.controller.TeamController}!getTeamById@{getTeamById}}
+\index{getTeamById@{getTeamById}!com.example.football\_manager.controller.TeamController@{com.example.football\_manager.controller.TeamController}}
+\doxysubsubsection{\texorpdfstring{getTeamById()}{getTeamById()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1controller_1_1TeamController_a0c2610b6ff83d868a5160459ba8c90e9} 
+Response\+Entity$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Team}{Team}} $>$ com.\+example.\+football\+\_\+manager.\+controller.\+Team\+Controller.\+get\+Team\+By\+Id (\begin{DoxyParamCaption}\item[{@Path\+Variable Long}]{id}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{TeamController_8java_source_l00094}{94}} of file \mbox{\hyperlink{TeamController_8java_source}{Team\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1controller_1_1TeamController_a48f48b6f1d97b05517ab1c3533fa5565}\index{com.example.football\_manager.controller.TeamController@{com.example.football\_manager.controller.TeamController}!getTeamsContainingName@{getTeamsContainingName}}
+\index{getTeamsContainingName@{getTeamsContainingName}!com.example.football\_manager.controller.TeamController@{com.example.football\_manager.controller.TeamController}}
+\doxysubsubsection{\texorpdfstring{getTeamsContainingName()}{getTeamsContainingName()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1controller_1_1TeamController_a48f48b6f1d97b05517ab1c3533fa5565} 
+Response\+Entity$<$ List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Team}{Team}} $>$ $>$ com.\+example.\+football\+\_\+manager.\+controller.\+Team\+Controller.\+get\+Teams\+Containing\+Name (\begin{DoxyParamCaption}\item[{@Request\+Param String}]{name}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{TeamController_8java_source_l00106}{106}} of file \mbox{\hyperlink{TeamController_8java_source}{Team\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1controller_1_1TeamController_a15d859209638e1d46391cb390e2f592e}\index{com.example.football\_manager.controller.TeamController@{com.example.football\_manager.controller.TeamController}!updateTeam@{updateTeam}}
+\index{updateTeam@{updateTeam}!com.example.football\_manager.controller.TeamController@{com.example.football\_manager.controller.TeamController}}
+\doxysubsubsection{\texorpdfstring{updateTeam()}{updateTeam()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1controller_1_1TeamController_a15d859209638e1d46391cb390e2f592e} 
+Response\+Entity$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Team}{Team}} $>$ com.\+example.\+football\+\_\+manager.\+controller.\+Team\+Controller.\+update\+Team (\begin{DoxyParamCaption}\item[{@Path\+Variable Long}]{id}{, }\item[{@Valid @Request\+Body \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1TeamRequestDTO}{Team\+Request\+DTO}}}]{dto}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{TeamController_8java_source_l00065}{65}} of file \mbox{\hyperlink{TeamController_8java_source}{Team\+Controller.\+java}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Football\+\_\+\+Manager/src/main/java/com/example/football\+\_\+manager/controller/\mbox{\hyperlink{TeamController_8java}{Team\+Controller.\+java}}\end{DoxyCompactItemize}

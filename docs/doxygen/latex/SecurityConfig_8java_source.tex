@@ -1,0 +1,35 @@
+\doxysection{Security\+Config.\+java}
+\hypertarget{SecurityConfig_8java_source}{}\label{SecurityConfig_8java_source}\index{Football\_Manager/src/main/java/com/example/football\_manager/config/SecurityConfig.java@{Football\_Manager/src/main/java/com/example/football\_manager/config/SecurityConfig.java}}
+\mbox{\hyperlink{SecurityConfig_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{SecurityConfig_8java_source_l00001}00001\ \textcolor{keyword}{package\ }com.example.football\_manager.config;}
+\DoxyCodeLine{\Hypertarget{SecurityConfig_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{SecurityConfig_8java_source_l00003}00003\ \textcolor{keyword}{import}\ org.springframework.context.annotation.Bean;}
+\DoxyCodeLine{\Hypertarget{SecurityConfig_8java_source_l00004}00004\ \textcolor{keyword}{import}\ org.springframework.context.annotation.Configuration;}
+\DoxyCodeLine{\Hypertarget{SecurityConfig_8java_source_l00005}00005\ \textcolor{keyword}{import}\ org.springframework.security.config.annotation.web.builders.HttpSecurity;}
+\DoxyCodeLine{\Hypertarget{SecurityConfig_8java_source_l00006}00006\ \textcolor{keyword}{import}\ org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;}
+\DoxyCodeLine{\Hypertarget{SecurityConfig_8java_source_l00007}00007\ \textcolor{keyword}{import}\ org.springframework.security.crypto.password.PasswordEncoder;}
+\DoxyCodeLine{\Hypertarget{SecurityConfig_8java_source_l00008}00008\ \textcolor{keyword}{import}\ org.springframework.security.web.SecurityFilterChain;}
+\DoxyCodeLine{\Hypertarget{SecurityConfig_8java_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{SecurityConfig_8java_source_l00010}00010\ @Configuration}
+\DoxyCodeLine{\Hypertarget{SecurityConfig_8java_source_l00011}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1config_1_1SecurityConfig}{00011}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1config_1_1SecurityConfig}{SecurityConfig}}\ \{}
+\DoxyCodeLine{\Hypertarget{SecurityConfig_8java_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{SecurityConfig_8java_source_l00013}00013\ \ \ \ \ @Bean}
+\DoxyCodeLine{\Hypertarget{SecurityConfig_8java_source_l00014}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1config_1_1SecurityConfig_abd94fd36346613fa61ee0fd92907b1bf}{00014}}\ \ \ \ \ \textcolor{keyword}{public}\ SecurityFilterChain\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1config_1_1SecurityConfig_abd94fd36346613fa61ee0fd92907b1bf}{filterChain}}(HttpSecurity\ http)\ \textcolor{keywordflow}{throws}\ Exception\ \{}
+\DoxyCodeLine{\Hypertarget{SecurityConfig_8java_source_l00015}00015\ \ \ \ \ \ \ \ \ http}
+\DoxyCodeLine{\Hypertarget{SecurityConfig_8java_source_l00016}00016\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .csrf(csrf\ -\/>\ csrf.ignoringRequestMatchers(\textcolor{stringliteral}{"{}/auth/**"{}},\ \textcolor{stringliteral}{"{}/api/**"{}}))}
+\DoxyCodeLine{\Hypertarget{SecurityConfig_8java_source_l00017}00017\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .authorizeHttpRequests(auth\ -\/>\ auth}
+\DoxyCodeLine{\Hypertarget{SecurityConfig_8java_source_l00018}00018\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .anyRequest().permitAll()}
+\DoxyCodeLine{\Hypertarget{SecurityConfig_8java_source_l00019}00019\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{\Hypertarget{SecurityConfig_8java_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{SecurityConfig_8java_source_l00021}00021\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ http.build();}
+\DoxyCodeLine{\Hypertarget{SecurityConfig_8java_source_l00022}00022\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{SecurityConfig_8java_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{SecurityConfig_8java_source_l00024}00024\ \ \ \ \ @Bean}
+\DoxyCodeLine{\Hypertarget{SecurityConfig_8java_source_l00025}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1config_1_1SecurityConfig_a5fb9b00e62875d2409f03529c5b20ec2}{00025}}\ \ \ \ \ \textcolor{keyword}{public}\ PasswordEncoder\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1config_1_1SecurityConfig_a5fb9b00e62875d2409f03529c5b20ec2}{passwordEncoder}}()\ \{}
+\DoxyCodeLine{\Hypertarget{SecurityConfig_8java_source_l00026}00026\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ BCryptPasswordEncoder();}
+\DoxyCodeLine{\Hypertarget{SecurityConfig_8java_source_l00027}00027\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{SecurityConfig_8java_source_l00028}00028\ \}}
+\DoxyCodeLine{\Hypertarget{SecurityConfig_8java_source_l00029}00029\ }
+
+\end{DoxyCode}

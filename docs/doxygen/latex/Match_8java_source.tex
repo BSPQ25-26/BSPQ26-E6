@@ -1,0 +1,50 @@
+\doxysection{Match.\+java}
+\hypertarget{Match_8java_source}{}\label{Match_8java_source}\index{Football\_Manager/src/main/java/com/example/football\_manager/model/Match.java@{Football\_Manager/src/main/java/com/example/football\_manager/model/Match.java}}
+\mbox{\hyperlink{Match_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{Match_8java_source_l00001}00001\ \textcolor{keyword}{package\ }com.example.football\_manager.model;}
+\DoxyCodeLine{\Hypertarget{Match_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{Match_8java_source_l00003}00003\ \textcolor{keyword}{import}\ jakarta.persistence.*;}
+\DoxyCodeLine{\Hypertarget{Match_8java_source_l00004}00004\ \textcolor{keyword}{import}\ lombok.*;}
+\DoxyCodeLine{\Hypertarget{Match_8java_source_l00005}00005\ \textcolor{keyword}{import}\ java.time.OffsetDateTime;}
+\DoxyCodeLine{\Hypertarget{Match_8java_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{Match_8java_source_l00007}00007\ @Entity}
+\DoxyCodeLine{\Hypertarget{Match_8java_source_l00008}00008\ @Table(name\ =\ \textcolor{stringliteral}{"{}match"{}})}
+\DoxyCodeLine{\Hypertarget{Match_8java_source_l00009}00009\ @Data}
+\DoxyCodeLine{\Hypertarget{Match_8java_source_l00010}00010\ @NoArgsConstructor}
+\DoxyCodeLine{\Hypertarget{Match_8java_source_l00011}00011\ @AllArgsConstructor}
+\DoxyCodeLine{\Hypertarget{Match_8java_source_l00012}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{00012}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}}\ \{}
+\DoxyCodeLine{\Hypertarget{Match_8java_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{Match_8java_source_l00014}00014\ \ \ \ \ @Id}
+\DoxyCodeLine{\Hypertarget{Match_8java_source_l00015}00015\ \ \ \ \ @GeneratedValue(strategy\ =\ GenerationType.IDENTITY)}
+\DoxyCodeLine{\Hypertarget{Match_8java_source_l00016}00016\ \ \ \ \ \textcolor{keyword}{private}\ Long\ id;}
+\DoxyCodeLine{\Hypertarget{Match_8java_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{Match_8java_source_l00018}00018\ \ \ \ \ @ManyToOne}
+\DoxyCodeLine{\Hypertarget{Match_8java_source_l00019}00019\ \ \ \ \ @JoinColumn(name\ =\ \textcolor{stringliteral}{"{}fk\_left\_team\_id"{}},\ nullable\ =\ \textcolor{keyword}{false})}
+\DoxyCodeLine{\Hypertarget{Match_8java_source_l00020}00020\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Team}{Team}}\ leftTeam;}
+\DoxyCodeLine{\Hypertarget{Match_8java_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{Match_8java_source_l00022}00022\ \ \ \ \ @ManyToOne}
+\DoxyCodeLine{\Hypertarget{Match_8java_source_l00023}00023\ \ \ \ \ @JoinColumn(name\ =\ \textcolor{stringliteral}{"{}fk\_right\_team\_id"{}},\ nullable\ =\ \textcolor{keyword}{false})}
+\DoxyCodeLine{\Hypertarget{Match_8java_source_l00024}00024\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Team}{Team}}\ rightTeam;}
+\DoxyCodeLine{\Hypertarget{Match_8java_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{Match_8java_source_l00026}00026\ \ \ \ \ @ManyToOne}
+\DoxyCodeLine{\Hypertarget{Match_8java_source_l00027}00027\ \ \ \ \ @JoinColumn(name\ =\ \textcolor{stringliteral}{"{}fk\_league\_id"{}},\ nullable\ =\ \textcolor{keyword}{false})}
+\DoxyCodeLine{\Hypertarget{Match_8java_source_l00028}00028\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Competition}{Competition}}\ competition;}
+\DoxyCodeLine{\Hypertarget{Match_8java_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{Match_8java_source_l00030}00030\ \ \ \ \ @Column(nullable\ =\ \textcolor{keyword}{false})}
+\DoxyCodeLine{\Hypertarget{Match_8java_source_l00031}00031\ \ \ \ \ \textcolor{keyword}{private}\ OffsetDateTime\ datetime;}
+\DoxyCodeLine{\Hypertarget{Match_8java_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{Match_8java_source_l00033}00033\ \ \ \ \ @Column(nullable\ =\ \textcolor{keyword}{false},\ length\ =\ 100)}
+\DoxyCodeLine{\Hypertarget{Match_8java_source_l00034}00034\ \ \ \ \ \textcolor{keyword}{private}\ String\ venue;}
+\DoxyCodeLine{\Hypertarget{Match_8java_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{Match_8java_source_l00036}00036\ \ \ \ \ @Column(name\ =\ \textcolor{stringliteral}{"{}left\_score"{}},\ nullable\ =\ \textcolor{keyword}{false})}
+\DoxyCodeLine{\Hypertarget{Match_8java_source_l00037}00037\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{short}\ leftScore;}
+\DoxyCodeLine{\Hypertarget{Match_8java_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{Match_8java_source_l00039}00039\ \ \ \ \ @Column(name\ =\ \textcolor{stringliteral}{"{}right\_score"{}},\ nullable\ =\ \textcolor{keyword}{false})}
+\DoxyCodeLine{\Hypertarget{Match_8java_source_l00040}00040\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{short}\ rightScore;}
+\DoxyCodeLine{\Hypertarget{Match_8java_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{Match_8java_source_l00042}00042\ \ \ \ \ @Column(nullable\ =\ \textcolor{keyword}{false})}
+\DoxyCodeLine{\Hypertarget{Match_8java_source_l00043}00043\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{boolean}\ finished;}
+\DoxyCodeLine{\Hypertarget{Match_8java_source_l00044}00044\ \}}
+
+\end{DoxyCode}
