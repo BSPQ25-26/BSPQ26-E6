@@ -14,58 +14,7 @@
 
 <body class="pitch-bg min-h-screen font-sans text-slate-800">
 
-<nav class="bg-slate-900 border-b-2 border-emerald-600 shadow-md">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col sm:flex-row justify-between items-center min-h-16 py-3 gap-4">
-            <div class="flex items-center gap-3">
-                <svg class="w-8 h-8 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M9 10a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z"></path>
-                </svg>
-                <span class="text-xl font-black text-white uppercase tracking-wider">
-                    Football<span class="text-emerald-500">Manager</span>
-                </span>
-            </div>
-
-            <div class="flex flex-wrap justify-center sm:justify-end gap-3 items-center">
-                <select id="langSelect"
-                        class="px-4 py-[0.55rem] bg-slate-800 text-slate-300 text-sm font-medium rounded-md border border-slate-700"
-                        onchange="window.location.href = window.location.pathname + '?lang=' + this.value;">
-                    <option value="es" th:selected="${#locale.language == 'es'}" th:text="#{global.lang.es}">Espanol</option>
-                    <option value="en" th:selected="${#locale.language == 'en'}" th:text="#{global.lang.en}">English</option>
-                </select>
-
-                <a href="/standings" class="px-4 py-2 bg-slate-800 text-slate-300 text-sm font-medium rounded-md hover:bg-emerald-600 hover:text-white transition-colors border border-slate-700" th:text="#{nav.standings}">
-                    Standings
-                </a>
-              
-                <a href="/profile"
-                   class="px-4 py-2 bg-slate-800 text-slate-300 text-sm font-medium rounded-md hover:bg-slate-700 hover:text-white transition-colors border border-slate-700" th:text="#{teams.profile}">
-                    My Profile
-                </a>
-
-                <a href="/matches"
-                   class="px-4 py-2 bg-slate-800 text-slate-300 text-sm font-medium rounded-md hover:bg-slate-700 hover:text-white transition-colors border border-slate-700" th:text="#{teams.matches}">
-                    Matches
-                </a>
-
-                <a th:if="${isAdmin}" href="/admin"
-                   class="px-4 py-2 bg-slate-800 text-slate-300 text-sm font-medium rounded-md hover:bg-slate-700 hover:text-white transition-colors border border-slate-700" th:text="#{teams.adminPanel}">
-                    Admin Panel
-                </a>
-
-                <form th:action="@{/logout}" method="POST" class="m-0">
-                    <button type="submit"
-                            class="px-4 py-2 bg-red-500/10 text-red-500 text-sm font-medium rounded-md hover:bg-red-500 hover:text-white transition-colors border border-red-500/20" th:text="#{teams.logout}">
-                        Logout
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-</nav>
+<nav th:replace="~{fragments/navbar :: navbar(active='teams')}"></nav>
 
 <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
 

@@ -13,27 +13,7 @@
 </head>
 <body class="pitch-bg min-h-screen font-sans text-slate-800 pb-10">
 
-<nav class="bg-slate-900 border-b-2 border-emerald-600 shadow-md mb-10">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-16">
-            <div class="flex items-center gap-3">
-                <svg class="w-8 h-8 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                <span class="text-xl font-black text-white uppercase tracking-wider"><span th:text="#{brand.control}">Control</span><span class="text-emerald-500" th:text="#{brand.center}">Center</span></span>
-            </div>
-            <div class="flex items-center gap-3">
-                <select id="langSelect"
-                        class="px-4 py-[0.55rem] bg-slate-800 text-slate-300 text-sm font-medium rounded-md border border-slate-700"
-                        onchange="window.location.href = window.location.pathname + '?lang=' + this.value;">
-                    <option value="es" th:selected="${#locale.language == 'es'}" th:text="#{global.lang.es}">Espanol</option>
-                    <option value="en" th:selected="${#locale.language == 'en'}" th:text="#{global.lang.en}">English</option>
-                </select>
-                <a href="/teams" class="px-4 py-2 bg-slate-800 text-slate-300 text-sm font-medium rounded-md hover:bg-slate-700 hover:text-white transition-colors border border-slate-700" th:text="#{nav.backToDatabase}">
-                    Back to Database
-                </a>
-            </div>
-        </div>
-    </div>
-</nav>
+<nav th:replace="~{fragments/navbar :: navbar(active='admin')}"></nav>
 
 <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="mb-8">

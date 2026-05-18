@@ -8,35 +8,7 @@
 
 <body class="bg-slate-100 min-h-screen font-sans text-slate-800">
 
-<nav class="bg-slate-900 border-b-2 border-emerald-600 shadow-md">
-    <div class="max-w-7xl mx-auto px-4">
-        <div class="flex justify-between items-center h-16">
-            <a href="/teams" class="text-white font-black uppercase">
-                Football<span class="text-emerald-500">Manager</span>
-            </a>
-
-            <div class="flex gap-3 items-center">
-                <select id="langSelect"
-        class="px-4 py-[0.55rem] bg-slate-800 text-slate-300 text-sm font-medium rounded-md border border-slate-700"
-        onchange="window.location.href = window.location.pathname + '?lang=' + this.value;">
-    <option value="es" th:selected="${#locale.language == 'es'}" th:text="#{global.lang.es}">Espanol</option>
-    <option value="en" th:selected="${#locale.language == 'en'}" th:text="#{global.lang.en}">English</option>
-</select>
-                <a href="/teams" class="px-4 py-2 bg-slate-800 text-slate-300 rounded-md hover:bg-slate-700" th:text="#{teamDetails.navBack}">
-                    Back to Teams
-                </a>
-
-                <a href="/standings" class="px-4 py-2 bg-slate-800 text-slate-300 text-sm font-medium rounded-md hover:bg-emerald-600 hover:text-white transition-colors border border-slate-700" th:text="#{nav.standings}">
-                    Standings
-                </a>
-                <a th:if="${isAdmin}" href="/admin"
-                   class="px-4 py-2 bg-slate-800 text-slate-300 rounded-md hover:bg-slate-700" th:text="#{teamDetails.adminPanel}">
-                    Admin Panel
-                </a>
-            </div>
-        </div>
-    </div>
-</nav>
+<nav th:replace="~{fragments/navbar :: navbar(active='teams')}"></nav>
 
 <main class="max-w-6xl mx-auto px-4 py-10">
 
