@@ -32,12 +32,16 @@ public class CacheConfig {
                         .maximumSize(1000)
                         .build()),
                 new CaffeineCache("competitions", Caffeine.newBuilder()
-                        .expireAfterWrite(Duration.ofMinutes(1))
-                        .maximumSize(2000)
+                        .expireAfterWrite(Duration.ofMinutes(2))
+                        .maximumSize(1000)
                         .build()),
                 new CaffeineCache("teams", Caffeine.newBuilder()
-                        .expireAfterWrite(Duration.ofMinutes(1))
-                        .maximumSize(2000)
+                        .expireAfterWrite(Duration.ofMinutes(2))
+                        .maximumSize(1000)
+                        .build()),
+                new CaffeineCache("matchResults", Caffeine.newBuilder()
+                        .expireAfterWrite(Duration.ofSeconds(30))
+                        .maximumSize(1000)
                         .build())
         ));
         return cacheManager;

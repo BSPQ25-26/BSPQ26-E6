@@ -47,7 +47,7 @@ public class MatchService {
     }
 
     @Transactional
-    @CacheEvict(cacheNames = {"matches", "upcomingMatches", "standings"}, allEntries = true)
+    @CacheEvict(cacheNames = {"matches", "upcomingMatches", "standings", "matchResults"}, allEntries = true)
     public String createMatch(MatchRequestDTO request) {
         validateMatchRequest(request, true);
 
@@ -102,7 +102,7 @@ public class MatchService {
     }
 
     @Transactional
-    @CacheEvict(cacheNames = {"matches", "upcomingMatches", "standings"}, allEntries = true)
+    @CacheEvict(cacheNames = {"matches", "upcomingMatches", "standings", "matchResults"}, allEntries = true)
     public String updateMatch(Long id, MatchRequestDTO request) {
         validateMatchUpdate(request);
 
@@ -142,7 +142,7 @@ public class MatchService {
     }
 
     @Transactional
-    @CacheEvict(cacheNames = {"matches", "upcomingMatches", "standings"}, allEntries = true)
+    @CacheEvict(cacheNames = {"matches", "upcomingMatches", "standings", "matchResults"}, allEntries = true)
     public String deleteMatch(Long id) {
         Match match = matchRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Match not found with id: " + id));
@@ -154,7 +154,7 @@ public class MatchService {
     }
 
     @Transactional
-    @CacheEvict(cacheNames = {"matches", "upcomingMatches", "standings"}, allEntries = true)
+    @CacheEvict(cacheNames = {"matches", "upcomingMatches", "standings", "matchResults"}, allEntries = true)
     public String registerResult(Long id, MatchResultRequestDTO request) {
         if (request == null || request.getGoals() == null) {
             throw new IllegalArgumentException("Validation Error: Goals are required.");
@@ -195,6 +195,7 @@ public class MatchService {
         return "Result registered for match " + id + ": " + leftScore + " - " + rightScore;
     }
 
+    @Cacheable(cacheNames = "matchResults")
     public List<MatchResultDTO> getFinishedMatchResults() {
         List<Match> matches = matchRepository.findByFinishedTrueOrderByDatetimeDesc();
 
