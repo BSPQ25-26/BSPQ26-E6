@@ -60,7 +60,7 @@
                     Team
                 </option>
             </select>
-            <a href="/matches/schedule" class="px-6 py-3 bg-emerald-600 text-white font-bold rounded-xl hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-200 uppercase text-sm tracking-widest text-center" th:text="#{matches.scheduleNew}">
+            <a th:if="${isAdmin}" href="/matches/schedule" class="px-6 py-3 bg-emerald-600 text-white font-bold rounded-xl hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-200 uppercase text-sm tracking-widest text-center" th:text="#{matches.scheduleNew}">
                 Schedule New Match
             </a>
         </div>

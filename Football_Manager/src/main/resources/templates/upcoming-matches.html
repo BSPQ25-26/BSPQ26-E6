@@ -47,7 +47,7 @@
             </h1>
             <p class="text-slate-500 mt-1 font-medium" th:text="#{matches.subtitle}">Track all upcoming fixtures and final results.</p>
         </div>
-        <a href="/matches/schedule" class="px-6 py-3 bg-emerald-600 text-white font-bold rounded-xl hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-200 uppercase text-sm tracking-widest" th:text="#{matches.scheduleNew}">
+        <a th:if="${isAdmin}" href="/matches/schedule" class="px-6 py-3 bg-emerald-600 text-white font-bold rounded-xl hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-200 uppercase text-sm tracking-widest" th:text="#{matches.scheduleNew}">
             Schedule New Match
         </a>
     </div>

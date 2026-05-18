@@ -152,7 +152,10 @@ public class MatchViewController {
     }
 
     @GetMapping("/matches/upcoming")
-    public String showUpcomingMatchesPage(Model model) {
+    public String showUpcomingMatchesPage(Model model, HttpSession session) {
+        Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
+
+        model.addAttribute("isAdmin", isAdmin != null && isAdmin);
         model.addAttribute("matches", matchService.getUpcomingMatches());
         return "upcoming-matches";
     }

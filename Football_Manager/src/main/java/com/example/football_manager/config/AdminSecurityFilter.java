@@ -27,7 +27,11 @@ public class AdminSecurityFilter implements Filter {
         boolean isProtectedPath = uri.startsWith("/admin") ||
                 uri.startsWith("/teams/add") ||
                 uri.startsWith("/teams/edit") ||
-                uri.startsWith("/teams/delete");
+                uri.startsWith("/teams/delete") ||
+                uri.startsWith("/matches/schedule") ||
+                uri.startsWith("/matches/edit") ||
+                uri.startsWith("/matches/results") ||
+                uri.matches("^/matches/\\d+/(score|results).*$");
 
         if (isProtectedPath) {
             HttpSession session = req.getSession(false);
