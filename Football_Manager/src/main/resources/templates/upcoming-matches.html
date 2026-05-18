@@ -22,7 +22,7 @@
             <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight uppercase">
                 <span th:text="#{matches.heading}">Match Schedule</span> - <span class="text-emerald-600">Upcoming</span>
             </h1>
-            <p class="text-slate-500 mt-1 font-medium" th:text="#{matches.subtitle}">Track all upcoming fixtures and final results.</p>
+            <p class="text-slate-500 mt-1 font-medium" th:text="#{matches.upcoming.subtitle}">Track all upcoming fixtures.</p>
         </div>
         <a th:if="${isAdmin}" href="/matches/schedule" class="px-6 py-3 bg-emerald-600 text-white font-bold rounded-xl hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-200 uppercase text-sm tracking-widest" th:text="#{matches.scheduleNew}">
             Schedule New Match
