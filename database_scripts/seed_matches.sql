@@ -29,7 +29,16 @@ INSERT INTO "match" (id, fk_left_team_id, fk_right_team_id, fk_league_id, dateti
 (17,  2,  8, 1, '2026-05-25 18:30:00+02', 0, 0, false, 'Estadi Olympic Lluis Companys'),
 (18,  3, 10, 1, '2026-05-31 21:00:00+02', 0, 0, false, 'Civitas Metropolitano'),
 (19,  4,  7, 1, '2026-06-07 18:30:00+02', 0, 0, false, 'San Mames'),
-(20,  5,  6, 1, '2026-06-14 18:30:00+02', 0, 0, false, 'Reale Arena');
+(20,  5,  6, 1, '2026-06-14 18:30:00+02', 0, 0, false, 'Reale Arena')
+ON CONFLICT (id) DO UPDATE SET
+  fk_left_team_id  = EXCLUDED.fk_left_team_id,
+  fk_right_team_id = EXCLUDED.fk_right_team_id,
+  fk_league_id     = EXCLUDED.fk_league_id,
+  datetime         = EXCLUDED.datetime,
+  left_score       = EXCLUDED.left_score,
+  right_score      = EXCLUDED.right_score,
+  finished         = EXCLUDED.finished,
+  venue            = EXCLUDED.venue;
 
 -- ==========================
 --  PREMIER LEAGUE  (competition 2)
@@ -56,7 +65,16 @@ INSERT INTO "match" (id, fk_left_team_id, fk_right_team_id, fk_league_id, dateti
 (37, 11, 14, 2, '2026-05-25 16:30:00+01', 0, 0, false, 'Etihad Stadium'),
 (38, 16, 20, 2, '2026-05-31 16:30:00+01', 0, 0, false, 'Tottenham Hotspur Stadium'),
 (39, 17, 19, 2, '2026-06-07 16:30:00+01', 0, 0, false, 'St. James Park'),
-(40, 15, 18, 2, '2026-06-14 16:30:00+01', 0, 0, false, 'Old Trafford');
+(40, 15, 18, 2, '2026-06-14 16:30:00+01', 0, 0, false, 'Old Trafford')
+ON CONFLICT (id) DO UPDATE SET
+  fk_left_team_id  = EXCLUDED.fk_left_team_id,
+  fk_right_team_id = EXCLUDED.fk_right_team_id,
+  fk_league_id     = EXCLUDED.fk_league_id,
+  datetime         = EXCLUDED.datetime,
+  left_score       = EXCLUDED.left_score,
+  right_score      = EXCLUDED.right_score,
+  finished         = EXCLUDED.finished,
+  venue            = EXCLUDED.venue;
 
 -- ==========================
 --  BUNDESLIGA  (competition 3)
@@ -83,7 +101,16 @@ INSERT INTO "match" (id, fk_left_team_id, fk_right_team_id, fk_league_id, dateti
 (57, 21, 26, 3, '2026-05-30 15:30:00+02', 0, 0, false, 'BayArena'),
 (58, 23, 28, 3, '2026-06-06 15:30:00+02', 0, 0, false, 'Signal Iduna Park'),
 (59, 24, 27, 3, '2026-06-13 15:30:00+02', 0, 0, false, 'Red Bull Arena'),
-(60, 29, 30, 3, '2026-06-20 15:30:00+02', 0, 0, false, 'Europa Park Stadion');
+(60, 29, 30, 3, '2026-06-20 15:30:00+02', 0, 0, false, 'Europa Park Stadion')
+ON CONFLICT (id) DO UPDATE SET
+  fk_left_team_id  = EXCLUDED.fk_left_team_id,
+  fk_right_team_id = EXCLUDED.fk_right_team_id,
+  fk_league_id     = EXCLUDED.fk_league_id,
+  datetime         = EXCLUDED.datetime,
+  left_score       = EXCLUDED.left_score,
+  right_score      = EXCLUDED.right_score,
+  finished         = EXCLUDED.finished,
+  venue            = EXCLUDED.venue;
 
 -- ==========================
 --  SERIE A  (competition 4)
@@ -110,7 +137,16 @@ INSERT INTO "match" (id, fk_left_team_id, fk_right_team_id, fk_league_id, dateti
 (77, 32, 33, 4, '2026-05-30 20:45:00+02', 0, 0, false, 'San Siro'),
 (78, 35, 37, 4, '2026-06-06 20:45:00+02', 0, 0, false, 'Stadio Olimpico'),
 (79, 36, 40, 4, '2026-06-13 20:45:00+02', 0, 0, false, 'Stadio Olimpico'),
-(80, 38, 39, 4, '2026-06-20 20:45:00+02', 0, 0, false, 'Stadio Artemio Franchi');
+(80, 38, 39, 4, '2026-06-20 20:45:00+02', 0, 0, false, 'Stadio Artemio Franchi')
+ON CONFLICT (id) DO UPDATE SET
+  fk_left_team_id  = EXCLUDED.fk_left_team_id,
+  fk_right_team_id = EXCLUDED.fk_right_team_id,
+  fk_league_id     = EXCLUDED.fk_league_id,
+  datetime         = EXCLUDED.datetime,
+  left_score       = EXCLUDED.left_score,
+  right_score      = EXCLUDED.right_score,
+  finished         = EXCLUDED.finished,
+  venue            = EXCLUDED.venue;
 
 -- ==========================
 --  LIGUE 1  (competition 5)
@@ -137,7 +173,16 @@ INSERT INTO "match" (id, fk_left_team_id, fk_right_team_id, fk_league_id, dateti
 (97,  42, 45, 5, '2026-05-30 21:00:00+02', 0, 0, false, 'Orange Velodrome'),
 (98,  44, 47, 5, '2026-06-06 17:05:00+02', 0, 0, false, 'Stade Pierre-Mauroy'),
 (99,  46, 48, 5, '2026-06-13 17:05:00+02', 0, 0, false, 'Stade Bollaert-Delelis'),
-(100, 49, 50, 5, '2026-06-20 17:05:00+02', 0, 0, false, 'Stade Auguste Delaune');
+(100, 49, 50, 5, '2026-06-20 17:05:00+02', 0, 0, false, 'Stade Auguste Delaune')
+ON CONFLICT (id) DO UPDATE SET
+  fk_left_team_id  = EXCLUDED.fk_left_team_id,
+  fk_right_team_id = EXCLUDED.fk_right_team_id,
+  fk_league_id     = EXCLUDED.fk_league_id,
+  datetime         = EXCLUDED.datetime,
+  left_score       = EXCLUDED.left_score,
+  right_score      = EXCLUDED.right_score,
+  finished         = EXCLUDED.finished,
+  venue            = EXCLUDED.venue;
 
 -- Reset match sequence
 SELECT setval(pg_get_serial_sequence('"match"', 'id'), (SELECT MAX(id) FROM "match"));
@@ -145,6 +190,9 @@ SELECT setval(pg_get_serial_sequence('"match"', 'id'), (SELECT MAX(id) FROM "mat
 -- ==========================
 --  GOALS
 -- ==========================
+-- Delete existing goals for these matches before re-inserting
+DELETE FROM match_goal WHERE fk_match_id BETWEEN 1 AND 100;
+
 INSERT INTO match_goal (fk_match_id, fk_team_id, goal_minute, stoppage_minute) VALUES
 -- Match 1: Real Madrid 3-2 Barcelona
 ( 1,  1, 23, NULL), ( 1,  2, 44, NULL), ( 1,  1, 67, NULL), ( 1,  2, 75, NULL), ( 1,  1, 89, NULL),
