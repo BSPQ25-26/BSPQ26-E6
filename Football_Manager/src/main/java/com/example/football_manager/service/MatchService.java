@@ -12,6 +12,8 @@ import com.example.football_manager.repository.MatchGoalRepository;
 import com.example.football_manager.repository.MatchRepository;
 import com.example.football_manager.repository.TeamRepository;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,6 +47,7 @@ public class MatchService {
     }
 
     @Transactional
+    @CacheEvict(cacheNames = {"matches", "upcomingMatches", "standings"}, allEntries = true)
     public String createMatch(MatchRequestDTO request) {
         validateMatchRequest(request, true);
 
@@ -99,6 +102,7 @@ public class MatchService {
     }
 
     @Transactional
+    @CacheEvict(cacheNames = {"matches", "upcomingMatches", "standings"}, allEntries = true)
     public String updateMatch(Long id, MatchRequestDTO request) {
         validateMatchUpdate(request);
 
@@ -138,6 +142,7 @@ public class MatchService {
     }
 
     @Transactional
+    @CacheEvict(cacheNames = {"matches", "upcomingMatches", "standings"}, allEntries = true)
     public String deleteMatch(Long id) {
         Match match = matchRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Match not found with id: " + id));
@@ -149,6 +154,7 @@ public class MatchService {
     }
 
     @Transactional
+    @CacheEvict(cacheNames = {"matches", "upcomingMatches", "standings"}, allEntries = true)
     public String registerResult(Long id, MatchResultRequestDTO request) {
         if (request == null || request.getGoals() == null) {
             throw new IllegalArgumentException("Validation Error: Goals are required.");
@@ -264,12 +270,15 @@ public class MatchService {
         return matchRepository.findAll();
     }
 
+    @Cacheable(cacheNames = "upcomingMatches")
     public List<Match> getUpcomingMatches() {
         return matchRepository.findAll().stream()
                 .filter(match -> !match.isFinished())
                 .sorted((m1, m2) -> m1.getDatetime().compareTo(m2.getDatetime()))
                 .toList();
     }
+
+    @Cacheable(cacheNames = "matches", key = "T(java.util.Objects).hash(#teamId, #status, #competitionId)")
     public List<Match> getMatches(Long teamId, MatchRequestDTO.MatchStatus status, Long competitionId) {
         Boolean finished = toFinishedFilter(status);
 

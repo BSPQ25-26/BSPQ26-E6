@@ -6,6 +6,7 @@ import com.example.football_manager.model.Match;
 import com.example.football_manager.model.Team;
 import com.example.football_manager.repository.CompetitionRepository;
 import com.example.football_manager.repository.MatchRepository;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -26,10 +27,12 @@ public class StandingsService {
         this.matchRepository = matchRepository;
     }
 
+    @Cacheable(cacheNames = "competitions")
     public List<Competition> getCompetitions() {
         return competitionRepository.findAll();
     }
 
+    @Cacheable(cacheNames = "standings", key = "#competitionId")
     public List<StandingDTO> getStandingsForCompetition(Long competitionId) {
         List<Match> matches = matchRepository.findByFilters(null, null, competitionId);
 

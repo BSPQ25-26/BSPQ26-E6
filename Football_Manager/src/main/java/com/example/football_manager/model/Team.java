@@ -1,6 +1,6 @@
 package com.example.football_manager.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,7 +34,7 @@ public class Team {
 
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
     @OrderBy("number ASC")
-    @JsonManagedReference
+    @JsonIgnore
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private List<Player> players = new ArrayList<>();
@@ -46,4 +46,3 @@ public class Team {
         this.country = country;
     }
 }
-
