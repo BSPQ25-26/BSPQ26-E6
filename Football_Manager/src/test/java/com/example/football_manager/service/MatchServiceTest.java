@@ -386,4 +386,107 @@ class MatchServiceTest {
         assertEquals(1, result.size());
         assertEquals(40L, result.get(0).getId());
     }
+    @Test
+    void getMatches_withoutFilters_shouldReturnAllMatches() {
+        Match match = new Match();
+        match.setId(50L);
+
+        when(matchRepository.findAll()).thenReturn(List.of(match));
+
+        List<Match> result = matchService.getMatches(null, null, null);
+
+        assertEquals(1, result.size());
+        assertEquals(50L, result.get(0).getId());
+
+        verify(matchRepository).findAll();
+        verify(matchRepository, never()).findByFilters(any(), any(), any());
+    }
+
+    @Test
+    void getMatches_withTeamFilter_shouldCallFilteredRepository() {
+        Match match = new Match();
+        match.setId(51L);
+
+        when(matchRepository.findByFilters(1L, null, null)).thenReturn(List.of(match));
+
+        List<Match> result = matchService.getMatches(1L, null, null);
+
+        assertEquals(1, result.size());
+        assertEquals(51L, result.get(0).getId());
+
+        verify(matchRepository).findByFilters(1L, null, null);
+        verify(matchRepository, never()).findAll();
+    }
+
+    @Test
+    void getMatches_withFinishedStatus_shouldConvertStatusToTrue() {
+        Match match = new Match();
+        match.setId(52L);
+        match.setFinished(true);
+
+        when(matchRepository.findByFilters(null, true, null)).thenReturn(List.of(match));
+
+        List<Match> result = matchService.getMatches(
+                null,
+                MatchRequestDTO.MatchStatus.FINISHED,
+                null
+        );
+
+        assertEquals(1, result.size());
+        assertTrue(result.get(0).isFinished());
+
+        verify(matchRepository).findByFilters(null, true, null);
+    }
+
+    @Test
+    void getMatches_withScheduledStatus_shouldConvertStatusToFalse() {
+        Match match = new Match();
+        match.setId(53L);
+        match.setFinished(false);
+
+        when(matchRepository.findByFilters(null, false, null)).thenReturn(List.of(match));
+
+        List<Match> result = matchService.getMatches(
+                null,
+                MatchRequestDTO.MatchStatus.SCHEDULED,
+                null
+        );
+
+        assertEquals(1, result.size());
+        assertFalse(result.get(0).isFinished());
+
+        verify(matchRepository).findByFilters(null, false, null);
+    }
+
+    @Test
+    void getMatches_withCompetitionFilter_shouldCallFilteredRepository() {
+        Match match = new Match();
+        match.setId(54L);
+
+        when(matchRepository.findByFilters(null, null, 7L)).thenReturn(List.of(match));
+
+        List<Match> result = matchService.getMatches(null, null, 7L);
+
+        assertEquals(1, result.size());
+        assertEquals(54L, result.get(0).getId());
+
+        verify(matchRepository).findByFilters(null, null, 7L);
+    }
+
+    @Test
+    void getMatches_withInvalidStatusForFiltering_shouldThrowException() {
+        IllegalArgumentException ex = assertThrows(
+                IllegalArgumentException.class,
+                () -> matchService.getMatches(
+                        null,
+                        MatchRequestDTO.MatchStatus.IN_PROGRESS,
+                        null
+                )
+        );
+
+        assertTrue(ex.getMessage().contains("Match status filter"));
+
+        verify(matchRepository, never()).findAll();
+        verify(matchRepository, never()).findByFilters(any(), any(), any());
+    }
 }

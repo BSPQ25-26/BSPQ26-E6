@@ -1,0 +1,25 @@
+\doxysection{Player\+Repository.\+java}
+\hypertarget{PlayerRepository_8java_source}{}\label{PlayerRepository_8java_source}\index{Football\_Manager/src/main/java/com/example/football\_manager/repository/PlayerRepository.java@{Football\_Manager/src/main/java/com/example/football\_manager/repository/PlayerRepository.java}}
+\mbox{\hyperlink{PlayerRepository_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{PlayerRepository_8java_source_l00001}00001\ \textcolor{keyword}{package\ }com.example.football\_manager.repository;}
+\DoxyCodeLine{\Hypertarget{PlayerRepository_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{PlayerRepository_8java_source_l00003}00003\ \textcolor{keyword}{import}\ com.example.football\_manager.model.Player;}
+\DoxyCodeLine{\Hypertarget{PlayerRepository_8java_source_l00004}00004\ \textcolor{keyword}{import}\ org.springframework.data.jpa.repository.JpaRepository;}
+\DoxyCodeLine{\Hypertarget{PlayerRepository_8java_source_l00005}00005\ \textcolor{keyword}{import}\ org.springframework.stereotype.Repository;}
+\DoxyCodeLine{\Hypertarget{PlayerRepository_8java_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{PlayerRepository_8java_source_l00007}00007\ \textcolor{keyword}{import}\ java.util.List;}
+\DoxyCodeLine{\Hypertarget{PlayerRepository_8java_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{PlayerRepository_8java_source_l00009}00009\ @Repository}
+\DoxyCodeLine{\Hypertarget{PlayerRepository_8java_source_l00010}\mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1PlayerRepository}{00010}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{interface\ }\mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1PlayerRepository}{PlayerRepository}}\ \textcolor{keyword}{extends}\ JpaRepository<Player,\ Long>\ \{}
+\DoxyCodeLine{\Hypertarget{PlayerRepository_8java_source_l00011}\mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1PlayerRepository_a5ccf4ded2dbfe230fb334b90ea1e56ed}{00011}}\ \ \ \ \ \textcolor{keywordtype}{boolean}\ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1PlayerRepository_a5ccf4ded2dbfe230fb334b90ea1e56ed}{existsByTeamIdAndNumber}}(Long\ teamId,\ Integer\ number);}
+\DoxyCodeLine{\Hypertarget{PlayerRepository_8java_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{PlayerRepository_8java_source_l00013}\mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1PlayerRepository_a754b9bdef018bc51c6015b855d17e61e}{00013}}\ \ \ \ \ \textcolor{keywordtype}{boolean}\ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1PlayerRepository_a754b9bdef018bc51c6015b855d17e61e}{existsByTeamIdAndNumberAndIdNot}}(Long\ teamId,\ Integer\ number,\ Long\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{PlayerRepository_8java_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{PlayerRepository_8java_source_l00015}\mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1PlayerRepository_ae5f41d08a705fd837a9a56616e5d7c34}{00015}}\ \ \ \ \ List<Player>\ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1PlayerRepository_ae5f41d08a705fd837a9a56616e5d7c34}{findByTeamIdOrderByNumberAsc}}(Long\ teamId);}
+\DoxyCodeLine{\Hypertarget{PlayerRepository_8java_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{PlayerRepository_8java_source_l00017}\mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1PlayerRepository_a9e01ab3c11951131bd2e54f8758ae9ac}{00017}}\ \ \ \ \ java.util.Optional<\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Player}{Player}}>\ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1PlayerRepository_a9e01ab3c11951131bd2e54f8758ae9ac}{findByIdAndTeamId}}(Long\ \textcolor{keywordtype}{id},\ Long\ teamId);}
+\DoxyCodeLine{\Hypertarget{PlayerRepository_8java_source_l00018}00018\ \}}
+\DoxyCodeLine{\Hypertarget{PlayerRepository_8java_source_l00019}00019\ }
+
+\end{DoxyCode}

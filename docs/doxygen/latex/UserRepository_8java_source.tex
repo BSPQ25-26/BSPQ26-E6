@@ -1,0 +1,26 @@
+\doxysection{User\+Repository.\+java}
+\hypertarget{UserRepository_8java_source}{}\label{UserRepository_8java_source}\index{Football\_Manager/src/main/java/com/example/football\_manager/repository/UserRepository.java@{Football\_Manager/src/main/java/com/example/football\_manager/repository/UserRepository.java}}
+\mbox{\hyperlink{UserRepository_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{UserRepository_8java_source_l00001}00001\ \textcolor{keyword}{package\ }com.example.football\_manager.repository;}
+\DoxyCodeLine{\Hypertarget{UserRepository_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{UserRepository_8java_source_l00003}00003\ \textcolor{keyword}{import}\ com.example.football\_manager.model.User;}
+\DoxyCodeLine{\Hypertarget{UserRepository_8java_source_l00004}00004\ \textcolor{keyword}{import}\ org.springframework.data.jpa.repository.EntityGraph;}
+\DoxyCodeLine{\Hypertarget{UserRepository_8java_source_l00005}00005\ \textcolor{keyword}{import}\ org.springframework.data.jpa.repository.JpaRepository;}
+\DoxyCodeLine{\Hypertarget{UserRepository_8java_source_l00006}00006\ \textcolor{keyword}{import}\ org.springframework.stereotype.Repository;}
+\DoxyCodeLine{\Hypertarget{UserRepository_8java_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{UserRepository_8java_source_l00008}00008\ \textcolor{keyword}{import}\ java.util.Optional;}
+\DoxyCodeLine{\Hypertarget{UserRepository_8java_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{UserRepository_8java_source_l00010}00010\ @Repository}
+\DoxyCodeLine{\Hypertarget{UserRepository_8java_source_l00011}\mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1UserRepository}{00011}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{interface\ }\mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1UserRepository}{UserRepository}}\ \textcolor{keyword}{extends}\ JpaRepository<User,\ Long>\ \{}
+\DoxyCodeLine{\Hypertarget{UserRepository_8java_source_l00012}\mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1UserRepository_ac327974dd58a47a21bbbbd6e2b4be931}{00012}}\ \ \ \ \ Optional<User>\ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1UserRepository_ac327974dd58a47a21bbbbd6e2b4be931}{findByUsername}}(String\ username);}
+\DoxyCodeLine{\Hypertarget{UserRepository_8java_source_l00013}\mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1UserRepository_abb0bd1c1af4f1977d608d08e9637f304}{00013}}\ \ \ \ \ Optional<User>\ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1UserRepository_abb0bd1c1af4f1977d608d08e9637f304}{findByEmail}}(String\ email);}
+\DoxyCodeLine{\Hypertarget{UserRepository_8java_source_l00014}00014\ \ \ \ \ @EntityGraph(attributePaths\ =\ \textcolor{stringliteral}{"{}favouriteTeams"{}})}
+\DoxyCodeLine{\Hypertarget{UserRepository_8java_source_l00015}\mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1UserRepository_a9a7fdf9bb3095f8f1aa6802fabcba065}{00015}}\ \ \ \ \ Optional<\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1User}{User}}>\ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1UserRepository_a9a7fdf9bb3095f8f1aa6802fabcba065}{findWithFavouriteTeamsById}}(Long\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{UserRepository_8java_source_l00016}\mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1UserRepository_acfead2ebe938f94d59663bdd4e19ba72}{00016}}\ \ \ \ \ \textcolor{keywordtype}{boolean}\ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1UserRepository_acfead2ebe938f94d59663bdd4e19ba72}{existsByUsername}}(String\ username);}
+\DoxyCodeLine{\Hypertarget{UserRepository_8java_source_l00017}\mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1UserRepository_a9bf6759122462c8adf3efa1a6026801d}{00017}}\ \ \ \ \ \textcolor{keywordtype}{boolean}\ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1UserRepository_a9bf6759122462c8adf3efa1a6026801d}{existsByEmail}}(String\ email);}
+\DoxyCodeLine{\Hypertarget{UserRepository_8java_source_l00018}\mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1UserRepository_a126837925ae61fa55ccd9e2ffb1e9767}{00018}}\ \ \ \ \ \textcolor{keywordtype}{boolean}\ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1UserRepository_a126837925ae61fa55ccd9e2ffb1e9767}{existsByUsernameAndIdNot}}(String\ username,\ Long\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{UserRepository_8java_source_l00019}\mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1UserRepository_a0efb4d0eb6102f15df736f99b78793fb}{00019}}\ \ \ \ \ \textcolor{keywordtype}{boolean}\ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1UserRepository_a0efb4d0eb6102f15df736f99b78793fb}{existsByEmailAndIdNot}}(String\ email,\ Long\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{UserRepository_8java_source_l00020}00020\ \}}
+
+\end{DoxyCode}

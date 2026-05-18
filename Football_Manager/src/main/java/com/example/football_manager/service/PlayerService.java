@@ -6,8 +6,11 @@ import com.example.football_manager.model.Team;
 import com.example.football_manager.repository.PlayerRepository;
 import com.example.football_manager.repository.TeamRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class PlayerService {
@@ -42,6 +45,50 @@ public class PlayerService {
         team.getPlayers().add(savedPlayer);
 
         return savedPlayer;
+    }
+
+    @Transactional
+    public List<Player> createPlayers(Long teamId, List<PlayerRequestDTO> playerRequests) {
+        if (teamId == null) {
+            throw new IllegalArgumentException("Validation Error: Team ID is required.");
+        }
+
+        if (playerRequests == null || playerRequests.isEmpty()) {
+            throw new IllegalArgumentException("Validation Error: Player list is required.");
+        }
+
+        Team team = teamRepository.findById(teamId)
+                .orElseThrow(() -> new IllegalArgumentException("Team not found with id: " + teamId));
+
+        Set<Integer> numbersInRequest = new HashSet<>();
+        for (PlayerRequestDTO playerRequest : playerRequests) {
+            validatePlayerRequest(teamId, playerRequest);
+
+            if (!numbersInRequest.add(playerRequest.getNumber())) {
+                throw new IllegalArgumentException(
+                        "Validation Error: Request contains duplicated player number " + playerRequest.getNumber() + "."
+                );
+            }
+
+            if (playerRepository.existsByTeamIdAndNumber(teamId, playerRequest.getNumber())) {
+                throw new IllegalArgumentException(
+                        "Validation Error: Team already has a player with number " + playerRequest.getNumber() + "."
+                );
+            }
+        }
+
+        List<Player> players = playerRequests.stream().map(playerRequest -> {
+            Player player = new Player();
+            player.setName(playerRequest.getName().trim());
+            player.setNumber(playerRequest.getNumber());
+            player.setPosition(playerRequest.getPosition());
+            player.setTeam(team);
+            return player;
+        }).toList();
+
+        List<Player> savedPlayers = playerRepository.saveAll(players);
+        team.getPlayers().addAll(savedPlayers);
+        return savedPlayers;
     }
 
     public List<Player> getPlayersByTeamId(Long teamId) {

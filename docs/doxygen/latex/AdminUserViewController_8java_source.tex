@@ -1,0 +1,35 @@
+\doxysection{Admin\+User\+View\+Controller.\+java}
+\hypertarget{AdminUserViewController_8java_source}{}\label{AdminUserViewController_8java_source}\index{Football\_Manager/src/main/java/com/example/football\_manager/controller/AdminUserViewController.java@{Football\_Manager/src/main/java/com/example/football\_manager/controller/AdminUserViewController.java}}
+\mbox{\hyperlink{AdminUserViewController_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{AdminUserViewController_8java_source_l00001}00001\ \textcolor{keyword}{package\ }com.example.football\_manager.controller;}
+\DoxyCodeLine{\Hypertarget{AdminUserViewController_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{AdminUserViewController_8java_source_l00003}00003\ \textcolor{keyword}{import}\ com.example.football\_manager.service.UserService;}
+\DoxyCodeLine{\Hypertarget{AdminUserViewController_8java_source_l00004}00004\ \textcolor{keyword}{import}\ org.springframework.stereotype.Controller;}
+\DoxyCodeLine{\Hypertarget{AdminUserViewController_8java_source_l00005}00005\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.*;}
+\DoxyCodeLine{\Hypertarget{AdminUserViewController_8java_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{AdminUserViewController_8java_source_l00007}00007\ @Controller}
+\DoxyCodeLine{\Hypertarget{AdminUserViewController_8java_source_l00008}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1AdminUserViewController}{00008}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1AdminUserViewController_ad43eb0a66885fc3e292fdc95eb11fa97}{AdminUserViewController}}\ \{}
+\DoxyCodeLine{\Hypertarget{AdminUserViewController_8java_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{AdminUserViewController_8java_source_l00010}00010\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1UserService}{UserService}}\ userService;}
+\DoxyCodeLine{\Hypertarget{AdminUserViewController_8java_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{AdminUserViewController_8java_source_l00012}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1AdminUserViewController_ad43eb0a66885fc3e292fdc95eb11fa97}{00012}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1AdminUserViewController_ad43eb0a66885fc3e292fdc95eb11fa97}{AdminUserViewController}}(\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1UserService}{UserService}}\ userService)\ \{}
+\DoxyCodeLine{\Hypertarget{AdminUserViewController_8java_source_l00013}00013\ \ \ \ \ \ \ \ \ this.userService\ =\ userService;}
+\DoxyCodeLine{\Hypertarget{AdminUserViewController_8java_source_l00014}00014\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{AdminUserViewController_8java_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{AdminUserViewController_8java_source_l00016}00016\ \ \ \ \ @GetMapping(\textcolor{stringliteral}{"{}/admin/users"{}})}
+\DoxyCodeLine{\Hypertarget{AdminUserViewController_8java_source_l00017}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1AdminUserViewController_a6f213c6dc277c2691d68ea7ce9a0ed2a}{00017}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1AdminUserViewController_a6f213c6dc277c2691d68ea7ce9a0ed2a}{usersPage}}()\ \{}
+\DoxyCodeLine{\Hypertarget{AdminUserViewController_8java_source_l00018}00018\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}admin-\/users"{}};}
+\DoxyCodeLine{\Hypertarget{AdminUserViewController_8java_source_l00019}00019\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{AdminUserViewController_8java_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{AdminUserViewController_8java_source_l00021}00021\ \ \ \ \ @PostMapping(\textcolor{stringliteral}{"{}/admin/users"{}})}
+\DoxyCodeLine{\Hypertarget{AdminUserViewController_8java_source_l00022}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1AdminUserViewController_a45c523c4b70cae0b940567601112f8b4}{00022}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1AdminUserViewController_a45c523c4b70cae0b940567601112f8b4}{createUser}}(@RequestParam\ String\ username,}
+\DoxyCodeLine{\Hypertarget{AdminUserViewController_8java_source_l00023}00023\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @RequestParam\ String\ email,}
+\DoxyCodeLine{\Hypertarget{AdminUserViewController_8java_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @RequestParam\ String\ password,}
+\DoxyCodeLine{\Hypertarget{AdminUserViewController_8java_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @RequestParam(defaultValue\ =\ \textcolor{stringliteral}{"{}false"{}})\ Boolean\ isAdmin)\ \{}
+\DoxyCodeLine{\Hypertarget{AdminUserViewController_8java_source_l00026}00026\ \ \ \ \ \ \ \ \ userService.registerUser(username,\ email,\ password,\ isAdmin);}
+\DoxyCodeLine{\Hypertarget{AdminUserViewController_8java_source_l00027}00027\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}redirect:/admin/users"{}};}
+\DoxyCodeLine{\Hypertarget{AdminUserViewController_8java_source_l00028}00028\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{AdminUserViewController_8java_source_l00029}00029\ \}}
+
+\end{DoxyCode}

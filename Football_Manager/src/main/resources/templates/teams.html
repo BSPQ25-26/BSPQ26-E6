@@ -84,13 +84,23 @@
     </div>
 
     <section class="mb-8 bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
-        <div class="px-6 py-5 border-b border-slate-200 bg-slate-50">
-            <h2 class="text-2xl font-extrabold text-slate-900 uppercase" th:text="#{teams.upcoming.heading}">
-                Upcoming Matches From Your Favourite Teams
-            </h2>
-            <p class="text-slate-500 mt-1 font-medium" th:text="#{teams.upcoming.subtitle}">
-                These are the next matches involving teams you marked with the heart.
-            </p>
+        <div class="px-6 py-5 border-b border-slate-200 bg-slate-50 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+                <h2 class="text-2xl font-extrabold text-slate-900 uppercase" th:text="#{teams.upcoming.heading}">
+                    Upcoming Matches From Your Favourite Teams
+                </h2>
+                <p class="text-slate-500 mt-1 font-medium" th:text="#{teams.upcoming.subtitle}">
+                    These are the next matches involving teams you marked with the heart.
+                </p>
+            </div>
+            
+            <div class="flex-shrink-0">
+                <a href="/matches/upcoming" 
+                class="inline-flex items-center px-4 py-2.5 bg-emerald-600 text-white text-xs font-bold rounded-xl hover:bg-emerald-700 transition-all shadow-md shadow-emerald-100 uppercase tracking-widest"
+                th:text="#{teams.upcoming.viewAllButton}">
+                    Ver todos los próximos partidos
+                </a>
+            </div>
         </div>
 
         <div th:if="${#lists.isEmpty(favouriteUpcomingMatches)}" class="p-6 text-slate-500" th:text="#{teams.upcoming.empty}">

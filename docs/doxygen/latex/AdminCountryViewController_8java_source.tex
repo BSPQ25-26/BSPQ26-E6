@@ -1,0 +1,42 @@
+\doxysection{Admin\+Country\+View\+Controller.\+java}
+\hypertarget{AdminCountryViewController_8java_source}{}\label{AdminCountryViewController_8java_source}\index{Football\_Manager/src/main/java/com/example/football\_manager/controller/AdminCountryViewController.java@{Football\_Manager/src/main/java/com/example/football\_manager/controller/AdminCountryViewController.java}}
+\mbox{\hyperlink{AdminCountryViewController_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{AdminCountryViewController_8java_source_l00001}\mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1controller}{00001}}\ \textcolor{keyword}{package\ }com.example.football\_manager.controller;}
+\DoxyCodeLine{\Hypertarget{AdminCountryViewController_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{AdminCountryViewController_8java_source_l00003}00003\ \textcolor{keyword}{import}\ com.example.football\_manager.dto.CountryRequestDTO;}
+\DoxyCodeLine{\Hypertarget{AdminCountryViewController_8java_source_l00004}00004\ \textcolor{keyword}{import}\ com.example.football\_manager.service.CountryService;}
+\DoxyCodeLine{\Hypertarget{AdminCountryViewController_8java_source_l00005}00005\ \textcolor{keyword}{import}\ org.springframework.stereotype.Controller;}
+\DoxyCodeLine{\Hypertarget{AdminCountryViewController_8java_source_l00006}00006\ \textcolor{keyword}{import}\ org.springframework.ui.Model;}
+\DoxyCodeLine{\Hypertarget{AdminCountryViewController_8java_source_l00007}00007\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.*;}
+\DoxyCodeLine{\Hypertarget{AdminCountryViewController_8java_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{AdminCountryViewController_8java_source_l00009}00009\ @Controller}
+\DoxyCodeLine{\Hypertarget{AdminCountryViewController_8java_source_l00010}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1AdminCountryViewController}{00010}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1AdminCountryViewController_a3c75aba19cad5c0bf1019886f0f3c5aa}{AdminCountryViewController}}\ \{}
+\DoxyCodeLine{\Hypertarget{AdminCountryViewController_8java_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{AdminCountryViewController_8java_source_l00012}00012\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1CountryService}{CountryService}}\ countryService;}
+\DoxyCodeLine{\Hypertarget{AdminCountryViewController_8java_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{AdminCountryViewController_8java_source_l00014}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1AdminCountryViewController_a3c75aba19cad5c0bf1019886f0f3c5aa}{00014}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1AdminCountryViewController_a3c75aba19cad5c0bf1019886f0f3c5aa}{AdminCountryViewController}}(\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1CountryService}{CountryService}}\ countryService)\ \{}
+\DoxyCodeLine{\Hypertarget{AdminCountryViewController_8java_source_l00015}00015\ \ \ \ \ \ \ \ \ this.countryService\ =\ countryService;}
+\DoxyCodeLine{\Hypertarget{AdminCountryViewController_8java_source_l00016}00016\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{AdminCountryViewController_8java_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{AdminCountryViewController_8java_source_l00018}00018\ \ \ \ \ @GetMapping(\textcolor{stringliteral}{"{}/admin/countries"{}})}
+\DoxyCodeLine{\Hypertarget{AdminCountryViewController_8java_source_l00019}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1AdminCountryViewController_a4397c75a123f429d0d4e102602c9a347}{00019}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1AdminCountryViewController_a4397c75a123f429d0d4e102602c9a347}{countriesPage}}(Model\ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1model}{model}})\ \{}
+\DoxyCodeLine{\Hypertarget{AdminCountryViewController_8java_source_l00020}00020\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}countries"{}},\ countryService.getAllCountries());}
+\DoxyCodeLine{\Hypertarget{AdminCountryViewController_8java_source_l00021}00021\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}countryRequest"{}},\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1CountryRequestDTO}{CountryRequestDTO}}());}
+\DoxyCodeLine{\Hypertarget{AdminCountryViewController_8java_source_l00022}00022\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}admin-\/countries"{}};}
+\DoxyCodeLine{\Hypertarget{AdminCountryViewController_8java_source_l00023}00023\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{AdminCountryViewController_8java_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{AdminCountryViewController_8java_source_l00025}00025\ \ \ \ \ @PostMapping(\textcolor{stringliteral}{"{}/admin/countries"{}})}
+\DoxyCodeLine{\Hypertarget{AdminCountryViewController_8java_source_l00026}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1AdminCountryViewController_a8464ad00252a507c43f871535605ab0c}{00026}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1AdminCountryViewController_a8464ad00252a507c43f871535605ab0c}{createCountry}}(@ModelAttribute\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1CountryRequestDTO}{CountryRequestDTO}}\ countryRequest)\ \{}
+\DoxyCodeLine{\Hypertarget{AdminCountryViewController_8java_source_l00027}00027\ \ \ \ \ \ \ \ \ countryService.createCountry(countryRequest);}
+\DoxyCodeLine{\Hypertarget{AdminCountryViewController_8java_source_l00028}00028\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}redirect:/admin/countries"{}};}
+\DoxyCodeLine{\Hypertarget{AdminCountryViewController_8java_source_l00029}00029\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{AdminCountryViewController_8java_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{AdminCountryViewController_8java_source_l00031}00031\ \ \ \ \ @PostMapping(\textcolor{stringliteral}{"{}/admin/countries/delete/\{id\}"{}})}
+\DoxyCodeLine{\Hypertarget{AdminCountryViewController_8java_source_l00032}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1AdminCountryViewController_aec4cad91f5da610c80fd389e9d43d86a}{00032}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1AdminCountryViewController_aec4cad91f5da610c80fd389e9d43d86a}{deleteCountry}}(@PathVariable\ Long\ \textcolor{keywordtype}{id})\ \{}
+\DoxyCodeLine{\Hypertarget{AdminCountryViewController_8java_source_l00033}00033\ \ \ \ \ \ \ \ \ countryService.deleteCountry(\textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{AdminCountryViewController_8java_source_l00034}00034\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}redirect:/admin/countries"{}};}
+\DoxyCodeLine{\Hypertarget{AdminCountryViewController_8java_source_l00035}00035\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{AdminCountryViewController_8java_source_l00036}00036\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,39 @@
+\doxysection{Locale\+Config.\+java}
+\hypertarget{LocaleConfig_8java_source}{}\label{LocaleConfig_8java_source}\index{Football\_Manager/src/main/java/com/example/football\_manager/config/LocaleConfig.java@{Football\_Manager/src/main/java/com/example/football\_manager/config/LocaleConfig.java}}
+\mbox{\hyperlink{LocaleConfig_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{LocaleConfig_8java_source_l00001}00001\ \textcolor{keyword}{package\ }com.example.football\_manager.config;}
+\DoxyCodeLine{\Hypertarget{LocaleConfig_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{LocaleConfig_8java_source_l00003}00003\ \textcolor{keyword}{import}\ java.util.Locale;}
+\DoxyCodeLine{\Hypertarget{LocaleConfig_8java_source_l00004}00004\ \textcolor{keyword}{import}\ org.springframework.context.annotation.Bean;}
+\DoxyCodeLine{\Hypertarget{LocaleConfig_8java_source_l00005}00005\ \textcolor{keyword}{import}\ org.springframework.context.annotation.Configuration;}
+\DoxyCodeLine{\Hypertarget{LocaleConfig_8java_source_l00006}00006\ \textcolor{keyword}{import}\ org.springframework.web.servlet.LocaleResolver;}
+\DoxyCodeLine{\Hypertarget{LocaleConfig_8java_source_l00007}00007\ \textcolor{keyword}{import}\ org.springframework.web.servlet.config.annotation.InterceptorRegistry;}
+\DoxyCodeLine{\Hypertarget{LocaleConfig_8java_source_l00008}00008\ \textcolor{keyword}{import}\ org.springframework.web.servlet.config.annotation.WebMvcConfigurer;}
+\DoxyCodeLine{\Hypertarget{LocaleConfig_8java_source_l00009}00009\ \textcolor{keyword}{import}\ org.springframework.web.servlet.i18n.CookieLocaleResolver;}
+\DoxyCodeLine{\Hypertarget{LocaleConfig_8java_source_l00010}00010\ \textcolor{keyword}{import}\ org.springframework.web.servlet.i18n.LocaleChangeInterceptor;}
+\DoxyCodeLine{\Hypertarget{LocaleConfig_8java_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{LocaleConfig_8java_source_l00012}00012\ @Configuration}
+\DoxyCodeLine{\Hypertarget{LocaleConfig_8java_source_l00013}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1config_1_1LocaleConfig}{00013}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1config_1_1LocaleConfig}{LocaleConfig}}\ \textcolor{keyword}{implements}\ WebMvcConfigurer\ \{}
+\DoxyCodeLine{\Hypertarget{LocaleConfig_8java_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{LocaleConfig_8java_source_l00015}00015\ \ \ \ \ @Bean}
+\DoxyCodeLine{\Hypertarget{LocaleConfig_8java_source_l00016}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1config_1_1LocaleConfig_a093b75cc575fef5df555c6e511f7cf76}{00016}}\ \ \ \ \ \textcolor{keyword}{public}\ LocaleResolver\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1config_1_1LocaleConfig_a093b75cc575fef5df555c6e511f7cf76}{localeResolver}}()\ \{}
+\DoxyCodeLine{\Hypertarget{LocaleConfig_8java_source_l00017}00017\ \ \ \ \ \ \ \ \ CookieLocaleResolver\ resolver\ =\ \textcolor{keyword}{new}\ CookieLocaleResolver();}
+\DoxyCodeLine{\Hypertarget{LocaleConfig_8java_source_l00018}00018\ \ \ \ \ \ \ \ \ resolver.setDefaultLocale(\textcolor{keyword}{new}\ Locale(\textcolor{stringliteral}{"{}es"{}}));}
+\DoxyCodeLine{\Hypertarget{LocaleConfig_8java_source_l00019}00019\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ resolver;}
+\DoxyCodeLine{\Hypertarget{LocaleConfig_8java_source_l00020}00020\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{LocaleConfig_8java_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{LocaleConfig_8java_source_l00022}00022\ \ \ \ \ @Bean}
+\DoxyCodeLine{\Hypertarget{LocaleConfig_8java_source_l00023}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1config_1_1LocaleConfig_aef6b6acce60ecacd27c2f546446baf19}{00023}}\ \ \ \ \ \textcolor{keyword}{public}\ LocaleChangeInterceptor\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1config_1_1LocaleConfig_aef6b6acce60ecacd27c2f546446baf19}{localeChangeInterceptor}}()\ \{}
+\DoxyCodeLine{\Hypertarget{LocaleConfig_8java_source_l00024}00024\ \ \ \ \ \ \ \ \ LocaleChangeInterceptor\ interceptor\ =\ \textcolor{keyword}{new}\ LocaleChangeInterceptor();}
+\DoxyCodeLine{\Hypertarget{LocaleConfig_8java_source_l00025}00025\ \ \ \ \ \ \ \ \ interceptor.setParamName(\textcolor{stringliteral}{"{}lang"{}});}
+\DoxyCodeLine{\Hypertarget{LocaleConfig_8java_source_l00026}00026\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ interceptor;}
+\DoxyCodeLine{\Hypertarget{LocaleConfig_8java_source_l00027}00027\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{LocaleConfig_8java_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{LocaleConfig_8java_source_l00029}00029\ \ \ \ \ @Override}
+\DoxyCodeLine{\Hypertarget{LocaleConfig_8java_source_l00030}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1config_1_1LocaleConfig_a858c462df22d10e0f3ab4cc333267ee0}{00030}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1config_1_1LocaleConfig_a858c462df22d10e0f3ab4cc333267ee0}{addInterceptors}}(InterceptorRegistry\ registry)\ \{}
+\DoxyCodeLine{\Hypertarget{LocaleConfig_8java_source_l00031}00031\ \ \ \ \ \ \ \ \ registry.addInterceptor(\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1config_1_1LocaleConfig_aef6b6acce60ecacd27c2f546446baf19}{localeChangeInterceptor}}());}
+\DoxyCodeLine{\Hypertarget{LocaleConfig_8java_source_l00032}00032\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{LocaleConfig_8java_source_l00033}00033\ \}}
+
+\end{DoxyCode}

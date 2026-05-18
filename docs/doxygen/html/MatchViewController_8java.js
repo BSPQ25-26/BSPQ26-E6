@@ -1,0 +1,4 @@
+var MatchViewController_8java =
+[
+    [ "com.example.football_manager.controller.MatchViewController", "classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController.html", "classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController" ]
+];

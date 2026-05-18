@@ -1,0 +1,97 @@
+\doxysection{Auth\+Controller.\+java}
+\hypertarget{AuthController_8java_source}{}\label{AuthController_8java_source}\index{Football\_Manager/src/main/java/com/example/football\_manager/controller/AuthController.java@{Football\_Manager/src/main/java/com/example/football\_manager/controller/AuthController.java}}
+\mbox{\hyperlink{AuthController_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00001}00001\ \textcolor{keyword}{package\ }com.example.football\_manager.controller;}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00003}00003\ \textcolor{keyword}{import}\ com.example.football\_manager.dto.AuthResponseDTO;}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00004}00004\ \textcolor{keyword}{import}\ com.example.football\_manager.dto.LoginDTO;}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00005}00005\ \textcolor{keyword}{import}\ com.example.football\_manager.dto.RegisterDTO;}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00006}00006\ \textcolor{keyword}{import}\ com.example.football\_manager.model.User;}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00007}00007\ \textcolor{keyword}{import}\ com.example.football\_manager.service.UserService;}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00008}00008\ \textcolor{keyword}{import}\ jakarta.servlet.http.HttpSession;}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00009}00009\ \textcolor{keyword}{import}\ jakarta.validation.Valid;}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00010}00010\ \textcolor{keyword}{import}\ io.swagger.v3.oas.annotations.Operation;}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00011}00011\ \textcolor{keyword}{import}\ io.swagger.v3.oas.annotations.media.Content;}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00012}00012\ \textcolor{keyword}{import}\ io.swagger.v3.oas.annotations.media.Schema;}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00013}00013\ \textcolor{keyword}{import}\ io.swagger.v3.oas.annotations.responses.ApiResponse;}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00014}00014\ \textcolor{keyword}{import}\ io.swagger.v3.oas.annotations.responses.ApiResponses;}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00015}00015\ \textcolor{keyword}{import}\ io.swagger.v3.oas.annotations.tags.Tag;}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00016}00016\ \textcolor{keyword}{import}\ org.springframework.beans.factory.annotation.Autowired;}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00017}00017\ \textcolor{keyword}{import}\ org.springframework.http.HttpStatus;}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00018}00018\ \textcolor{keyword}{import}\ org.springframework.http.ResponseEntity;}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00019}00019\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.*;}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00021}00021\ @RestController}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00022}00022\ @RequestMapping(\textcolor{stringliteral}{"{}/auth"{}})}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00023}00023\ @Tag(name\ =\ \textcolor{stringliteral}{"{}Auth"{}})}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00024}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1AuthController}{00024}}\ public\ class\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1AuthController}{AuthController}}\ \{}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00026}00026\ \ \ \ \ @Autowired}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00027}00027\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1UserService}{UserService}}\ userService;}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00029}00029\ \ \ \ \ @PostMapping(\textcolor{stringliteral}{"{}/register"{}})}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00030}00030\ \ \ \ \ @Operation(}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ summary\ =\ \textcolor{stringliteral}{"{}Register\ a\ user"{}},}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ description\ =\ \textcolor{stringliteral}{"{}Creates\ a\ new\ user\ account.\ Returns\ a\ message\ indicating\ success\ or\ conflict."{}},}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ requestBody\ =\ @io.swagger.v3.oas.annotations.parameters.RequestBody(}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ required\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ description\ =\ \textcolor{stringliteral}{"{}Registration\ details"{}},}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ content\ =\ @Content(schema\ =\ @Schema(implementation\ =\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1RegisterDTO}{RegisterDTO}}.class))}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00038}00038\ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00039}00039\ \ \ \ \ @ApiResponses(\{}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ @ApiResponse(responseCode\ =\ \textcolor{stringliteral}{"{}201"{}},\ description\ =\ \textcolor{stringliteral}{"{}User\ registered"{}}),}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ @ApiResponse(responseCode\ =\ \textcolor{stringliteral}{"{}409"{}},\ description\ =\ \textcolor{stringliteral}{"{}Username\ or\ email\ already\ exists"{}}),}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ @ApiResponse(responseCode\ =\ \textcolor{stringliteral}{"{}400"{}},\ description\ =\ \textcolor{stringliteral}{"{}Validation\ error"{}})}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00043}00043\ \ \ \ \ \})}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00044}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1AuthController_a2f4a0cff63dd6c604cb9d83b2eabc3e4}{00044}}\ \ \ \ \ \textcolor{keyword}{public}\ ResponseEntity<AuthResponseDTO>\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1AuthController_a2f4a0cff63dd6c604cb9d83b2eabc3e4}{register}}(@Valid\ @RequestBody\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1RegisterDTO}{RegisterDTO}}\ registerDTO)\ \{}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00045}00045\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1User}{User}}\ user\ =\ userService.registerUser(}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ registerDTO.getUsername(),}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ registerDTO.getEmail(),}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ registerDTO.getPassword(),}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ registerDTO.getIsAdmin()}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ResponseEntity.status(HttpStatus.CREATED)}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .body(\textcolor{keyword}{new}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1AuthResponseDTO}{AuthResponseDTO}}(user.getId(),\ user.getUsername(),\ user.getEmail(),\ user.getIsAdmin(),\ \textcolor{stringliteral}{"{}User\ registered"{}}));}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00055}00055\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (IllegalArgumentException\ ex)\ \{}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ResponseEntity.status(HttpStatus.CONFLICT)}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .body(\textcolor{keyword}{new}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1AuthResponseDTO}{AuthResponseDTO}}(\textcolor{keyword}{null},\ \textcolor{keyword}{null},\ \textcolor{keyword}{null},\ \textcolor{keyword}{null},\ ex.getMessage()));}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00058}00058\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00059}00059\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00061}00061\ \ \ \ \ @PostMapping(\textcolor{stringliteral}{"{}/login"{}})}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00062}00062\ \ \ \ \ @Operation(}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ summary\ =\ \textcolor{stringliteral}{"{}Login"{}},}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ description\ =\ \textcolor{stringliteral}{"{}Authenticates\ the\ user\ and\ stores\ the\ session\ attributes\ for\ subsequent\ requests."{}},}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ requestBody\ =\ @io.swagger.v3.oas.annotations.parameters.RequestBody(}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ required\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ description\ =\ \textcolor{stringliteral}{"{}Login\ credentials"{}},}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ content\ =\ @Content(schema\ =\ @Schema(implementation\ =\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1LoginDTO}{LoginDTO}}.class))}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00070}00070\ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00071}00071\ \ \ \ \ @ApiResponses(\{}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ @ApiResponse(responseCode\ =\ \textcolor{stringliteral}{"{}200"{}},\ description\ =\ \textcolor{stringliteral}{"{}Login\ successful"{}}),}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ @ApiResponse(responseCode\ =\ \textcolor{stringliteral}{"{}401"{}},\ description\ =\ \textcolor{stringliteral}{"{}Invalid\ credentials"{}}),}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ @ApiResponse(responseCode\ =\ \textcolor{stringliteral}{"{}400"{}},\ description\ =\ \textcolor{stringliteral}{"{}Validation\ error"{}})}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00075}00075\ \ \ \ \ \})}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00076}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1AuthController_a398715c6ea6c1da2347d6e13ffb46d74}{00076}}\ \ \ \ \ \textcolor{keyword}{public}\ ResponseEntity<AuthResponseDTO>\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1AuthController_a398715c6ea6c1da2347d6e13ffb46d74}{login}}(@Valid\ @RequestBody\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1LoginDTO}{LoginDTO}}\ loginDTO,\ HttpSession\ session)\ \{}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00077}00077\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1User}{User}}\ user\ =\ userService.login(loginDTO.getUsername(),\ loginDTO.getPassword());}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ session.setAttribute(\textcolor{stringliteral}{"{}userId"{}},\ user.getId());}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ session.setAttribute(\textcolor{stringliteral}{"{}isAdmin"{}},\ user.getIsAdmin());}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ResponseEntity.ok(}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1AuthResponseDTO}{AuthResponseDTO}}(user.getId(),\ user.getUsername(),\ user.getEmail(),\ user.getIsAdmin(),\ \textcolor{stringliteral}{"{}Login\ successful"{}})}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00086}00086\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (IllegalArgumentException\ ex)\ \{}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ResponseEntity.status(HttpStatus.UNAUTHORIZED)}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .body(\textcolor{keyword}{new}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1AuthResponseDTO}{AuthResponseDTO}}(\textcolor{keyword}{null},\ \textcolor{keyword}{null},\ \textcolor{keyword}{null},\ \textcolor{keyword}{null},\ ex.getMessage()));}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00089}00089\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00090}00090\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{AuthController_8java_source_l00091}00091\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,1081 @@
+\begin{theindex}
+
+  \item {addFavouriteTeam}
+    \subitem {com.example.football\_manager.controller.FavouriteTeamController}, 
+		\hyperpage{35}
+    \subitem {com.example.football\_manager.service.UserService}, 
+		\hyperpage{78}
+  \item {addInterceptors}
+    \subitem {com.example.football\_manager.config.LocaleConfig}, 
+		\hyperpage{38}
+  \item {AdminCountryViewController}
+    \subitem {com.example.football\_manager.controller.AdminCountryViewController}, 
+		\hyperpage{17}
+  \item {adminPanel}
+    \subitem {com.example.football\_manager.controller.AdminViewController}, 
+		\hyperpage{23}
+  \item {AdminPlayerViewController}
+    \subitem {com.example.football\_manager.controller.AdminPlayerViewController}, 
+		\hyperpage{19}
+  \item {AdminUserViewController}
+    \subitem {com.example.football\_manager.controller.AdminUserViewController}, 
+		\hyperpage{22}
+  \item {AuthResponseDTO}
+    \subitem {com.example.football\_manager.dto.AuthResponseDTO}, 
+		\hyperpage{24}
+
+  \indexspace
+
+  \item {BSPQ26-\/E6}, \hyperpage{1}
+
+  \indexspace
+
+  \item {CANCELLED}
+    \subitem {com.example.football\_manager.dto.MatchRequestDTO.MatchStatus}, 
+		\hyperpage{52}
+  \item {com.example.football\_manager}, \hyperpage{13}
+  \item {com.example.football\_manager.config}, \hyperpage{13}
+  \item {com.example.football\_manager.config.AdminSecurityFilter}, 
+		\hyperpage{21}
+    \subitem {doFilter}, \hyperpage{21}
+  \item {com.example.football\_manager.config.LocaleConfig}, 
+		\hyperpage{38}
+    \subitem {addInterceptors}, \hyperpage{38}
+    \subitem {localeChangeInterceptor}, \hyperpage{38}
+    \subitem {localeResolver}, \hyperpage{38}
+  \item {com.example.football\_manager.config.OpenApiConfig}, 
+		\hyperpage{56}
+  \item {com.example.football\_manager.config.SecurityConfig}, 
+		\hyperpage{66}
+    \subitem {filterChain}, \hyperpage{67}
+    \subitem {passwordEncoder}, \hyperpage{67}
+  \item {com.example.football\_manager.controller}, \hyperpage{14}
+  \item {com.example.football\_manager.controller.AdminCountryViewController}, 
+		\hyperpage{17}
+    \subitem {AdminCountryViewController}, \hyperpage{17}
+    \subitem {countriesPage}, \hyperpage{17}
+    \subitem {createCountry}, \hyperpage{17}
+    \subitem {deleteCountry}, \hyperpage{18}
+  \item {com.example.football\_manager.controller.AdminPlayerViewController}, 
+		\hyperpage{18}
+    \subitem {AdminPlayerViewController}, \hyperpage{19}
+    \subitem {createPlayer}, \hyperpage{19}
+    \subitem {deletePlayer}, \hyperpage{19}
+    \subitem {managePlayersLanding}, \hyperpage{19}
+    \subitem {manageTeamPlayers}, \hyperpage{19}
+    \subitem {showEditPlayerForm}, \hyperpage{20}
+    \subitem {updatePlayer}, \hyperpage{20}
+  \item {com.example.football\_manager.controller.AdminUserViewController}, 
+		\hyperpage{21}
+    \subitem {AdminUserViewController}, \hyperpage{22}
+    \subitem {createUser}, \hyperpage{22}
+    \subitem {usersPage}, \hyperpage{22}
+  \item {com.example.football\_manager.controller.AdminViewController}, 
+		\hyperpage{22}
+    \subitem {adminPanel}, \hyperpage{23}
+    \subitem {manageTeams}, \hyperpage{23}
+  \item {com.example.football\_manager.controller.AuthController}, 
+		\hyperpage{23}
+    \subitem {login}, \hyperpage{24}
+    \subitem {register}, \hyperpage{24}
+  \item {com.example.football\_manager.controller.AuthViewController}, 
+		\hyperpage{25}
+    \subitem {index}, \hyperpage{26}
+    \subitem {loginPage}, \hyperpage{26}
+    \subitem {registerPage}, \hyperpage{26}
+  \item {com.example.football\_manager.controller.CompetitionController}, 
+		\hyperpage{27}
+    \subitem {CompetitionController}, \hyperpage{27}
+    \subitem {createCompetition}, \hyperpage{27}
+    \subitem {deleteCompetition}, \hyperpage{27}
+    \subitem {getAllCompetitions}, \hyperpage{27}
+    \subitem {getCompetitionById}, \hyperpage{28}
+    \subitem {updateCompetition}, \hyperpage{28}
+  \item {com.example.football\_manager.controller.CountryController}, 
+		\hyperpage{31}
+    \subitem {CountryController}, \hyperpage{32}
+    \subitem {createCountry}, \hyperpage{32}
+    \subitem {deleteCountry}, \hyperpage{32}
+    \subitem {getAllCountries}, \hyperpage{32}
+  \item {com.example.football\_manager.controller.FavouriteTeamController}, 
+		\hyperpage{35}
+    \subitem {addFavouriteTeam}, \hyperpage{35}
+    \subitem {FavouriteTeamController}, \hyperpage{35}
+    \subitem {removeFavouriteTeam}, \hyperpage{35}
+  \item {com.example.football\_manager.controller.MatchController}, 
+		\hyperpage{40}
+    \subitem {createMatchFromForm}, \hyperpage{40}
+    \subitem {createMatchFromJson}, \hyperpage{40}
+    \subitem {deleteMatch}, \hyperpage{40}
+    \subitem {getMatches}, \hyperpage{41}
+    \subitem {getMatchResults}, \hyperpage{41}
+    \subitem {registerResult}, \hyperpage{41}
+    \subitem {updateMatch}, \hyperpage{41}
+  \item {com.example.football\_manager.controller.MatchViewController}, 
+		\hyperpage{53}
+    \subitem {MatchViewController}, \hyperpage{53}
+    \subitem {saveMatchResult}, \hyperpage{54}
+    \subitem {showEditForm}, \hyperpage{54}
+    \subitem {showMatchesPage}, \hyperpage{54}
+    \subitem {showResultsPage}, \hyperpage{54}
+    \subitem {showScheduleForm}, \hyperpage{54}
+    \subitem {showScoreForm}, \hyperpage{55}
+    \subitem {submitScoreForm}, \hyperpage{55}
+    \subitem {updateMatch}, \hyperpage{55}
+  \item {com.example.football\_manager.controller.PlayerController}, 
+		\hyperpage{56}
+    \subitem {createPlayer}, \hyperpage{57}
+    \subitem {deletePlayer}, \hyperpage{57}
+    \subitem {getPlayersByTeamId}, \hyperpage{57}
+    \subitem {PlayerController}, \hyperpage{56}
+    \subitem {updatePlayer}, \hyperpage{57}
+  \item {com.example.football\_manager.controller.ProfileViewController}, 
+		\hyperpage{63}
+    \subitem {profilePage}, \hyperpage{64}
+    \subitem {ProfileViewController}, \hyperpage{64}
+    \subitem {updateProfile}, \hyperpage{64}
+  \item {com.example.football\_manager.controller.TeamController}, 
+		\hyperpage{68}
+    \subitem {createTeam}, \hyperpage{68}
+    \subitem {deleteTeam}, \hyperpage{68}
+    \subitem {getAllTeams}, \hyperpage{68}
+    \subitem {getTeamById}, \hyperpage{68}
+    \subitem {getTeamsContainingName}, \hyperpage{69}
+    \subitem {TeamController}, \hyperpage{68}
+    \subitem {updateTeam}, \hyperpage{69}
+  \item {com.example.football\_manager.controller.TeamViewController}, 
+		\hyperpage{73}
+    \subitem {createTeam}, \hyperpage{74}
+    \subitem {deleteTeam}, \hyperpage{74}
+    \subitem {showAddTeamForm}, \hyperpage{74}
+    \subitem {showEditTeamForm}, \hyperpage{74}
+    \subitem {teamDetailsPage}, \hyperpage{74}
+    \subitem {teamsPage}, \hyperpage{75}
+    \subitem {updateTeam}, \hyperpage{75}
+  \item {com.example.football\_manager.dto}, \hyperpage{14}
+    \subitem {MatchResultDTO}, \hyperpage{15}
+  \item {com.example.football\_manager.dto.AuthResponseDTO}, 
+		\hyperpage{24}
+    \subitem {AuthResponseDTO}, \hyperpage{24}
+    \subitem {getEmail}, \hyperpage{25}
+    \subitem {getId}, \hyperpage{25}
+    \subitem {getIsAdmin}, \hyperpage{25}
+    \subitem {getMessage}, \hyperpage{25}
+    \subitem {getUsername}, \hyperpage{25}
+  \item {com.example.football\_manager.dto.CompetitionRequestDTO}, 
+		\hyperpage{29}
+    \subitem {CompetitionRequestDTO}, \hyperpage{29}
+    \subitem {getName}, \hyperpage{29}
+    \subitem {setName}, \hyperpage{29}
+  \item {com.example.football\_manager.dto.CountryRequestDTO}, 
+		\hyperpage{33}
+    \subitem {CountryRequestDTO}, \hyperpage{33}
+    \subitem {getName}, \hyperpage{33}
+    \subitem {setName}, \hyperpage{33}
+  \item {com.example.football\_manager.dto.LoginDTO}, \hyperpage{39}
+    \subitem {getPassword}, \hyperpage{39}
+    \subitem {getUsername}, \hyperpage{39}
+    \subitem {setPassword}, \hyperpage{39}
+    \subitem {setUsername}, \hyperpage{39}
+  \item {com.example.football\_manager.dto.MatchRequestDTO}, 
+		\hyperpage{44}
+    \subitem {getAwayScore}, \hyperpage{45}
+    \subitem {getAwayTeamId}, \hyperpage{45}
+    \subitem {getCompetitionId}, \hyperpage{45}
+    \subitem {getHomeScore}, \hyperpage{45}
+    \subitem {getHomeTeamId}, \hyperpage{46}
+    \subitem {getKickoffTime}, \hyperpage{46}
+    \subitem {getStatus}, \hyperpage{46}
+    \subitem {getVenue}, \hyperpage{46}
+    \subitem {setAwayScore}, \hyperpage{46}
+    \subitem {setAwayTeamId}, \hyperpage{46}
+    \subitem {setCompetitionId}, \hyperpage{47}
+    \subitem {setHomeScore}, \hyperpage{47}
+    \subitem {setHomeTeamId}, \hyperpage{47}
+    \subitem {setKickoffTime}, \hyperpage{47}
+    \subitem {setStatus}, \hyperpage{47}
+    \subitem {setVenue}, \hyperpage{47}
+  \item {com.example.football\_manager.dto.MatchRequestDTO.MatchStatus}, 
+		\hyperpage{52}
+    \subitem {CANCELLED}, \hyperpage{52}
+    \subitem {FINISHED}, \hyperpage{52}
+    \subitem {IN\_PROGRESS}, \hyperpage{52}
+    \subitem {SCHEDULED}, \hyperpage{53}
+  \item {com.example.football\_manager.dto.MatchResultRequestDTO}, 
+		\hyperpage{48}
+    \subitem {getGoals}, \hyperpage{48}
+    \subitem {setGoals}, \hyperpage{48}
+  \item {com.example.football\_manager.dto.MatchResultRequestDTO.GoalDTO}, 
+		\hyperpage{36}
+    \subitem {getMinute}, \hyperpage{37}
+    \subitem {getStoppageMinute}, \hyperpage{37}
+    \subitem {getTeamId}, \hyperpage{37}
+    \subitem {setMinute}, \hyperpage{37}
+    \subitem {setStoppageMinute}, \hyperpage{37}
+    \subitem {setTeamId}, \hyperpage{37}
+  \item {com.example.football\_manager.dto.PlayerRequestDTO}, 
+		\hyperpage{60}
+    \subitem {getName}, \hyperpage{60}
+    \subitem {getNumber}, \hyperpage{60}
+    \subitem {getPosition}, \hyperpage{60}
+    \subitem {PlayerRequestDTO}, \hyperpage{60}
+    \subitem {setName}, \hyperpage{61}
+    \subitem {setNumber}, \hyperpage{61}
+    \subitem {setPosition}, \hyperpage{61}
+  \item {com.example.football\_manager.dto.ProfileUpdateDTO}, 
+		\hyperpage{63}
+    \subitem {isPasswordConfirmationValid}, \hyperpage{63}
+  \item {com.example.football\_manager.dto.RegisterDTO}, \hyperpage{65}
+    \subitem {getEmail}, \hyperpage{65}
+    \subitem {getIsAdmin}, \hyperpage{65}
+    \subitem {getPassword}, \hyperpage{65}
+    \subitem {getUsername}, \hyperpage{65}
+    \subitem {setEmail}, \hyperpage{65}
+    \subitem {setIsAdmin}, \hyperpage{66}
+    \subitem {setPassword}, \hyperpage{66}
+    \subitem {setUsername}, \hyperpage{66}
+  \item {com.example.football\_manager.dto.TeamRequestDTO}, 
+		\hyperpage{70}
+    \subitem {getCountryId}, \hyperpage{71}
+    \subitem {getLogoUrl}, \hyperpage{71}
+    \subitem {getName}, \hyperpage{71}
+    \subitem {setCountryId}, \hyperpage{71}
+    \subitem {setLogoUrl}, \hyperpage{71}
+    \subitem {setName}, \hyperpage{71}
+    \subitem {TeamRequestDTO}, \hyperpage{70}
+  \item {com.example.football\_manager.FootballManagerApplication}, 
+		\hyperpage{36}
+    \subitem {main}, \hyperpage{36}
+  \item {com.example.football\_manager.model}, \hyperpage{15}
+  \item {com.example.football\_manager.model.Competition}, 
+		\hyperpage{26}
+  \item {com.example.football\_manager.model.Country}, \hyperpage{31}
+  \item {com.example.football\_manager.model.Match}, \hyperpage{40}
+  \item {com.example.football\_manager.model.MatchGoal}, \hyperpage{42}
+  \item {com.example.football\_manager.model.Player}, \hyperpage{56}
+  \item {com.example.football\_manager.model.PlayerPosition}, 
+		\hyperpage{57}
+    \subitem {DEFENDER}, \hyperpage{58}
+    \subitem {FORWARD}, \hyperpage{58}
+    \subitem {GOALKEEPER}, \hyperpage{58}
+    \subitem {MIDFIELDER}, \hyperpage{58}
+  \item {com.example.football\_manager.model.Team}, \hyperpage{67}
+    \subitem {Team}, \hyperpage{67}
+  \item {com.example.football\_manager.model.User}, \hyperpage{75}
+  \item {com.example.football\_manager.repository}, \hyperpage{15}
+  \item {com.example.football\_manager.repository.CompetitionRepository}, 
+		\hyperpage{28}
+  \item {com.example.football\_manager.repository.CountryRepository}, 
+		\hyperpage{32}
+  \item {com.example.football\_manager.repository.MatchGoalRepository}, 
+		\hyperpage{42}
+    \subitem {deleteByMatchId}, \hyperpage{42}
+    \subitem {findByMatchIdOrderByMinuteAscStoppageMinuteAscIdAsc}, 
+		\hyperpage{42}
+  \item {com.example.football\_manager.repository.MatchRepository}, 
+		\hyperpage{43}
+    \subitem {findByFilters}, \hyperpage{43}
+    \subitem {findByFinishedFalseAndDatetimeAfterAndLeftTeamIdInOrFinishedFalseAndDatetimeAfterAndRightTeamIdInOrderByDatetimeAsc}, 
+		\hyperpage{43}
+    \subitem {findByFinishedFalseAndDatetimeAfterAndLeftTeamIdOrFinishedFalseAndDatetimeAfterAndRightTeamIdOrderByDatetimeAsc}, 
+		\hyperpage{43}
+    \subitem {findByFinishedTrueAndLeftTeamIdOrFinishedTrueAndRightTeamIdOrderByDatetimeDesc}, 
+		\hyperpage{44}
+    \subitem {findByFinishedTrueOrderByDatetimeDesc}, \hyperpage{44}
+  \item {com.example.football\_manager.repository.PlayerRepository}, 
+		\hyperpage{58}
+    \subitem {existsByTeamIdAndNumber}, \hyperpage{59}
+    \subitem {existsByTeamIdAndNumberAndIdNot}, \hyperpage{59}
+    \subitem {findByIdAndTeamId}, \hyperpage{59}
+    \subitem {findByTeamIdOrderByNumberAsc}, \hyperpage{59}
+  \item {com.example.football\_manager.repository.TeamRepository}, 
+		\hyperpage{69}
+    \subitem {findByNameContainingIgnoreCase}, \hyperpage{70}
+  \item {com.example.football\_manager.repository.UserRepository}, 
+		\hyperpage{76}
+    \subitem {existsByEmail}, \hyperpage{76}
+    \subitem {existsByEmailAndIdNot}, \hyperpage{76}
+    \subitem {existsByUsername}, \hyperpage{76}
+    \subitem {existsByUsernameAndIdNot}, \hyperpage{77}
+    \subitem {findByEmail}, \hyperpage{77}
+    \subitem {findByUsername}, \hyperpage{77}
+    \subitem {findWithFavouriteTeamsById}, \hyperpage{77}
+  \item {com.example.football\_manager.service}, \hyperpage{15}
+  \item {com.example.football\_manager.service.CompetitionService}, 
+		\hyperpage{30}
+    \subitem {CompetitionService}, \hyperpage{30}
+    \subitem {createCompetition}, \hyperpage{30}
+    \subitem {deleteCompetition}, \hyperpage{30}
+    \subitem {getAllCompetitions}, \hyperpage{30}
+    \subitem {getCompetitionById}, \hyperpage{30}
+    \subitem {updateCompetition}, \hyperpage{31}
+  \item {com.example.football\_manager.service.CountryService}, 
+		\hyperpage{34}
+    \subitem {CountryService}, \hyperpage{34}
+    \subitem {createCountry}, \hyperpage{34}
+    \subitem {deleteCountry}, \hyperpage{34}
+    \subitem {getAllCountries}, \hyperpage{35}
+  \item {com.example.football\_manager.service.MatchService}, 
+		\hyperpage{49}
+    \subitem {createMatch}, \hyperpage{49}
+    \subitem {deleteMatch}, \hyperpage{49}
+    \subitem {getAllMatches}, \hyperpage{50}
+    \subitem {getFinishedMatchResults}, \hyperpage{50}
+    \subitem {getFutureMatchesByFavouriteTeamIds}, \hyperpage{50}
+    \subitem {getFutureMatchesByTeamId}, \hyperpage{50}
+    \subitem {getGoalsByMatchId}, \hyperpage{50}
+    \subitem {getMatchById}, \hyperpage{50}
+    \subitem {getMatches}, \hyperpage{51}
+    \subitem {getMatchForEdit}, \hyperpage{51}
+    \subitem {getRecentMatchesByTeamId}, \hyperpage{51}
+    \subitem {MatchService}, \hyperpage{49}
+    \subitem {registerResult}, \hyperpage{51}
+    \subitem {updateMatch}, \hyperpage{51}
+  \item {com.example.football\_manager.service.PlayerService}, 
+		\hyperpage{61}
+    \subitem {createPlayer}, \hyperpage{62}
+    \subitem {deletePlayer}, \hyperpage{62}
+    \subitem {getPlayerByTeamId}, \hyperpage{62}
+    \subitem {getPlayersByTeamId}, \hyperpage{62}
+    \subitem {PlayerService}, \hyperpage{62}
+    \subitem {updatePlayer}, \hyperpage{62}
+  \item {com.example.football\_manager.service.TeamService}, 
+		\hyperpage{72}
+    \subitem {createTeam}, \hyperpage{72}
+    \subitem {deleteTeam}, \hyperpage{72}
+    \subitem {getAllTeams}, \hyperpage{72}
+    \subitem {getTeamById}, \hyperpage{72}
+    \subitem {getTeamsContainingName}, \hyperpage{73}
+    \subitem {TeamService}, \hyperpage{72}
+    \subitem {updateTeam}, \hyperpage{73}
+  \item {com.example.football\_manager.service.UserService}, 
+		\hyperpage{78}
+    \subitem {addFavouriteTeam}, \hyperpage{78}
+    \subitem {getFavouriteTeamIdsByUserId}, \hyperpage{78}
+    \subitem {getUserById}, \hyperpage{78}
+    \subitem {getUserByUsername}, \hyperpage{78}
+    \subitem {getUserProfile}, \hyperpage{79}
+    \subitem {login}, \hyperpage{79}
+    \subitem {registerUser}, \hyperpage{79}
+    \subitem {removeFavouriteTeam}, \hyperpage{79}
+    \subitem {updateProfile}, \hyperpage{79}
+  \item {CompetitionController}
+    \subitem {com.example.football\_manager.controller.CompetitionController}, 
+		\hyperpage{27}
+  \item {CompetitionRequestDTO}
+    \subitem {com.example.football\_manager.dto.CompetitionRequestDTO}, 
+		\hyperpage{29}
+  \item {CompetitionService}
+    \subitem {com.example.football\_manager.service.CompetitionService}, 
+		\hyperpage{30}
+  \item {countriesPage}
+    \subitem {com.example.football\_manager.controller.AdminCountryViewController}, 
+		\hyperpage{17}
+  \item {CountryController}
+    \subitem {com.example.football\_manager.controller.CountryController}, 
+		\hyperpage{32}
+  \item {CountryRequestDTO}
+    \subitem {com.example.football\_manager.dto.CountryRequestDTO}, 
+		\hyperpage{33}
+  \item {CountryService}
+    \subitem {com.example.football\_manager.service.CountryService}, 
+		\hyperpage{34}
+  \item {createCompetition}
+    \subitem {com.example.football\_manager.controller.CompetitionController}, 
+		\hyperpage{27}
+    \subitem {com.example.football\_manager.service.CompetitionService}, 
+		\hyperpage{30}
+  \item {createCountry}
+    \subitem {com.example.football\_manager.controller.AdminCountryViewController}, 
+		\hyperpage{17}
+    \subitem {com.example.football\_manager.controller.CountryController}, 
+		\hyperpage{32}
+    \subitem {com.example.football\_manager.service.CountryService}, 
+		\hyperpage{34}
+  \item {createMatch}
+    \subitem {com.example.football\_manager.service.MatchService}, 
+		\hyperpage{49}
+  \item {createMatchFromForm}
+    \subitem {com.example.football\_manager.controller.MatchController}, 
+		\hyperpage{40}
+  \item {createMatchFromJson}
+    \subitem {com.example.football\_manager.controller.MatchController}, 
+		\hyperpage{40}
+  \item {createPlayer}
+    \subitem {com.example.football\_manager.controller.AdminPlayerViewController}, 
+		\hyperpage{19}
+    \subitem {com.example.football\_manager.controller.PlayerController}, 
+		\hyperpage{57}
+    \subitem {com.example.football\_manager.service.PlayerService}, 
+		\hyperpage{62}
+  \item {createTeam}
+    \subitem {com.example.football\_manager.controller.TeamController}, 
+		\hyperpage{68}
+    \subitem {com.example.football\_manager.controller.TeamViewController}, 
+		\hyperpage{74}
+    \subitem {com.example.football\_manager.service.TeamService}, 
+		\hyperpage{72}
+  \item {createUser}
+    \subitem {com.example.football\_manager.controller.AdminUserViewController}, 
+		\hyperpage{22}
+
+  \indexspace
+
+  \item {DEFENDER}
+    \subitem {com.example.football\_manager.model.PlayerPosition}, 
+		\hyperpage{58}
+  \item {deleteByMatchId}
+    \subitem {com.example.football\_manager.repository.MatchGoalRepository}, 
+		\hyperpage{42}
+  \item {deleteCompetition}
+    \subitem {com.example.football\_manager.controller.CompetitionController}, 
+		\hyperpage{27}
+    \subitem {com.example.football\_manager.service.CompetitionService}, 
+		\hyperpage{30}
+  \item {deleteCountry}
+    \subitem {com.example.football\_manager.controller.AdminCountryViewController}, 
+		\hyperpage{18}
+    \subitem {com.example.football\_manager.controller.CountryController}, 
+		\hyperpage{32}
+    \subitem {com.example.football\_manager.service.CountryService}, 
+		\hyperpage{34}
+  \item {deleteMatch}
+    \subitem {com.example.football\_manager.controller.MatchController}, 
+		\hyperpage{40}
+    \subitem {com.example.football\_manager.service.MatchService}, 
+		\hyperpage{49}
+  \item {deletePlayer}
+    \subitem {com.example.football\_manager.controller.AdminPlayerViewController}, 
+		\hyperpage{19}
+    \subitem {com.example.football\_manager.controller.PlayerController}, 
+		\hyperpage{57}
+    \subitem {com.example.football\_manager.service.PlayerService}, 
+		\hyperpage{62}
+  \item {deleteTeam}
+    \subitem {com.example.football\_manager.controller.TeamController}, 
+		\hyperpage{68}
+    \subitem {com.example.football\_manager.controller.TeamViewController}, 
+		\hyperpage{74}
+    \subitem {com.example.football\_manager.service.TeamService}, 
+		\hyperpage{72}
+  \item {docs/doxygen\_mainpage.md}, \hyperpage{81}
+  \item {doFilter}
+    \subitem {com.example.football\_manager.config.AdminSecurityFilter}, 
+		\hyperpage{21}
+  \item {doxygen\_mainpage}, \hyperpage{3}
+
+  \indexspace
+
+  \item {existsByEmail}
+    \subitem {com.example.football\_manager.repository.UserRepository}, 
+		\hyperpage{76}
+  \item {existsByEmailAndIdNot}
+    \subitem {com.example.football\_manager.repository.UserRepository}, 
+		\hyperpage{76}
+  \item {existsByTeamIdAndNumber}
+    \subitem {com.example.football\_manager.repository.PlayerRepository}, 
+		\hyperpage{59}
+  \item {existsByTeamIdAndNumberAndIdNot}
+    \subitem {com.example.football\_manager.repository.PlayerRepository}, 
+		\hyperpage{59}
+  \item {existsByUsername}
+    \subitem {com.example.football\_manager.repository.UserRepository}, 
+		\hyperpage{76}
+  \item {existsByUsernameAndIdNot}
+    \subitem {com.example.football\_manager.repository.UserRepository}, 
+		\hyperpage{77}
+
+  \indexspace
+
+  \item {FavouriteTeamController}
+    \subitem {com.example.football\_manager.controller.FavouriteTeamController}, 
+		\hyperpage{35}
+  \item {filterChain}
+    \subitem {com.example.football\_manager.config.SecurityConfig}, 
+		\hyperpage{67}
+  \item {findByEmail}
+    \subitem {com.example.football\_manager.repository.UserRepository}, 
+		\hyperpage{77}
+  \item {findByFilters}
+    \subitem {com.example.football\_manager.repository.MatchRepository}, 
+		\hyperpage{43}
+  \item {findByFinishedFalseAndDatetimeAfterAndLeftTeamIdInOrFinishedFalseAndDatetimeAfterAndRightTeamIdInOrderByDatetimeAsc}
+    \subitem {com.example.football\_manager.repository.MatchRepository}, 
+		\hyperpage{43}
+  \item {findByFinishedFalseAndDatetimeAfterAndLeftTeamIdOrFinishedFalseAndDatetimeAfterAndRightTeamIdOrderByDatetimeAsc}
+    \subitem {com.example.football\_manager.repository.MatchRepository}, 
+		\hyperpage{43}
+  \item {findByFinishedTrueAndLeftTeamIdOrFinishedTrueAndRightTeamIdOrderByDatetimeDesc}
+    \subitem {com.example.football\_manager.repository.MatchRepository}, 
+		\hyperpage{44}
+  \item {findByFinishedTrueOrderByDatetimeDesc}
+    \subitem {com.example.football\_manager.repository.MatchRepository}, 
+		\hyperpage{44}
+  \item {findByIdAndTeamId}
+    \subitem {com.example.football\_manager.repository.PlayerRepository}, 
+		\hyperpage{59}
+  \item {findByMatchIdOrderByMinuteAscStoppageMinuteAscIdAsc}
+    \subitem {com.example.football\_manager.repository.MatchGoalRepository}, 
+		\hyperpage{42}
+  \item {findByNameContainingIgnoreCase}
+    \subitem {com.example.football\_manager.repository.TeamRepository}, 
+		\hyperpage{70}
+  \item {findByTeamIdOrderByNumberAsc}
+    \subitem {com.example.football\_manager.repository.PlayerRepository}, 
+		\hyperpage{59}
+  \item {findByUsername}
+    \subitem {com.example.football\_manager.repository.UserRepository}, 
+		\hyperpage{77}
+  \item {findWithFavouriteTeamsById}
+    \subitem {com.example.football\_manager.repository.UserRepository}, 
+		\hyperpage{77}
+  \item {FINISHED}
+    \subitem {com.example.football\_manager.dto.MatchRequestDTO.MatchStatus}, 
+		\hyperpage{52}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/config/AdminSecurityFilter.java}, 
+		\hyperpage{81, 82}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/config/LocaleConfig.java}, 
+		\hyperpage{82, 83}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/config/OpenApiConfig.java}, 
+		\hyperpage{83, 84}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/config/SecurityConfig.java}, 
+		\hyperpage{84}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/controller/AdminCountryViewController.java}, 
+		\hyperpage{85}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/controller/AdminPlayerViewController.java}, 
+		\hyperpage{86}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/controller/AdminUserViewController.java}, 
+		\hyperpage{89}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/controller/AdminViewController.java}, 
+		\hyperpage{89, 90}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/controller/AuthController.java}, 
+		\hyperpage{90, 91}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/controller/AuthViewController.java}, 
+		\hyperpage{92}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/controller/CompetitionController.java}, 
+		\hyperpage{93}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/controller/CountryController.java}, 
+		\hyperpage{95}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/controller/FavouriteTeamController.java}, 
+		\hyperpage{96, 97}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/controller/MatchController.java}, 
+		\hyperpage{98, 99}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/controller/MatchViewController.java}, 
+		\hyperpage{101}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/controller/PlayerController.java}, 
+		\hyperpage{103, 104}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/controller/ProfileViewController.java}, 
+		\hyperpage{105, 106}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/controller/TeamController.java}, 
+		\hyperpage{107, 108}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/controller/TeamViewController.java}, 
+		\hyperpage{109, 110}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/dto/AuthResponseDTO.java}, 
+		\hyperpage{111, 112}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/dto/CompetitionRequestDTO.java}, 
+		\hyperpage{112, 113}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/dto/CountryRequestDTO.java}, 
+		\hyperpage{113}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/dto/LoginDTO.java}, 
+		\hyperpage{114}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/dto/MatchRequestDTO.java}, 
+		\hyperpage{115}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/dto/MatchResultDTO.java}, 
+		\hyperpage{116}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/dto/MatchResultRequestDTO.java}, 
+		\hyperpage{117}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/dto/PlayerRequestDTO.java}, 
+		\hyperpage{118}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/dto/ProfileUpdateDTO.java}, 
+		\hyperpage{119, 120}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/dto/RegisterDTO.java}, 
+		\hyperpage{120, 121}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/dto/TeamRequestDTO.java}, 
+		\hyperpage{121, 122}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/FootballManagerApplication.java}, 
+		\hyperpage{122, 123}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/model/Competition.java}, 
+		\hyperpage{123}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/model/Country.java}, 
+		\hyperpage{124}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/model/Match.java}, 
+		\hyperpage{124, 125}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/model/MatchGoal.java}, 
+		\hyperpage{125, 126}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/model/Player.java}, 
+		\hyperpage{126, 127}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/model/PlayerPosition.java}, 
+		\hyperpage{127}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/model/Team.java}, 
+		\hyperpage{128}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/model/User.java}, 
+		\hyperpage{129}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/repository/CompetitionRepository.java}, 
+		\hyperpage{130}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/repository/CountryRepository.java}, 
+		\hyperpage{130, 131}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/repository/MatchGoalRepository.java}, 
+		\hyperpage{131}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/repository/MatchRepository.java}, 
+		\hyperpage{132}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/repository/PlayerRepository.java}, 
+		\hyperpage{133}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/repository/TeamRepository.java}, 
+		\hyperpage{133, 134}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/repository/UserRepository.java}, 
+		\hyperpage{134, 135}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/service/CompetitionService.java}, 
+		\hyperpage{135}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/service/CountryService.java}, 
+		\hyperpage{136}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/service/MatchService.java}, 
+		\hyperpage{137, 138}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/service/PlayerService.java}, 
+		\hyperpage{142, 143}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/service/TeamService.java}, 
+		\hyperpage{145}
+  \item {Football\_Manager/src/main/java/com/example/football\_manager/service/UserService.java}, 
+		\hyperpage{146, 147}
+  \item {FORWARD}
+    \subitem {com.example.football\_manager.model.PlayerPosition}, 
+		\hyperpage{58}
+
+  \indexspace
+
+  \item {getAllCompetitions}
+    \subitem {com.example.football\_manager.controller.CompetitionController}, 
+		\hyperpage{27}
+    \subitem {com.example.football\_manager.service.CompetitionService}, 
+		\hyperpage{30}
+  \item {getAllCountries}
+    \subitem {com.example.football\_manager.controller.CountryController}, 
+		\hyperpage{32}
+    \subitem {com.example.football\_manager.service.CountryService}, 
+		\hyperpage{35}
+  \item {getAllMatches}
+    \subitem {com.example.football\_manager.service.MatchService}, 
+		\hyperpage{50}
+  \item {getAllTeams}
+    \subitem {com.example.football\_manager.controller.TeamController}, 
+		\hyperpage{68}
+    \subitem {com.example.football\_manager.service.TeamService}, 
+		\hyperpage{72}
+  \item {getAwayScore}
+    \subitem {com.example.football\_manager.dto.MatchRequestDTO}, 
+		\hyperpage{45}
+  \item {getAwayTeamId}
+    \subitem {com.example.football\_manager.dto.MatchRequestDTO}, 
+		\hyperpage{45}
+  \item {getCompetitionById}
+    \subitem {com.example.football\_manager.controller.CompetitionController}, 
+		\hyperpage{28}
+    \subitem {com.example.football\_manager.service.CompetitionService}, 
+		\hyperpage{30}
+  \item {getCompetitionId}
+    \subitem {com.example.football\_manager.dto.MatchRequestDTO}, 
+		\hyperpage{45}
+  \item {getCountryId}
+    \subitem {com.example.football\_manager.dto.TeamRequestDTO}, 
+		\hyperpage{71}
+  \item {getEmail}
+    \subitem {com.example.football\_manager.dto.AuthResponseDTO}, 
+		\hyperpage{25}
+    \subitem {com.example.football\_manager.dto.RegisterDTO}, 
+		\hyperpage{65}
+  \item {getFavouriteTeamIdsByUserId}
+    \subitem {com.example.football\_manager.service.UserService}, 
+		\hyperpage{78}
+  \item {getFinishedMatchResults}
+    \subitem {com.example.football\_manager.service.MatchService}, 
+		\hyperpage{50}
+  \item {getFutureMatchesByFavouriteTeamIds}
+    \subitem {com.example.football\_manager.service.MatchService}, 
+		\hyperpage{50}
+  \item {getFutureMatchesByTeamId}
+    \subitem {com.example.football\_manager.service.MatchService}, 
+		\hyperpage{50}
+  \item {getGoals}
+    \subitem {com.example.football\_manager.dto.MatchResultRequestDTO}, 
+		\hyperpage{48}
+  \item {getGoalsByMatchId}
+    \subitem {com.example.football\_manager.service.MatchService}, 
+		\hyperpage{50}
+  \item {getHomeScore}
+    \subitem {com.example.football\_manager.dto.MatchRequestDTO}, 
+		\hyperpage{45}
+  \item {getHomeTeamId}
+    \subitem {com.example.football\_manager.dto.MatchRequestDTO}, 
+		\hyperpage{46}
+  \item {getId}
+    \subitem {com.example.football\_manager.dto.AuthResponseDTO}, 
+		\hyperpage{25}
+  \item {getIsAdmin}
+    \subitem {com.example.football\_manager.dto.AuthResponseDTO}, 
+		\hyperpage{25}
+    \subitem {com.example.football\_manager.dto.RegisterDTO}, 
+		\hyperpage{65}
+  \item {getKickoffTime}
+    \subitem {com.example.football\_manager.dto.MatchRequestDTO}, 
+		\hyperpage{46}
+  \item {getLogoUrl}
+    \subitem {com.example.football\_manager.dto.TeamRequestDTO}, 
+		\hyperpage{71}
+  \item {getMatchById}
+    \subitem {com.example.football\_manager.service.MatchService}, 
+		\hyperpage{50}
+  \item {getMatches}
+    \subitem {com.example.football\_manager.controller.MatchController}, 
+		\hyperpage{41}
+    \subitem {com.example.football\_manager.service.MatchService}, 
+		\hyperpage{51}
+  \item {getMatchForEdit}
+    \subitem {com.example.football\_manager.service.MatchService}, 
+		\hyperpage{51}
+  \item {getMatchResults}
+    \subitem {com.example.football\_manager.controller.MatchController}, 
+		\hyperpage{41}
+  \item {getMessage}
+    \subitem {com.example.football\_manager.dto.AuthResponseDTO}, 
+		\hyperpage{25}
+  \item {getMinute}
+    \subitem {com.example.football\_manager.dto.MatchResultRequestDTO.GoalDTO}, 
+		\hyperpage{37}
+  \item {getName}
+    \subitem {com.example.football\_manager.dto.CompetitionRequestDTO}, 
+		\hyperpage{29}
+    \subitem {com.example.football\_manager.dto.CountryRequestDTO}, 
+		\hyperpage{33}
+    \subitem {com.example.football\_manager.dto.PlayerRequestDTO}, 
+		\hyperpage{60}
+    \subitem {com.example.football\_manager.dto.TeamRequestDTO}, 
+		\hyperpage{71}
+  \item {getNumber}
+    \subitem {com.example.football\_manager.dto.PlayerRequestDTO}, 
+		\hyperpage{60}
+  \item {getPassword}
+    \subitem {com.example.football\_manager.dto.LoginDTO}, 
+		\hyperpage{39}
+    \subitem {com.example.football\_manager.dto.RegisterDTO}, 
+		\hyperpage{65}
+  \item {getPlayerByTeamId}
+    \subitem {com.example.football\_manager.service.PlayerService}, 
+		\hyperpage{62}
+  \item {getPlayersByTeamId}
+    \subitem {com.example.football\_manager.controller.PlayerController}, 
+		\hyperpage{57}
+    \subitem {com.example.football\_manager.service.PlayerService}, 
+		\hyperpage{62}
+  \item {getPosition}
+    \subitem {com.example.football\_manager.dto.PlayerRequestDTO}, 
+		\hyperpage{60}
+  \item {getRecentMatchesByTeamId}
+    \subitem {com.example.football\_manager.service.MatchService}, 
+		\hyperpage{51}
+  \item {getStatus}
+    \subitem {com.example.football\_manager.dto.MatchRequestDTO}, 
+		\hyperpage{46}
+  \item {getStoppageMinute}
+    \subitem {com.example.football\_manager.dto.MatchResultRequestDTO.GoalDTO}, 
+		\hyperpage{37}
+  \item {getTeamById}
+    \subitem {com.example.football\_manager.controller.TeamController}, 
+		\hyperpage{68}
+    \subitem {com.example.football\_manager.service.TeamService}, 
+		\hyperpage{72}
+  \item {getTeamId}
+    \subitem {com.example.football\_manager.dto.MatchResultRequestDTO.GoalDTO}, 
+		\hyperpage{37}
+  \item {getTeamsContainingName}
+    \subitem {com.example.football\_manager.controller.TeamController}, 
+		\hyperpage{69}
+    \subitem {com.example.football\_manager.service.TeamService}, 
+		\hyperpage{73}
+  \item {getUserById}
+    \subitem {com.example.football\_manager.service.UserService}, 
+		\hyperpage{78}
+  \item {getUserByUsername}
+    \subitem {com.example.football\_manager.service.UserService}, 
+		\hyperpage{78}
+  \item {getUsername}
+    \subitem {com.example.football\_manager.dto.AuthResponseDTO}, 
+		\hyperpage{25}
+    \subitem {com.example.football\_manager.dto.LoginDTO}, 
+		\hyperpage{39}
+    \subitem {com.example.football\_manager.dto.RegisterDTO}, 
+		\hyperpage{65}
+  \item {getUserProfile}
+    \subitem {com.example.football\_manager.service.UserService}, 
+		\hyperpage{79}
+  \item {getVenue}
+    \subitem {com.example.football\_manager.dto.MatchRequestDTO}, 
+		\hyperpage{46}
+  \item {GOALKEEPER}
+    \subitem {com.example.football\_manager.model.PlayerPosition}, 
+		\hyperpage{58}
+
+  \indexspace
+
+  \item {IN\_PROGRESS}
+    \subitem {com.example.football\_manager.dto.MatchRequestDTO.MatchStatus}, 
+		\hyperpage{52}
+  \item {index}
+    \subitem {com.example.football\_manager.controller.AuthViewController}, 
+		\hyperpage{26}
+  \item {isPasswordConfirmationValid}
+    \subitem {com.example.football\_manager.dto.ProfileUpdateDTO}, 
+		\hyperpage{63}
+
+  \indexspace
+
+  \item {localeChangeInterceptor}
+    \subitem {com.example.football\_manager.config.LocaleConfig}, 
+		\hyperpage{38}
+  \item {localeResolver}
+    \subitem {com.example.football\_manager.config.LocaleConfig}, 
+		\hyperpage{38}
+  \item {login}
+    \subitem {com.example.football\_manager.controller.AuthController}, 
+		\hyperpage{24}
+    \subitem {com.example.football\_manager.service.UserService}, 
+		\hyperpage{79}
+  \item {loginPage}
+    \subitem {com.example.football\_manager.controller.AuthViewController}, 
+		\hyperpage{26}
+
+  \indexspace
+
+  \item {main}
+    \subitem {com.example.football\_manager.FootballManagerApplication}, 
+		\hyperpage{36}
+  \item {managePlayersLanding}
+    \subitem {com.example.football\_manager.controller.AdminPlayerViewController}, 
+		\hyperpage{19}
+  \item {manageTeamPlayers}
+    \subitem {com.example.football\_manager.controller.AdminPlayerViewController}, 
+		\hyperpage{19}
+  \item {manageTeams}
+    \subitem {com.example.football\_manager.controller.AdminViewController}, 
+		\hyperpage{23}
+  \item {MatchResultDTO}
+    \subitem {com.example.football\_manager.dto}, \hyperpage{15}
+  \item {MatchService}
+    \subitem {com.example.football\_manager.service.MatchService}, 
+		\hyperpage{49}
+  \item {MatchViewController}
+    \subitem {com.example.football\_manager.controller.MatchViewController}, 
+		\hyperpage{53}
+  \item {MIDFIELDER}
+    \subitem {com.example.football\_manager.model.PlayerPosition}, 
+		\hyperpage{58}
+
+  \indexspace
+
+  \item {passwordEncoder}
+    \subitem {com.example.football\_manager.config.SecurityConfig}, 
+		\hyperpage{67}
+  \item {PlayerController}
+    \subitem {com.example.football\_manager.controller.PlayerController}, 
+		\hyperpage{56}
+  \item {PlayerRequestDTO}
+    \subitem {com.example.football\_manager.dto.PlayerRequestDTO}, 
+		\hyperpage{60}
+  \item {PlayerService}
+    \subitem {com.example.football\_manager.service.PlayerService}, 
+		\hyperpage{62}
+  \item {profilePage}
+    \subitem {com.example.football\_manager.controller.ProfileViewController}, 
+		\hyperpage{64}
+  \item {ProfileViewController}
+    \subitem {com.example.football\_manager.controller.ProfileViewController}, 
+		\hyperpage{64}
+
+  \indexspace
+
+  \item {README.md}, \hyperpage{149}
+  \item {register}
+    \subitem {com.example.football\_manager.controller.AuthController}, 
+		\hyperpage{24}
+  \item {registerPage}
+    \subitem {com.example.football\_manager.controller.AuthViewController}, 
+		\hyperpage{26}
+  \item {registerResult}
+    \subitem {com.example.football\_manager.controller.MatchController}, 
+		\hyperpage{41}
+    \subitem {com.example.football\_manager.service.MatchService}, 
+		\hyperpage{51}
+  \item {registerUser}
+    \subitem {com.example.football\_manager.service.UserService}, 
+		\hyperpage{79}
+  \item {removeFavouriteTeam}
+    \subitem {com.example.football\_manager.controller.FavouriteTeamController}, 
+		\hyperpage{35}
+    \subitem {com.example.football\_manager.service.UserService}, 
+		\hyperpage{79}
+
+  \indexspace
+
+  \item {saveMatchResult}
+    \subitem {com.example.football\_manager.controller.MatchViewController}, 
+		\hyperpage{54}
+  \item {SCHEDULED}
+    \subitem {com.example.football\_manager.dto.MatchRequestDTO.MatchStatus}, 
+		\hyperpage{53}
+  \item {setAwayScore}
+    \subitem {com.example.football\_manager.dto.MatchRequestDTO}, 
+		\hyperpage{46}
+  \item {setAwayTeamId}
+    \subitem {com.example.football\_manager.dto.MatchRequestDTO}, 
+		\hyperpage{46}
+  \item {setCompetitionId}
+    \subitem {com.example.football\_manager.dto.MatchRequestDTO}, 
+		\hyperpage{47}
+  \item {setCountryId}
+    \subitem {com.example.football\_manager.dto.TeamRequestDTO}, 
+		\hyperpage{71}
+  \item {setEmail}
+    \subitem {com.example.football\_manager.dto.RegisterDTO}, 
+		\hyperpage{65}
+  \item {setGoals}
+    \subitem {com.example.football\_manager.dto.MatchResultRequestDTO}, 
+		\hyperpage{48}
+  \item {setHomeScore}
+    \subitem {com.example.football\_manager.dto.MatchRequestDTO}, 
+		\hyperpage{47}
+  \item {setHomeTeamId}
+    \subitem {com.example.football\_manager.dto.MatchRequestDTO}, 
+		\hyperpage{47}
+  \item {setIsAdmin}
+    \subitem {com.example.football\_manager.dto.RegisterDTO}, 
+		\hyperpage{66}
+  \item {setKickoffTime}
+    \subitem {com.example.football\_manager.dto.MatchRequestDTO}, 
+		\hyperpage{47}
+  \item {setLogoUrl}
+    \subitem {com.example.football\_manager.dto.TeamRequestDTO}, 
+		\hyperpage{71}
+  \item {setMinute}
+    \subitem {com.example.football\_manager.dto.MatchResultRequestDTO.GoalDTO}, 
+		\hyperpage{37}
+  \item {setName}
+    \subitem {com.example.football\_manager.dto.CompetitionRequestDTO}, 
+		\hyperpage{29}
+    \subitem {com.example.football\_manager.dto.CountryRequestDTO}, 
+		\hyperpage{33}
+    \subitem {com.example.football\_manager.dto.PlayerRequestDTO}, 
+		\hyperpage{61}
+    \subitem {com.example.football\_manager.dto.TeamRequestDTO}, 
+		\hyperpage{71}
+  \item {setNumber}
+    \subitem {com.example.football\_manager.dto.PlayerRequestDTO}, 
+		\hyperpage{61}
+  \item {setPassword}
+    \subitem {com.example.football\_manager.dto.LoginDTO}, 
+		\hyperpage{39}
+    \subitem {com.example.football\_manager.dto.RegisterDTO}, 
+		\hyperpage{66}
+  \item {setPosition}
+    \subitem {com.example.football\_manager.dto.PlayerRequestDTO}, 
+		\hyperpage{61}
+  \item {setStatus}
+    \subitem {com.example.football\_manager.dto.MatchRequestDTO}, 
+		\hyperpage{47}
+  \item {setStoppageMinute}
+    \subitem {com.example.football\_manager.dto.MatchResultRequestDTO.GoalDTO}, 
+		\hyperpage{37}
+  \item {setTeamId}
+    \subitem {com.example.football\_manager.dto.MatchResultRequestDTO.GoalDTO}, 
+		\hyperpage{37}
+  \item {setUsername}
+    \subitem {com.example.football\_manager.dto.LoginDTO}, 
+		\hyperpage{39}
+    \subitem {com.example.football\_manager.dto.RegisterDTO}, 
+		\hyperpage{66}
+  \item {setVenue}
+    \subitem {com.example.football\_manager.dto.MatchRequestDTO}, 
+		\hyperpage{47}
+  \item {showAddTeamForm}
+    \subitem {com.example.football\_manager.controller.TeamViewController}, 
+		\hyperpage{74}
+  \item {showEditForm}
+    \subitem {com.example.football\_manager.controller.MatchViewController}, 
+		\hyperpage{54}
+  \item {showEditPlayerForm}
+    \subitem {com.example.football\_manager.controller.AdminPlayerViewController}, 
+		\hyperpage{20}
+  \item {showEditTeamForm}
+    \subitem {com.example.football\_manager.controller.TeamViewController}, 
+		\hyperpage{74}
+  \item {showMatchesPage}
+    \subitem {com.example.football\_manager.controller.MatchViewController}, 
+		\hyperpage{54}
+  \item {showResultsPage}
+    \subitem {com.example.football\_manager.controller.MatchViewController}, 
+		\hyperpage{54}
+  \item {showScheduleForm}
+    \subitem {com.example.football\_manager.controller.MatchViewController}, 
+		\hyperpage{54}
+  \item {showScoreForm}
+    \subitem {com.example.football\_manager.controller.MatchViewController}, 
+		\hyperpage{55}
+  \item {submitScoreForm}
+    \subitem {com.example.football\_manager.controller.MatchViewController}, 
+		\hyperpage{55}
+
+  \indexspace
+
+  \item {Team}
+    \subitem {com.example.football\_manager.model.Team}, \hyperpage{67}
+  \item {TeamController}
+    \subitem {com.example.football\_manager.controller.TeamController}, 
+		\hyperpage{68}
+  \item {teamDetailsPage}
+    \subitem {com.example.football\_manager.controller.TeamViewController}, 
+		\hyperpage{74}
+  \item {TeamRequestDTO}
+    \subitem {com.example.football\_manager.dto.TeamRequestDTO}, 
+		\hyperpage{70}
+  \item {TeamService}
+    \subitem {com.example.football\_manager.service.TeamService}, 
+		\hyperpage{72}
+  \item {teamsPage}
+    \subitem {com.example.football\_manager.controller.TeamViewController}, 
+		\hyperpage{75}
+
+  \indexspace
+
+  \item {updateCompetition}
+    \subitem {com.example.football\_manager.controller.CompetitionController}, 
+		\hyperpage{28}
+    \subitem {com.example.football\_manager.service.CompetitionService}, 
+		\hyperpage{31}
+  \item {updateMatch}
+    \subitem {com.example.football\_manager.controller.MatchController}, 
+		\hyperpage{41}
+    \subitem {com.example.football\_manager.controller.MatchViewController}, 
+		\hyperpage{55}
+    \subitem {com.example.football\_manager.service.MatchService}, 
+		\hyperpage{51}
+  \item {updatePlayer}
+    \subitem {com.example.football\_manager.controller.AdminPlayerViewController}, 
+		\hyperpage{20}
+    \subitem {com.example.football\_manager.controller.PlayerController}, 
+		\hyperpage{57}
+    \subitem {com.example.football\_manager.service.PlayerService}, 
+		\hyperpage{62}
+  \item {updateProfile}
+    \subitem {com.example.football\_manager.controller.ProfileViewController}, 
+		\hyperpage{64}
+    \subitem {com.example.football\_manager.service.UserService}, 
+		\hyperpage{79}
+  \item {updateTeam}
+    \subitem {com.example.football\_manager.controller.TeamController}, 
+		\hyperpage{69}
+    \subitem {com.example.football\_manager.controller.TeamViewController}, 
+		\hyperpage{75}
+    \subitem {com.example.football\_manager.service.TeamService}, 
+		\hyperpage{73}
+  \item {usersPage}
+    \subitem {com.example.football\_manager.controller.AdminUserViewController}, 
+		\hyperpage{22}
+
+\end{theindex}

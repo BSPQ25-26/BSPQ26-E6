@@ -1,0 +1,114 @@
+\doxysection{Competition\+Controller.\+java}
+\hypertarget{CompetitionController_8java_source}{}\label{CompetitionController_8java_source}\index{Football\_Manager/src/main/java/com/example/football\_manager/controller/CompetitionController.java@{Football\_Manager/src/main/java/com/example/football\_manager/controller/CompetitionController.java}}
+\mbox{\hyperlink{CompetitionController_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00001}00001\ \textcolor{keyword}{package\ }com.example.football\_manager.controller;}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00003}00003\ \textcolor{keyword}{import}\ com.example.football\_manager.dto.CompetitionRequestDTO;}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00004}00004\ \textcolor{keyword}{import}\ com.example.football\_manager.model.Competition;}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00005}00005\ \textcolor{keyword}{import}\ com.example.football\_manager.service.CompetitionService;}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00006}00006\ \textcolor{keyword}{import}\ jakarta.validation.Valid;}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00007}00007\ \textcolor{keyword}{import}\ io.swagger.v3.oas.annotations.Operation;}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00008}00008\ \textcolor{keyword}{import}\ io.swagger.v3.oas.annotations.media.Content;}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00009}00009\ \textcolor{keyword}{import}\ io.swagger.v3.oas.annotations.media.Schema;}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00010}00010\ \textcolor{keyword}{import}\ io.swagger.v3.oas.annotations.responses.ApiResponse;}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00011}00011\ \textcolor{keyword}{import}\ io.swagger.v3.oas.annotations.responses.ApiResponses;}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00012}00012\ \textcolor{keyword}{import}\ io.swagger.v3.oas.annotations.tags.Tag;}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00013}00013\ \textcolor{keyword}{import}\ org.springframework.http.HttpStatus;}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00014}00014\ \textcolor{keyword}{import}\ org.springframework.http.ResponseEntity;}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00015}00015\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.*;}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00017}00017\ \textcolor{keyword}{import}\ java.util.List;}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00019}00019\ @RestController}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00020}00020\ @RequestMapping(\textcolor{stringliteral}{"{}/api/competitions"{}})}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00021}00021\ @Tag(name\ =\ \textcolor{stringliteral}{"{}Competitions"{}})}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00022}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1CompetitionController}{00022}}\ public\ class\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1CompetitionController_a3736f338567ad4d10efe88d13133dcf7}{CompetitionController}}\ \{}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00024}00024\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1CompetitionService}{CompetitionService}}\ competitionService;}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00026}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1CompetitionController_a3736f338567ad4d10efe88d13133dcf7}{00026}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1CompetitionController_a3736f338567ad4d10efe88d13133dcf7}{CompetitionController}}(\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1CompetitionService}{CompetitionService}}\ competitionService)\ \{}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00027}00027\ \ \ \ \ \ \ \ \ this.competitionService\ =\ competitionService;}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00028}00028\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00030}00030\ \ \ \ \ @PostMapping}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00031}00031\ \ \ \ \ @Operation(}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ summary\ =\ \textcolor{stringliteral}{"{}Create\ a\ competition"{}},}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ description\ =\ \textcolor{stringliteral}{"{}Creates\ a\ new\ competition\ entry."{}},}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ requestBody\ =\ @io.swagger.v3.oas.annotations.parameters.RequestBody(}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ required\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ description\ =\ \textcolor{stringliteral}{"{}Competition\ details"{}},}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ content\ =\ @Content(schema\ =\ @Schema(implementation\ =\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1CompetitionRequestDTO}{CompetitionRequestDTO}}.class))}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00039}00039\ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00040}00040\ \ \ \ \ @ApiResponses(\{}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ @ApiResponse(responseCode\ =\ \textcolor{stringliteral}{"{}201"{}},\ description\ =\ \textcolor{stringliteral}{"{}Competition\ created"{}}),}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ @ApiResponse(responseCode\ =\ \textcolor{stringliteral}{"{}400"{}},\ description\ =\ \textcolor{stringliteral}{"{}Validation\ error"{}})}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00043}00043\ \ \ \ \ \})}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00044}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1CompetitionController_ae2dd9a20d263544486a096f44ab591a8}{00044}}\ \ \ \ \ \textcolor{keyword}{public}\ ResponseEntity<Competition>\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1CompetitionController_ae2dd9a20d263544486a096f44ab591a8}{createCompetition}}(@Valid\ @RequestBody\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1CompetitionRequestDTO}{CompetitionRequestDTO}}\ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}})\ \{}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00045}00045\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Competition}{Competition}}\ createdCompetition\ =\ competitionService.createCompetition(\mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}});}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00046}00046\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ ResponseEntity<>(createdCompetition,\ HttpStatus.CREATED);}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00047}00047\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00049}00049\ \ \ \ \ @PutMapping(\textcolor{stringliteral}{"{}/\{id\}"{}})}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00050}00050\ \ \ \ \ @Operation(}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ summary\ =\ \textcolor{stringliteral}{"{}Update\ a\ competition"{}},}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ description\ =\ \textcolor{stringliteral}{"{}Updates\ the\ competition\ name."{}},}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ requestBody\ =\ @io.swagger.v3.oas.annotations.parameters.RequestBody(}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ required\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ description\ =\ \textcolor{stringliteral}{"{}Updated\ competition\ details"{}},}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ content\ =\ @Content(schema\ =\ @Schema(implementation\ =\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1CompetitionRequestDTO}{CompetitionRequestDTO}}.class))}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00058}00058\ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00059}00059\ \ \ \ \ @ApiResponses(\{}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ @ApiResponse(responseCode\ =\ \textcolor{stringliteral}{"{}200"{}},\ description\ =\ \textcolor{stringliteral}{"{}Competition\ updated"{}}),}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ @ApiResponse(responseCode\ =\ \textcolor{stringliteral}{"{}400"{}},\ description\ =\ \textcolor{stringliteral}{"{}Validation\ error"{}}),}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ @ApiResponse(responseCode\ =\ \textcolor{stringliteral}{"{}404"{}},\ description\ =\ \textcolor{stringliteral}{"{}Competition\ not\ found"{}})}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00063}00063\ \ \ \ \ \})}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00064}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1CompetitionController_a419e5f21f0c2891a6cd102b711db6815}{00064}}\ \ \ \ \ \textcolor{keyword}{public}\ ResponseEntity<Competition>\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1CompetitionController_a419e5f21f0c2891a6cd102b711db6815}{updateCompetition}}(@PathVariable\ Long\ \textcolor{keywordtype}{id},}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @Valid\ @RequestBody\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1CompetitionRequestDTO}{CompetitionRequestDTO}}\ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}})\ \{}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00066}00066\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Competition}{Competition}}\ updatedCompetition\ =\ competitionService.updateCompetition(\textcolor{keywordtype}{id},\ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}});}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00067}00067\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ResponseEntity.ok(updatedCompetition);}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00068}00068\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00070}00070\ \ \ \ \ @GetMapping(\textcolor{stringliteral}{"{}/\{id\}"{}})}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00071}00071\ \ \ \ \ @Operation(}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ summary\ =\ \textcolor{stringliteral}{"{}Get\ competition\ by\ id"{}},}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ description\ =\ \textcolor{stringliteral}{"{}Returns\ competition\ details\ for\ the\ specified\ id."{}}}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00074}00074\ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00075}00075\ \ \ \ \ @ApiResponses(\{}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ @ApiResponse(responseCode\ =\ \textcolor{stringliteral}{"{}200"{}},\ description\ =\ \textcolor{stringliteral}{"{}Competition\ found"{}}),}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ @ApiResponse(responseCode\ =\ \textcolor{stringliteral}{"{}404"{}},\ description\ =\ \textcolor{stringliteral}{"{}Competition\ not\ found"{}})}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00078}00078\ \ \ \ \ \})}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00079}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1CompetitionController_adf32c55f5ced297d6b77dd39de89d8e9}{00079}}\ \ \ \ \ \textcolor{keyword}{public}\ ResponseEntity<Competition>\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1CompetitionController_adf32c55f5ced297d6b77dd39de89d8e9}{getCompetitionById}}(@PathVariable\ Long\ \textcolor{keywordtype}{id})\ \{}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00080}00080\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ResponseEntity.of(competitionService.getCompetitionById(\textcolor{keywordtype}{id}));}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00081}00081\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00083}00083\ \ \ \ \ @GetMapping}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00084}00084\ \ \ \ \ @Operation(}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ summary\ =\ \textcolor{stringliteral}{"{}List\ all\ competitions"{}},}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ description\ =\ \textcolor{stringliteral}{"{}Returns\ every\ competition\ in\ the\ system."{}}}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00087}00087\ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00088}00088\ \ \ \ \ @ApiResponses(\{}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ @ApiResponse(responseCode\ =\ \textcolor{stringliteral}{"{}200"{}},\ description\ =\ \textcolor{stringliteral}{"{}Competition\ list"{}})}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00090}00090\ \ \ \ \ \})}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00091}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1CompetitionController_a9605c0a732d3d8458ade7b8fd8d6e453}{00091}}\ \ \ \ \ \textcolor{keyword}{public}\ ResponseEntity<List<Competition>>\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1CompetitionController_a9605c0a732d3d8458ade7b8fd8d6e453}{getAllCompetitions}}()\ \{}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00092}00092\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ResponseEntity.ok(competitionService.getAllCompetitions());}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00093}00093\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00095}00095\ \ \ \ \ @DeleteMapping(\textcolor{stringliteral}{"{}/\{id\}"{}})}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00096}00096\ \ \ \ \ @Operation(}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ summary\ =\ \textcolor{stringliteral}{"{}Delete\ a\ competition"{}},}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ description\ =\ \textcolor{stringliteral}{"{}Deletes\ a\ competition\ by\ its\ identifier."{}}}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00099}00099\ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00100}00100\ \ \ \ \ @ApiResponses(\{}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ @ApiResponse(responseCode\ =\ \textcolor{stringliteral}{"{}204"{}},\ description\ =\ \textcolor{stringliteral}{"{}Competition\ deleted"{}}),}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ @ApiResponse(responseCode\ =\ \textcolor{stringliteral}{"{}404"{}},\ description\ =\ \textcolor{stringliteral}{"{}Competition\ not\ found"{}})}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00103}00103\ \ \ \ \ \})}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00104}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1CompetitionController_a2cb4b86c56451e772632fdf79c20b6fb}{00104}}\ \ \ \ \ \textcolor{keyword}{public}\ ResponseEntity<Void>\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1CompetitionController_a2cb4b86c56451e772632fdf79c20b6fb}{deleteCompetition}}(@PathVariable\ Long\ \textcolor{keywordtype}{id})\ \{}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00105}00105\ \ \ \ \ \ \ \ \ competitionService.deleteCompetition(\textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00106}00106\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ResponseEntity.noContent().build();}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00107}00107\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{CompetitionController_8java_source_l00108}00108\ \}}
+
+\end{DoxyCode}

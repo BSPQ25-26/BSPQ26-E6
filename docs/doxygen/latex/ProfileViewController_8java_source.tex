@@ -1,0 +1,114 @@
+\doxysection{Profile\+View\+Controller.\+java}
+\hypertarget{ProfileViewController_8java_source}{}\label{ProfileViewController_8java_source}\index{Football\_Manager/src/main/java/com/example/football\_manager/controller/ProfileViewController.java@{Football\_Manager/src/main/java/com/example/football\_manager/controller/ProfileViewController.java}}
+\mbox{\hyperlink{ProfileViewController_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00001}00001\ \textcolor{keyword}{package\ }com.example.football\_manager.controller;}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00003}00003\ \textcolor{keyword}{import}\ com.example.football\_manager.dto.ProfileUpdateDTO;}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00004}00004\ \textcolor{keyword}{import}\ com.example.football\_manager.model.User;}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00005}00005\ \textcolor{keyword}{import}\ com.example.football\_manager.service.UserService;}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00006}00006\ \textcolor{keyword}{import}\ jakarta.servlet.http.HttpSession;}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00007}00007\ \textcolor{keyword}{import}\ jakarta.validation.Valid;}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00008}00008\ \textcolor{keyword}{import}\ org.springframework.stereotype.Controller;}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00009}00009\ \textcolor{keyword}{import}\ org.springframework.ui.Model;}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00010}00010\ \textcolor{keyword}{import}\ org.springframework.validation.BindingResult;}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00011}00011\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.GetMapping;}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00012}00012\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.ModelAttribute;}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00013}00013\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.PostMapping;}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00015}00015\ \textcolor{keyword}{import}\ java.util.Set;}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00017}00017\ @Controller}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00018}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1ProfileViewController}{00018}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1ProfileViewController_a113ba492acb9b948f465d7054f68ab18}{ProfileViewController}}\ \{}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00020}00020\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1UserService}{UserService}}\ userService;}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00022}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1ProfileViewController_a113ba492acb9b948f465d7054f68ab18}{00022}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1ProfileViewController_a113ba492acb9b948f465d7054f68ab18}{ProfileViewController}}(\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1UserService}{UserService}}\ userService)\ \{}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00023}00023\ \ \ \ \ \ \ \ \ this.userService\ =\ userService;}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00024}00024\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00026}00026\ \ \ \ \ @GetMapping(\textcolor{stringliteral}{"{}/profile"{}})}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00027}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1ProfileViewController_ad51d90e2c89b6fd3b5460a1d224a0da1}{00027}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1ProfileViewController_ad51d90e2c89b6fd3b5460a1d224a0da1}{profilePage}}(Model\ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1model}{model}},\ HttpSession\ session)\ \{}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00028}00028\ \ \ \ \ \ \ \ \ Long\ userId\ =\ (Long)\ session.getAttribute(\textcolor{stringliteral}{"{}userId"{}});}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00029}00029\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (userId\ ==\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}redirect:/login"{}};}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00031}00031\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00033}00033\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1User}{User}}\ user;}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00034}00034\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ user\ =\ userService.getUserProfile(userId);}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00036}00036\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (IllegalArgumentException\ ex)\ \{}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ session.invalidate();}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}redirect:/login"{}};}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00039}00039\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00041}00041\ \ \ \ \ \ \ \ \ populateProfileModel(\mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1model}{model}},\ user);}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00042}00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}profile"{}};}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00043}00043\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00045}00045\ \ \ \ \ @PostMapping(\textcolor{stringliteral}{"{}/profile"{}})}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00046}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1ProfileViewController_abe225f7d3e9d162dfc6fc6fa53fe7f72}{00046}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1ProfileViewController_abe225f7d3e9d162dfc6fc6fa53fe7f72}{updateProfile}}(@Valid\ @ModelAttribute(\textcolor{stringliteral}{"{}profileForm"{}})\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1ProfileUpdateDTO}{ProfileUpdateDTO}}\ profileForm,}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ BindingResult\ bindingResult,}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Model\ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1model}{model}},}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ HttpSession\ session)\ \{}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00050}00050\ \ \ \ \ \ \ \ \ Long\ userId\ =\ (Long)\ session.getAttribute(\textcolor{stringliteral}{"{}userId"{}});}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00051}00051\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (userId\ ==\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}redirect:/login"{}};}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00053}00053\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00055}00055\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1User}{User}}\ currentUser;}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00056}00056\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ currentUser\ =\ userService.getUserProfile(userId);}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00058}00058\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (IllegalArgumentException\ ex)\ \{}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ session.invalidate();}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}redirect:/login"{}};}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00061}00061\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00063}00063\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (bindingResult.hasErrors())\ \{}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ populateProfileModel(model,\ currentUser);}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ return\ \textcolor{stringliteral}{"{}profile"{}};}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00066}00066\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00068}00068\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ User\ updatedUser\ =\ userService.updateProfile(}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ userId,}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ profileForm.getUsername(),}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ profileForm.getEmail(),}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ profileForm.getCurrentPassword(),}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ profileForm.getNewPassword(),}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ profileForm.getConfirmNewPassword()}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ ProfileUpdateDTO\ refreshedForm\ =\ new\ ProfileUpdateDTO();}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ refreshedForm.setUsername(updatedUser.getUsername());}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ refreshedForm.setEmail(updatedUser.getEmail());}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ model.addAttribute(\textcolor{stringliteral}{"{}profileForm"{}},\ refreshedForm);}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ model.addAttribute(\textcolor{stringliteral}{"{}favouriteTeams"{}},\ updatedUser.getFavouriteTeams()\ !=\ null\ ?\ updatedUser.getFavouriteTeams()\ :\ Set.of());}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ model.addAttribute(\textcolor{stringliteral}{"{}successMessage"{}},\ \textcolor{stringliteral}{"{}Profile\ updated\ successfully"{}});}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ return\ \textcolor{stringliteral}{"{}profile"{}};}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00085}00085\ \ \ \ \ \ \ \ \ \}\ catch\ (IllegalArgumentException\ ex)\ \{}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ populateProfileModel(\mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1model}{model}},\ currentUser);}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}errorMessage"{}},\ ex.getMessage());}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}profile"{}};}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00089}00089\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00090}00090\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00092}00092\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ populateProfileModel(Model\ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1model}{model}},\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1User}{User}}\ user)\ \{}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00093}00093\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1model}{model}}.containsAttribute(\textcolor{stringliteral}{"{}profileForm"{}}))\ \{}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1ProfileUpdateDTO}{ProfileUpdateDTO}}\ profileForm\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1ProfileUpdateDTO}{ProfileUpdateDTO}}();}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ profileForm.setUsername(user.getUsername());}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ profileForm.setEmail(user.getEmail());}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}profileForm"{}},\ profileForm);}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00098}00098\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00099}00099\ }
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00100}00100\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}favouriteTeams"{}},\ user.getFavouriteTeams()\ !=\ \textcolor{keyword}{null}\ ?\ user.getFavouriteTeams()\ :\ Set.of());}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00101}00101\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00102}00102\ \}}
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00103}00103\ }
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{ProfileViewController_8java_source_l00108}00108\ }
+
+\end{DoxyCode}

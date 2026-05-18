@@ -1,0 +1,159 @@
+\doxysection{Match\+View\+Controller.\+java}
+\hypertarget{MatchViewController_8java_source}{}\label{MatchViewController_8java_source}\index{Football\_Manager/src/main/java/com/example/football\_manager/controller/MatchViewController.java@{Football\_Manager/src/main/java/com/example/football\_manager/controller/MatchViewController.java}}
+\mbox{\hyperlink{MatchViewController_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00001}00001\ \textcolor{keyword}{package\ }com.example.football\_manager.controller;}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00003}00003\ \textcolor{keyword}{import}\ com.example.football\_manager.dto.MatchRequestDTO;}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00004}00004\ \textcolor{keyword}{import}\ com.example.football\_manager.dto.MatchResultRequestDTO;}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00005}00005\ \textcolor{keyword}{import}\ com.example.football\_manager.model.Match;}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00006}00006\ \textcolor{keyword}{import}\ com.example.football\_manager.model.MatchGoal;}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00007}00007\ \textcolor{keyword}{import}\ com.example.football\_manager.service.MatchService;}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00008}00008\ \textcolor{keyword}{import}\ com.example.football\_manager.service.TeamService;}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00010}00010\ \textcolor{keyword}{import}\ jakarta.servlet.http.HttpSession;}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00011}00011\ \textcolor{keyword}{import}\ org.springframework.http.HttpStatus;}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00012}00012\ \textcolor{keyword}{import}\ org.springframework.stereotype.Controller;}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00013}00013\ \textcolor{keyword}{import}\ org.springframework.ui.Model;}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00014}00014\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.GetMapping;}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00015}00015\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.ModelAttribute;}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00016}00016\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.PathVariable;}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00017}00017\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.PostMapping;}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00018}00018\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.RequestParam;}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00019}00019\ \textcolor{keyword}{import}\ org.springframework.web.server.ResponseStatusException;}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00020}00020\ \textcolor{keyword}{import}\ org.springframework.web.servlet.mvc.support.RedirectAttributes;}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00022}00022\ \textcolor{keyword}{import}\ java.util.ArrayList;}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00023}00023\ \textcolor{keyword}{import}\ java.util.List;}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00025}00025\ @Controller}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00026}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController}{00026}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_aaacba571202d183144b1c02c44d6061a}{MatchViewController}}\ \{}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00028}00028\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService}{MatchService}}\ matchService;}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00029}00029\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1TeamService}{TeamService}}\ teamService;}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00031}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_aaacba571202d183144b1c02c44d6061a}{00031}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_aaacba571202d183144b1c02c44d6061a}{MatchViewController}}(\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService}{MatchService}}\ matchService,\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1TeamService}{TeamService}}\ teamService)\ \{}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00032}00032\ \ \ \ \ \ \ \ \ this.matchService\ =\ matchService;}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00033}00033\ \ \ \ \ \ \ \ \ this.teamService\ =\ teamService;}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00034}00034\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00036}00036\ \ \ \ \ @GetMapping(\textcolor{stringliteral}{"{}/matches"{}})}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00037}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_ab7de02f5f461112b059a71b06f42446a}{00037}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_ab7de02f5f461112b059a71b06f42446a}{showMatchesPage}}(}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ @RequestParam(required\ =\ false)\ Long\ teamId,}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ @RequestParam(required\ =\ false)\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO}{MatchRequestDTO}}.MatchStatus\ status,}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ @RequestParam(required\ =\ false)\ Long\ competitionId,}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ Model\ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1model}{model}},}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ HttpSession\ session)\ \{}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00043}00043\ \ \ \ \ \ \ \ \ Boolean\ isAdmin\ =\ (Boolean)\ session.getAttribute(\textcolor{stringliteral}{"{}isAdmin"{}});}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00045}00045\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}isAdmin"{}},\ isAdmin\ !=\ \textcolor{keyword}{null}\ \&\&\ isAdmin);}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00046}00046\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}matches"{}},\ matchService.getMatches(teamId,\ status,\ competitionId));}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00048}00048\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (IllegalArgumentException\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ ResponseStatusException(HttpStatus.BAD\_REQUEST,\ e.getMessage(),\ e);}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00050}00050\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00051}00051\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}teams"{}},\ teamService.getAllTeams());}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00052}00052\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}selectedTeamId"{}},\ teamId);}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00054}00054\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}matches"{}};}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00055}00055\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00057}00057\ \ \ \ \ @GetMapping(\textcolor{stringliteral}{"{}/matches/schedule"{}})}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00058}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_a4259930870e55951ea5036c87bebc3ce}{00058}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_a4259930870e55951ea5036c87bebc3ce}{showScheduleForm}}(Model\ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1model}{model}})\ \{}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00059}00059\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}matchRequest"{}},\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO}{MatchRequestDTO}}());}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00060}00060\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}teams"{}},\ teamService.getAllTeams());}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00061}00061\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}schedule-\/match"{}};}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00062}00062\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00064}00064\ \ \ \ \ @GetMapping(\textcolor{stringliteral}{"{}/matches/results"{}})}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00065}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_a114bf4908d7e6f239e822045edc314cb}{00065}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_a114bf4908d7e6f239e822045edc314cb}{showResultsPage}}(Model\ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1model}{model}})\ \{}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00066}00066\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}results"{}},\ matchService.getFinishedMatchResults());}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00067}00067\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}match-\/results"{}};}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00068}00068\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00069}00069\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00070}00070\ \ \ \ \ @GetMapping(\textcolor{stringliteral}{"{}/matches/edit/\{id\}"{}})}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00071}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_a0b052c3f46ac34fd7ff8577925e98671}{00071}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_a0b052c3f46ac34fd7ff8577925e98671}{showEditForm}}(@PathVariable\ Long\ \textcolor{keywordtype}{id},\ Model\ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1model}{model}})\ \{}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00072}00072\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO}{MatchRequestDTO}}\ matchRequestDTO\ =\ matchService.getMatchForEdit(\textcolor{keywordtype}{id})}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Match\ not\ found."{}}));}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00074}00074\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00075}00075\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}matchRequest"{}},\ matchRequestDTO);}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00076}00076\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}matchId"{}},\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00077}00077\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ PASAR\ LA\ LISTA\ DE\ EQUIPOS\ PARA\ LOS\ DESPLEGABLES}}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00078}00078\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}teams"{}},\ teamService.getAllTeams());}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00079}00079\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}edit-\/match"{}};}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00080}00080\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00082}00082\ \ \ \ \ @PostMapping(\textcolor{stringliteral}{"{}/matches/edit/\{id\}"{}})}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00083}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_ae8147b733292ce8c886de5b4afb594f1}{00083}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_ae8147b733292ce8c886de5b4afb594f1}{updateMatch}}(@PathVariable\ Long\ \textcolor{keywordtype}{id},\ @ModelAttribute(\textcolor{stringliteral}{"{}matchRequest"{}})\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO}{MatchRequestDTO}}\ matchDTO)\ \{}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00084}00084\ \ \ \ \ \ \ \ \ matchService.updateMatch(\textcolor{keywordtype}{id},\ matchDTO);}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00085}00085\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}redirect:/matches/results"{}};}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00086}00086\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00089}00089\ \ \ \ \ @GetMapping(\textcolor{stringliteral}{"{}/matches/\{id\}/score"{}})}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00090}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_a531901bb000f98f83069f7de1bf8eb34}{00090}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_a531901bb000f98f83069f7de1bf8eb34}{showScoreForm}}(@PathVariable\ Long\ \textcolor{keywordtype}{id},\ Model\ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1model}{model}})\ \{}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00091}00091\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}}\ match\ =\ matchService.getMatchById(\textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00093}00093\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1model}{model}}.containsAttribute(\textcolor{stringliteral}{"{}resultRequest"{}}))\ \{}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ model.addAttribute(\textcolor{stringliteral}{"{}resultRequest"{}},\ toResultRequest(matchService.getGoalsByMatchId(id)));}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00095}00095\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00097}00097\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}match"{}},\ match);}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00098}00098\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}enter-\/match-\/score"{}};}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00099}00099\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00101}00101\ \ \ \ \ @PostMapping(\textcolor{stringliteral}{"{}/matches/\{id\}/score"{}})}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00102}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_a8f05de52f1c2f3de22c42902b1788463}{00102}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_a8f05de52f1c2f3de22c42902b1788463}{submitScoreForm}}(}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ @PathVariable\ Long\ \textcolor{keywordtype}{id},}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ @ModelAttribute(\textcolor{stringliteral}{"{}resultRequest"{}})\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO}{MatchResultRequestDTO}}\ resultRequest,}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ Model\ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1model}{model}},}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ RedirectAttributes\ redirectAttributes)\ \{}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00108}00108\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}}\ match\ =\ matchService.getMatchById(\textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00109}00109\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}match"{}},\ match);}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00110}00110\ }
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00111}00111\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (resultRequest.getGoals()\ ==\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ resultRequest.setGoals(new\ ArrayList<>());}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00113}00113\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00114}00114\ }
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00115}00115\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ matchService.registerResult(id,\ resultRequest);}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ redirectAttributes.addFlashAttribute(\textcolor{stringliteral}{"{}successMessage"{}},\ \textcolor{stringliteral}{"{}Result\ saved\ successfully."{}});}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ return\ \textcolor{stringliteral}{"{}redirect:/matches/"{}}\ +\ id\ +\ \textcolor{stringliteral}{"{}/score"{}};}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00119}00119\ \ \ \ \ \ \ \ \ \}\ catch\ (IllegalArgumentException\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}errorMessage"{}},\ e.getMessage());}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}enter-\/match-\/score"{}};}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00122}00122\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00123}00123\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00124}00124\ }
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00125}00125\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO}{MatchResultRequestDTO}}\ toResultRequest(List<MatchGoal>\ goals)\ \{}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00126}00126\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO}{MatchResultRequestDTO}}\ resultRequest\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO}{MatchResultRequestDTO}}();}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00127}00127\ \ \ \ \ \ \ \ \ List<\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO}{MatchResultRequestDTO}}.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO_1_1GoalDTO}{GoalDTO}}>\ goalDTOs\ =\ \textcolor{keyword}{new}\ ArrayList<>();}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00128}00128\ }
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00129}00129\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1MatchGoal}{MatchGoal}}\ goal\ :\ goals)\ \{}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00130}00130\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO_1_1GoalDTO}{MatchResultRequestDTO.GoalDTO}}\ goalDTO\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO}{MatchResultRequestDTO}}.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO_1_1GoalDTO}{GoalDTO}}();}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00131}00131\ \ \ \ \ \ \ \ \ \ \ \ \ goalDTO.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO_1_1GoalDTO_a076b0dea27765d2cf5542633d36e58c0}{setTeamId}}(goal.getTeam().getId());}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00132}00132\ \ \ \ \ \ \ \ \ \ \ \ \ goalDTO.setMinute((\textcolor{keywordtype}{int})\ goal.getMinute());}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00133}00133\ \ \ \ \ \ \ \ \ \ \ \ \ goalDTO.setStoppageMinute(}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ goal.getStoppageMinute()\ ==\ \textcolor{keyword}{null}\ ?\ \textcolor{keyword}{null}\ :\ (\textcolor{keywordtype}{int})\ goal.getStoppageMinute()}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ goalDTOs.add(goalDTO);}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00137}00137\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00138}00138\ }
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00139}00139\ \ \ \ \ \ \ \ \ resultRequest.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO_abf51f1f5989b75d61e4d222b82999fb7}{setGoals}}(goalDTOs);}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00140}00140\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ resultRequest;}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00141}00141\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00142}00142\ }
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00143}00143\ \ \ \ \ @PostMapping(\textcolor{stringliteral}{"{}/matches/\{id\}/results"{}})}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00144}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_a75d0a6f76d58370d8529d08d60a52c7f}{00144}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_a75d0a6f76d58370d8529d08d60a52c7f}{saveMatchResult}}(@PathVariable\ Long\ \textcolor{keywordtype}{id},\ @ModelAttribute\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO}{MatchResultRequestDTO}}\ requestDTO)\ \{}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00145}00145\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ matchService.registerResult(\textcolor{keywordtype}{id},\ requestDTO);}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00148}00148\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}redirect:/admin/matches"{}};\ }
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00149}00149\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (IllegalArgumentException\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00150}00150\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}redirect:/matches/"{}}\ +\ \textcolor{keywordtype}{id}\ +\ \textcolor{stringliteral}{"{}/results?error=true"{}};}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00151}00151\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00152}00152\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00153}00153\ \}}
+
+\end{DoxyCode}

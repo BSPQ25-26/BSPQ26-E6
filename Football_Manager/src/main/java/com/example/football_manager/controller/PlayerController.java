@@ -1,5 +1,6 @@
 package com.example.football_manager.controller;
 
+import com.example.football_manager.dto.PlayerBulkRequestDTO;
 import com.example.football_manager.dto.PlayerRequestDTO;
 import com.example.football_manager.model.Player;
 import com.example.football_manager.service.PlayerService;
@@ -42,6 +43,26 @@ public class PlayerController {
         try {
             Player createdPlayer = playerService.createPlayer(teamId, dto);
             return new ResponseEntity<>(createdPlayer, HttpStatus.CREATED);
+        } catch (IllegalArgumentException ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
+    }
+
+    @PostMapping("/bulk")
+    @Operation(
+            summary = "Create many players for a team",
+            description = "Adds multiple players to the given team squad using a single JSON payload."
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "201", description = "Players created"),
+            @ApiResponse(responseCode = "400", description = "Validation or business rule error")
+    })
+    public ResponseEntity<?> createPlayers(
+            @PathVariable Long teamId,
+            @Valid @RequestBody PlayerBulkRequestDTO dto) {
+        try {
+            List<Player> createdPlayers = playerService.createPlayers(teamId, dto.getPlayers());
+            return new ResponseEntity<>(createdPlayers, HttpStatus.CREATED);
         } catch (IllegalArgumentException ex) {
             return ResponseEntity.badRequest().body(ex.getMessage());
         }
