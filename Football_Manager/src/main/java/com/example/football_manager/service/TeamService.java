@@ -9,6 +9,8 @@ import com.example.football_manager.repository.TeamRepository;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,6 +24,7 @@ public class TeamService {
         this.countryRepository = countryRepository;
     }
 
+    @CacheEvict(cacheNames = "teams", allEntries = true)
     public Team createTeam(TeamRequestDTO dto) {
         Country country = countryRepository.findById(dto.getCountryId())
                 .orElseThrow(() -> new RuntimeException("Country not found with id: " + dto.getCountryId()));
@@ -34,6 +37,7 @@ public class TeamService {
         return teamRepository.save(team);
     }
 
+    @CacheEvict(cacheNames = "teams", allEntries = true)
     public Team updateTeam(Long id, TeamRequestDTO dto) {
         Team existingTeam = teamRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Team not found with id: " + id));
@@ -48,6 +52,7 @@ public class TeamService {
         return teamRepository.save(existingTeam);
     }
 
+    @CacheEvict(cacheNames = "teams", allEntries = true)
     public void deleteTeam(Long id) {
         Team existingTeam = teamRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Team not found with id: " + id));
@@ -66,6 +71,7 @@ public class TeamService {
         return teamRepository.findByNameContainingIgnoreCase(name.trim());
     }
 
+    @Cacheable(cacheNames = "teams")
     public List<Team> getAllTeams() {
         return teamRepository.findAll();
     }

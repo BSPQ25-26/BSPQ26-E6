@@ -33,7 +33,11 @@ public class CacheConfig {
                         .build()),
                 new CaffeineCache("competitions", Caffeine.newBuilder()
                         .expireAfterWrite(Duration.ofMinutes(1))
-                        .maximumSize(1000)
+                        .maximumSize(2000)
+                        .build()),
+                new CaffeineCache("teams", Caffeine.newBuilder()
+                        .expireAfterWrite(Duration.ofMinutes(1))
+                        .maximumSize(2000)
                         .build())
         ));
         return cacheManager;
