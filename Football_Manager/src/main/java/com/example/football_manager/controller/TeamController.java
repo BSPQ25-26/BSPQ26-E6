@@ -55,4 +55,9 @@ public class TeamController {
         List<Team> teams = teamService.getAllTeams();
         return ResponseEntity.ok(teams);
     }
+
+    @GetMapping("/standings")
+    public ResponseEntity<List<Team>> getStandings() {
+        return ResponseEntity.ok(teamService.getStandings());
+    }
 }

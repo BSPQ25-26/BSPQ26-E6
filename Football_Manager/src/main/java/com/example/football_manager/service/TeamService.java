@@ -5,6 +5,7 @@ import com.example.football_manager.model.Country;
 import com.example.football_manager.model.Team;
 import com.example.football_manager.repository.CountryRepository;
 import com.example.football_manager.repository.TeamRepository;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 import java.util.Optional;
@@ -68,5 +69,15 @@ public class TeamService {
 
     public List<Team> getAllTeams() {
         return teamRepository.findAll();
+    }
+
+    public List<Team> getStandings() {
+        return teamRepository.findAll(
+            Sort.by(
+                Sort.Order.desc("pts"),
+                Sort.Order.desc("dg"),
+                Sort.Order.desc("gf")
+            )
+        );
     }
 }
