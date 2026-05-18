@@ -16,7 +16,7 @@
 
 <nav class="bg-slate-900 border-b-2 border-emerald-600 shadow-md">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-16">
+        <div class="flex flex-col sm:flex-row justify-between items-center min-h-16 py-3 gap-4">
             <div class="flex items-center gap-3">
                 <svg class="w-8 h-8 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -29,19 +29,26 @@
                 </span>
             </div>
 
-            <div class="flex gap-3 items-center">
+            <div class="flex flex-wrap justify-center sm:justify-end gap-3 items-center">
                 <select id="langSelect"
                         class="px-4 py-[0.55rem] bg-slate-800 text-slate-300 text-sm font-medium rounded-md border border-slate-700"
                         onchange="window.location.href = window.location.pathname + '?lang=' + this.value;">
                     <option value="es" th:selected="${#locale.language == 'es'}" th:text="#{global.lang.es}">Espanol</option>
                     <option value="en" th:selected="${#locale.language == 'en'}" th:text="#{global.lang.en}">English</option>
                 </select>
+
                 <a href="/standings" class="px-4 py-2 bg-slate-800 text-slate-300 text-sm font-medium rounded-md hover:bg-emerald-600 hover:text-white transition-colors border border-slate-700" th:text="#{nav.standings}">
                     Standings
                 </a>
+              
                 <a href="/profile"
                    class="px-4 py-2 bg-slate-800 text-slate-300 text-sm font-medium rounded-md hover:bg-slate-700 hover:text-white transition-colors border border-slate-700" th:text="#{teams.profile}">
                     My Profile
+                </a>
+
+                <a href="/matches"
+                   class="px-4 py-2 bg-slate-800 text-slate-300 text-sm font-medium rounded-md hover:bg-slate-700 hover:text-white transition-colors border border-slate-700" th:text="#{teams.matches}">
+                    Matches
                 </a>
 
                 <a th:if="${isAdmin}" href="/admin"
