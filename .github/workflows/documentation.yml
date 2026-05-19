@@ -64,6 +64,64 @@ jobs:
       - name: Generate Doxygen HTML and LaTeX documentation
         run: doxygen Doxyfile
 
+      - name: Sanitize Doxygen LaTeX files
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          replacements = {
+              "│": "|",
+              "┃": "|",
+              "║": "|",
+              "─": "-",
+              "━": "-",
+              "═": "-",
+              "┌": "+",
+              "┐": "+",
+              "└": "+",
+              "┘": "+",
+              "├": "+",
+              "┤": "+",
+              "┬": "+",
+              "┴": "+",
+              "┼": "+",
+              "╔": "+",
+              "╗": "+",
+              "╚": "+",
+              "╝": "+",
+              "╠": "+",
+              "╣": "+",
+              "╦": "+",
+              "╩": "+",
+              "╬": "+",
+              "→": "->",
+              "←": "<-",
+              "≥": ">=",
+              "≤": "<=",
+              "—": "-",
+              "–": "-",
+              "✅": "[OK]",
+              "❌": "[ERROR]",
+              "⚠️": "[WARNING]",
+              "⚠": "[WARNING]",
+              "📌": "",
+              "🚀": "",
+              "📄": "",
+              "📊": "",
+              "🧪": "",
+              "⚽": "",
+          }
+
+          latex_dir = Path("docs/doxygen/latex")
+
+          if latex_dir.exists():
+              for file in latex_dir.rglob("*.tex"):
+                  text = file.read_text(encoding="utf-8", errors="ignore")
+                  for old, new in replacements.items():
+                      text = text.replace(old, new)
+                  file.write_text(text, encoding="utf-8")
+          PY
+
       - name: Generate Doxygen PDF documentation
         working-directory: docs/doxygen/latex
         run: |
@@ -113,14 +171,26 @@ jobs:
                       padding: 60px 24px;
                   }
 
+                  .badge {
+                      display: inline-block;
+                      color: #10b981;
+                      font-size: 14px;
+                      font-weight: 800;
+                      letter-spacing: 0.18em;
+                      text-transform: uppercase;
+                      margin-bottom: 16px;
+                  }
+
                   h1 {
                       font-size: 48px;
-                      margin-bottom: 12px;
+                      margin: 0 0 12px;
+                      line-height: 1.05;
                   }
 
                   p {
                       color: #94a3b8;
                       font-size: 18px;
+                      line-height: 1.6;
                   }
 
                   .grid {
@@ -138,6 +208,7 @@ jobs:
                       text-decoration: none;
                       color: #f8fafc;
                       transition: 0.2s ease;
+                      min-height: 160px;
                   }
 
                   .card:hover {
@@ -147,12 +218,15 @@ jobs:
 
                   .card h2 {
                       margin-top: 0;
+                      margin-bottom: 12px;
                       color: #10b981;
+                      font-size: 24px;
                   }
 
                   .card p {
                       font-size: 15px;
                       line-height: 1.5;
+                      margin-bottom: 0;
                   }
 
                   footer {
@@ -166,6 +240,7 @@ jobs:
               <div class="top-bar"></div>
 
               <main>
+                  <span class="badge">Sprint 3 Documentation</span>
                   <h1>Football Manager Documentation</h1>
                   <p>
                       Generated documentation, quality reports and testing evidence for the Football Manager teamwork project.
@@ -194,7 +269,7 @@ jobs:
                   </section>
 
                   <footer>
-                      Football Manager · Sprint 3 · Documentation generated with GitHub Actions
+                      Football Manager · Sprint 3 · Generated with GitHub Actions
                   </footer>
               </main>
           </body>
