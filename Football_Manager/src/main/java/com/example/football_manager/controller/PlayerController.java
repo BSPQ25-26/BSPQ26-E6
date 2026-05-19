@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * REST endpoints for managing players within a team.
+ */
 @RestController
 @RequestMapping("/api/teams/{teamId}/players")
 @Tag(name = "Players")
@@ -28,6 +31,13 @@ public class PlayerController {
         this.playerService = playerService;
     }
 
+    /**
+     * Creates a player in the given team.
+     *
+     * @param teamId team identifier
+     * @param dto player details payload
+     * @return created player or error message
+     */
     @PostMapping
     @Operation(
             summary = "Create a player for a team",
@@ -48,6 +58,13 @@ public class PlayerController {
         }
     }
 
+    /**
+     * Creates multiple players in the given team.
+     *
+     * @param teamId team identifier
+     * @param dto bulk player payload
+     * @return created players or error message
+     */
     @PostMapping("/bulk")
     @Operation(
             summary = "Create many players for a team",
@@ -68,6 +85,12 @@ public class PlayerController {
         }
     }
 
+    /**
+     * Lists all players for a team.
+     *
+     * @param teamId team identifier
+     * @return list of players or error message
+     */
     @GetMapping
     @Operation(
             summary = "List players of a team",
@@ -86,6 +109,14 @@ public class PlayerController {
         }
     }
 
+    /**
+     * Updates a player in the given team.
+     *
+     * @param teamId team identifier
+     * @param playerId player identifier
+     * @param dto player updates payload
+     * @return updated player or error message
+     */
     @PutMapping("/{playerId}")
     @Operation(
             summary = "Update a player of a team",
@@ -107,6 +138,13 @@ public class PlayerController {
         }
     }
 
+    /**
+     * Deletes a player from the given team.
+     *
+     * @param teamId team identifier
+     * @param playerId player identifier
+     * @return empty response or error message
+     */
     @DeleteMapping("/{playerId}")
     @Operation(
             summary = "Delete a player from a team",
