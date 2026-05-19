@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{fantasy.title}">Football Manager - Fantasy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen bg-slate-100 font-sans text-slate-800">
+
+<nav th:replace="~{fragments/navbar :: navbar(active='fantasy')}"></nav>
+
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+    <!-- Header -->
+    <section class="bg-slate-900 rounded-3xl shadow-xl overflow-hidden mb-8">
+        <div class="p-8 lg:p-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
+            <div>
+                <p class="text-emerald-400 text-sm font-black uppercase tracking-[0.25em]"
+                   th:text="#{fantasy.mode}">
+                    Fantasy Mode
+                </p>
+
+                <h1 class="text-4xl lg:text-5xl font-black text-white mt-3 uppercase tracking-tight"
+                    th:text="#{fantasy.heading}">
+                    Build your dream team
+                </h1>
+
+                <p class="text-slate-300 mt-4 max-w-2xl text-lg"
+                   th:text="#{fantasy.subtitle}">
+                    Join a league, choose up to 11 players, and compete in the leaderboard using fantasy points based on match results.
+                </p>
+            </div>
+
+            <div class="bg-white/10 border border-white/10 rounded-2xl p-6 min-w-[18rem]">
+                <p class="text-slate-300 text-xs font-black uppercase tracking-widest"
+                   th:text="#{fantasy.totalPoints}">
+                    Your total points
+                </p>
+
+                <p class="text-6xl font-black text-emerald-400 mt-2" th:text="${myScore.totalPoints}">
+                    0
+                </p>
+
+                <p class="text-slate-300 font-semibold mt-1" th:text="${myScore.username}">
+                    username
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Alerts -->
+    <div th:if="${successMessage}"
+         class="mb-6 p-4 rounded-2xl border border-emerald-200 bg-emerald-50 text-emerald-700 font-bold"
+         th:text="${successMessage}">
+        Success
+    </div>
+
+    <div th:if="${errorMessage}"
+         class="mb-6 p-4 rounded-2xl border border-red-200 bg-red-50 text-red-700 font-bold"
+         th:text="${errorMessage}">
+        Error
+    </div>
+
+    <!-- Main layout -->
+    <div class="grid grid-cols-1 xl:grid-cols-12 gap-6">
+
+        <!-- Left column -->
+        <aside class="xl:col-span-4 space-y-6">
+
+            <!-- Step 1: leagues -->
+            <section class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="p-6 border-b border-slate-200 bg-slate-50">
+                    <div class="flex items-center gap-3">
+                        <span class="w-9 h-9 rounded-full bg-emerald-600 text-white flex items-center justify-center font-black"
+                              th:text="#{fantasy.step1}">
+                            1
+                        </span>
+
+                        <div>
+                            <h2 class="text-xl font-black text-slate-900 uppercase"
+                                th:text="#{fantasy.chooseLeague}">
+                                Choose a league
+                            </h2>
+
+                            <p class="text-sm text-slate-500 font-medium"
+                               th:text="#{fantasy.chooseLeague.subtitle}">
+                                Create one or join with a code.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-6 space-y-5">
+
+                    <!-- Current selected league -->
+                    <div th:if="${selectedLeague != null}"
+                         class="rounded-2xl bg-emerald-50 border border-emerald-200 p-4">
+                        <p class="text-xs font-black uppercase tracking-widest text-emerald-700"
+                           th:text="#{fantasy.currentLeague}">
+                            Current league
+                        </p>
+
+                        <p class="text-lg font-black text-slate-900 mt-1" th:text="${selectedLeague.name}">
+                            League
+                        </p>
+
+                        <p class="text-sm text-slate-600 mt-1">
+                            <span th:text="#{fantasy.inviteCode}">Invite code:</span>
+                            <span class="font-black text-emerald-700" th:text="${selectedLeague.code}">
+                                CODE
+                            </span>
+                        </p>
+                    </div>
+
+                    <div th:if="${selectedLeague == null}"
+                         class="rounded-2xl bg-slate-50 border border-slate-200 p-4 text-slate-500 text-sm font-medium"
+                         th:text="#{fantasy.noLeague}">
+                        You are not inside any fantasy league yet.
+                    </div>
+
+                    <!-- My leagues -->
+                    <div>
+                        <p class="text-sm font-black text-slate-700 uppercase mb-3"
+                           th:text="#{fantasy.myLeagues}">
+                            My leagues
+                        </p>
+
+                        <div th:if="${#lists.isEmpty(myLeagues)}"
+                             class="text-sm text-slate-500 bg-slate-50 rounded-2xl p-4"
+                             th:text="#{fantasy.noLeagues}">
+                            No leagues yet.
+                        </div>
+
+                        <div th:if="${!#lists.isEmpty(myLeagues)}"
+                             class="space-y-2 max-h-52 overflow-y-auto pr-1">
+                            <a th:each="league : ${myLeagues}"
+                               th:href="@{/fantasy/leagues/{id}(id=${league.id})}"
+                               class="block rounded-2xl border px-4 py-3 transition-colors"
+                               th:classappend="${selectedLeague != null and selectedLeague.id == league.id} ? ' border-emerald-500 bg-emerald-50' : ' border-slate-200 bg-white hover:bg-slate-50'">
+
+                                <div class="flex items-center justify-between gap-3">
+                                    <div class="min-w-0">
+                                        <p class="font-black text-slate-900 truncate" th:text="${league.name}">
+                                            League
+                                        </p>
+
+                                        <p class="text-xs text-slate-500">
+                                            <span th:text="#{fantasy.inviteCode}">Code:</span>
+                                            <span class="font-bold" th:text="${league.code}">CODE</span>
+                                        </p>
+                                    </div>
+
+                                    <span th:if="${selectedLeague != null and selectedLeague.id == league.id}"
+                                          class="text-xs font-black bg-emerald-600 text-white rounded-full px-3 py-1"
+                                          th:text="#{fantasy.active}">
+                                        Active
+                                    </span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Create / join forms -->
+                    <details class="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                        <summary class="cursor-pointer font-black text-slate-900 uppercase"
+                                 th:text="#{fantasy.createLeague}">
+                            Create new league
+                        </summary>
+
+                        <form th:action="@{/fantasy/leagues}" method="post" class="mt-4 space-y-3">
+                            <input name="name"
+                                   type="text"
+                                   maxlength="60"
+                                   th:placeholder="#{fantasy.createLeague.placeholder}"
+                                   class="w-full border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+
+                            <button type="submit"
+                                    class="w-full bg-emerald-600 text-white font-black rounded-xl px-4 py-3 hover:bg-emerald-700 transition-colors uppercase"
+                                    th:text="#{fantasy.createLeague.button}">
+                                Create league
+                            </button>
+                        </form>
+                    </details>
+
+                    <details class="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                        <summary class="cursor-pointer font-black text-slate-900 uppercase"
+                                 th:text="#{fantasy.joinLeague}">
+                            Join with code
+                        </summary>
+
+                        <form th:action="@{/fantasy/leagues/join}" method="post" class="mt-4 space-y-3">
+                            <input name="code"
+                                   type="text"
+                                   maxlength="12"
+                                   th:placeholder="#{fantasy.joinLeague.placeholder}"
+                                   class="w-full border border-slate-300 rounded-xl px-4 py-3 uppercase focus:outline-none focus:ring-2 focus:ring-emerald-500">
+
+                            <button type="submit"
+                                    class="w-full bg-slate-900 text-white font-black rounded-xl px-4 py-3 hover:bg-slate-800 transition-colors uppercase"
+                                    th:text="#{fantasy.joinLeague.button}">
+                                Join league
+                            </button>
+                        </form>
+                    </details>
+                </div>
+            </section>
+
+            <!-- Step 3: leaderboard -->
+            <section class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="p-6 border-b border-slate-200 bg-slate-50">
+                    <div class="flex items-center gap-3">
+                        <span class="w-9 h-9 rounded-full bg-emerald-600 text-white flex items-center justify-center font-black"
+                              th:text="#{fantasy.step3}">
+                            3
+                        </span>
+
+                        <div>
+                            <h2 class="text-xl font-black text-slate-900 uppercase"
+                                th:text="#{fantasy.leaderboard}">
+                                Leaderboard
+                            </h2>
+
+                            <p class="text-sm text-slate-500 font-medium"
+                               th:text="#{fantasy.leaderboard.subtitle}">
+                                Ranking of the selected league.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div th:if="${selectedLeague == null}"
+                     class="p-6 text-slate-500 text-sm"
+                     th:text="#{fantasy.leaderboard.noLeague}">
+                    Create or join a league to see the leaderboard.
+                </div>
+
+                <div th:if="${selectedLeague != null and #lists.isEmpty(leaderboard)}"
+                     class="p-6 text-slate-500 text-sm"
+                     th:text="#{fantasy.leaderboard.empty}">
+                    No members yet.
+                </div>
+
+                <div th:if="${selectedLeague != null and !#lists.isEmpty(leaderboard)}"
+                     class="divide-y divide-slate-200">
+                    <div th:each="entry : ${leaderboard}"
+                         class="px-6 py-4 flex items-center justify-between gap-3">
+
+                        <div class="flex items-center gap-3 min-w-0">
+                            <span class="w-10 h-10 rounded-full flex items-center justify-center font-black"
+                                  th:classappend="${entry.position == 1} ? ' bg-amber-100 text-amber-700' : ' bg-slate-100 text-slate-700'"
+                                  th:text="${entry.position}">
+                                1
+                            </span>
+
+                            <div class="min-w-0">
+                                <p class="font-black text-slate-900 truncate" th:text="${entry.username}">
+                                    User
+                                </p>
+
+                                <p class="text-xs text-slate-500" th:text="#{fantasy.manager}">
+                                    Fantasy manager
+                                </p>
+                            </div>
+                        </div>
+
+                        <span class="bg-slate-900 text-emerald-400 font-black rounded-xl px-3 py-2"
+                              th:text="${entry.totalPoints}">
+                            0
+                        </span>
+                    </div>
+                </div>
+            </section>
+        </aside>
+
+        <!-- Right column -->
+        <section class="xl:col-span-8 space-y-6">
+
+            <!-- Step 2: lineup picker -->
+            <section class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="p-6 border-b border-slate-200 bg-slate-50">
+                    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                        <div class="flex items-center gap-3">
+                            <span class="w-9 h-9 rounded-full bg-emerald-600 text-white flex items-center justify-center font-black"
+                                  th:text="#{fantasy.step2}">
+                                2
+                            </span>
+
+                            <div>
+                                <h2 class="text-xl font-black text-slate-900 uppercase"
+                                    th:text="#{fantasy.pickLineup}">
+                                    Pick your lineup
+                                </h2>
+
+                                <p class="text-sm text-slate-500 font-medium"
+                                   th:text="#{fantasy.pickLineup.subtitle}">
+                                    Select up to 11 players. Maximum one goalkeeper.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white border border-slate-200 rounded-2xl px-5 py-3">
+                            <p class="text-xs text-slate-500 font-black uppercase tracking-widest"
+                               th:text="#{fantasy.selected}">
+                                Selected
+                            </p>
+
+                            <p class="text-2xl font-black text-slate-900">
+                                <span id="selectedCount" class="text-emerald-600"
+                                      th:text="${#lists.size(selectedPlayerIds)}">0</span>
+                                <span class="text-slate-400">/ 11</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Search and filters -->
+                <div class="p-6 border-b border-slate-200">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="md:col-span-2">
+                            <label for="playerSearch"
+                                   class="block text-xs font-black uppercase text-slate-500 mb-2"
+                                   th:text="#{fantasy.search}">
+                                Search player or team
+                            </label>
+
+                            <input id="playerSearch"
+                                   type="text"
+                                   th:placeholder="#{fantasy.search.placeholder}"
+                                   class="w-full border border-slate-300 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                        </div>
+
+                        <div>
+                            <label for="positionFilter"
+                                   class="block text-xs font-black uppercase text-slate-500 mb-2"
+                                   th:text="#{fantasy.position}">
+                                Position
+                            </label>
+
+                            <select id="positionFilter"
+                                    class="w-full border border-slate-300 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                <option value="" th:text="#{fantasy.allPositions}">All positions</option>
+                                <option value="goalkeeper" th:text="#{fantasy.goalkeepers}">Goalkeepers</option>
+                                <option value="defender" th:text="#{fantasy.defenders}">Defenders</option>
+                                <option value="midfielder" th:text="#{fantasy.midfielders}">Midfielders</option>
+                                <option value="forward" th:text="#{fantasy.forwards}">Forwards</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <form th:action="@{/fantasy/lineup}" method="post">
+                    <div class="p-6">
+                        <div th:if="${#lists.isEmpty(availablePlayers)}"
+                             class="p-10 text-center rounded-2xl bg-slate-50 border border-slate-200">
+                            <p class="text-slate-700 font-black text-lg"
+                               th:text="#{fantasy.noPlayers.title}">
+                                No players available
+                            </p>
+
+                            <p class="text-slate-500 text-sm mt-1"
+                               th:text="#{fantasy.noPlayers.subtitle}">
+                                Add players from the admin panel before using Fantasy mode.
+                            </p>
+                        </div>
+
+                        <div th:if="${!#lists.isEmpty(availablePlayers)}"
+                             class="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-[44rem] overflow-y-auto pr-2">
+
+                            <label th:each="player : ${availablePlayers}"
+                                   th:attr="data-search=${#strings.toLowerCase(player.playerName + ' ' + player.teamName + ' ' + player.position)}, data-position=${#strings.toLowerCase(player.position)}"
+                                   class="fantasy-player-card flex items-center gap-4 rounded-2xl border bg-white p-4 cursor-pointer transition-all hover:shadow-md">
+
+                                <input type="checkbox"
+                                       name="playerIds"
+                                       th:value="${player.playerId}"
+                                       th:checked="${selectedPlayerIds.contains(player.playerId)}"
+                                       class="fantasy-player-checkbox w-5 h-5 accent-emerald-600 shrink-0">
+
+                                <div class="w-14 h-14 rounded-2xl bg-slate-50 border border-slate-200 p-2 flex items-center justify-center shrink-0">
+                                    <img th:src="${player.teamLogoUrl != null && !player.teamLogoUrl.isEmpty() ? player.teamLogoUrl : 'https://via.placeholder.com/64?text=Logo'}"
+                                         alt="Team logo"
+                                         class="w-full h-full object-contain">
+                                </div>
+
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex flex-wrap items-center gap-2 mb-1">
+                                        <span class="text-xs font-black rounded-lg bg-slate-100 text-slate-700 px-2 py-1"
+                                              th:text="'#' + ${player.number}">
+                                            #10
+                                        </span>
+
+                                        <span class="text-xs font-black rounded-lg bg-emerald-100 text-emerald-700 px-2 py-1"
+                                              th:text="${player.position}">
+                                            MIDFIELDER
+                                        </span>
+                                    </div>
+
+                                    <p class="font-black text-slate-900 truncate" th:text="${player.playerName}">
+                                        Player
+                                    </p>
+
+                                    <p class="text-sm text-slate-500 truncate" th:text="${player.teamName}">
+                                        Team
+                                    </p>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="p-6 bg-slate-50 border-t border-slate-200 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                        <div class="text-sm text-slate-500">
+                            <p class="font-bold text-slate-700"
+                               th:text="#{fantasy.scoring.title}">
+                                Scoring formula
+                            </p>
+
+                            <p th:text="#{fantasy.scoring.text}">
+                                Base points + match result + goal difference + clean sheet bonus + position bonus.
+                            </p>
+                        </div>
+
+                        <button type="submit"
+                                class="bg-emerald-600 text-white font-black rounded-2xl px-8 py-4 hover:bg-emerald-700 transition-colors uppercase tracking-wide"
+                                th:text="#{fantasy.saveLineup}">
+                            Save lineup
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- My lineup summary -->
+            <section class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="p-6 border-b border-slate-200 bg-slate-50">
+                    <h2 class="text-xl font-black text-slate-900 uppercase"
+                        th:text="#{fantasy.yourPlayers}">
+                        Your selected players
+                    </h2>
+
+                    <p class="text-sm text-slate-500 font-medium"
+                       th:text="#{fantasy.yourPlayers.subtitle}">
+                        Current lineup and individual fantasy points.
+                    </p>
+                </div>
+
+                <div th:if="${#lists.isEmpty(lineup)}"
+                     class="p-8 text-center text-slate-500"
+                     th:text="#{fantasy.noLineup}">
+                    You have not selected your lineup yet.
+                </div>
+
+                <div th:if="${!#lists.isEmpty(lineup)}"
+                     class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-6">
+                    <div th:each="player : ${lineup}"
+                         class="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                        <div class="flex items-start justify-between gap-3">
+                            <div class="min-w-0">
+                                <p class="font-black text-slate-900 truncate" th:text="${player.playerName}">
+                                    Player
+                                </p>
+
+                                <p class="text-xs text-slate-500 mt-1">
+                                    <span th:text="${player.teamName}">Team</span>
+                                    ·
+                                    <span th:text="${player.position}">Position</span>
+                                </p>
+                            </div>
+
+                            <span class="bg-emerald-600 text-white font-black rounded-xl px-3 py-2"
+                                  th:text="${player.points}">
+                                0
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </div>
+</main>
+
+<script th:inline="javascript">
+    const maxPlayersMessage = /*[[#{fantasy.alert.maxPlayers}]]*/ 'You can select a maximum of 11 players.';
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const checkboxes = document.querySelectorAll('.fantasy-player-checkbox');
+        const selectedCount = document.getElementById('selectedCount');
+        const playerSearch = document.getElementById('playerSearch');
+        const positionFilter = document.getElementById('positionFilter');
+        const cards = document.querySelectorAll('.fantasy-player-card');
+
+        function updateSelectedCards() {
+            let checked = 0;
+
+            checkboxes.forEach(checkbox => {
+                const card = checkbox.closest('.fantasy-player-card');
+
+                if (checkbox.checked) {
+                    checked++;
+                    card.classList.add('border-emerald-500', 'bg-emerald-50', 'ring-2', 'ring-emerald-100');
+                    card.classList.remove('border-slate-200');
+                } else {
+                    card.classList.remove('border-emerald-500', 'bg-emerald-50', 'ring-2', 'ring-emerald-100');
+                    card.classList.add('border-slate-200');
+                }
+            });
+
+            selectedCount.textContent = checked;
+        }
+
+        function applyFilters() {
+            const searchValue = playerSearch.value.trim().toLowerCase();
+            const positionValue = positionFilter.value.trim().toLowerCase();
+
+            cards.forEach(card => {
+                const searchText = card.dataset.search || '';
+                const position = card.dataset.position || '';
+
+                const matchesSearch = !searchValue || searchText.includes(searchValue);
+                const matchesPosition = !positionValue || position === positionValue;
+
+                card.classList.toggle('hidden', !(matchesSearch && matchesPosition));
+            });
+        }
+
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                const checked = document.querySelectorAll('.fantasy-player-checkbox:checked').length;
+
+                if (checked > 11) {
+                    checkbox.checked = false;
+                    alert(maxPlayersMessage);
+                }
+
+                updateSelectedCards();
+            });
+        });
+
+        playerSearch.addEventListener('input', applyFilters);
+        positionFilter.addEventListener('change', applyFilters);
+
+        updateSelectedCards();
+        applyFilters();
+    });
+</script>
+
+</body>
+</html>

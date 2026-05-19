@@ -46,6 +46,10 @@ public class FantasyService {
     public FantasyLeagueDTO createLeague(Long userId, CreateFantasyLeagueRequestDTO request) {
         User owner = getUserOrThrow(userId);
 
+        if (request == null || request.getName() == null || request.getName().trim().isEmpty()) {
+            throw new IllegalArgumentException("League name is required.");
+        }
+
         FantasyLeague league = new FantasyLeague();
         league.setName(request.getName().trim());
         league.setCode(generateUniqueCode());
@@ -65,12 +69,16 @@ public class FantasyService {
     public FantasyLeagueDTO joinLeague(Long userId, JoinFantasyLeagueRequestDTO request) {
         User user = getUserOrThrow(userId);
 
+        if (request == null || request.getCode() == null || request.getCode().trim().isEmpty()) {
+            throw new IllegalArgumentException("League code is required.");
+        }
+
         FantasyLeague league = fantasyLeagueRepository
                 .findByCodeIgnoreCase(request.getCode().trim())
                 .orElseThrow(() -> new IllegalArgumentException("Fantasy league not found."));
 
         if (fantasyLeagueMemberRepository.existsByLeagueIdAndUserId(league.getId(), user.getId())) {
-            throw new IllegalArgumentException("User is already a member of this fantasy league.");
+            throw new IllegalArgumentException("You are already a member of this fantasy league.");
         }
 
         FantasyLeagueMember member = new FantasyLeagueMember();
@@ -88,12 +96,42 @@ public class FantasyService {
         return fantasyLeagueMemberRepository.findByUserId(userId)
                 .stream()
                 .map(member -> toLeagueDTO(member.getLeague()))
+                .sorted(Comparator.comparing(FantasyLeagueDTO::getName))
+                .toList();
+    }
+
+    @Transactional(readOnly = true)
+    public FantasyLeagueDTO getLeagueForMember(Long leagueId, Long userId) {
+        FantasyLeague league = fantasyLeagueRepository.findById(leagueId)
+                .orElseThrow(() -> new IllegalArgumentException("Fantasy league not found."));
+
+        if (!fantasyLeagueMemberRepository.existsByLeagueIdAndUserId(leagueId, userId)) {
+            throw new IllegalArgumentException("You are not a member of this fantasy league.");
+        }
+
+        return toLeagueDTO(league);
+    }
+
+    @Transactional(readOnly = true)
+    public List<FantasyAvailablePlayerDTO> getAvailablePlayers() {
+        return playerRepository.findAll()
+                .stream()
+                .sorted(
+                        Comparator.comparing((Player p) -> p.getTeam().getName())
+                                .thenComparing(Player::getNumber)
+                                .thenComparing(Player::getName)
+                )
+                .map(this::toAvailablePlayerDTO)
                 .toList();
     }
 
     @Transactional
     public List<FantasyLineupPlayerDTO> saveLineup(Long userId, FantasyLineupRequestDTO request) {
         User user = getUserOrThrow(userId);
+
+        if (request == null || request.getPlayerIds() == null || request.getPlayerIds().isEmpty()) {
+            throw new IllegalArgumentException("Select at least one player.");
+        }
 
         List<Long> playerIds = request.getPlayerIds();
 
@@ -109,16 +147,21 @@ public class FantasyService {
         List<Player> players = playerRepository.findAllById(playerIds);
 
         if (players.size() != playerIds.size()) {
-            throw new IllegalArgumentException("One or more players do not exist.");
+            throw new IllegalArgumentException("One or more selected players do not exist.");
         }
 
         validateLineupStructure(players);
 
         fantasyLineupPlayerRepository.deleteByUserId(userId);
 
-        List<FantasyLineupPlayer> lineupPlayers = IntStream.range(0, players.size())
+        List<FantasyLineupPlayer> lineupPlayers = IntStream.range(0, playerIds.size())
                 .mapToObj(index -> {
-                    Player player = players.get(index);
+                    Long playerId = playerIds.get(index);
+
+                    Player player = players.stream()
+                            .filter(p -> p.getId().equals(playerId))
+                            .findFirst()
+                            .orElseThrow(() -> new IllegalArgumentException("Player not found."));
 
                     FantasyLineupPlayer lineupPlayer = new FantasyLineupPlayer();
                     lineupPlayer.setUser(user);
@@ -293,6 +336,20 @@ public class FantasyService {
                 league.getCode(),
                 league.getOwner().getId(),
                 league.getOwner().getUsername()
+        );
+    }
+
+    private FantasyAvailablePlayerDTO toAvailablePlayerDTO(Player player) {
+        Team team = player.getTeam();
+
+        return new FantasyAvailablePlayerDTO(
+                player.getId(),
+                player.getName(),
+                player.getNumber(),
+                player.getPosition(),
+                team.getId(),
+                team.getName(),
+                team.getLogoUrl()
         );
     }
 
