@@ -11,7 +11,7 @@ on:
 
 jobs:
   generate-documentation:
-    name: Build tests, Maven Site and Doxygen
+    name: Build tests, Maven Site, Doxygen HTML and PDF
     runs-on: ubuntu-latest
 
     steps:
@@ -37,13 +37,30 @@ jobs:
         working-directory: Football_Manager
         run: ./mvnw site
 
-      - name: Install Doxygen and Graphviz
+      - name: Install Doxygen, Graphviz and LaTeX
         run: |
           sudo apt-get update
-          sudo apt-get install -y doxygen graphviz
+          sudo apt-get install -y \
+            doxygen \
+            graphviz \
+            make \
+            latexmk \
+            texlive-latex-base \
+            texlive-latex-recommended \
+            texlive-latex-extra \
+            texlive-fonts-recommended \
+            texlive-font-utils \
+            cm-super
 
-      - name: Generate Doxygen HTML documentation
+      - name: Generate Doxygen HTML and LaTeX documentation
         run: doxygen Doxyfile
+
+      - name: Generate Doxygen PDF documentation
+        working-directory: docs/doxygen/latex
+        run: |
+          make clean || true
+          make
+          test -f refman.pdf
 
       - name: Upload Maven Site artifact
         uses: actions/upload-artifact@v4
@@ -62,3 +79,10 @@ jobs:
         with:
           name: doxygen-html
           path: docs/doxygen/html/
+
+      - name: Upload Doxygen PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: doxygen-pdf
+          path: docs/doxygen/latex/refman.pdf
+          if-no-files-found: error
