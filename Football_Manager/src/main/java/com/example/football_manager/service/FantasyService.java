@@ -3,6 +3,9 @@ package com.example.football_manager.service;
 import com.example.football_manager.dto.*;
 import com.example.football_manager.model.*;
 import com.example.football_manager.repository.*;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,6 +46,7 @@ public class FantasyService {
     }
 
     @Transactional
+    @CacheEvict(cacheNames = "fantasyLeagues", key = "#userId")
     public FantasyLeagueDTO createLeague(Long userId, CreateFantasyLeagueRequestDTO request) {
         User owner = getUserOrThrow(userId);
 
@@ -66,6 +70,10 @@ public class FantasyService {
     }
 
     @Transactional
+    @Caching(evict = {
+            @CacheEvict(cacheNames = "fantasyLeagues", key = "#userId"),
+            @CacheEvict(cacheNames = "fantasyLeaderboard", key = "#result.id")
+    })
     public FantasyLeagueDTO joinLeague(Long userId, JoinFantasyLeagueRequestDTO request) {
         User user = getUserOrThrow(userId);
 
@@ -90,6 +98,7 @@ public class FantasyService {
     }
 
     @Transactional(readOnly = true)
+    @Cacheable(cacheNames = "fantasyLeagues", key = "#userId")
     public List<FantasyLeagueDTO> getMyLeagues(Long userId) {
         getUserOrThrow(userId);
 
@@ -101,6 +110,7 @@ public class FantasyService {
     }
 
     @Transactional(readOnly = true)
+    @Cacheable(cacheNames = "fantasyLeague", key = "T(java.util.Objects).hash(#leagueId, #userId)")
     public FantasyLeagueDTO getLeagueForMember(Long leagueId, Long userId) {
         FantasyLeague league = fantasyLeagueRepository.findById(leagueId)
                 .orElseThrow(() -> new IllegalArgumentException("Fantasy league not found."));
@@ -113,6 +123,7 @@ public class FantasyService {
     }
 
     @Transactional(readOnly = true)
+    @Cacheable(cacheNames = "fantasyAvailablePlayers")
     public List<FantasyAvailablePlayerDTO> getAvailablePlayers() {
         return playerRepository.findAll()
                 .stream()
@@ -126,6 +137,11 @@ public class FantasyService {
     }
 
     @Transactional
+    @Caching(evict = {
+            @CacheEvict(cacheNames = "fantasyLineup", key = "#userId"),
+            @CacheEvict(cacheNames = "fantasyScore", key = "#userId"),
+            @CacheEvict(cacheNames = "fantasyLeaderboard", allEntries = true)
+    })
     public List<FantasyLineupPlayerDTO> saveLineup(Long userId, FantasyLineupRequestDTO request) {
         User user = getUserOrThrow(userId);
 
@@ -178,6 +194,7 @@ public class FantasyService {
     }
 
     @Transactional(readOnly = true)
+    @Cacheable(cacheNames = "fantasyLineup", key = "#userId")
     public List<FantasyLineupPlayerDTO> getLineup(Long userId) {
         getUserOrThrow(userId);
 
@@ -193,6 +210,7 @@ public class FantasyService {
     }
 
     @Transactional(readOnly = true)
+    @Cacheable(cacheNames = "fantasyScore", key = "#userId")
     public FantasyScoreDTO getMyScore(Long userId) {
         User user = getUserOrThrow(userId);
 
@@ -211,6 +229,7 @@ public class FantasyService {
     }
 
     @Transactional(readOnly = true)
+    @Cacheable(cacheNames = "fantasyLeaderboard", key = "#leagueId")
     public List<FantasyLeaderboardEntryDTO> getLeaderboard(Long leagueId) {
         FantasyLeague league = fantasyLeagueRepository.findById(leagueId)
                 .orElseThrow(() -> new IllegalArgumentException("Fantasy league not found."));

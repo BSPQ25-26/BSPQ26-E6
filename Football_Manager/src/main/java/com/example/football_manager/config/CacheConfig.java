@@ -42,6 +42,30 @@ public class CacheConfig {
                 new CaffeineCache("matchResults", Caffeine.newBuilder()
                         .expireAfterWrite(Duration.ofSeconds(30))
                         .maximumSize(1000)
+                        .build()),
+                new CaffeineCache("fantasyLeagues", Caffeine.newBuilder()
+                        .expireAfterWrite(Duration.ofMinutes(1))
+                        .maximumSize(1000)
+                        .build()),
+                new CaffeineCache("fantasyLeague", Caffeine.newBuilder()
+                        .expireAfterWrite(Duration.ofMinutes(1))
+                        .maximumSize(1000)
+                        .build()),
+                new CaffeineCache("fantasyAvailablePlayers", Caffeine.newBuilder()
+                        .expireAfterWrite(Duration.ofMinutes(1))
+                        .maximumSize(1000)
+                        .build()),
+                new CaffeineCache("fantasyLineup", Caffeine.newBuilder()
+                        .expireAfterWrite(Duration.ofMinutes(1))
+                        .maximumSize(1000)
+                        .build()),
+                new CaffeineCache("fantasyScore", Caffeine.newBuilder()
+                        .expireAfterWrite(Duration.ofMinutes(1))
+                        .maximumSize(1000)
+                        .build()),
+                new CaffeineCache("fantasyLeaderboard", Caffeine.newBuilder()
+                        .expireAfterWrite(Duration.ofMinutes(1))
+                        .maximumSize(1000)
                         .build())
         ));
         return cacheManager;
