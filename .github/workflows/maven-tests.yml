@@ -23,4 +23,5 @@ jobs:
         cache: maven
         
     - name: Run tests
+      working-directory: Football_Manager
       run: mvn clean test
