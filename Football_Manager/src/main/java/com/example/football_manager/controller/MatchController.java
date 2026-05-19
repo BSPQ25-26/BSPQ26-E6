@@ -21,6 +21,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * REST endpoints for managing matches and match results.
+ */
 @RestController
 @RequestMapping("/api/matches")
 @Tag(name = "Matches")
@@ -29,6 +32,14 @@ public class MatchController {
     @Autowired
     private MatchService matchService;
 
+    /**
+     * Lists matches with optional filters.
+     *
+     * @param teamId optional team filter
+     * @param status optional match status filter
+     * @param competitionId optional competition filter
+     * @return matching matches
+     */
     @GetMapping
     @Operation(
             summary = "List matches",
@@ -49,6 +60,11 @@ public class MatchController {
         }
     }
 
+    /**
+     * Lists upcoming matches.
+     *
+     * @return upcoming matches ordered by date
+     */
     @GetMapping("/upcoming")
     @Operation(
             summary = "List all upcoming matches",
@@ -58,6 +74,12 @@ public class MatchController {
         return ResponseEntity.ok(matchService.getUpcomingMatches());
     }
 
+    /**
+     * Creates a match using JSON payload.
+     *
+     * @param matchDTO match details
+     * @return creation message
+     */
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(
             summary = "Create a match (JSON)",
@@ -76,6 +98,12 @@ public class MatchController {
         return createMatchResponse(matchDTO);
     }
 
+    /**
+     * Creates a match using form-encoded payload.
+     *
+     * @param matchDTO match form fields
+     * @return creation message
+     */
     @PostMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @Operation(
             summary = "Create a match (form)",
@@ -103,6 +131,11 @@ public class MatchController {
         }
     }
 
+    /**
+     * Lists results for finished matches.
+     *
+     * @return finished match results
+     */
     @GetMapping("/results")
     @Operation(
             summary = "List finished match results",
@@ -115,7 +148,13 @@ public class MatchController {
         return ResponseEntity.ok(matchService.getFinishedMatchResults());
     }
 
-    // Edit match details
+    /**
+     * Updates match details.
+     *
+     * @param id match identifier
+     * @param matchDTO match update payload
+     * @return update message
+     */
     @PostMapping("/{id}")
     @Operation(
             summary = "Update match details",
@@ -138,6 +177,12 @@ public class MatchController {
         }
     }
 
+    /**
+     * Deletes a match.
+     *
+     * @param id match identifier
+     * @return delete message
+     */
     @DeleteMapping("/{id}")
     @Operation(
             summary = "Delete a match",
@@ -155,6 +200,13 @@ public class MatchController {
         }
     }
 
+    /**
+     * Registers a match result.
+     *
+     * @param id match identifier
+     * @param resultDTO goal list payload
+     * @return result registration message
+     */
     @PatchMapping("/{id}/result")
     @Operation(
             summary = "Register match result",

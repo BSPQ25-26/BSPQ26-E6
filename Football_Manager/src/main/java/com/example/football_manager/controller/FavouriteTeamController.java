@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * REST endpoints for managing a user's favourite teams.
+ */
 @RestController
 @RequestMapping("/api/users/me/favourites/teams")
 @Tag(name = "Favourites")
@@ -25,6 +28,13 @@ public class FavouriteTeamController {
         this.userService = userService;
     }
 
+    /**
+     * Adds a team to the current user's favourites.
+     *
+     * @param teamId team identifier
+     * @param session HTTP session containing user id
+     * @return result message
+     */
     @PostMapping("/{teamId}")
     @Operation(
             summary = "Add favourite team",
@@ -50,6 +60,13 @@ public class FavouriteTeamController {
         }
     }
 
+    /**
+     * Removes a team from the current user's favourites.
+     *
+     * @param teamId team identifier
+     * @param session HTTP session containing user id
+     * @return result message
+     */
     @DeleteMapping("/{teamId}")
     @Operation(
             summary = "Remove favourite team",
@@ -87,4 +104,3 @@ public class FavouriteTeamController {
         return ResponseEntity.badRequest().body(message);
     }
 }
-
