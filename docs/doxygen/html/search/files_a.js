@@ -1,9 +1,8 @@
 var searchData=
 [
-  ['team_2ejava_0',['Team.java',['../Team_8java.html',1,'']]],
-  ['teamcontroller_2ejava_1',['TeamController.java',['../TeamController_8java.html',1,'']]],
-  ['teamrepository_2ejava_2',['TeamRepository.java',['../TeamRepository_8java.html',1,'']]],
-  ['teamrequestdto_2ejava_3',['TeamRequestDTO.java',['../TeamRequestDTO_8java.html',1,'']]],
-  ['teamservice_2ejava_4',['TeamService.java',['../TeamService_8java.html',1,'']]],
-  ['teamviewcontroller_2ejava_5',['TeamViewController.java',['../TeamViewController_8java.html',1,'']]]
+  ['securityconfig_2ejava_0',['SecurityConfig.java',['../SecurityConfig_8java.html',1,'']]],
+  ['standingdto_2ejava_1',['StandingDTO.java',['../StandingDTO_8java.html',1,'']]],
+  ['standingscontroller_2ejava_2',['StandingsController.java',['../StandingsController_8java.html',1,'']]],
+  ['standingsservice_2ejava_3',['StandingsService.java',['../StandingsService_8java.html',1,'']]],
+  ['standingsviewcontroller_2ejava_4',['StandingsViewController.java',['../StandingsViewController_8java.html',1,'']]]
 ];

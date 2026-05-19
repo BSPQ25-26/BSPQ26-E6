@@ -102,7 +102,7 @@ $(function(){initNavTree('Team_8java_source.html',''); initResizable(true); });
 <div class="contents">
 <a href="Team_8java.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="keyword">package </span>com.example.football_manager.model;</div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="keyword">import</span> com.fasterxml.jackson.annotation.JsonManagedReference;</div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="keyword">import</span> com.fasterxml.jackson.annotation.JsonIgnore;</div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="keyword">import</span> jakarta.persistence.*;</div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">import</span> lombok.AllArgsConstructor;</div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">import</span> lombok.Data;</div>
@@ -137,7 +137,7 @@ $(function(){initNavTree('Team_8java_source.html',''); initResizable(true); });
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    @OneToMany(mappedBy = <span class="stringliteral">&quot;team&quot;</span>, cascade = CascadeType.ALL, orphanRemoval = <span class="keyword">true</span>)</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    @OrderBy(<span class="stringliteral">&quot;number ASC&quot;</span>)</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    @JsonManagedReference</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    @JsonIgnore</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    @ToString.Exclude</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    @EqualsAndHashCode.Exclude</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keyword">private</span> List&lt;Player&gt; players = <span class="keyword">new</span> ArrayList&lt;&gt;();</div>
@@ -152,7 +152,6 @@ $(function(){initNavTree('Team_8java_source.html',''); initResizable(true); });
 </div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>}</div>
 </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
 <div class="ttc" id="aclasscom_1_1example_1_1football__manager_1_1model_1_1Country_html"><div class="ttname"><a href="classcom_1_1example_1_1football__manager_1_1model_1_1Country.html">com.example.football_manager.model.Country</a></div><div class="ttdef"><b>Definition</b> <a href="Country_8java_source.html#l00013">Country.java:13</a></div></div>
 <div class="ttc" id="aclasscom_1_1example_1_1football__manager_1_1model_1_1Team_html_acd18bc2adf075c8c453a3140a71ab0b9"><div class="ttname"><a href="classcom_1_1example_1_1football__manager_1_1model_1_1Team.html#acd18bc2adf075c8c453a3140a71ab0b9">com.example.football_manager.model.Team.Team</a></div><div class="ttdeci">Team(Long id, String name, String logoUrl, Country country)</div><div class="ttdef"><b>Definition</b> <a href="#l00042">Team.java:42</a></div></div>
 </div><!-- fragment --></div><!-- contents -->

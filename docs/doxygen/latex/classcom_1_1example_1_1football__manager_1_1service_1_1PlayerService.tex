@@ -7,6 +7,8 @@
 \item 
 \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Player}{Player}} \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1PlayerService_a35fbe49737e20fbb2410443d6bc2c241}{create\+Player}} (Long team\+Id, \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1PlayerRequestDTO}{Player\+Request\+DTO}} dto)
 \item 
+List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Player}{Player}} $>$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1PlayerService_a3831cb31ad96bc071c5066fe73bbc114}{create\+Players}} (Long team\+Id, List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1PlayerRequestDTO}{Player\+Request\+DTO}} $>$ player\+Requests)
+\item 
 List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Player}{Player}} $>$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1PlayerService_a02eb184c0ce5c96d26ba9ed63cf625df}{get\+Players\+By\+Team\+Id}} (Long team\+Id)
 \item 
 \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Player}{Player}} \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1PlayerService_a2bb720d687f80330289b7e256425e6a6}{get\+Player\+By\+Team\+Id}} (Long team\+Id, Long player\+Id)
@@ -20,7 +22,7 @@ void \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1Pla
 \doxysubsection{Detailed Description}
 
 
-Definition at line \mbox{\hyperlink{PlayerService_8java_source_l00013}{13}} of file \mbox{\hyperlink{PlayerService_8java_source}{Player\+Service.\+java}}.
+Definition at line \mbox{\hyperlink{PlayerService_8java_source_l00016}{16}} of file \mbox{\hyperlink{PlayerService_8java_source}{Player\+Service.\+java}}.
 
 
 
@@ -33,7 +35,7 @@ com.\+example.\+football\+\_\+manager.\+service.\+Player\+Service.\+Player\+Serv
 
 
 
-Definition at line \mbox{\hyperlink{PlayerService_8java_source_l00018}{18}} of file \mbox{\hyperlink{PlayerService_8java_source}{Player\+Service.\+java}}.
+Definition at line \mbox{\hyperlink{PlayerService_8java_source_l00021}{21}} of file \mbox{\hyperlink{PlayerService_8java_source}{Player\+Service.\+java}}.
 
 
 
@@ -46,7 +48,17 @@ Definition at line \mbox{\hyperlink{PlayerService_8java_source_l00018}{18}} of f
 
 
 
-Definition at line \mbox{\hyperlink{PlayerService_8java_source_l00023}{23}} of file \mbox{\hyperlink{PlayerService_8java_source}{Player\+Service.\+java}}.
+Definition at line \mbox{\hyperlink{PlayerService_8java_source_l00026}{26}} of file \mbox{\hyperlink{PlayerService_8java_source}{Player\+Service.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1service_1_1PlayerService_a3831cb31ad96bc071c5066fe73bbc114}\index{com.example.football\_manager.service.PlayerService@{com.example.football\_manager.service.PlayerService}!createPlayers@{createPlayers}}
+\index{createPlayers@{createPlayers}!com.example.football\_manager.service.PlayerService@{com.example.football\_manager.service.PlayerService}}
+\doxysubsubsection{\texorpdfstring{createPlayers()}{createPlayers()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1service_1_1PlayerService_a3831cb31ad96bc071c5066fe73bbc114} 
+List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Player}{Player}} $>$ com.\+example.\+football\+\_\+manager.\+service.\+Player\+Service.\+create\+Players (\begin{DoxyParamCaption}\item[{Long}]{team\+Id}{, }\item[{List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1PlayerRequestDTO}{Player\+Request\+DTO}} $>$}]{player\+Requests}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{PlayerService_8java_source_l00051}{51}} of file \mbox{\hyperlink{PlayerService_8java_source}{Player\+Service.\+java}}.
 
 \Hypertarget{classcom_1_1example_1_1football__manager_1_1service_1_1PlayerService_a4ec24669a4de26f7aa285ac84d34e78b}\index{com.example.football\_manager.service.PlayerService@{com.example.football\_manager.service.PlayerService}!deletePlayer@{deletePlayer}}
 \index{deletePlayer@{deletePlayer}!com.example.football\_manager.service.PlayerService@{com.example.football\_manager.service.PlayerService}}
@@ -56,7 +68,7 @@ void com.\+example.\+football\+\_\+manager.\+service.\+Player\+Service.\+delete\
 
 
 
-Definition at line \mbox{\hyperlink{PlayerService_8java_source_l00107}{107}} of file \mbox{\hyperlink{PlayerService_8java_source}{Player\+Service.\+java}}.
+Definition at line \mbox{\hyperlink{PlayerService_8java_source_l00154}{154}} of file \mbox{\hyperlink{PlayerService_8java_source}{Player\+Service.\+java}}.
 
 \Hypertarget{classcom_1_1example_1_1football__manager_1_1service_1_1PlayerService_a2bb720d687f80330289b7e256425e6a6}\index{com.example.football\_manager.service.PlayerService@{com.example.football\_manager.service.PlayerService}!getPlayerByTeamId@{getPlayerByTeamId}}
 \index{getPlayerByTeamId@{getPlayerByTeamId}!com.example.football\_manager.service.PlayerService@{com.example.football\_manager.service.PlayerService}}
@@ -66,7 +78,7 @@ Definition at line \mbox{\hyperlink{PlayerService_8java_source_l00107}{107}} of 
 
 
 
-Definition at line \mbox{\hyperlink{PlayerService_8java_source_l00059}{59}} of file \mbox{\hyperlink{PlayerService_8java_source}{Player\+Service.\+java}}.
+Definition at line \mbox{\hyperlink{PlayerService_8java_source_l00106}{106}} of file \mbox{\hyperlink{PlayerService_8java_source}{Player\+Service.\+java}}.
 
 \Hypertarget{classcom_1_1example_1_1football__manager_1_1service_1_1PlayerService_a02eb184c0ce5c96d26ba9ed63cf625df}\index{com.example.football\_manager.service.PlayerService@{com.example.football\_manager.service.PlayerService}!getPlayersByTeamId@{getPlayersByTeamId}}
 \index{getPlayersByTeamId@{getPlayersByTeamId}!com.example.football\_manager.service.PlayerService@{com.example.football\_manager.service.PlayerService}}
@@ -76,7 +88,7 @@ List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Pl
 
 
 
-Definition at line \mbox{\hyperlink{PlayerService_8java_source_l00047}{47}} of file \mbox{\hyperlink{PlayerService_8java_source}{Player\+Service.\+java}}.
+Definition at line \mbox{\hyperlink{PlayerService_8java_source_l00094}{94}} of file \mbox{\hyperlink{PlayerService_8java_source}{Player\+Service.\+java}}.
 
 \Hypertarget{classcom_1_1example_1_1football__manager_1_1service_1_1PlayerService_ab9f71c576c0e0b995d49d537cfa11db3}\index{com.example.football\_manager.service.PlayerService@{com.example.football\_manager.service.PlayerService}!updatePlayer@{updatePlayer}}
 \index{updatePlayer@{updatePlayer}!com.example.football\_manager.service.PlayerService@{com.example.football\_manager.service.PlayerService}}
@@ -86,7 +98,7 @@ Definition at line \mbox{\hyperlink{PlayerService_8java_source_l00047}{47}} of f
 
 
 
-Definition at line \mbox{\hyperlink{PlayerService_8java_source_l00078}{78}} of file \mbox{\hyperlink{PlayerService_8java_source}{Player\+Service.\+java}}.
+Definition at line \mbox{\hyperlink{PlayerService_8java_source_l00125}{125}} of file \mbox{\hyperlink{PlayerService_8java_source}{Player\+Service.\+java}}.
 
 
 

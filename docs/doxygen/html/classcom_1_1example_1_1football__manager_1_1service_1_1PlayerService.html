@@ -110,6 +110,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aba73034ee61e3931e7eb519c19bf3422"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35fbe49737e20fbb2410443d6bc2c241" id="r_a35fbe49737e20fbb2410443d6bc2c241"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcom_1_1example_1_1football__manager_1_1model_1_1Player.html">Player</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a35fbe49737e20fbb2410443d6bc2c241">createPlayer</a> (Long teamId, <a class="el" href="classcom_1_1example_1_1football__manager_1_1dto_1_1PlayerRequestDTO.html">PlayerRequestDTO</a> dto)</td></tr>
 <tr class="separator:a35fbe49737e20fbb2410443d6bc2c241"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3831cb31ad96bc071c5066fe73bbc114" id="r_a3831cb31ad96bc071c5066fe73bbc114"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="classcom_1_1example_1_1football__manager_1_1model_1_1Player.html">Player</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3831cb31ad96bc071c5066fe73bbc114">createPlayers</a> (Long teamId, List&lt; <a class="el" href="classcom_1_1example_1_1football__manager_1_1dto_1_1PlayerRequestDTO.html">PlayerRequestDTO</a> &gt; playerRequests)</td></tr>
+<tr class="separator:a3831cb31ad96bc071c5066fe73bbc114"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a02eb184c0ce5c96d26ba9ed63cf625df" id="r_a02eb184c0ce5c96d26ba9ed63cf625df"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="classcom_1_1example_1_1football__manager_1_1model_1_1Player.html">Player</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a02eb184c0ce5c96d26ba9ed63cf625df">getPlayersByTeamId</a> (Long teamId)</td></tr>
 <tr class="separator:a02eb184c0ce5c96d26ba9ed63cf625df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2bb720d687f80330289b7e256425e6a6" id="r_a2bb720d687f80330289b7e256425e6a6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcom_1_1example_1_1football__manager_1_1model_1_1Player.html">Player</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2bb720d687f80330289b7e256425e6a6">getPlayerByTeamId</a> (Long teamId, Long playerId)</td></tr>
@@ -121,7 +123,7 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="PlayerService_8java_source.html#l00013">13</a> of file <a class="el" href="PlayerService_8java_source.html">PlayerService.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PlayerService_8java_source.html#l00016">16</a> of file <a class="el" href="PlayerService_8java_source.html">PlayerService.java</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aba73034ee61e3931e7eb519c19bf3422" name="aba73034ee61e3931e7eb519c19bf3422"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aba73034ee61e3931e7eb519c19bf3422">&#9670;&#160;</a></span>PlayerService()</h2>
@@ -142,7 +144,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PlayerService_8java_source.html#l00018">18</a> of file <a class="el" href="PlayerService_8java_source.html">PlayerService.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PlayerService_8java_source.html#l00021">21</a> of file <a class="el" href="PlayerService_8java_source.html">PlayerService.java</a>.</p>
 
 </div>
 </div>
@@ -166,7 +168,30 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PlayerService_8java_source.html#l00023">23</a> of file <a class="el" href="PlayerService_8java_source.html">PlayerService.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PlayerService_8java_source.html#l00026">26</a> of file <a class="el" href="PlayerService_8java_source.html">PlayerService.java</a>.</p>
+
+</div>
+</div>
+<a id="a3831cb31ad96bc071c5066fe73bbc114" name="a3831cb31ad96bc071c5066fe73bbc114"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3831cb31ad96bc071c5066fe73bbc114">&#9670;&#160;</a></span>createPlayers()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">List&lt; <a class="el" href="classcom_1_1example_1_1football__manager_1_1model_1_1Player.html">Player</a> &gt; com.example.football_manager.service.PlayerService.createPlayers </td>
+          <td>(</td>
+          <td class="paramtype">Long</td>          <td class="paramname"><span class="paramname"><em>teamId</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">List&lt; <a class="el" href="classcom_1_1example_1_1football__manager_1_1dto_1_1PlayerRequestDTO.html">PlayerRequestDTO</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>playerRequests</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="PlayerService_8java_source.html#l00051">51</a> of file <a class="el" href="PlayerService_8java_source.html">PlayerService.java</a>.</p>
 
 </div>
 </div>
@@ -189,7 +214,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PlayerService_8java_source.html#l00107">107</a> of file <a class="el" href="PlayerService_8java_source.html">PlayerService.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PlayerService_8java_source.html#l00154">154</a> of file <a class="el" href="PlayerService_8java_source.html">PlayerService.java</a>.</p>
 
 </div>
 </div>
@@ -212,7 +237,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PlayerService_8java_source.html#l00059">59</a> of file <a class="el" href="PlayerService_8java_source.html">PlayerService.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PlayerService_8java_source.html#l00106">106</a> of file <a class="el" href="PlayerService_8java_source.html">PlayerService.java</a>.</p>
 
 </div>
 </div>
@@ -231,7 +256,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PlayerService_8java_source.html#l00047">47</a> of file <a class="el" href="PlayerService_8java_source.html">PlayerService.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PlayerService_8java_source.html#l00094">94</a> of file <a class="el" href="PlayerService_8java_source.html">PlayerService.java</a>.</p>
 
 </div>
 </div>
@@ -259,7 +284,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PlayerService_8java_source.html#l00078">78</a> of file <a class="el" href="PlayerService_8java_source.html">PlayerService.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PlayerService_8java_source.html#l00125">125</a> of file <a class="el" href="PlayerService_8java_source.html">PlayerService.java</a>.</p>
 
 </div>
 </div>

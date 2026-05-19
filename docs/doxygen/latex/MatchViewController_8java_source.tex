@@ -154,6 +154,15 @@
 \DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00150}00150\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}redirect:/matches/"{}}\ +\ \textcolor{keywordtype}{id}\ +\ \textcolor{stringliteral}{"{}/results?error=true"{}};}
 \DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00151}00151\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00152}00152\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00153}00153\ \}}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00153}00153\ }
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00154}00154\ \ \ \ \ @GetMapping(\textcolor{stringliteral}{"{}/matches/upcoming"{}})}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00155}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_a769a67341d4a00e27342dc7766decff1}{00155}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController_a769a67341d4a00e27342dc7766decff1}{showUpcomingMatchesPage}}(Model\ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1model}{model}},\ HttpSession\ session)\ \{}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00156}00156\ \ \ \ \ \ \ \ \ Boolean\ isAdmin\ =\ (Boolean)\ session.getAttribute(\textcolor{stringliteral}{"{}isAdmin"{}});}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00157}00157\ }
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00158}00158\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}isAdmin"{}},\ isAdmin\ !=\ \textcolor{keyword}{null}\ \&\&\ isAdmin);}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00159}00159\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}matches"{}},\ matchService.getUpcomingMatches());}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00160}00160\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}upcoming-\/matches"{}};}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00161}00161\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchViewController_8java_source_l00162}00162\ \}}
 
 \end{DoxyCode}

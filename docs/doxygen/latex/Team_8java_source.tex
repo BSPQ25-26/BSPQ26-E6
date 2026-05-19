@@ -4,7 +4,7 @@
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\Hypertarget{Team_8java_source_l00001}00001\ \textcolor{keyword}{package\ }com.example.football\_manager.model;}
 \DoxyCodeLine{\Hypertarget{Team_8java_source_l00002}00002\ }
-\DoxyCodeLine{\Hypertarget{Team_8java_source_l00003}00003\ \textcolor{keyword}{import}\ com.fasterxml.jackson.annotation.JsonManagedReference;}
+\DoxyCodeLine{\Hypertarget{Team_8java_source_l00003}00003\ \textcolor{keyword}{import}\ com.fasterxml.jackson.annotation.JsonIgnore;}
 \DoxyCodeLine{\Hypertarget{Team_8java_source_l00004}00004\ \textcolor{keyword}{import}\ jakarta.persistence.*;}
 \DoxyCodeLine{\Hypertarget{Team_8java_source_l00005}00005\ \textcolor{keyword}{import}\ lombok.AllArgsConstructor;}
 \DoxyCodeLine{\Hypertarget{Team_8java_source_l00006}00006\ \textcolor{keyword}{import}\ lombok.Data;}
@@ -38,7 +38,7 @@
 \DoxyCodeLine{\Hypertarget{Team_8java_source_l00034}00034\ }
 \DoxyCodeLine{\Hypertarget{Team_8java_source_l00035}00035\ \ \ \ \ @OneToMany(mappedBy\ =\ \textcolor{stringliteral}{"{}team"{}},\ cascade\ =\ CascadeType.ALL,\ orphanRemoval\ =\ \textcolor{keyword}{true})}
 \DoxyCodeLine{\Hypertarget{Team_8java_source_l00036}00036\ \ \ \ \ @OrderBy(\textcolor{stringliteral}{"{}number\ ASC"{}})}
-\DoxyCodeLine{\Hypertarget{Team_8java_source_l00037}00037\ \ \ \ \ @JsonManagedReference}
+\DoxyCodeLine{\Hypertarget{Team_8java_source_l00037}00037\ \ \ \ \ @JsonIgnore}
 \DoxyCodeLine{\Hypertarget{Team_8java_source_l00038}00038\ \ \ \ \ @ToString.Exclude}
 \DoxyCodeLine{\Hypertarget{Team_8java_source_l00039}00039\ \ \ \ \ @EqualsAndHashCode.Exclude}
 \DoxyCodeLine{\Hypertarget{Team_8java_source_l00040}00040\ \ \ \ \ \textcolor{keyword}{private}\ List<Player>\ players\ =\ \textcolor{keyword}{new}\ ArrayList<>();}
@@ -50,6 +50,5 @@
 \DoxyCodeLine{\Hypertarget{Team_8java_source_l00046}00046\ \ \ \ \ \ \ \ \ this.country\ =\ country;}
 \DoxyCodeLine{\Hypertarget{Team_8java_source_l00047}00047\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{Team_8java_source_l00048}00048\ \}}
-\DoxyCodeLine{\Hypertarget{Team_8java_source_l00049}00049\ }
 
 \end{DoxyCode}

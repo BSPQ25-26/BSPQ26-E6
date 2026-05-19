@@ -5,6 +5,7 @@ var annotated_dup =
         [ "football_manager", "namespacecom_1_1example_1_1football__manager.html", [
           [ "config", "namespacecom_1_1example_1_1football__manager_1_1config.html", [
             [ "AdminSecurityFilter", "classcom_1_1example_1_1football__manager_1_1config_1_1AdminSecurityFilter.html", "classcom_1_1example_1_1football__manager_1_1config_1_1AdminSecurityFilter" ],
+            [ "CacheConfig", "classcom_1_1example_1_1football__manager_1_1config_1_1CacheConfig.html", "classcom_1_1example_1_1football__manager_1_1config_1_1CacheConfig" ],
             [ "LocaleConfig", "classcom_1_1example_1_1football__manager_1_1config_1_1LocaleConfig.html", "classcom_1_1example_1_1football__manager_1_1config_1_1LocaleConfig" ],
             [ "OpenApiConfig", "classcom_1_1example_1_1football__manager_1_1config_1_1OpenApiConfig.html", null ],
             [ "SecurityConfig", "classcom_1_1example_1_1football__manager_1_1config_1_1SecurityConfig.html", "classcom_1_1example_1_1football__manager_1_1config_1_1SecurityConfig" ]
@@ -19,10 +20,13 @@ var annotated_dup =
             [ "CompetitionController", "classcom_1_1example_1_1football__manager_1_1controller_1_1CompetitionController.html", "classcom_1_1example_1_1football__manager_1_1controller_1_1CompetitionController" ],
             [ "CountryController", "classcom_1_1example_1_1football__manager_1_1controller_1_1CountryController.html", "classcom_1_1example_1_1football__manager_1_1controller_1_1CountryController" ],
             [ "FavouriteTeamController", "classcom_1_1example_1_1football__manager_1_1controller_1_1FavouriteTeamController.html", "classcom_1_1example_1_1football__manager_1_1controller_1_1FavouriteTeamController" ],
+            [ "GlobalModelAttributes", "classcom_1_1example_1_1football__manager_1_1controller_1_1GlobalModelAttributes.html", "classcom_1_1example_1_1football__manager_1_1controller_1_1GlobalModelAttributes" ],
             [ "MatchController", "classcom_1_1example_1_1football__manager_1_1controller_1_1MatchController.html", "classcom_1_1example_1_1football__manager_1_1controller_1_1MatchController" ],
             [ "MatchViewController", "classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController.html", "classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController" ],
             [ "PlayerController", "classcom_1_1example_1_1football__manager_1_1controller_1_1PlayerController.html", "classcom_1_1example_1_1football__manager_1_1controller_1_1PlayerController" ],
             [ "ProfileViewController", "classcom_1_1example_1_1football__manager_1_1controller_1_1ProfileViewController.html", "classcom_1_1example_1_1football__manager_1_1controller_1_1ProfileViewController" ],
+            [ "StandingsController", "classcom_1_1example_1_1football__manager_1_1controller_1_1StandingsController.html", "classcom_1_1example_1_1football__manager_1_1controller_1_1StandingsController" ],
+            [ "StandingsViewController", "classcom_1_1example_1_1football__manager_1_1controller_1_1StandingsViewController.html", "classcom_1_1example_1_1football__manager_1_1controller_1_1StandingsViewController" ],
             [ "TeamController", "classcom_1_1example_1_1football__manager_1_1controller_1_1TeamController.html", "classcom_1_1example_1_1football__manager_1_1controller_1_1TeamController" ],
             [ "TeamViewController", "classcom_1_1example_1_1football__manager_1_1controller_1_1TeamViewController.html", "classcom_1_1example_1_1football__manager_1_1controller_1_1TeamViewController" ]
           ] ],
@@ -33,9 +37,11 @@ var annotated_dup =
             [ "LoginDTO", "classcom_1_1example_1_1football__manager_1_1dto_1_1LoginDTO.html", "classcom_1_1example_1_1football__manager_1_1dto_1_1LoginDTO" ],
             [ "MatchRequestDTO", "classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO.html", "classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO" ],
             [ "MatchResultRequestDTO", "classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO.html", "classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO" ],
+            [ "PlayerBulkRequestDTO", "classcom_1_1example_1_1football__manager_1_1dto_1_1PlayerBulkRequestDTO.html", "classcom_1_1example_1_1football__manager_1_1dto_1_1PlayerBulkRequestDTO" ],
             [ "PlayerRequestDTO", "classcom_1_1example_1_1football__manager_1_1dto_1_1PlayerRequestDTO.html", "classcom_1_1example_1_1football__manager_1_1dto_1_1PlayerRequestDTO" ],
             [ "ProfileUpdateDTO", "classcom_1_1example_1_1football__manager_1_1dto_1_1ProfileUpdateDTO.html", "classcom_1_1example_1_1football__manager_1_1dto_1_1ProfileUpdateDTO" ],
             [ "RegisterDTO", "classcom_1_1example_1_1football__manager_1_1dto_1_1RegisterDTO.html", "classcom_1_1example_1_1football__manager_1_1dto_1_1RegisterDTO" ],
+            [ "StandingDTO", "classcom_1_1example_1_1football__manager_1_1dto_1_1StandingDTO.html", "classcom_1_1example_1_1football__manager_1_1dto_1_1StandingDTO" ],
             [ "TeamRequestDTO", "classcom_1_1example_1_1football__manager_1_1dto_1_1TeamRequestDTO.html", "classcom_1_1example_1_1football__manager_1_1dto_1_1TeamRequestDTO" ]
           ] ],
           [ "model", "namespacecom_1_1example_1_1football__manager_1_1model.html", [
@@ -62,6 +68,7 @@ var annotated_dup =
             [ "CountryService", "classcom_1_1example_1_1football__manager_1_1service_1_1CountryService.html", "classcom_1_1example_1_1football__manager_1_1service_1_1CountryService" ],
             [ "MatchService", "classcom_1_1example_1_1football__manager_1_1service_1_1MatchService.html", "classcom_1_1example_1_1football__manager_1_1service_1_1MatchService" ],
             [ "PlayerService", "classcom_1_1example_1_1football__manager_1_1service_1_1PlayerService.html", "classcom_1_1example_1_1football__manager_1_1service_1_1PlayerService" ],
+            [ "StandingsService", "classcom_1_1example_1_1football__manager_1_1service_1_1StandingsService.html", "classcom_1_1example_1_1football__manager_1_1service_1_1StandingsService" ],
             [ "TeamService", "classcom_1_1example_1_1football__manager_1_1service_1_1TeamService.html", "classcom_1_1example_1_1football__manager_1_1service_1_1TeamService" ],
             [ "UserService", "classcom_1_1example_1_1football__manager_1_1service_1_1UserService.html", "classcom_1_1example_1_1football__manager_1_1service_1_1UserService" ]
           ] ],

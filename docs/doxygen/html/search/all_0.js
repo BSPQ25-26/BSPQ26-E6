@@ -1,22 +1,4 @@
 var searchData=
 [
-  ['addfavouriteteam_0',['addFavouriteTeam',['../classcom_1_1example_1_1football__manager_1_1controller_1_1FavouriteTeamController.html#a34ae164c2dbad759f2bd379276f36668',1,'com.example.football_manager.controller.FavouriteTeamController.addFavouriteTeam()'],['../classcom_1_1example_1_1football__manager_1_1service_1_1UserService.html#a190b9f9bf4f004033b236a9c895e2e4e',1,'com.example.football_manager.service.UserService.addFavouriteTeam()']]],
-  ['addinterceptors_1',['addInterceptors',['../classcom_1_1example_1_1football__manager_1_1config_1_1LocaleConfig.html#a858c462df22d10e0f3ab4cc333267ee0',1,'com::example::football_manager::config::LocaleConfig']]],
-  ['admincountryviewcontroller_2',['AdminCountryViewController',['../classcom_1_1example_1_1football__manager_1_1controller_1_1AdminCountryViewController.html',1,'com.example.football_manager.controller.AdminCountryViewController'],['../classcom_1_1example_1_1football__manager_1_1controller_1_1AdminCountryViewController.html#a3c75aba19cad5c0bf1019886f0f3c5aa',1,'com.example.football_manager.controller.AdminCountryViewController.AdminCountryViewController()']]],
-  ['admincountryviewcontroller_2ejava_3',['AdminCountryViewController.java',['../AdminCountryViewController_8java.html',1,'']]],
-  ['adminpanel_4',['adminPanel',['../classcom_1_1example_1_1football__manager_1_1controller_1_1AdminViewController.html#a6968adf81d8cca814ffc2cc97835f7a0',1,'com::example::football_manager::controller::AdminViewController']]],
-  ['adminplayerviewcontroller_5',['AdminPlayerViewController',['../classcom_1_1example_1_1football__manager_1_1controller_1_1AdminPlayerViewController.html',1,'com.example.football_manager.controller.AdminPlayerViewController'],['../classcom_1_1example_1_1football__manager_1_1controller_1_1AdminPlayerViewController.html#aa113604c1403008b74f8928a1405e30f',1,'com.example.football_manager.controller.AdminPlayerViewController.AdminPlayerViewController()']]],
-  ['adminplayerviewcontroller_2ejava_6',['AdminPlayerViewController.java',['../AdminPlayerViewController_8java.html',1,'']]],
-  ['adminsecurityfilter_7',['AdminSecurityFilter',['../classcom_1_1example_1_1football__manager_1_1config_1_1AdminSecurityFilter.html',1,'com::example::football_manager::config']]],
-  ['adminsecurityfilter_2ejava_8',['AdminSecurityFilter.java',['../AdminSecurityFilter_8java.html',1,'']]],
-  ['adminuserviewcontroller_9',['AdminUserViewController',['../classcom_1_1example_1_1football__manager_1_1controller_1_1AdminUserViewController.html',1,'com.example.football_manager.controller.AdminUserViewController'],['../classcom_1_1example_1_1football__manager_1_1controller_1_1AdminUserViewController.html#ad43eb0a66885fc3e292fdc95eb11fa97',1,'com.example.football_manager.controller.AdminUserViewController.AdminUserViewController()']]],
-  ['adminuserviewcontroller_2ejava_10',['AdminUserViewController.java',['../AdminUserViewController_8java.html',1,'']]],
-  ['adminviewcontroller_11',['AdminViewController',['../classcom_1_1example_1_1football__manager_1_1controller_1_1AdminViewController.html',1,'com::example::football_manager::controller']]],
-  ['adminviewcontroller_2ejava_12',['AdminViewController.java',['../AdminViewController_8java.html',1,'']]],
-  ['authcontroller_13',['AuthController',['../classcom_1_1example_1_1football__manager_1_1controller_1_1AuthController.html',1,'com::example::football_manager::controller']]],
-  ['authcontroller_2ejava_14',['AuthController.java',['../AuthController_8java.html',1,'']]],
-  ['authresponsedto_15',['AuthResponseDTO',['../classcom_1_1example_1_1football__manager_1_1dto_1_1AuthResponseDTO.html',1,'com.example.football_manager.dto.AuthResponseDTO'],['../classcom_1_1example_1_1football__manager_1_1dto_1_1AuthResponseDTO.html#abc3ab2fce4b83faee6bfb587493d7013',1,'com.example.football_manager.dto.AuthResponseDTO.AuthResponseDTO()']]],
-  ['authresponsedto_2ejava_16',['AuthResponseDTO.java',['../AuthResponseDTO_8java.html',1,'']]],
-  ['authviewcontroller_17',['AuthViewController',['../classcom_1_1example_1_1football__manager_1_1controller_1_1AuthViewController.html',1,'com::example::football_manager::controller']]],
-  ['authviewcontroller_2ejava_18',['AuthViewController.java',['../AuthViewController_8java.html',1,'']]]
+  ['2_20evidence_0',['Sprint 2 Evidence',['../md_README.html#autotoc_md44',1,'']]]
 ];

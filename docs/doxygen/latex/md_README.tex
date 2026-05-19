@@ -1,7 +1,649 @@
-\chapter{BSPQ26-\/\+E6}
-\hypertarget{md_README}{}\label{md_README}\index{BSPQ26-\/E6@{BSPQ26-\/E6}}
+\chapter{Football Manager}
+\hypertarget{md_README}{}\label{md_README}\index{Football Manager@{Football Manager}}
 \label{md_README_autotoc_md0}%
 \Hypertarget{md_README_autotoc_md0}%
 
 
-Repository for team BSPQ26-\/\+E6 
+Football Manager is a Spring Boot web application developed for managing football teams, matches, results, users and favourite teams.
+
+The project was developed as part of the Software Process and Quality course, including automated testing, performance testing, continuous integration and generated documentation.
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md2}{}\doxysection{\texorpdfstring{Main Features}{Main Features}}\label{md_README_autotoc_md2}
+
+\begin{DoxyItemize}
+\item User registration and login.
+\item Admin and regular user roles.
+\item Team management.
+\item Country management.
+\item Competition management.
+\item Match management.
+\item Match results.
+\item Favourite teams.
+\item Web views using Thymeleaf.
+\item REST API endpoints.
+\item Automated unit and integration tests.
+\item Code coverage with Ja\+Co\+Co.
+\item Performance testing with JUnit\+Perf.
+\item Continuous Integration with Jenkins.
+\item Documentation generated with Doxygen.
+\item Maven Site generation.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md4}{}\doxysection{\texorpdfstring{Technologies Used}{Technologies Used}}\label{md_README_autotoc_md4}
+
+\begin{DoxyItemize}
+\item Java 17
+\item Spring Boot
+\item Spring Data JPA
+\item Spring Security
+\item Thymeleaf
+\item Postgre\+SQL
+\item Maven
+\item JUnit 5
+\item JUnit 4
+\item Mockito
+\item JUnit\+Perf
+\item Ja\+Co\+Co
+\item Jenkins
+\item Doxygen
+\item Maven Site
+\item Docker
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md6}{}\doxysection{\texorpdfstring{Project Structure}{Project Structure}}\label{md_README_autotoc_md6}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{BSPQ26-\/E6/}
+\DoxyCodeLine{│}
+\DoxyCodeLine{├──\ Football\_Manager/}
+\DoxyCodeLine{│\ \ \ ├──\ src/main/java/com/example/football\_manager/}
+\DoxyCodeLine{│\ \ \ │\ \ \ ├──\ config/}
+\DoxyCodeLine{│\ \ \ │\ \ \ ├──\ controller/}
+\DoxyCodeLine{│\ \ \ │\ \ \ ├──\ dto/}
+\DoxyCodeLine{│\ \ \ │\ \ \ ├──\ model/}
+\DoxyCodeLine{│\ \ \ │\ \ \ ├──\ repository/}
+\DoxyCodeLine{│\ \ \ │\ \ \ └──\ service/}
+\DoxyCodeLine{│\ \ \ │}
+\DoxyCodeLine{│\ \ \ ├──\ src/main/resources/}
+\DoxyCodeLine{│\ \ \ │\ \ \ ├──\ templates/}
+\DoxyCodeLine{│\ \ \ │\ \ \ ├──\ static/}
+\DoxyCodeLine{│\ \ \ │\ \ \ └──\ application.properties}
+\DoxyCodeLine{│\ \ \ │}
+\DoxyCodeLine{│\ \ \ ├──\ src/test/java/com/example/football\_manager/}
+\DoxyCodeLine{│\ \ \ │\ \ \ ├──\ controller/}
+\DoxyCodeLine{│\ \ \ │\ \ \ ├──\ performance/}
+\DoxyCodeLine{│\ \ \ │\ \ \ └──\ service/}
+\DoxyCodeLine{│\ \ \ │}
+\DoxyCodeLine{│\ \ \ ├──\ pom.xml}
+\DoxyCodeLine{│\ \ \ ├──\ mvnw}
+\DoxyCodeLine{│\ \ \ └──\ mvnw.cmd}
+\DoxyCodeLine{│}
+\DoxyCodeLine{├──\ docs/}
+\DoxyCodeLine{│\ \ \ ├──\ doxygen/}
+\DoxyCodeLine{│\ \ \ └──\ sprint3/}
+\DoxyCodeLine{│}
+\DoxyCodeLine{├──\ Doxyfile}
+\DoxyCodeLine{├──\ Jenkinsfile}
+\DoxyCodeLine{└──\ README.md}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md8}{}\doxysection{\texorpdfstring{Requirements}{Requirements}}\label{md_README_autotoc_md8}
+Before running the project, make sure you have\+:
+
+
+\begin{DoxyItemize}
+\item Java 17 installed.
+\item Postgre\+SQL installed and running.
+\item Git installed.
+\item Maven Wrapper included in the project.
+\item Docker installed if you want to run Jenkins or documentation tools through Docker.
+\end{DoxyItemize}
+
+Check Java version\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{java\ -\/version}
+
+\end{DoxyCode}
+
+
+Expected version\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Java\ 17}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md10}{}\doxysection{\texorpdfstring{Database Configuration}{Database Configuration}}\label{md_README_autotoc_md10}
+The application uses Postgre\+SQL.
+
+Check the database configuration in\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Football\_Manager/src/main/resources/application.properties}
+
+\end{DoxyCode}
+
+
+Typical configuration example\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{spring.datasource.url=jdbc:postgresql://localhost:5432/football\_manager}
+\DoxyCodeLine{spring.datasource.username=postgres}
+\DoxyCodeLine{spring.datasource.password=your\_password}
+\DoxyCodeLine{spring.jpa.hibernate.ddl-\/auto=update}
+
+\end{DoxyCode}
+
+
+Make sure the database exists before running the application.
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md12}{}\doxysection{\texorpdfstring{How to Run the Application}{How to Run the Application}}\label{md_README_autotoc_md12}
+From the project folder\+:\hypertarget{md_README_autotoc_md13}{}\doxysubsection{\texorpdfstring{Windows}{Windows}}\label{md_README_autotoc_md13}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd\ Football\_Manager}
+\DoxyCodeLine{.\(\backslash\)mvnw.cmd\ spring-\/boot:run}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md14}{}\doxysubsection{\texorpdfstring{Linux / mac\+OS}{Linux / mac\+OS}}\label{md_README_autotoc_md14}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd\ Football\_Manager}
+\DoxyCodeLine{chmod\ +x\ mvnw}
+\DoxyCodeLine{./mvnw\ spring-\/boot:run}
+
+\end{DoxyCode}
+
+
+The application will be available at\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{http://localhost:8080}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md16}{}\doxysection{\texorpdfstring{How to Run Tests}{How to Run Tests}}\label{md_README_autotoc_md16}
+\hypertarget{md_README_autotoc_md17}{}\doxysubsection{\texorpdfstring{Windows}{Windows}}\label{md_README_autotoc_md17}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd\ Football\_Manager}
+\DoxyCodeLine{.\(\backslash\)mvnw.cmd\ test}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md18}{}\doxysubsection{\texorpdfstring{Linux / mac\+OS}{Linux / mac\+OS}}\label{md_README_autotoc_md18}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd\ Football\_Manager}
+\DoxyCodeLine{./mvnw\ test}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md20}{}\doxysection{\texorpdfstring{Code Coverage with Ja\+Co\+Co}{Code Coverage with Ja\+Co\+Co}}\label{md_README_autotoc_md20}
+To run tests and generate the Ja\+Co\+Co coverage report\+:\hypertarget{md_README_autotoc_md21}{}\doxysubsection{\texorpdfstring{Windows}{Windows}}\label{md_README_autotoc_md21}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd\ Football\_Manager}
+\DoxyCodeLine{.\(\backslash\)mvnw.cmd\ clean\ test\ jacoco:report}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md22}{}\doxysubsection{\texorpdfstring{Linux / mac\+OS}{Linux / mac\+OS}}\label{md_README_autotoc_md22}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd\ Football\_Manager}
+\DoxyCodeLine{./mvnw\ clean\ test\ jacoco:report}
+
+\end{DoxyCode}
+
+
+The report is generated in\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Football\_Manager/target/site/jacoco/index.html}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md24}{}\doxysection{\texorpdfstring{Performance Testing with JUnit\+Perf}{Performance Testing with JUnit\+Perf}}\label{md_README_autotoc_md24}
+The project uses JUnit\+Perf for performance testing.
+
+Performance tests are located in\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Football\_Manager/src/test/java/com/example/football\_manager/performance/}
+
+\end{DoxyCode}
+
+
+To run only the performance tests\+:\hypertarget{md_README_autotoc_md25}{}\doxysubsection{\texorpdfstring{Windows}{Windows}}\label{md_README_autotoc_md25}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd\ Football\_Manager}
+\DoxyCodeLine{.\(\backslash\)mvnw.cmd\ test\ -\/Dtest=TeamServicePerformanceTest}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md26}{}\doxysubsection{\texorpdfstring{Linux / mac\+OS}{Linux / mac\+OS}}\label{md_README_autotoc_md26}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd\ Football\_Manager}
+\DoxyCodeLine{./mvnw\ test\ -\/Dtest=TeamServicePerformanceTest}
+
+\end{DoxyCode}
+
+
+JUnit\+Perf generates an HTML report in\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Football\_Manager/build/reports/junitperf\_report.html}
+
+\end{DoxyCode}
+
+
+The performance tests include\+:
+
+
+\begin{DoxyItemize}
+\item Single-\/thread execution.
+\item Multi-\/thread execution.
+\item Throughput validation.
+\item Duration-\/based execution.
+\item Mean latency validation.
+\item Maximum latency validation.
+\item An intentionally failing test for Sprint 2 evidence.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md28}{}\doxysection{\texorpdfstring{Jenkins CI Pipeline}{Jenkins CI Pipeline}}\label{md_README_autotoc_md28}
+The repository includes a {\ttfamily Jenkinsfile} for Sprint 3 Continuous Integration.
+
+The Jenkins pipeline performs\+:
+
+
+\begin{DoxyEnumerate}
+\item Checkout from Git\+Hub.
+\item Java version verification.
+\item Maven compile.
+\item Test execution.
+\item Ja\+Co\+Co report generation.
+\item Package generation.
+\item Artifact archiving.
+\end{DoxyEnumerate}
+
+The Jenkinsfile is located at\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Jenkinsfile}
+
+\end{DoxyCode}
+
+
+To test the Jenkins pipeline\+:
+
+
+\begin{DoxyEnumerate}
+\item Open Jenkins.
+\item Create a new Pipeline job.
+\item Select {\ttfamily Pipeline script from SCM}.
+\item Select Git.
+\item Use the repository URL\+:
+\end{DoxyEnumerate}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{https://github.com/BSPQ25-\/26/BSPQ26-\/E6.git}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyEnumerate}
+\item Use branch\+:
+\end{DoxyEnumerate}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{*/main}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyEnumerate}
+\item Use script path\+:
+\end{DoxyEnumerate}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Jenkinsfile}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyEnumerate}
+\item Run {\ttfamily Build Now}.
+\end{DoxyEnumerate}
+
+A successful execution should finish with\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Finished:\ SUCCESS}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md30}{}\doxysection{\texorpdfstring{Doxygen Documentation}{Doxygen Documentation}}\label{md_README_autotoc_md30}
+The project includes a Doxygen configuration file\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Doxyfile}
+
+\end{DoxyCode}
+
+
+Doxygen generates documentation from the Java source code.
+
+To generate Doxygen documentation using Docker\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{docker\ run\ -\/-\/rm\ -\/v\ "{}\$\{PWD\}:/project"{}\ -\/w\ /project\ alpine:latest\ sh\ -\/c\ "{}apk\ add\ -\/-\/no-\/cache\ doxygen\ \&\&\ doxygen\ Doxyfile"{}}
+
+\end{DoxyCode}
+
+
+Generated HTML documentation\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{docs/doxygen/html/index.html}
+
+\end{DoxyCode}
+
+
+Generated La\+TeX documentation\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{docs/doxygen/latex/}
+
+\end{DoxyCode}
+
+
+Generated PDF documentation, if compiled\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{docs/doxygen/latex/refman.pdf}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md32}{}\doxysection{\texorpdfstring{Swagger/\+Open\+API Documentation}{Swagger/\+Open\+API Documentation}}\label{md_README_autotoc_md32}
+The project includes Swagger/\+Open\+API documentation for the REST API.
+
+The Swagger documentation is available at\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{/swagger-\/ui/index.html}
+
+\end{DoxyCode}
+
+
+The Open\+API specification is available at\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{/v3/api-\/docs}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md34}{}\doxysection{\texorpdfstring{Maven Site}{Maven Site}}\label{md_README_autotoc_md34}
+To generate the Maven Site\+:\hypertarget{md_README_autotoc_md35}{}\doxysubsection{\texorpdfstring{Windows}{Windows}}\label{md_README_autotoc_md35}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd\ Football\_Manager}
+\DoxyCodeLine{.\(\backslash\)mvnw.cmd\ site}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md36}{}\doxysubsection{\texorpdfstring{Linux / mac\+OS}{Linux / mac\+OS}}\label{md_README_autotoc_md36}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd\ Football\_Manager}
+\DoxyCodeLine{./mvnw\ site}
+
+\end{DoxyCode}
+
+
+The generated site is located at\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Football\_Manager/target/site/index.html}
+
+\end{DoxyCode}
+
+
+The Maven Site includes project information and generated reports.
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md38}{}\doxysection{\texorpdfstring{Main API Endpoints}{Main API Endpoints}}\label{md_README_autotoc_md38}
+Some of the main REST endpoints are\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{GET\ \ \ \ /api/teams}
+\DoxyCodeLine{POST\ \ \ /api/teams}
+\DoxyCodeLine{PUT\ \ \ \ /api/teams/\{id\}}
+\DoxyCodeLine{DELETE\ /api/teams/\{id\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{GET\ \ \ \ /api/countries}
+\DoxyCodeLine{POST\ \ \ /api/countries}
+\DoxyCodeLine{DELETE\ /api/countries/\{id\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{GET\ \ \ \ /api/competitions}
+\DoxyCodeLine{POST\ \ \ /api/competitions}
+\DoxyCodeLine{PUT\ \ \ \ /api/competitions/\{id\}}
+\DoxyCodeLine{DELETE\ /api/competitions/\{id\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{GET\ \ \ \ /api/matches}
+\DoxyCodeLine{POST\ \ \ /api/matches}
+\DoxyCodeLine{PUT\ \ \ \ /api/matches/\{id\}}
+\DoxyCodeLine{DELETE\ /api/matches/\{id\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{GET\ \ \ \ /api/matches/results}
+\DoxyCodeLine{PATCH\ \ /api/matches/\{id\}/result}
+\DoxyCodeLine{}
+\DoxyCodeLine{POST\ \ \ /api/auth/register}
+\DoxyCodeLine{POST\ \ \ /api/auth/login}
+\DoxyCodeLine{POST\ \ \ /api/auth/logout}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md40}{}\doxysection{\texorpdfstring{Web Views}{Web Views}}\label{md_README_autotoc_md40}
+Main web pages include\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{/login}
+\DoxyCodeLine{/register}
+\DoxyCodeLine{/teams}
+\DoxyCodeLine{/teams/\{id\}}
+\DoxyCodeLine{/matches/schedule}
+\DoxyCodeLine{/matches/results}
+\DoxyCodeLine{/profile}
+\DoxyCodeLine{/admin}
+\DoxyCodeLine{/admin/manage-\/teams}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md42}{}\doxysection{\texorpdfstring{Testing Strategy}{Testing Strategy}}\label{md_README_autotoc_md42}
+The project includes different types of tests\+:
+
+
+\begin{DoxyItemize}
+\item Unit tests for service classes.
+\item Controller tests.
+\item Authentication tests.
+\item Performance tests.
+\item Coverage reports with Ja\+Co\+Co.
+\end{DoxyItemize}
+
+Main tested areas\+:
+
+
+\begin{DoxyItemize}
+\item User authentication.
+\item Country management.
+\item Competition management.
+\item Match management.
+\item Team management.
+\item Performance of team retrieval operations.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md44}{}\doxysection{\texorpdfstring{Sprint 2 Evidence}{Sprint 2 Evidence}}\label{md_README_autotoc_md44}
+Sprint 2 included\+:
+
+
+\begin{DoxyItemize}
+\item Unit tests.
+\item Controller tests.
+\item Ja\+Co\+Co coverage report.
+\item Performance tests using JUnit\+Perf.
+\item Successful performance execution.
+\item Intentionally failing performance execution.
+\item Performance HTML report.
+\item Visual\+VM evidence, if available.
+\item Release 2 evidence.
+\end{DoxyItemize}
+
+Relevant generated files\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Football\_Manager/target/site/jacoco/}
+\DoxyCodeLine{Football\_Manager/build/reports/junitperf\_report.html}
+\DoxyCodeLine{docs/sprint2/}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md46}{}\doxysection{\texorpdfstring{Sprint 3 Evidence}{Sprint 3 Evidence}}\label{md_README_autotoc_md46}
+Sprint 3 includes\+:
+
+
+\begin{DoxyItemize}
+\item Jenkins CI pipeline.
+\item Successful Jenkins build evidence.
+\item Doxygen HTML documentation.
+\item Doxygen La\+Te\+X/\+PDF documentation.
+\item Maven Site.
+\item Improved README documentation.
+\item Release 3 evidence.
+\end{DoxyItemize}
+
+Relevant files\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Jenkinsfile}
+\DoxyCodeLine{Doxyfile}
+\DoxyCodeLine{docs/doxygen/}
+\DoxyCodeLine{docs/sprint3/}
+\DoxyCodeLine{Football\_Manager/target/site/}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md48}{}\doxysection{\texorpdfstring{How to Package the Application}{How to Package the Application}}\label{md_README_autotoc_md48}
+To generate the {\ttfamily .jar} file\+:\hypertarget{md_README_autotoc_md49}{}\doxysubsection{\texorpdfstring{Windows}{Windows}}\label{md_README_autotoc_md49}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd\ Football\_Manager}
+\DoxyCodeLine{.\(\backslash\)mvnw.cmd\ package\ -\/DskipTests}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md50}{}\doxysubsection{\texorpdfstring{Linux / mac\+OS}{Linux / mac\+OS}}\label{md_README_autotoc_md50}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd\ Football\_Manager}
+\DoxyCodeLine{./mvnw\ package\ -\/DskipTests}
+
+\end{DoxyCode}
+
+
+The generated artifact is located in\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Football\_Manager/target/}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md52}{}\doxysection{\texorpdfstring{Authors}{Authors}}\label{md_README_autotoc_md52}
+Group E6
+
+Team members\+:
+
+
+\begin{DoxyItemize}
+\item Alba Delgado Ortega
+\item Alejandro Vicente Milla Tinajero
+\item Alex Ramarathinam Aguirre
+\item Elena Torralbo Jiménez
+\item Iker Castillo Peiteado
+\item Jaime Etxebarria Ugarte
+\item Javier Gómez Martínez
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md54}{}\doxysection{\texorpdfstring{Repository}{Repository}}\label{md_README_autotoc_md54}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{https://github.com/BSPQ25-\/26/BSPQ26-\/E6}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md56}{}\doxysection{\texorpdfstring{Project Status}{Project Status}}\label{md_README_autotoc_md56}
+The project includes the main functionality required for the course project, together with testing, performance evaluation, continuous integration and generated documentation evidence for Sprint 2 and Sprint 3. 

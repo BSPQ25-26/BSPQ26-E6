@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.13.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Football Manager: BSPQ26-E6</title>
+<title>Football Manager: Football Manager</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -97,11 +97,394 @@ $(function(){initNavTree('md_README.html',''); initResizable(true); });
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">BSPQ26-E6</div></div>
+  <div class="headertitle"><div class="title">Football Manager</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="autotoc_md0"></a></p>
-<p>Repository for team BSPQ26-E6 </p>
+<p>Football Manager is a Spring Boot web application developed for managing football teams, matches, results, users and favourite teams.</p>
+<p>The project was developed as part of the Software Process and Quality course, including automated testing, performance testing, continuous integration and generated documentation.</p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md2"></a>
+Main Features</h1>
+<ul>
+<li>User registration and login.</li>
+<li>Admin and regular user roles.</li>
+<li>Team management.</li>
+<li>Country management.</li>
+<li>Competition management.</li>
+<li>Match management.</li>
+<li>Match results.</li>
+<li>Favourite teams.</li>
+<li>Web views using Thymeleaf.</li>
+<li>REST API endpoints.</li>
+<li>Automated unit and integration tests.</li>
+<li>Code coverage with JaCoCo.</li>
+<li>Performance testing with JUnitPerf.</li>
+<li>Continuous Integration with Jenkins.</li>
+<li>Documentation generated with Doxygen.</li>
+<li>Maven Site generation.</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md4"></a>
+Technologies Used</h1>
+<ul>
+<li>Java 17</li>
+<li>Spring Boot</li>
+<li>Spring Data JPA</li>
+<li>Spring Security</li>
+<li>Thymeleaf</li>
+<li>PostgreSQL</li>
+<li>Maven</li>
+<li>JUnit 5</li>
+<li>JUnit 4</li>
+<li>Mockito</li>
+<li>JUnitPerf</li>
+<li>JaCoCo</li>
+<li>Jenkins</li>
+<li>Doxygen</li>
+<li>Maven Site</li>
+<li>Docker</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md6"></a>
+Project Structure</h1>
+<div class="fragment"><div class="line">BSPQ26-E6/</div>
+<div class="line">│</div>
+<div class="line">├── Football_Manager/</div>
+<div class="line">│   ├── src/main/java/com/example/football_manager/</div>
+<div class="line">│   │   ├── config/</div>
+<div class="line">│   │   ├── controller/</div>
+<div class="line">│   │   ├── dto/</div>
+<div class="line">│   │   ├── model/</div>
+<div class="line">│   │   ├── repository/</div>
+<div class="line">│   │   └── service/</div>
+<div class="line">│   │</div>
+<div class="line">│   ├── src/main/resources/</div>
+<div class="line">│   │   ├── templates/</div>
+<div class="line">│   │   ├── static/</div>
+<div class="line">│   │   └── application.properties</div>
+<div class="line">│   │</div>
+<div class="line">│   ├── src/test/java/com/example/football_manager/</div>
+<div class="line">│   │   ├── controller/</div>
+<div class="line">│   │   ├── performance/</div>
+<div class="line">│   │   └── service/</div>
+<div class="line">│   │</div>
+<div class="line">│   ├── pom.xml</div>
+<div class="line">│   ├── mvnw</div>
+<div class="line">│   └── mvnw.cmd</div>
+<div class="line">│</div>
+<div class="line">├── docs/</div>
+<div class="line">│   ├── doxygen/</div>
+<div class="line">│   └── sprint3/</div>
+<div class="line">│</div>
+<div class="line">├── Doxyfile</div>
+<div class="line">├── Jenkinsfile</div>
+<div class="line">└── README.md</div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="autotoc_md8"></a>
+Requirements</h1>
+<p>Before running the project, make sure you have:</p>
+<ul>
+<li>Java 17 installed.</li>
+<li>PostgreSQL installed and running.</li>
+<li>Git installed.</li>
+<li>Maven Wrapper included in the project.</li>
+<li>Docker installed if you want to run Jenkins or documentation tools through Docker.</li>
+</ul>
+<p>Check Java version:</p>
+<div class="fragment"><div class="line">java -version</div>
+</div><!-- fragment --><p>Expected version:</p>
+<div class="fragment"><div class="line">Java 17</div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="autotoc_md10"></a>
+Database Configuration</h1>
+<p>The application uses PostgreSQL.</p>
+<p>Check the database configuration in:</p>
+<div class="fragment"><div class="line">Football_Manager/src/main/resources/application.properties</div>
+</div><!-- fragment --><p>Typical configuration example:</p>
+<div class="fragment"><div class="line">spring.datasource.url=jdbc:postgresql://localhost:5432/football_manager</div>
+<div class="line">spring.datasource.username=postgres</div>
+<div class="line">spring.datasource.password=your_password</div>
+<div class="line">spring.jpa.hibernate.ddl-auto=update</div>
+</div><!-- fragment --><p>Make sure the database exists before running the application.</p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md12"></a>
+How to Run the Application</h1>
+<p>From the project folder:</p>
+<h2><a class="anchor" id="autotoc_md13"></a>
+Windows</h2>
+<div class="fragment"><div class="line">cd Football_Manager</div>
+<div class="line">.\mvnw.cmd spring-boot:run</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md14"></a>
+Linux / macOS</h2>
+<div class="fragment"><div class="line">cd Football_Manager</div>
+<div class="line">chmod +x mvnw</div>
+<div class="line">./mvnw spring-boot:run</div>
+</div><!-- fragment --><p>The application will be available at:</p>
+<div class="fragment"><div class="line">http://localhost:8080</div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="autotoc_md16"></a>
+How to Run Tests</h1>
+<h2><a class="anchor" id="autotoc_md17"></a>
+Windows</h2>
+<div class="fragment"><div class="line">cd Football_Manager</div>
+<div class="line">.\mvnw.cmd test</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md18"></a>
+Linux / macOS</h2>
+<div class="fragment"><div class="line">cd Football_Manager</div>
+<div class="line">./mvnw test</div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="autotoc_md20"></a>
+Code Coverage with JaCoCo</h1>
+<p>To run tests and generate the JaCoCo coverage report:</p>
+<h2><a class="anchor" id="autotoc_md21"></a>
+Windows</h2>
+<div class="fragment"><div class="line">cd Football_Manager</div>
+<div class="line">.\mvnw.cmd clean test jacoco:report</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md22"></a>
+Linux / macOS</h2>
+<div class="fragment"><div class="line">cd Football_Manager</div>
+<div class="line">./mvnw clean test jacoco:report</div>
+</div><!-- fragment --><p>The report is generated in:</p>
+<div class="fragment"><div class="line">Football_Manager/target/site/jacoco/index.html</div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="autotoc_md24"></a>
+Performance Testing with JUnitPerf</h1>
+<p>The project uses JUnitPerf for performance testing.</p>
+<p>Performance tests are located in:</p>
+<div class="fragment"><div class="line">Football_Manager/src/test/java/com/example/football_manager/performance/</div>
+</div><!-- fragment --><p>To run only the performance tests:</p>
+<h2><a class="anchor" id="autotoc_md25"></a>
+Windows</h2>
+<div class="fragment"><div class="line">cd Football_Manager</div>
+<div class="line">.\mvnw.cmd test -Dtest=TeamServicePerformanceTest</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md26"></a>
+Linux / macOS</h2>
+<div class="fragment"><div class="line">cd Football_Manager</div>
+<div class="line">./mvnw test -Dtest=TeamServicePerformanceTest</div>
+</div><!-- fragment --><p>JUnitPerf generates an HTML report in:</p>
+<div class="fragment"><div class="line">Football_Manager/build/reports/junitperf_report.html</div>
+</div><!-- fragment --><p>The performance tests include:</p>
+<ul>
+<li>Single-thread execution.</li>
+<li>Multi-thread execution.</li>
+<li>Throughput validation.</li>
+<li>Duration-based execution.</li>
+<li>Mean latency validation.</li>
+<li>Maximum latency validation.</li>
+<li>An intentionally failing test for Sprint 2 evidence.</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md28"></a>
+Jenkins CI Pipeline</h1>
+<p>The repository includes a <code>Jenkinsfile</code> for Sprint 3 Continuous Integration.</p>
+<p>The Jenkins pipeline performs:</p>
+<ol type="1">
+<li>Checkout from GitHub.</li>
+<li>Java version verification.</li>
+<li>Maven compile.</li>
+<li>Test execution.</li>
+<li>JaCoCo report generation.</li>
+<li>Package generation.</li>
+<li>Artifact archiving.</li>
+</ol>
+<p>The Jenkinsfile is located at:</p>
+<div class="fragment"><div class="line">Jenkinsfile</div>
+</div><!-- fragment --><p>To test the Jenkins pipeline:</p>
+<ol type="1">
+<li>Open Jenkins.</li>
+<li>Create a new Pipeline job.</li>
+<li>Select <code>Pipeline script from SCM</code>.</li>
+<li>Select Git.</li>
+<li>Use the repository URL:</li>
+</ol>
+<div class="fragment"><div class="line">https://github.com/BSPQ25-26/BSPQ26-E6.git</div>
+</div><!-- fragment --><ol type="1">
+<li>Use branch:</li>
+</ol>
+<div class="fragment"><div class="line">*/main</div>
+</div><!-- fragment --><ol type="1">
+<li>Use script path:</li>
+</ol>
+<div class="fragment"><div class="line">Jenkinsfile</div>
+</div><!-- fragment --><ol type="1">
+<li>Run <code>Build Now</code>.</li>
+</ol>
+<p>A successful execution should finish with:</p>
+<div class="fragment"><div class="line">Finished: SUCCESS</div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="autotoc_md30"></a>
+Doxygen Documentation</h1>
+<p>The project includes a Doxygen configuration file:</p>
+<div class="fragment"><div class="line">Doxyfile</div>
+</div><!-- fragment --><p>Doxygen generates documentation from the Java source code.</p>
+<p>To generate Doxygen documentation using Docker:</p>
+<div class="fragment"><div class="line">docker run --rm -v &quot;${PWD}:/project&quot; -w /project alpine:latest sh -c &quot;apk add --no-cache doxygen &amp;&amp; doxygen Doxyfile&quot;</div>
+</div><!-- fragment --><p>Generated HTML documentation:</p>
+<div class="fragment"><div class="line">docs/doxygen/html/index.html</div>
+</div><!-- fragment --><p>Generated LaTeX documentation:</p>
+<div class="fragment"><div class="line">docs/doxygen/latex/</div>
+</div><!-- fragment --><p>Generated PDF documentation, if compiled:</p>
+<div class="fragment"><div class="line">docs/doxygen/latex/refman.pdf</div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="autotoc_md32"></a>
+Swagger/OpenAPI Documentation</h1>
+<p>The project includes Swagger/OpenAPI documentation for the REST API.</p>
+<p>The Swagger documentation is available at:</p>
+<div class="fragment"><div class="line">/swagger-ui/index.html</div>
+</div><!-- fragment --><p>The OpenAPI specification is available at:</p>
+<div class="fragment"><div class="line">/v3/api-docs</div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="autotoc_md34"></a>
+Maven Site</h1>
+<p>To generate the Maven Site:</p>
+<h2><a class="anchor" id="autotoc_md35"></a>
+Windows</h2>
+<div class="fragment"><div class="line">cd Football_Manager</div>
+<div class="line">.\mvnw.cmd site</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md36"></a>
+Linux / macOS</h2>
+<div class="fragment"><div class="line">cd Football_Manager</div>
+<div class="line">./mvnw site</div>
+</div><!-- fragment --><p>The generated site is located at:</p>
+<div class="fragment"><div class="line">Football_Manager/target/site/index.html</div>
+</div><!-- fragment --><p>The Maven Site includes project information and generated reports.</p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md38"></a>
+Main API Endpoints</h1>
+<p>Some of the main REST endpoints are:</p>
+<div class="fragment"><div class="line">GET    /api/teams</div>
+<div class="line">POST   /api/teams</div>
+<div class="line">PUT    /api/teams/{id}</div>
+<div class="line">DELETE /api/teams/{id}</div>
+<div class="line"> </div>
+<div class="line">GET    /api/countries</div>
+<div class="line">POST   /api/countries</div>
+<div class="line">DELETE /api/countries/{id}</div>
+<div class="line"> </div>
+<div class="line">GET    /api/competitions</div>
+<div class="line">POST   /api/competitions</div>
+<div class="line">PUT    /api/competitions/{id}</div>
+<div class="line">DELETE /api/competitions/{id}</div>
+<div class="line"> </div>
+<div class="line">GET    /api/matches</div>
+<div class="line">POST   /api/matches</div>
+<div class="line">PUT    /api/matches/{id}</div>
+<div class="line">DELETE /api/matches/{id}</div>
+<div class="line"> </div>
+<div class="line">GET    /api/matches/results</div>
+<div class="line">PATCH  /api/matches/{id}/result</div>
+<div class="line"> </div>
+<div class="line">POST   /api/auth/register</div>
+<div class="line">POST   /api/auth/login</div>
+<div class="line">POST   /api/auth/logout</div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="autotoc_md40"></a>
+Web Views</h1>
+<p>Main web pages include:</p>
+<div class="fragment"><div class="line">/login</div>
+<div class="line">/register</div>
+<div class="line">/teams</div>
+<div class="line">/teams/{id}</div>
+<div class="line">/matches/schedule</div>
+<div class="line">/matches/results</div>
+<div class="line">/profile</div>
+<div class="line">/admin</div>
+<div class="line">/admin/manage-teams</div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="autotoc_md42"></a>
+Testing Strategy</h1>
+<p>The project includes different types of tests:</p>
+<ul>
+<li>Unit tests for service classes.</li>
+<li>Controller tests.</li>
+<li>Authentication tests.</li>
+<li>Performance tests.</li>
+<li>Coverage reports with JaCoCo.</li>
+</ul>
+<p>Main tested areas:</p>
+<ul>
+<li>User authentication.</li>
+<li>Country management.</li>
+<li>Competition management.</li>
+<li>Match management.</li>
+<li>Team management.</li>
+<li>Performance of team retrieval operations.</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md44"></a>
+Sprint 2 Evidence</h1>
+<p>Sprint 2 included:</p>
+<ul>
+<li>Unit tests.</li>
+<li>Controller tests.</li>
+<li>JaCoCo coverage report.</li>
+<li>Performance tests using JUnitPerf.</li>
+<li>Successful performance execution.</li>
+<li>Intentionally failing performance execution.</li>
+<li>Performance HTML report.</li>
+<li>VisualVM evidence, if available.</li>
+<li>Release 2 evidence.</li>
+</ul>
+<p>Relevant generated files:</p>
+<div class="fragment"><div class="line">Football_Manager/target/site/jacoco/</div>
+<div class="line">Football_Manager/build/reports/junitperf_report.html</div>
+<div class="line">docs/sprint2/</div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="autotoc_md46"></a>
+Sprint 3 Evidence</h1>
+<p>Sprint 3 includes:</p>
+<ul>
+<li>Jenkins CI pipeline.</li>
+<li>Successful Jenkins build evidence.</li>
+<li>Doxygen HTML documentation.</li>
+<li>Doxygen LaTeX/PDF documentation.</li>
+<li>Maven Site.</li>
+<li>Improved README documentation.</li>
+<li>Release 3 evidence.</li>
+</ul>
+<p>Relevant files:</p>
+<div class="fragment"><div class="line">Jenkinsfile</div>
+<div class="line">Doxyfile</div>
+<div class="line">docs/doxygen/</div>
+<div class="line">docs/sprint3/</div>
+<div class="line">Football_Manager/target/site/</div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="autotoc_md48"></a>
+How to Package the Application</h1>
+<p>To generate the <code>.jar</code> file:</p>
+<h2><a class="anchor" id="autotoc_md49"></a>
+Windows</h2>
+<div class="fragment"><div class="line">cd Football_Manager</div>
+<div class="line">.\mvnw.cmd package -DskipTests</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md50"></a>
+Linux / macOS</h2>
+<div class="fragment"><div class="line">cd Football_Manager</div>
+<div class="line">./mvnw package -DskipTests</div>
+</div><!-- fragment --><p>The generated artifact is located in:</p>
+<div class="fragment"><div class="line">Football_Manager/target/</div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="autotoc_md52"></a>
+Authors</h1>
+<p>Group E6</p>
+<p>Team members:</p>
+<ul>
+<li>Alba Delgado Ortega</li>
+<li>Alejandro Vicente Milla Tinajero</li>
+<li>Alex Ramarathinam Aguirre</li>
+<li>Elena Torralbo Jiménez</li>
+<li>Iker Castillo Peiteado</li>
+<li>Jaime Etxebarria Ugarte</li>
+<li>Javier Gómez Martínez</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md54"></a>
+Repository</h1>
+<div class="fragment"><div class="line">https://github.com/BSPQ25-26/BSPQ26-E6</div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="autotoc_md56"></a>
+Project Status</h1>
+<p>The project includes the main functionality required for the course project, together with testing, performance evaluation, continuous integration and generated documentation evidence for Sprint 2 and Sprint 3. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

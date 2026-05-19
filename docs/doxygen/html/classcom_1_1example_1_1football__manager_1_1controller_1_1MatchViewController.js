@@ -7,6 +7,7 @@ var classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewControlle
     [ "showResultsPage", "classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController.html#a114bf4908d7e6f239e822045edc314cb", null ],
     [ "showScheduleForm", "classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController.html#a4259930870e55951ea5036c87bebc3ce", null ],
     [ "showScoreForm", "classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController.html#a531901bb000f98f83069f7de1bf8eb34", null ],
+    [ "showUpcomingMatchesPage", "classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController.html#a769a67341d4a00e27342dc7766decff1", null ],
     [ "submitScoreForm", "classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController.html#a8f05de52f1c2f3de22c42902b1788463", null ],
     [ "updateMatch", "classcom_1_1example_1_1football__manager_1_1controller_1_1MatchViewController.html#ae8147b733292ce8c886de5b4afb594f1", null ]
 ];

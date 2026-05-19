@@ -114,6 +114,8 @@ $(function(){initNavTree('MatchService_8java.html',''); initResizable(true); });
 <code>import com.example.football_manager.repository.MatchGoalRepository;</code><br />
 <code>import com.example.football_manager.repository.MatchRepository;</code><br />
 <code>import com.example.football_manager.repository.TeamRepository;</code><br />
+<code>import org.springframework.cache.annotation.CacheEvict;</code><br />
+<code>import org.springframework.cache.annotation.Cacheable;</code><br />
 <code>import org.springframework.stereotype.Service;</code><br />
 <code>import org.springframework.transaction.annotation.Transactional;</code><br />
 <code>import java.time.OffsetDateTime;</code><br />

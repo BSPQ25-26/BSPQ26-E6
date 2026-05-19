@@ -7,8 +7,10 @@ var dir_974e82ceaa3f1eff006131e240e764b7 =
     [ "MatchRequestDTO.java", "MatchRequestDTO_8java.html", "MatchRequestDTO_8java" ],
     [ "MatchResultDTO.java", "MatchResultDTO_8java.html", "MatchResultDTO_8java" ],
     [ "MatchResultRequestDTO.java", "MatchResultRequestDTO_8java.html", "MatchResultRequestDTO_8java" ],
+    [ "PlayerBulkRequestDTO.java", "PlayerBulkRequestDTO_8java.html", "PlayerBulkRequestDTO_8java" ],
     [ "PlayerRequestDTO.java", "PlayerRequestDTO_8java.html", "PlayerRequestDTO_8java" ],
     [ "ProfileUpdateDTO.java", "ProfileUpdateDTO_8java.html", "ProfileUpdateDTO_8java" ],
     [ "RegisterDTO.java", "RegisterDTO_8java.html", "RegisterDTO_8java" ],
+    [ "StandingDTO.java", "StandingDTO_8java.html", "StandingDTO_8java" ],
     [ "TeamRequestDTO.java", "TeamRequestDTO_8java.html", "TeamRequestDTO_8java" ]
 ];

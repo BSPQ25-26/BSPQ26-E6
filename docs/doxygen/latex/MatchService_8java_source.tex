@@ -16,365 +16,381 @@
 \DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00012}00012\ \textcolor{keyword}{import}\ com.example.football\_manager.repository.MatchRepository;}
 \DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00013}00013\ \textcolor{keyword}{import}\ com.example.football\_manager.repository.TeamRepository;}
 \DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00014}00014\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00015}00015\ \textcolor{keyword}{import}\ org.springframework.stereotype.Service;}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00016}00016\ \textcolor{keyword}{import}\ org.springframework.transaction.annotation.Transactional;}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00017}00017\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00018}00018\ \textcolor{keyword}{import}\ java.time.OffsetDateTime;}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00019}00019\ \textcolor{keyword}{import}\ java.time.ZoneId;}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00020}00020\ \textcolor{keyword}{import}\ java.util.ArrayList;}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00021}00021\ \textcolor{keyword}{import}\ java.util.List;}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00022}00022\ \textcolor{keyword}{import}\ java.util.Objects;}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00023}00023\ \textcolor{keyword}{import}\ java.util.Optional;}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00024}00024\ \textcolor{keyword}{import}\ java.util.Set;}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00025}00025\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00026}00026\ @Service}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00027}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService}{00027}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_af90d691f8ee642dccc9c9ecb147443fc}{MatchService}}\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00028}00028\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00029}00029\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository}{MatchRepository}}\ matchRepository;}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00030}00030\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchGoalRepository}{MatchGoalRepository}}\ matchGoalRepository;}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00031}00031\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1TeamRepository}{TeamRepository}}\ teamRepository;}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00032}00032\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1CompetitionRepository}{CompetitionRepository}}\ competitionRepository;}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00033}00033\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00034}00034\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00035}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_af90d691f8ee642dccc9c9ecb147443fc}{00035}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_af90d691f8ee642dccc9c9ecb147443fc}{MatchService}}(}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository}{MatchRepository}}\ matchRepository,}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchGoalRepository}{MatchGoalRepository}}\ matchGoalRepository,}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1TeamRepository}{TeamRepository}}\ teamRepository,}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1CompetitionRepository}{CompetitionRepository}}\ competitionRepository}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00040}00040\ \ \ \ \ )\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00041}00041\ \ \ \ \ \ \ \ \ this.matchRepository\ =\ matchRepository;}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00042}00042\ \ \ \ \ \ \ \ \ this.matchGoalRepository\ =\ matchGoalRepository;}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00043}00043\ \ \ \ \ \ \ \ \ this.teamRepository\ =\ teamRepository;}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00044}00044\ \ \ \ \ \ \ \ \ this.competitionRepository\ =\ competitionRepository;}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00045}00045\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00046}00046\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00047}00047\ \ \ \ \ @Transactional}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00048}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_aeb3bfc0d77a6720adaa834ac08cb87b2}{00048}}\ \ \ \ \ \textcolor{keyword}{public}\ String\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_aeb3bfc0d77a6720adaa834ac08cb87b2}{createMatch}}(\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO}{MatchRequestDTO}}\ request)\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00049}00049\ \ \ \ \ \ \ \ \ validateMatchRequest(request,\ \textcolor{keyword}{true});}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00050}00050\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00051}00051\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Team}{Team}}\ homeTeam\ =\ teamRepository.findById(request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ad6b6a74b0473522315516eebb2450ea6}{getHomeTeamId}}())}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Home\ team\ not\ found\ with\ id:\ "{}}\ +\ request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ad6b6a74b0473522315516eebb2450ea6}{getHomeTeamId}}()));}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00015}00015\ \textcolor{keyword}{import}\ org.springframework.cache.annotation.CacheEvict;}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00016}00016\ \textcolor{keyword}{import}\ org.springframework.cache.annotation.Cacheable;}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00017}00017\ \textcolor{keyword}{import}\ org.springframework.stereotype.Service;}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00018}00018\ \textcolor{keyword}{import}\ org.springframework.transaction.annotation.Transactional;}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00020}00020\ \textcolor{keyword}{import}\ java.time.OffsetDateTime;}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00021}00021\ \textcolor{keyword}{import}\ java.time.ZoneId;}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00022}00022\ \textcolor{keyword}{import}\ java.util.ArrayList;}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00023}00023\ \textcolor{keyword}{import}\ java.util.List;}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00024}00024\ \textcolor{keyword}{import}\ java.util.Objects;}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00025}00025\ \textcolor{keyword}{import}\ java.util.Optional;}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00026}00026\ \textcolor{keyword}{import}\ java.util.Set;}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00028}00028\ @Service}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00029}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService}{00029}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_af90d691f8ee642dccc9c9ecb147443fc}{MatchService}}\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00030}00030\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00031}00031\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository}{MatchRepository}}\ matchRepository;}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00032}00032\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchGoalRepository}{MatchGoalRepository}}\ matchGoalRepository;}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00033}00033\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1TeamRepository}{TeamRepository}}\ teamRepository;}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00034}00034\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1CompetitionRepository}{CompetitionRepository}}\ competitionRepository;}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00036}00036\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00037}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_af90d691f8ee642dccc9c9ecb147443fc}{00037}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_af90d691f8ee642dccc9c9ecb147443fc}{MatchService}}(}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchRepository}{MatchRepository}}\ matchRepository,}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1MatchGoalRepository}{MatchGoalRepository}}\ matchGoalRepository,}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1TeamRepository}{TeamRepository}}\ teamRepository,}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1CompetitionRepository}{CompetitionRepository}}\ competitionRepository}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00042}00042\ \ \ \ \ )\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00043}00043\ \ \ \ \ \ \ \ \ this.matchRepository\ =\ matchRepository;}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00044}00044\ \ \ \ \ \ \ \ \ this.matchGoalRepository\ =\ matchGoalRepository;}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00045}00045\ \ \ \ \ \ \ \ \ this.teamRepository\ =\ teamRepository;}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00046}00046\ \ \ \ \ \ \ \ \ this.competitionRepository\ =\ competitionRepository;}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00047}00047\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00049}00049\ \ \ \ \ @Transactional}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00050}00050\ \ \ \ \ @CacheEvict(cacheNames\ =\ \{\textcolor{stringliteral}{"{}matches"{}},\ \textcolor{stringliteral}{"{}upcomingMatches"{}},\ \textcolor{stringliteral}{"{}standings"{}},\ \textcolor{stringliteral}{"{}matchResults"{}}\},\ allEntries\ =\ \textcolor{keyword}{true})}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00051}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_aeb3bfc0d77a6720adaa834ac08cb87b2}{00051}}\ \ \ \ \ \textcolor{keyword}{public}\ String\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_aeb3bfc0d77a6720adaa834ac08cb87b2}{createMatch}}(\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO}{MatchRequestDTO}}\ request)\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00052}00052\ \ \ \ \ \ \ \ \ validateMatchRequest(request,\ \textcolor{keyword}{true});}
 \DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00053}00053\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00054}00054\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Team}{Team}}\ awayTeam\ =\ teamRepository.findById(request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ad8b1fee30397b829b483a38810620f78}{getAwayTeamId}}())}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Away\ team\ not\ found\ with\ id:\ "{}}\ +\ request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ad8b1fee30397b829b483a38810620f78}{getAwayTeamId}}()));}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00054}00054\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Team}{Team}}\ homeTeam\ =\ teamRepository.findById(request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ad6b6a74b0473522315516eebb2450ea6}{getHomeTeamId}}())}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Home\ team\ not\ found\ with\ id:\ "{}}\ +\ request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ad6b6a74b0473522315516eebb2450ea6}{getHomeTeamId}}()));}
 \DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00056}00056\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00057}00057\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Competition}{Competition}}\ competition\ =\ competitionRepository.findById(request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a6ccb6d5a72bb01b609acb5e3b7562f52}{getCompetitionId}}())}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Competition\ not\ found\ with\ id:\ "{}}\ +\ request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a6ccb6d5a72bb01b609acb5e3b7562f52}{getCompetitionId}}()));}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00057}00057\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Team}{Team}}\ awayTeam\ =\ teamRepository.findById(request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ad8b1fee30397b829b483a38810620f78}{getAwayTeamId}}())}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Away\ team\ not\ found\ with\ id:\ "{}}\ +\ request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ad8b1fee30397b829b483a38810620f78}{getAwayTeamId}}()));}
 \DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00059}00059\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00060}00060\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}}\ match\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}}();}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00061}00061\ \ \ \ \ \ \ \ \ match.setLeftTeam(homeTeam);}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00062}00062\ \ \ \ \ \ \ \ \ match.setRightTeam(awayTeam);}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00063}00063\ \ \ \ \ \ \ \ \ match.setCompetition(competition);}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00064}00064\ \ \ \ \ \ \ \ \ match.setDatetime(request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ae0d058e96aead8c5e0c8b0f275672e0b}{getKickoffTime}}().atZone(ZoneId.systemDefault()).toOffsetDateTime());}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00065}00065\ \ \ \ \ \ \ \ \ match.setVenue(request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a0513ea1d2a4b64fa08adf23a5150d849}{getVenue}}().trim());}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00066}00066\ \ \ \ \ \ \ \ \ match.setLeftScore(toShortScore(request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a2bf00954c7b88b3a1b9036e6d25eac91}{getHomeScore}}()));}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00067}00067\ \ \ \ \ \ \ \ \ match.setRightScore(toShortScore(request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a3d9fae02c0b09d26872772a5fdb82a2f}{getAwayScore}}()));}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00068}00068\ \ \ \ \ \ \ \ \ match.setFinished(request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ad6b82adc671b3fa0168d78a599aae0db}{getStatus}}()\ ==\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO}{MatchRequestDTO}}.\mbox{\hyperlink{enumcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_1_1MatchStatus}{MatchStatus}}.\mbox{\hyperlink{enumcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_1_1MatchStatus_a4ed1c65fafdd9a7989e1f43f139f4fb2}{FINISHED}});}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00069}00069\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00070}00070\ \ \ \ \ \ \ \ \ matchRepository.save(match);}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00071}00071\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00072}00072\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Match\ scheduled\ successfully."{}};}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00073}00073\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00060}00060\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Competition}{Competition}}\ competition\ =\ competitionRepository.findById(request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a6ccb6d5a72bb01b609acb5e3b7562f52}{getCompetitionId}}())}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Competition\ not\ found\ with\ id:\ "{}}\ +\ request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a6ccb6d5a72bb01b609acb5e3b7562f52}{getCompetitionId}}()));}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00063}00063\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}}\ match\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}}();}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00064}00064\ \ \ \ \ \ \ \ \ match.setLeftTeam(homeTeam);}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00065}00065\ \ \ \ \ \ \ \ \ match.setRightTeam(awayTeam);}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00066}00066\ \ \ \ \ \ \ \ \ match.setCompetition(competition);}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00067}00067\ \ \ \ \ \ \ \ \ match.setDatetime(request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ae0d058e96aead8c5e0c8b0f275672e0b}{getKickoffTime}}().atZone(ZoneId.systemDefault()).toOffsetDateTime());}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00068}00068\ \ \ \ \ \ \ \ \ match.setVenue(request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a0513ea1d2a4b64fa08adf23a5150d849}{getVenue}}().trim());}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00069}00069\ \ \ \ \ \ \ \ \ match.setLeftScore(toShortScore(request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a2bf00954c7b88b3a1b9036e6d25eac91}{getHomeScore}}()));}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00070}00070\ \ \ \ \ \ \ \ \ match.setRightScore(toShortScore(request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a3d9fae02c0b09d26872772a5fdb82a2f}{getAwayScore}}()));}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00071}00071\ \ \ \ \ \ \ \ \ match.setFinished(request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ad6b82adc671b3fa0168d78a599aae0db}{getStatus}}()\ ==\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO}{MatchRequestDTO}}.\mbox{\hyperlink{enumcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_1_1MatchStatus}{MatchStatus}}.\mbox{\hyperlink{enumcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_1_1MatchStatus_a4ed1c65fafdd9a7989e1f43f139f4fb2}{FINISHED}});}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00073}00073\ \ \ \ \ \ \ \ \ matchRepository.save(match);}
 \DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00074}00074\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00075}00075\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ validateMatchRequest(\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO}{MatchRequestDTO}}\ request,\ \textcolor{keywordtype}{boolean}\ competitionRequired)\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00076}00076\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request\ ==\ \textcolor{keyword}{null})\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Match\ data\ is\ required."{}});}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00078}00078\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00079}00079\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00080}00080\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ad6b6a74b0473522315516eebb2450ea6}{getHomeTeamId}}()\ ==\ \textcolor{keyword}{null}\ ||\ request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ad8b1fee30397b829b483a38810620f78}{getAwayTeamId}}()\ ==\ \textcolor{keyword}{null})\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Both\ Home\ and\ Away\ team\ IDs\ are\ required."{}});}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00082}00082\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00083}00083\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00084}00084\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (competitionRequired\ \&\&\ request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a6ccb6d5a72bb01b609acb5e3b7562f52}{getCompetitionId}}()\ ==\ \textcolor{keyword}{null})\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Competition\ ID\ is\ required."{}});}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00086}00086\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00087}00087\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00088}00088\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ae0d058e96aead8c5e0c8b0f275672e0b}{getKickoffTime}}()\ ==\ \textcolor{keyword}{null}\ ||\ request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a0513ea1d2a4b64fa08adf23a5150d849}{getVenue}}()\ ==\ \textcolor{keyword}{null})\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Kickoff\ time\ and\ Venue\ are\ required."{}});}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00090}00090\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00091}00091\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00092}00092\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ad6b6a74b0473522315516eebb2450ea6}{getHomeTeamId}}().equals(request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ad8b1fee30397b829b483a38810620f78}{getAwayTeamId}}()))\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Home\ and\ Away\ teams\ must\ be\ different."{}});}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00094}00094\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00095}00095\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00096}00096\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ad6b82adc671b3fa0168d78a599aae0db}{getStatus}}()\ ==\ \textcolor{keyword}{null})\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a22971d58de2a00402125967f7e1f6e6a}{setStatus}}(MatchRequestDTO.MatchStatus.SCHEDULED);}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00098}00098\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00099}00099\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00100}00100\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00101}00101\ \ \ \ \ @Transactional}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00102}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a29a97f0da2fe4a950291db609bee986f}{00102}}\ \ \ \ \ \textcolor{keyword}{public}\ String\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a29a97f0da2fe4a950291db609bee986f}{updateMatch}}(Long\ \textcolor{keywordtype}{id},\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO}{MatchRequestDTO}}\ request)\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00103}00103\ \ \ \ \ \ \ \ \ validateMatchUpdate(request);}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00104}00104\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00105}00105\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}}\ match\ =\ matchRepository.findById(\textcolor{keywordtype}{id})}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Match\ not\ found"{}}));}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00107}00107\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00108}00108\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Team}{Team}}\ homeTeam\ =\ teamRepository.findById(request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ad6b6a74b0473522315516eebb2450ea6}{getHomeTeamId}}())}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Home\ team\ not\ found"{}}));}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00110}00110\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Team}{Team}}\ awayTeam\ =\ teamRepository.findById(request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ad8b1fee30397b829b483a38810620f78}{getAwayTeamId}}())}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Away\ team\ not\ found"{}}));}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00112}00112\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00113}00113\ \ \ \ \ \ \ \ \ match.setLeftTeam(homeTeam);}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00114}00114\ \ \ \ \ \ \ \ \ match.setRightTeam(awayTeam);}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00115}00115\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00116}00116\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Actualizamos\ la\ fecha\ usando\ la\ zona\ horaria\ del\ sistema\ de\ tu\ compañero}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00117}00117\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ae0d058e96aead8c5e0c8b0f275672e0b}{getKickoffTime}}()\ !=\ \textcolor{keyword}{null})\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ match.setDatetime(request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ae0d058e96aead8c5e0c8b0f275672e0b}{getKickoffTime}}().atZone(ZoneId.systemDefault()).toOffsetDateTime());}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00119}00119\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00120}00120\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00121}00121\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Actualizamos\ la\ sede\ (venue)}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00122}00122\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a0513ea1d2a4b64fa08adf23a5150d849}{getVenue}}()\ !=\ \textcolor{keyword}{null}\ \&\&\ !request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a0513ea1d2a4b64fa08adf23a5150d849}{getVenue}}().isBlank())\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ match.setVenue(request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a0513ea1d2a4b64fa08adf23a5150d849}{getVenue}}().trim());}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00124}00124\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00125}00125\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00126}00126\ \ \ \ \ \ \ \ \ match.setFinished(request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ad6b82adc671b3fa0168d78a599aae0db}{getStatus}}()\ ==\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO}{MatchRequestDTO}}.\mbox{\hyperlink{enumcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_1_1MatchStatus}{MatchStatus}}.\mbox{\hyperlink{enumcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_1_1MatchStatus_a4ed1c65fafdd9a7989e1f43f139f4fb2}{FINISHED}});}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00127}00127\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00128}00128\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a2bf00954c7b88b3a1b9036e6d25eac91}{getHomeScore}}()\ !=\ \textcolor{keyword}{null})\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00129}00129\ \ \ \ \ \ \ \ \ \ \ \ \ match.setLeftScore(request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a2bf00954c7b88b3a1b9036e6d25eac91}{getHomeScore}}().shortValue());}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00130}00130\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00131}00131\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a3d9fae02c0b09d26872772a5fdb82a2f}{getAwayScore}}()\ !=\ \textcolor{keyword}{null})\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00132}00132\ \ \ \ \ \ \ \ \ \ \ \ \ match.setRightScore(request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a3d9fae02c0b09d26872772a5fdb82a2f}{getAwayScore}}().shortValue());}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00133}00133\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00134}00134\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00135}00135\ \ \ \ \ \ \ \ \ matchRepository.save(match);}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00136}00136\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00137}00137\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Match\ with\ ID\ "{}}\ +\ \textcolor{keywordtype}{id}\ +\ \textcolor{stringliteral}{"{}\ has\ been\ updated."{}};}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00138}00138\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00139}00139\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00140}00140\ \ \ \ \ @Transactional}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00141}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a11920c73281f64f81e0ce4d36d8bb208}{00141}}\ \ \ \ \ \textcolor{keyword}{public}\ String\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a11920c73281f64f81e0ce4d36d8bb208}{deleteMatch}}(Long\ \textcolor{keywordtype}{id})\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00142}00142\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}}\ match\ =\ matchRepository.findById(\textcolor{keywordtype}{id})}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Match\ not\ found\ with\ id:\ "{}}\ +\ \textcolor{keywordtype}{id}));}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00144}00144\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00145}00145\ \ \ \ \ \ \ \ \ matchGoalRepository.deleteByMatchId(\textcolor{keywordtype}{id});}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00146}00146\ \ \ \ \ \ \ \ \ matchRepository.delete(match);}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00147}00147\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00148}00148\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Match\ with\ ID\ "{}}\ +\ \textcolor{keywordtype}{id}\ +\ \textcolor{stringliteral}{"{}\ has\ been\ deleted."{}};}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00149}00149\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00150}00150\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00151}00151\ \ \ \ \ @Transactional}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00152}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a5ab09f54e5258ea8786775dace75b662}{00152}}\ \ \ \ \ \textcolor{keyword}{public}\ String\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a5ab09f54e5258ea8786775dace75b662}{registerResult}}(Long\ \textcolor{keywordtype}{id},\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO}{MatchResultRequestDTO}}\ request)\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00153}00153\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request\ ==\ \textcolor{keyword}{null}\ ||\ request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO_ad58707241323060bb9c02b3f00911d4f}{getGoals}}()\ ==\ \textcolor{keyword}{null})\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00154}00154\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Goals\ are\ required."{}});}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00155}00155\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00156}00156\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00157}00157\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}}\ match\ =\ matchRepository.findById(\textcolor{keywordtype}{id})}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Match\ not\ found\ with\ id:\ "{}}\ +\ \textcolor{keywordtype}{id}));}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00159}00159\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00160}00160\ \ \ \ \ \ \ \ \ List<MatchGoal>\ goals\ =\ \textcolor{keyword}{new}\ ArrayList<>();}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00161}00161\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ leftScore\ =\ 0;}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00162}00162\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ rightScore\ =\ 0;}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00163}00163\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00164}00164\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO}{MatchResultRequestDTO}}.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO_1_1GoalDTO}{GoalDTO}}\ goalDTO\ :\ request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO_ad58707241323060bb9c02b3f00911d4f}{getGoals}}())\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00165}00165\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Team}{Team}}\ scoringTeam\ =\ resolveScoringTeam(match,\ goalDTO);}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00166}00166\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (Objects.equals(scoringTeam.getId(),\ match.getLeftTeam().getId()))\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00168}00168\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ leftScore++;}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00169}00169\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ rightScore++;}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00075}00075\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Match\ scheduled\ successfully."{}};}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00076}00076\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00078}00078\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ validateMatchRequest(\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO}{MatchRequestDTO}}\ request,\ \textcolor{keywordtype}{boolean}\ competitionRequired)\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00079}00079\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request\ ==\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Match\ data\ is\ required."{}});}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00081}00081\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00083}00083\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ad6b6a74b0473522315516eebb2450ea6}{getHomeTeamId}}()\ ==\ \textcolor{keyword}{null}\ ||\ request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ad8b1fee30397b829b483a38810620f78}{getAwayTeamId}}()\ ==\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Both\ Home\ and\ Away\ team\ IDs\ are\ required."{}});}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00085}00085\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00087}00087\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (competitionRequired\ \&\&\ request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a6ccb6d5a72bb01b609acb5e3b7562f52}{getCompetitionId}}()\ ==\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Competition\ ID\ is\ required."{}});}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00089}00089\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00091}00091\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ae0d058e96aead8c5e0c8b0f275672e0b}{getKickoffTime}}()\ ==\ \textcolor{keyword}{null}\ ||\ request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a0513ea1d2a4b64fa08adf23a5150d849}{getVenue}}()\ ==\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Kickoff\ time\ and\ Venue\ are\ required."{}});}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00093}00093\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00095}00095\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ad6b6a74b0473522315516eebb2450ea6}{getHomeTeamId}}().equals(request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ad8b1fee30397b829b483a38810620f78}{getAwayTeamId}}()))\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Home\ and\ Away\ teams\ must\ be\ different."{}});}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00097}00097\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00099}00099\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ad6b82adc671b3fa0168d78a599aae0db}{getStatus}}()\ ==\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a22971d58de2a00402125967f7e1f6e6a}{setStatus}}(MatchRequestDTO.MatchStatus.SCHEDULED);}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00101}00101\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00102}00102\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00103}00103\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00104}00104\ \ \ \ \ @Transactional}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00105}00105\ \ \ \ \ @CacheEvict(cacheNames\ =\ \{\textcolor{stringliteral}{"{}matches"{}},\ \textcolor{stringliteral}{"{}upcomingMatches"{}},\ \textcolor{stringliteral}{"{}standings"{}},\ \textcolor{stringliteral}{"{}matchResults"{}}\},\ allEntries\ =\ \textcolor{keyword}{true})}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00106}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a29a97f0da2fe4a950291db609bee986f}{00106}}\ \ \ \ \ \textcolor{keyword}{public}\ String\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a29a97f0da2fe4a950291db609bee986f}{updateMatch}}(Long\ \textcolor{keywordtype}{id},\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO}{MatchRequestDTO}}\ request)\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00107}00107\ \ \ \ \ \ \ \ \ validateMatchUpdate(request);}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00109}00109\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}}\ match\ =\ matchRepository.findById(\textcolor{keywordtype}{id})}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Match\ not\ found"{}}));}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00112}00112\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Team}{Team}}\ homeTeam\ =\ teamRepository.findById(request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ad6b6a74b0473522315516eebb2450ea6}{getHomeTeamId}}())}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Home\ team\ not\ found"{}}));}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00114}00114\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Team}{Team}}\ awayTeam\ =\ teamRepository.findById(request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ad8b1fee30397b829b483a38810620f78}{getAwayTeamId}}())}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Away\ team\ not\ found"{}}));}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00116}00116\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00117}00117\ \ \ \ \ \ \ \ \ match.setLeftTeam(homeTeam);}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00118}00118\ \ \ \ \ \ \ \ \ match.setRightTeam(awayTeam);}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00119}00119\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00120}00120\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Actualizamos\ la\ fecha\ usando\ la\ zona\ horaria\ del\ sistema\ de\ tu\ compañero}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00121}00121\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ae0d058e96aead8c5e0c8b0f275672e0b}{getKickoffTime}}()\ !=\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ match.setDatetime(request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ae0d058e96aead8c5e0c8b0f275672e0b}{getKickoffTime}}().atZone(ZoneId.systemDefault()).toOffsetDateTime());}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00123}00123\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00124}00124\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00125}00125\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Actualizamos\ la\ sede\ (venue)}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00126}00126\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a0513ea1d2a4b64fa08adf23a5150d849}{getVenue}}()\ !=\ \textcolor{keyword}{null}\ \&\&\ !request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a0513ea1d2a4b64fa08adf23a5150d849}{getVenue}}().isBlank())\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00127}00127\ \ \ \ \ \ \ \ \ \ \ \ \ match.setVenue(request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a0513ea1d2a4b64fa08adf23a5150d849}{getVenue}}().trim());}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00128}00128\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00129}00129\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00130}00130\ \ \ \ \ \ \ \ \ match.setFinished(request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ad6b82adc671b3fa0168d78a599aae0db}{getStatus}}()\ ==\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO}{MatchRequestDTO}}.\mbox{\hyperlink{enumcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_1_1MatchStatus}{MatchStatus}}.\mbox{\hyperlink{enumcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_1_1MatchStatus_a4ed1c65fafdd9a7989e1f43f139f4fb2}{FINISHED}});}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00131}00131\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00132}00132\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a2bf00954c7b88b3a1b9036e6d25eac91}{getHomeScore}}()\ !=\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00133}00133\ \ \ \ \ \ \ \ \ \ \ \ \ match.setLeftScore(request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a2bf00954c7b88b3a1b9036e6d25eac91}{getHomeScore}}().shortValue());}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00134}00134\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00135}00135\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a3d9fae02c0b09d26872772a5fdb82a2f}{getAwayScore}}()\ !=\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ match.setRightScore(request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a3d9fae02c0b09d26872772a5fdb82a2f}{getAwayScore}}().shortValue());}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00137}00137\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00138}00138\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00139}00139\ \ \ \ \ \ \ \ \ matchRepository.save(match);}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00141}00141\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Match\ with\ ID\ "{}}\ +\ \textcolor{keywordtype}{id}\ +\ \textcolor{stringliteral}{"{}\ has\ been\ updated."{}};}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00142}00142\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00143}00143\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00144}00144\ \ \ \ \ @Transactional}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00145}00145\ \ \ \ \ @CacheEvict(cacheNames\ =\ \{\textcolor{stringliteral}{"{}matches"{}},\ \textcolor{stringliteral}{"{}upcomingMatches"{}},\ \textcolor{stringliteral}{"{}standings"{}},\ \textcolor{stringliteral}{"{}matchResults"{}}\},\ allEntries\ =\ \textcolor{keyword}{true})}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00146}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a11920c73281f64f81e0ce4d36d8bb208}{00146}}\ \ \ \ \ \textcolor{keyword}{public}\ String\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a11920c73281f64f81e0ce4d36d8bb208}{deleteMatch}}(Long\ \textcolor{keywordtype}{id})\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00147}00147\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}}\ match\ =\ matchRepository.findById(\textcolor{keywordtype}{id})}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00148}00148\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Match\ not\ found\ with\ id:\ "{}}\ +\ \textcolor{keywordtype}{id}));}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00149}00149\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00150}00150\ \ \ \ \ \ \ \ \ matchGoalRepository.deleteByMatchId(\textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00151}00151\ \ \ \ \ \ \ \ \ matchRepository.delete(match);}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00152}00152\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00153}00153\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Match\ with\ ID\ "{}}\ +\ \textcolor{keywordtype}{id}\ +\ \textcolor{stringliteral}{"{}\ has\ been\ deleted."{}};}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00154}00154\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00155}00155\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00156}00156\ \ \ \ \ @Transactional}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00157}00157\ \ \ \ \ @CacheEvict(cacheNames\ =\ \{\textcolor{stringliteral}{"{}matches"{}},\ \textcolor{stringliteral}{"{}upcomingMatches"{}},\ \textcolor{stringliteral}{"{}standings"{}},\ \textcolor{stringliteral}{"{}matchResults"{}}\},\ allEntries\ =\ \textcolor{keyword}{true})}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00158}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a5ab09f54e5258ea8786775dace75b662}{00158}}\ \ \ \ \ \textcolor{keyword}{public}\ String\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a5ab09f54e5258ea8786775dace75b662}{registerResult}}(Long\ \textcolor{keywordtype}{id},\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO}{MatchResultRequestDTO}}\ request)\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00159}00159\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request\ ==\ \textcolor{keyword}{null}\ ||\ request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO_ad58707241323060bb9c02b3f00911d4f}{getGoals}}()\ ==\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Goals\ are\ required."{}});}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00161}00161\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00162}00162\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00163}00163\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}}\ match\ =\ matchRepository.findById(\textcolor{keywordtype}{id})}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Match\ not\ found\ with\ id:\ "{}}\ +\ \textcolor{keywordtype}{id}));}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00165}00165\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00166}00166\ \ \ \ \ \ \ \ \ List<MatchGoal>\ goals\ =\ \textcolor{keyword}{new}\ ArrayList<>();}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00167}00167\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ leftScore\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00168}00168\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ rightScore\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00169}00169\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00170}00170\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO}{MatchResultRequestDTO}}.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO_1_1GoalDTO}{GoalDTO}}\ goalDTO\ :\ request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO_ad58707241323060bb9c02b3f00911d4f}{getGoals}}())\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Team}{Team}}\ scoringTeam\ =\ resolveScoringTeam(match,\ goalDTO);}
 \DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00172}00172\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00173}00173\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1MatchGoal}{MatchGoal}}\ goal\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1MatchGoal}{MatchGoal}}();}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ goal.setMatch(match);}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ goal.setTeam(scoringTeam);}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ goal.setMinute(goalDTO.getMinute().shortValue());}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \ \ goal.setStoppageMinute(toShort(goalDTO.getStoppageMinute()));}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ goals.add(goal);}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00179}00179\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00180}00180\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00181}00181\ \ \ \ \ \ \ \ \ matchGoalRepository.deleteByMatchId(\textcolor{keywordtype}{id});}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00182}00182\ \ \ \ \ \ \ \ \ matchGoalRepository.saveAll(goals);}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00183}00183\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00184}00184\ \ \ \ \ \ \ \ \ match.setLeftScore((\textcolor{keywordtype}{short})\ leftScore);}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00185}00185\ \ \ \ \ \ \ \ \ match.setRightScore((\textcolor{keywordtype}{short})\ rightScore);}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00186}00186\ \ \ \ \ \ \ \ \ match.setFinished(\textcolor{keyword}{true});}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00187}00187\ \ \ \ \ \ \ \ \ matchRepository.save(match);}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00188}00188\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00189}00189\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Result\ registered\ for\ match\ "{}}\ +\ \textcolor{keywordtype}{id}\ +\ \textcolor{stringliteral}{"{}:\ "{}}\ +\ leftScore\ +\ \textcolor{stringliteral}{"{}\ -\/\ "{}}\ +\ rightScore;}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00190}00190\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00191}00191\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00192}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_ad33b25c0df2261d7df5309bb08dc428a}{00192}}\ \ \ \ \ \textcolor{keyword}{public}\ List<MatchResultDTO>\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_ad33b25c0df2261d7df5309bb08dc428a}{getFinishedMatchResults}}()\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00193}00193\ \ \ \ \ \ \ \ \ List<Match>\ matches\ =\ matchRepository.findByFinishedTrueOrderByDatetimeDesc();}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00173}00173\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (Objects.equals(scoringTeam.getId(),\ match.getLeftTeam().getId()))\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ leftScore++;}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ rightScore++;}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00178}00178\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1MatchGoal}{MatchGoal}}\ goal\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1MatchGoal}{MatchGoal}}();}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ goal.setMatch(match);}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ goal.setTeam(scoringTeam);}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00182}00182\ \ \ \ \ \ \ \ \ \ \ \ \ goal.setMinute(goalDTO.getMinute().shortValue());}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ goal.setStoppageMinute(toShort(goalDTO.getStoppageMinute()));}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ goals.add(goal);}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00185}00185\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00186}00186\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00187}00187\ \ \ \ \ \ \ \ \ matchGoalRepository.deleteByMatchId(\textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00188}00188\ \ \ \ \ \ \ \ \ matchGoalRepository.saveAll(goals);}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00189}00189\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00190}00190\ \ \ \ \ \ \ \ \ match.setLeftScore((\textcolor{keywordtype}{short})\ leftScore);}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00191}00191\ \ \ \ \ \ \ \ \ match.setRightScore((\textcolor{keywordtype}{short})\ rightScore);}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00192}00192\ \ \ \ \ \ \ \ \ match.setFinished(\textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00193}00193\ \ \ \ \ \ \ \ \ matchRepository.save(match);}
 \DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00194}00194\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00195}00195\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ matches.stream()}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00196}00196\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .map(match\ -\/>\ \textcolor{keyword}{new}\ MatchResultDTO(}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00197}00197\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ match.getId(),}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00198}00198\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ match.getLeftTeam().getName(),}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00199}00199\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ match.getRightTeam().getName(),}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00200}00200\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ match.getLeftScore(),}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00201}00201\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ match.getRightScore(),}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00202}00202\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ match.getDatetime()}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00203}00203\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ))}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00204}00204\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .toList();}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00205}00205\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00206}00206\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00207}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_ac098037788db4a971140caba8887c7ba}{00207}}\ \ \ \ \ \textcolor{keyword}{public}\ Optional<MatchRequestDTO>\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_ac098037788db4a971140caba8887c7ba}{getMatchForEdit}}(Long\ \textcolor{keywordtype}{id})\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00208}00208\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (matchRepository\ ==\ \textcolor{keyword}{null})\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00209}00209\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Optional.empty();}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00210}00210\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00211}00211\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00212}00212\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ matchRepository.findById(\textcolor{keywordtype}{id}).map(match\ -\/>\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00213}00213\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO}{MatchRequestDTO}}\ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO}{MatchRequestDTO}}();}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00214}00214\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}.setHomeTeamId(match.getLeftTeam().getId());}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00215}00215\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}.setAwayTeamId(match.getRightTeam().getId());}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00216}00216\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}.setKickoffTime(match.getDatetime().toLocalDateTime());}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00217}00217\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}.setVenue(match.getVenue());\ \textcolor{comment}{//\ Carga\ el\ venue\ real,\ no\ "{}TBD"{}}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00218}00218\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}.setStatus(match.isFinished()}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00219}00219\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ?\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO}{MatchRequestDTO}}.\mbox{\hyperlink{enumcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_1_1MatchStatus}{MatchStatus}}.\mbox{\hyperlink{enumcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_1_1MatchStatus_a4ed1c65fafdd9a7989e1f43f139f4fb2}{FINISHED}}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00220}00220\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO}{MatchRequestDTO}}.\mbox{\hyperlink{enumcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_1_1MatchStatus}{MatchStatus}}.\mbox{\hyperlink{enumcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_1_1MatchStatus_ad240b4a9a77ee407ecff43fb9e0f685c}{SCHEDULED}});}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00221}00221\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}.setHomeScore((\textcolor{keywordtype}{int})\ match.getLeftScore());}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00222}00222\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}.setAwayScore((\textcolor{keywordtype}{int})\ match.getRightScore());}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00223}00223\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}};}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00224}00224\ \ \ \ \ \ \ \ \ \});}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00225}00225\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00226}00226\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00227}00227\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ validateMatchUpdate(\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO}{MatchRequestDTO}}\ request)\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00228}00228\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ad6b6a74b0473522315516eebb2450ea6}{getHomeTeamId}}()\ ==\ \textcolor{keyword}{null}\ ||\ request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ad8b1fee30397b829b483a38810620f78}{getAwayTeamId}}()\ ==\ \textcolor{keyword}{null})\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00229}00229\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Both\ Home\ and\ Away\ team\ IDs\ are\ required."{}});}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00230}00230\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00231}00231\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00232}00232\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ae0d058e96aead8c5e0c8b0f275672e0b}{getKickoffTime}}()\ ==\ \textcolor{keyword}{null}\ ||\ request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a0513ea1d2a4b64fa08adf23a5150d849}{getVenue}}()\ ==\ \textcolor{keyword}{null}\ ||\ request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a0513ea1d2a4b64fa08adf23a5150d849}{getVenue}}().isBlank())\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00233}00233\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Kickoff\ time\ and\ Venue\ are\ required."{}});}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00234}00234\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00235}00235\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00236}00236\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ad6b82adc671b3fa0168d78a599aae0db}{getStatus}}()\ ==\ \textcolor{keyword}{null})\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00237}00237\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Match\ status\ is\ required."{}});}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00238}00238\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00239}00239\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00240}00240\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ad6b6a74b0473522315516eebb2450ea6}{getHomeTeamId}}().equals(request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ad8b1fee30397b829b483a38810620f78}{getAwayTeamId}}()))\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00241}00241\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Home\ and\ Away\ teams\ must\ be\ different."{}});}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00242}00242\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00243}00243\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00244}00244\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a2bf00954c7b88b3a1b9036e6d25eac91}{getHomeScore}}()\ !=\ \textcolor{keyword}{null}\ \&\&\ request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a3d9fae02c0b09d26872772a5fdb82a2f}{getAwayScore}}()\ ==\ \textcolor{keyword}{null})\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00245}00245\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Away\ score\ is\ required\ when\ home\ score\ is\ provided."{}});}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00246}00246\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00247}00247\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00248}00248\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a3d9fae02c0b09d26872772a5fdb82a2f}{getAwayScore}}()\ !=\ \textcolor{keyword}{null}\ \&\&\ request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a2bf00954c7b88b3a1b9036e6d25eac91}{getHomeScore}}()\ ==\ \textcolor{keyword}{null})\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00249}00249\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Home\ score\ is\ required\ when\ away\ score\ is\ provided."{}});}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00250}00250\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00251}00251\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00252}00252\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ad6b82adc671b3fa0168d78a599aae0db}{getStatus}}()\ ==\ MatchRequestDTO.MatchStatus.\mbox{\hyperlink{enumcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_1_1MatchStatus_a4ed1c65fafdd9a7989e1f43f139f4fb2}{FINISHED}}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00253}00253\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\&\ (request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a2bf00954c7b88b3a1b9036e6d25eac91}{getHomeScore}}()\ ==\ \textcolor{keyword}{null}\ ||\ request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a3d9fae02c0b09d26872772a5fdb82a2f}{getAwayScore}}()\ ==\ \textcolor{keyword}{null}))\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00254}00254\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Both\ scores\ are\ required\ when\ status\ is\ FINISHED."{}});}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00255}00255\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00256}00256\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00257}00257\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ad6b82adc671b3fa0168d78a599aae0db}{getStatus}}()\ !=\ MatchRequestDTO.MatchStatus.\mbox{\hyperlink{enumcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_1_1MatchStatus_a4ed1c65fafdd9a7989e1f43f139f4fb2}{FINISHED}}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00258}00258\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\&\ (request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a2bf00954c7b88b3a1b9036e6d25eac91}{getHomeScore}}()\ !=\ \textcolor{keyword}{null}\ ||\ request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a3d9fae02c0b09d26872772a5fdb82a2f}{getAwayScore}}()\ !=\ \textcolor{keyword}{null}))\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00259}00259\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Scores\ can\ only\ be\ submitted\ when\ status\ is\ FINISHED."{}});}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00260}00260\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00261}00261\ \ \ \ \ \}\ \textcolor{comment}{//\ <-\/-\/\ ESTA\ ES\ LA\ LLAVE\ QUE\ FALTABA}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00262}00262\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00263}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a2fd28e3d0901517233996dcc4cd94de4}{00263}}\ \ \ \ \ \textcolor{keyword}{public}\ List<Match>\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a2fd28e3d0901517233996dcc4cd94de4}{getAllMatches}}()\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00264}00264\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ matchRepository.findAll();}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00265}00265\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00266}00266\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00267}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a0bb976d48d9d5fdf63fd95f4822b2850}{00267}}\ \ \ \ \ \textcolor{keyword}{public}\ List<Match>\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a0bb976d48d9d5fdf63fd95f4822b2850}{getMatches}}(Long\ teamId,\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO}{MatchRequestDTO}}.\mbox{\hyperlink{enumcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_1_1MatchStatus}{MatchStatus}}\ status,\ Long\ competitionId)\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00268}00268\ \ \ \ \ \ \ \ \ Boolean\ finished\ =\ toFinishedFilter(status);}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00195}00195\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Result\ registered\ for\ match\ "{}}\ +\ \textcolor{keywordtype}{id}\ +\ \textcolor{stringliteral}{"{}:\ "{}}\ +\ leftScore\ +\ \textcolor{stringliteral}{"{}\ -\/\ "{}}\ +\ rightScore;}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00196}00196\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00197}00197\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00198}00198\ \ \ \ \ @Cacheable(cacheNames\ =\ \textcolor{stringliteral}{"{}matchResults"{}})}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00199}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_ad33b25c0df2261d7df5309bb08dc428a}{00199}}\ \ \ \ \ public\ List<MatchResultDTO>\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_ad33b25c0df2261d7df5309bb08dc428a}{getFinishedMatchResults}}()\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00200}00200\ \ \ \ \ \ \ \ \ List<Match>\ matches\ =\ matchRepository.findByFinishedTrueOrderByDatetimeDesc();}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00201}00201\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00202}00202\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ matches.stream()}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00203}00203\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .map(match\ -\/>\ \textcolor{keyword}{new}\ MatchResultDTO(}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00204}00204\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ match.getId(),}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00205}00205\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ match.getLeftTeam().getName(),}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00206}00206\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ match.getRightTeam().getName(),}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00207}00207\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ match.getLeftScore(),}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00208}00208\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ match.getRightScore(),}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00209}00209\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ match.getDatetime()}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00210}00210\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ))}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00211}00211\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .toList();}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00212}00212\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00213}00213\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00214}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_ac098037788db4a971140caba8887c7ba}{00214}}\ \ \ \ \ \textcolor{keyword}{public}\ Optional<MatchRequestDTO>\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_ac098037788db4a971140caba8887c7ba}{getMatchForEdit}}(Long\ \textcolor{keywordtype}{id})\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00215}00215\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (matchRepository\ ==\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00216}00216\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Optional.empty();}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00217}00217\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00218}00218\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00219}00219\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ matchRepository.findById(\textcolor{keywordtype}{id}).map(match\ -\/>\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00220}00220\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO}{MatchRequestDTO}}\ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO}{MatchRequestDTO}}();}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00221}00221\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}.setHomeTeamId(match.getLeftTeam().getId());}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00222}00222\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}.setAwayTeamId(match.getRightTeam().getId());}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00223}00223\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}.setKickoffTime(match.getDatetime().toLocalDateTime());}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00224}00224\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}.setVenue(match.getVenue());\ \textcolor{comment}{//\ Carga\ el\ venue\ real,\ no\ "{}TBD"{}}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00225}00225\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}.setStatus(match.isFinished()}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00226}00226\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ?\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO}{MatchRequestDTO}}.\mbox{\hyperlink{enumcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_1_1MatchStatus}{MatchStatus}}.\mbox{\hyperlink{enumcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_1_1MatchStatus_a4ed1c65fafdd9a7989e1f43f139f4fb2}{FINISHED}}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00227}00227\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO}{MatchRequestDTO}}.\mbox{\hyperlink{enumcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_1_1MatchStatus}{MatchStatus}}.\mbox{\hyperlink{enumcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_1_1MatchStatus_ad240b4a9a77ee407ecff43fb9e0f685c}{SCHEDULED}});}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00228}00228\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}.setHomeScore((\textcolor{keywordtype}{int})\ match.getLeftScore());}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00229}00229\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}.setAwayScore((\textcolor{keywordtype}{int})\ match.getRightScore());}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00230}00230\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}};}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00231}00231\ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00232}00232\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00233}00233\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00234}00234\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ validateMatchUpdate(\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO}{MatchRequestDTO}}\ request)\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00235}00235\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ad6b6a74b0473522315516eebb2450ea6}{getHomeTeamId}}()\ ==\ \textcolor{keyword}{null}\ ||\ request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ad8b1fee30397b829b483a38810620f78}{getAwayTeamId}}()\ ==\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00236}00236\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Both\ Home\ and\ Away\ team\ IDs\ are\ required."{}});}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00237}00237\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00238}00238\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00239}00239\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ae0d058e96aead8c5e0c8b0f275672e0b}{getKickoffTime}}()\ ==\ \textcolor{keyword}{null}\ ||\ request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a0513ea1d2a4b64fa08adf23a5150d849}{getVenue}}()\ ==\ \textcolor{keyword}{null}\ ||\ request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a0513ea1d2a4b64fa08adf23a5150d849}{getVenue}}().isBlank())\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00240}00240\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Kickoff\ time\ and\ Venue\ are\ required."{}});}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00241}00241\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00242}00242\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00243}00243\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ad6b82adc671b3fa0168d78a599aae0db}{getStatus}}()\ ==\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00244}00244\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Match\ status\ is\ required."{}});}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00245}00245\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00246}00246\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00247}00247\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ad6b6a74b0473522315516eebb2450ea6}{getHomeTeamId}}().equals(request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ad8b1fee30397b829b483a38810620f78}{getAwayTeamId}}()))\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00248}00248\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Home\ and\ Away\ teams\ must\ be\ different."{}});}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00249}00249\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00250}00250\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00251}00251\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a2bf00954c7b88b3a1b9036e6d25eac91}{getHomeScore}}()\ !=\ \textcolor{keyword}{null}\ \&\&\ request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a3d9fae02c0b09d26872772a5fdb82a2f}{getAwayScore}}()\ ==\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00252}00252\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Away\ score\ is\ required\ when\ home\ score\ is\ provided."{}});}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00253}00253\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00254}00254\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00255}00255\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a3d9fae02c0b09d26872772a5fdb82a2f}{getAwayScore}}()\ !=\ \textcolor{keyword}{null}\ \&\&\ request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a2bf00954c7b88b3a1b9036e6d25eac91}{getHomeScore}}()\ ==\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00256}00256\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Home\ score\ is\ required\ when\ away\ score\ is\ provided."{}});}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00257}00257\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00258}00258\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00259}00259\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ad6b82adc671b3fa0168d78a599aae0db}{getStatus}}()\ ==\ MatchRequestDTO.MatchStatus.\mbox{\hyperlink{enumcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_1_1MatchStatus_a4ed1c65fafdd9a7989e1f43f139f4fb2}{FINISHED}}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00260}00260\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\&\ (request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a2bf00954c7b88b3a1b9036e6d25eac91}{getHomeScore}}()\ ==\ \textcolor{keyword}{null}\ ||\ request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a3d9fae02c0b09d26872772a5fdb82a2f}{getAwayScore}}()\ ==\ \textcolor{keyword}{null}))\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00261}00261\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Both\ scores\ are\ required\ when\ status\ is\ FINISHED."{}});}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00262}00262\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00263}00263\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00264}00264\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_ad6b82adc671b3fa0168d78a599aae0db}{getStatus}}()\ !=\ MatchRequestDTO.MatchStatus.\mbox{\hyperlink{enumcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_1_1MatchStatus_a4ed1c65fafdd9a7989e1f43f139f4fb2}{FINISHED}}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00265}00265\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\&\ (request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a2bf00954c7b88b3a1b9036e6d25eac91}{getHomeScore}}()\ !=\ \textcolor{keyword}{null}\ ||\ request.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO_a3d9fae02c0b09d26872772a5fdb82a2f}{getAwayScore}}()\ !=\ \textcolor{keyword}{null}))\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00266}00266\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Scores\ can\ only\ be\ submitted\ when\ status\ is\ FINISHED."{}});}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00267}00267\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00268}00268\ \ \ \ \ \}\ }
 \DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00269}00269\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00270}00270\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (teamId\ ==\ \textcolor{keyword}{null}\ \&\&\ finished\ ==\ \textcolor{keyword}{null}\ \&\&\ competitionId\ ==\ \textcolor{keyword}{null})\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00271}00271\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a2fd28e3d0901517233996dcc4cd94de4}{getAllMatches}}();}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00272}00272\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00270}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a2fd28e3d0901517233996dcc4cd94de4}{00270}}\ \ \ \ \ \textcolor{keyword}{public}\ List<Match>\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a2fd28e3d0901517233996dcc4cd94de4}{getAllMatches}}()\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00271}00271\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ matchRepository.findAll();}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00272}00272\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00273}00273\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00274}00274\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ matchRepository.findByFilters(teamId,\ finished,\ competitionId);}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00275}00275\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00276}00276\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00277}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a770134eee6ba9d451c6c125094e58a6d}{00277}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a770134eee6ba9d451c6c125094e58a6d}{getMatchById}}(Long\ \textcolor{keywordtype}{id})\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00278}00278\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ matchRepository.findById(\textcolor{keywordtype}{id})}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00279}00279\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Match\ not\ found\ with\ id:\ "{}}\ +\ \textcolor{keywordtype}{id}));}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00274}00274\ \ \ \ \ @Cacheable(cacheNames\ =\ \textcolor{stringliteral}{"{}upcomingMatches"{}})}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00275}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_ae0e6105522fd2af2ed6ad3b865965869}{00275}}\ \ \ \ \ public\ List<\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}}>\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_ae0e6105522fd2af2ed6ad3b865965869}{getUpcomingMatches}}()\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00276}00276\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ matchRepository.findAll().stream()}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00277}00277\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .filter(match\ -\/>\ !match.isFinished())}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00278}00278\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .sorted((m1,\ m2)\ -\/>\ m1.getDatetime().compareTo(m2.getDatetime()))}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00279}00279\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .toList();}
 \DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00280}00280\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00281}00281\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00282}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a317cc552896456fe5572f34f651e580a}{00282}}\ \ \ \ \ \textcolor{keyword}{public}\ List<MatchGoal>\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a317cc552896456fe5572f34f651e580a}{getGoalsByMatchId}}(Long\ matchId)\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00283}00283\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ matchGoalRepository.findByMatchIdOrderByMinuteAscStoppageMinuteAscIdAsc(matchId);}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00284}00284\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00282}00282\ \ \ \ \ @Cacheable(cacheNames\ =\ \textcolor{stringliteral}{"{}matches"{}},\ key\ =\ \textcolor{stringliteral}{"{}T(java.util.Objects).hash(\#teamId,\ \#status,\ \#competitionId)"{}})}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00283}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a0bb976d48d9d5fdf63fd95f4822b2850}{00283}}\ \ \ \ \ public\ List<\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}}>\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a0bb976d48d9d5fdf63fd95f4822b2850}{getMatches}}(Long\ teamId,\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO}{MatchRequestDTO}}.MatchStatus\ status,\ Long\ competitionId)\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00284}00284\ \ \ \ \ \ \ \ \ Boolean\ finished\ =\ toFinishedFilter(status);}
 \DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00285}00285\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00286}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a63f11b2245ea33304a45fd5fd5be7c02}{00286}}\ \ \ \ \ \textcolor{keyword}{public}\ List<Match>\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a63f11b2245ea33304a45fd5fd5be7c02}{getRecentMatchesByTeamId}}(Long\ teamId)\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00287}00287\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ matchRepository}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00288}00288\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .findByFinishedTrueAndLeftTeamIdOrFinishedTrueAndRightTeamIdOrderByDatetimeDesc(}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00289}00289\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ teamId,}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00290}00290\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ teamId}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00291}00291\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ );}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00292}00292\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00293}00293\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00294}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a4846b07a9e09105fc00a2a9449a2f051}{00294}}\ \ \ \ \ \textcolor{keyword}{public}\ List<Match>\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a4846b07a9e09105fc00a2a9449a2f051}{getFutureMatchesByTeamId}}(Long\ teamId)\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00295}00295\ \ \ \ \ \ \ \ \ OffsetDateTime\ now\ =\ OffsetDateTime.now();}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00296}00296\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00297}00297\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ matchRepository}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00298}00298\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .findByFinishedFalseAndDatetimeAfterAndLeftTeamIdOrFinishedFalseAndDatetimeAfterAndRightTeamIdOrderByDatetimeAsc(}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00299}00299\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ now,}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00300}00300\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ teamId,}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00301}00301\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ now,}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00302}00302\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ teamId}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00303}00303\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ );}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00304}00304\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00305}00305\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00306}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_ae5308e68df3538942e7cb8ca4da2b454}{00306}}\ \ \ \ \ \textcolor{keyword}{public}\ List<Match>\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_ae5308e68df3538942e7cb8ca4da2b454}{getFutureMatchesByFavouriteTeamIds}}(Set<Long>\ favouriteTeamIds)\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00307}00307\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (favouriteTeamIds\ ==\ \textcolor{keyword}{null}\ ||\ favouriteTeamIds.isEmpty())\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00308}00308\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ List.of();}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00309}00309\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00310}00310\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00286}00286\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (teamId\ ==\ \textcolor{keyword}{null}\ \&\&\ finished\ ==\ \textcolor{keyword}{null}\ \&\&\ competitionId\ ==\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00287}00287\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a2fd28e3d0901517233996dcc4cd94de4}{getAllMatches}}();}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00288}00288\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00289}00289\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00290}00290\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ matchRepository.findByFilters(teamId,\ finished,\ competitionId);}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00291}00291\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00292}00292\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00293}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a770134eee6ba9d451c6c125094e58a6d}{00293}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a770134eee6ba9d451c6c125094e58a6d}{getMatchById}}(Long\ \textcolor{keywordtype}{id})\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00294}00294\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ matchRepository.findById(\textcolor{keywordtype}{id})}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00295}00295\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Match\ not\ found\ with\ id:\ "{}}\ +\ \textcolor{keywordtype}{id}));}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00296}00296\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00297}00297\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00298}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a317cc552896456fe5572f34f651e580a}{00298}}\ \ \ \ \ \textcolor{keyword}{public}\ List<MatchGoal>\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a317cc552896456fe5572f34f651e580a}{getGoalsByMatchId}}(Long\ matchId)\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00299}00299\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ matchGoalRepository.findByMatchIdOrderByMinuteAscStoppageMinuteAscIdAsc(matchId);}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00300}00300\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00301}00301\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00302}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a63f11b2245ea33304a45fd5fd5be7c02}{00302}}\ \ \ \ \ \textcolor{keyword}{public}\ List<Match>\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a63f11b2245ea33304a45fd5fd5be7c02}{getRecentMatchesByTeamId}}(Long\ teamId)\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00303}00303\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ matchRepository}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00304}00304\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .findByFinishedTrueAndLeftTeamIdOrFinishedTrueAndRightTeamIdOrderByDatetimeDesc(}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00305}00305\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ teamId,}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00306}00306\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ teamId}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00307}00307\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00308}00308\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00309}00309\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00310}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a4846b07a9e09105fc00a2a9449a2f051}{00310}}\ \ \ \ \ \textcolor{keyword}{public}\ List<Match>\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a4846b07a9e09105fc00a2a9449a2f051}{getFutureMatchesByTeamId}}(Long\ teamId)\ \{}
 \DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00311}00311\ \ \ \ \ \ \ \ \ OffsetDateTime\ now\ =\ OffsetDateTime.now();}
 \DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00312}00312\ }
 \DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00313}00313\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ matchRepository}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00314}00314\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .findByFinishedFalseAndDatetimeAfterAndLeftTeamIdInOrFinishedFalseAndDatetimeAfterAndRightTeamIdInOrderByDatetimeAsc(}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00314}00314\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .findByFinishedFalseAndDatetimeAfterAndLeftTeamIdOrFinishedFalseAndDatetimeAfterAndRightTeamIdOrderByDatetimeAsc(}
 \DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00315}00315\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ now,}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00316}00316\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ favouriteTeamIds,}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00316}00316\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ teamId,}
 \DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00317}00317\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ now,}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00318}00318\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ favouriteTeamIds}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00318}00318\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ teamId}
 \DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00319}00319\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ );}
 \DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00320}00320\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00321}00321\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00322}00322\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Team}{Team}}\ resolveScoringTeam(\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}}\ match,\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO}{MatchResultRequestDTO}}.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO_1_1GoalDTO}{GoalDTO}}\ goalDTO)\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00323}00323\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (goalDTO\ ==\ \textcolor{keyword}{null}\ ||\ goalDTO.getTeamId()\ ==\ \textcolor{keyword}{null}\ ||\ goalDTO.getMinute()\ ==\ \textcolor{keyword}{null})\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00324}00324\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Every\ goal\ must\ include\ team\ ID\ and\ minute."{}});}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00322}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_ae5308e68df3538942e7cb8ca4da2b454}{00322}}\ \ \ \ \ \textcolor{keyword}{public}\ List<Match>\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_ae5308e68df3538942e7cb8ca4da2b454}{getFutureMatchesByFavouriteTeamIds}}(Set<Long>\ favouriteTeamIds)\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00323}00323\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (favouriteTeamIds\ ==\ \textcolor{keyword}{null}\ ||\ favouriteTeamIds.isEmpty())\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00324}00324\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ List.of();}
 \DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00325}00325\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00326}00326\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00327}00327\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (goalDTO.getMinute()\ <\ 1\ ||\ goalDTO.getMinute()\ >\ 120)\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00328}00328\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Goal\ minute\ must\ be\ between\ 1\ and\ 120."{}});}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00329}00329\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00330}00330\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00331}00331\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (goalDTO.getStoppageMinute()\ !=\ \textcolor{keyword}{null}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00332}00332\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\&\ (goalDTO.getStoppageMinute()\ <\ 0\ ||\ goalDTO.getStoppageMinute()\ >\ 30))\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00333}00333\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Stoppage\ minute\ must\ be\ between\ 0\ and\ 30."{}});}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00334}00334\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00335}00335\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00336}00336\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (Objects.equals(goalDTO.getTeamId(),\ match.getLeftTeam().getId()))\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00337}00337\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ match.getLeftTeam();}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00338}00338\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00339}00339\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00340}00340\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (Objects.equals(goalDTO.getTeamId(),\ match.getRightTeam().getId()))\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00341}00341\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ match.getRightTeam();}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00342}00342\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00343}00343\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00344}00344\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Scoring\ team\ must\ belong\ to\ the\ match."{}});}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00345}00345\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00327}00327\ \ \ \ \ \ \ \ \ OffsetDateTime\ now\ =\ OffsetDateTime.now();}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00328}00328\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00329}00329\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ matchRepository}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00330}00330\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .findByFinishedFalseAndDatetimeAfterAndLeftTeamIdInOrFinishedFalseAndDatetimeAfterAndRightTeamIdInOrderByDatetimeAsc(}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00331}00331\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ now,}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00332}00332\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ favouriteTeamIds,}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00333}00333\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ now,}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00334}00334\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ favouriteTeamIds}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00335}00335\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00336}00336\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00337}00337\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00338}00338\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Team}{Team}}\ resolveScoringTeam(\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}}\ match,\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO}{MatchResultRequestDTO}}.\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchResultRequestDTO_1_1GoalDTO}{GoalDTO}}\ goalDTO)\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00339}00339\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (goalDTO\ ==\ \textcolor{keyword}{null}\ ||\ goalDTO.getTeamId()\ ==\ \textcolor{keyword}{null}\ ||\ goalDTO.getMinute()\ ==\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00340}00340\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Every\ goal\ must\ include\ team\ ID\ and\ minute."{}});}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00341}00341\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00342}00342\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00343}00343\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (goalDTO.getMinute()\ <\ 1\ ||\ goalDTO.getMinute()\ >\ 120)\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00344}00344\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Goal\ minute\ must\ be\ between\ 1\ and\ 120."{}});}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00345}00345\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00346}00346\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00347}00347\ \ \ \ \ \textcolor{keyword}{private}\ Short\ toShort(Integer\ value)\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00348}00348\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ value\ ==\ \textcolor{keyword}{null}\ ?\ null\ :\ value.shortValue();}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00349}00349\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00350}00350\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00351}00351\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{short}\ toShortScore(Integer\ score)\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00352}00352\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (score\ ==\ \textcolor{keyword}{null})\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00353}00353\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00347}00347\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (goalDTO.getStoppageMinute()\ !=\ \textcolor{keyword}{null}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00348}00348\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\&\ (goalDTO.getStoppageMinute()\ <\ 0\ ||\ goalDTO.getStoppageMinute()\ >\ 30))\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00349}00349\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Stoppage\ minute\ must\ be\ between\ 0\ and\ 30."{}});}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00350}00350\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00351}00351\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00352}00352\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (Objects.equals(goalDTO.getTeamId(),\ match.getLeftTeam().getId()))\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00353}00353\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ match.getLeftTeam();}
 \DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00354}00354\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00355}00355\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00356}00356\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (score\ <\ 0\ ||\ score\ >\ Short.MAX\_VALUE)\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00357}00357\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Score\ must\ be\ a\ positive\ number."{}});}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00356}00356\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (Objects.equals(goalDTO.getTeamId(),\ match.getRightTeam().getId()))\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00357}00357\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ match.getRightTeam();}
 \DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00358}00358\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00359}00359\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00360}00360\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ score.shortValue();}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00360}00360\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Scoring\ team\ must\ belong\ to\ the\ match."{}});}
 \DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00361}00361\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00362}00362\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00363}00363\ \ \ \ \ \textcolor{keyword}{private}\ Boolean\ toFinishedFilter(MatchRequestDTO.MatchStatus\ status)\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00364}00364\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (status\ ==\ \textcolor{keyword}{null})\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00365}00365\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{null};}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00366}00366\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00367}00367\ }
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00368}00368\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keywordflow}{switch}\ (status)\ \{}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00369}00369\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ FINISHED\ -\/>\ \textcolor{keyword}{true};}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00370}00370\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ SCHEDULED\ -\/>\ \textcolor{keyword}{false};}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00371}00371\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}\ -\/>\ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Match\ status\ filter\ must\ be\ FINISHED\ or\ SCHEDULED."{}});}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00372}00372\ \ \ \ \ \ \ \ \ \};}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00373}00373\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00374}00374\ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00363}00363\ \ \ \ \ \textcolor{keyword}{private}\ Short\ toShort(Integer\ value)\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00364}00364\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ value\ ==\ \textcolor{keyword}{null}\ ?\ null\ :\ value.shortValue();}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00365}00365\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00366}00366\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00367}00367\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{short}\ toShortScore(Integer\ score)\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00368}00368\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (score\ ==\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00369}00369\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00370}00370\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00371}00371\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00372}00372\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (score\ <\ 0\ ||\ score\ >\ Short.MAX\_VALUE)\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00373}00373\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Score\ must\ be\ a\ positive\ number."{}});}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00374}00374\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00375}00375\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00376}00376\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ score.shortValue();}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00377}00377\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00378}00378\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00379}00379\ \ \ \ \ \textcolor{keyword}{private}\ Boolean\ toFinishedFilter(MatchRequestDTO.MatchStatus\ status)\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00380}00380\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (status\ ==\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00381}00381\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00382}00382\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00383}00383\ }
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00384}00384\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keywordflow}{switch}\ (status)\ \{}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00385}00385\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ FINISHED\ -\/>\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00386}00386\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ SCHEDULED\ -\/>\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00387}00387\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}\ -\/>\ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Validation\ Error:\ Match\ status\ filter\ must\ be\ FINISHED\ or\ SCHEDULED."{}});}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00388}00388\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00389}00389\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatchService_8java_source_l00390}00390\ \}}
 
 \end{DoxyCode}

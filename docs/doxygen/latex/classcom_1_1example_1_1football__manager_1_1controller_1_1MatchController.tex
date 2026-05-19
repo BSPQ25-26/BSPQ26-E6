@@ -5,6 +5,8 @@
 \item 
 Response\+Entity$<$ List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}} $>$ $>$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchController_afd91ad50df56e045893f7360bc7a6dc5}{get\+Matches}} ( @Request\+Param(required=false) Long team\+Id, @Request\+Param(required=false) Match\+Request\+DTO.\+Match\+Status status, @Request\+Param(required=false) Long competition\+Id)
 \item 
+Response\+Entity$<$ List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}} $>$ $>$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchController_a49f40c7feeed477a2b1ae13ed8674dd5}{get\+Upcoming\+Matches}} ()
+\item 
 Response\+Entity$<$ String $>$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchController_aff8b88b8f717b307206c271b99413a24}{create\+Match\+From\+Json}} (@Valid @Request\+Body \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO}{Match\+Request\+DTO}} match\+DTO)
 \item 
 Response\+Entity$<$ String $>$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchController_a9a7ac9ab22f6f929054a772c0f59a0ea}{create\+Match\+From\+Form}} (@Valid @Model\+Attribute \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1MatchRequestDTO}{Match\+Request\+DTO}} match\+DTO)
@@ -35,7 +37,7 @@ Response\+Entity$<$ String $>$ com.\+example.\+football\+\_\+manager.\+controlle
 
 
 
-Definition at line \mbox{\hyperlink{MatchController_8java_source_l00084}{84}} of file \mbox{\hyperlink{MatchController_8java_source}{Match\+Controller.\+java}}.
+Definition at line \mbox{\hyperlink{MatchController_8java_source_l00093}{93}} of file \mbox{\hyperlink{MatchController_8java_source}{Match\+Controller.\+java}}.
 
 \Hypertarget{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchController_aff8b88b8f717b307206c271b99413a24}\index{com.example.football\_manager.controller.MatchController@{com.example.football\_manager.controller.MatchController}!createMatchFromJson@{createMatchFromJson}}
 \index{createMatchFromJson@{createMatchFromJson}!com.example.football\_manager.controller.MatchController@{com.example.football\_manager.controller.MatchController}}
@@ -45,7 +47,7 @@ Response\+Entity$<$ String $>$ com.\+example.\+football\+\_\+manager.\+controlle
 
 
 
-Definition at line \mbox{\hyperlink{MatchController_8java_source_l00066}{66}} of file \mbox{\hyperlink{MatchController_8java_source}{Match\+Controller.\+java}}.
+Definition at line \mbox{\hyperlink{MatchController_8java_source_l00075}{75}} of file \mbox{\hyperlink{MatchController_8java_source}{Match\+Controller.\+java}}.
 
 \Hypertarget{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchController_a79c52a0144e633e8c8767323da58a809}\index{com.example.football\_manager.controller.MatchController@{com.example.football\_manager.controller.MatchController}!deleteMatch@{deleteMatch}}
 \index{deleteMatch@{deleteMatch}!com.example.football\_manager.controller.MatchController@{com.example.football\_manager.controller.MatchController}}
@@ -55,7 +57,7 @@ Response\+Entity$<$ String $>$ com.\+example.\+football\+\_\+manager.\+controlle
 
 
 
-Definition at line \mbox{\hyperlink{MatchController_8java_source_l00141}{141}} of file \mbox{\hyperlink{MatchController_8java_source}{Match\+Controller.\+java}}.
+Definition at line \mbox{\hyperlink{MatchController_8java_source_l00150}{150}} of file \mbox{\hyperlink{MatchController_8java_source}{Match\+Controller.\+java}}.
 
 \Hypertarget{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchController_afd91ad50df56e045893f7360bc7a6dc5}\index{com.example.football\_manager.controller.MatchController@{com.example.football\_manager.controller.MatchController}!getMatches@{getMatches}}
 \index{getMatches@{getMatches}!com.example.football\_manager.controller.MatchController@{com.example.football\_manager.controller.MatchController}}
@@ -75,7 +77,25 @@ Response\+Entity$<$ List$<$ Match\+Result\+DTO $>$ $>$ com.\+example.\+football\
 
 
 
-Definition at line \mbox{\hyperlink{MatchController_8java_source_l00105}{105}} of file \mbox{\hyperlink{MatchController_8java_source}{Match\+Controller.\+java}}.
+Definition at line \mbox{\hyperlink{MatchController_8java_source_l00114}{114}} of file \mbox{\hyperlink{MatchController_8java_source}{Match\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchController_a49f40c7feeed477a2b1ae13ed8674dd5}\index{com.example.football\_manager.controller.MatchController@{com.example.football\_manager.controller.MatchController}!getUpcomingMatches@{getUpcomingMatches}}
+\index{getUpcomingMatches@{getUpcomingMatches}!com.example.football\_manager.controller.MatchController@{com.example.football\_manager.controller.MatchController}}
+\doxysubsubsection{\texorpdfstring{getUpcomingMatches()}{getUpcomingMatches()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchController_a49f40c7feeed477a2b1ae13ed8674dd5} 
+Response\+Entity$<$ List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}} $>$ $>$ com.\+example.\+football\+\_\+manager.\+controller.\+Match\+Controller.\+get\+Upcoming\+Matches (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{MatchController_8java_source_l00057}{57}} of file \mbox{\hyperlink{MatchController_8java_source}{Match\+Controller.\+java}}.
+
+
+
+References \mbox{\hyperlink{MatchController_8java_source_l00057}{get\+Upcoming\+Matches()}}.
+
+
+
+Referenced by \mbox{\hyperlink{MatchController_8java_source_l00057}{get\+Upcoming\+Matches()}}.
 
 \Hypertarget{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchController_ad4811d08ad205fbf02c888876c4cceec}\index{com.example.football\_manager.controller.MatchController@{com.example.football\_manager.controller.MatchController}!registerResult@{registerResult}}
 \index{registerResult@{registerResult}!com.example.football\_manager.controller.MatchController@{com.example.football\_manager.controller.MatchController}}
@@ -85,7 +105,7 @@ Response\+Entity$<$ String $>$ com.\+example.\+football\+\_\+manager.\+controlle
 
 
 
-Definition at line \mbox{\hyperlink{MatchController_8java_source_l00163}{163}} of file \mbox{\hyperlink{MatchController_8java_source}{Match\+Controller.\+java}}.
+Definition at line \mbox{\hyperlink{MatchController_8java_source_l00172}{172}} of file \mbox{\hyperlink{MatchController_8java_source}{Match\+Controller.\+java}}.
 
 \Hypertarget{classcom_1_1example_1_1football__manager_1_1controller_1_1MatchController_ae7c7daa4e1b8e97e71f9b4099ea641aa}\index{com.example.football\_manager.controller.MatchController@{com.example.football\_manager.controller.MatchController}!updateMatch@{updateMatch}}
 \index{updateMatch@{updateMatch}!com.example.football\_manager.controller.MatchController@{com.example.football\_manager.controller.MatchController}}
@@ -95,7 +115,7 @@ Response\+Entity$<$ String $>$ com.\+example.\+football\+\_\+manager.\+controlle
 
 
 
-Definition at line \mbox{\hyperlink{MatchController_8java_source_l00124}{124}} of file \mbox{\hyperlink{MatchController_8java_source}{Match\+Controller.\+java}}.
+Definition at line \mbox{\hyperlink{MatchController_8java_source_l00133}{133}} of file \mbox{\hyperlink{MatchController_8java_source}{Match\+Controller.\+java}}.
 
 
 

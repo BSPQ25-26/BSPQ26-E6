@@ -13,66 +13,72 @@
 \DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00009}00009\ \textcolor{keyword}{import}\ java.util.List;}
 \DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00010}00010\ \textcolor{keyword}{import}\ java.util.Optional;}
 \DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00011}00011\ }
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00012}00012\ \textcolor{keyword}{import}\ org.springframework.stereotype.Service;}
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00013}00013\ }
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00014}00014\ @Service}
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00015}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1TeamService}{00015}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1TeamService_a5f25cbc9330b1cdeba55691a9ad0b0f2}{TeamService}}\ \{}
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00016}00016\ }
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00017}00017\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1TeamRepository}{TeamRepository}}\ teamRepository;}
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00018}00018\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1CountryRepository}{CountryRepository}}\ countryRepository;}
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00019}00019\ }
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00020}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1TeamService_a5f25cbc9330b1cdeba55691a9ad0b0f2}{00020}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1TeamService_a5f25cbc9330b1cdeba55691a9ad0b0f2}{TeamService}}(\mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1TeamRepository}{TeamRepository}}\ teamRepository,\ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1CountryRepository}{CountryRepository}}\ countryRepository)\ \{}
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00021}00021\ \ \ \ \ \ \ \ \ this.teamRepository\ =\ teamRepository;}
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00022}00022\ \ \ \ \ \ \ \ \ this.countryRepository\ =\ countryRepository;}
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00023}00023\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00024}00024\ }
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00025}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1TeamService_abb49a24ce1fa9fc8699fe614c1288b47}{00025}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Team}{Team}}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1TeamService_abb49a24ce1fa9fc8699fe614c1288b47}{createTeam}}(\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1TeamRequestDTO}{TeamRequestDTO}}\ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}})\ \{}
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00026}00026\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Country}{Country}}\ country\ =\ countryRepository.findById(\mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}.getCountryId())}
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ RuntimeException(\textcolor{stringliteral}{"{}Country\ not\ found\ with\ id:\ "{}}\ +\ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}.getCountryId()));}
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00028}00028\ }
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00029}00029\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Team}{Team}}\ team\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Team}{Team}}();}
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00030}00030\ \ \ \ \ \ \ \ \ team.setName(\mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}.getName().trim());}
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00031}00031\ \ \ \ \ \ \ \ \ team.setLogoUrl(\mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}.getLogoUrl().trim());}
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00032}00032\ \ \ \ \ \ \ \ \ team.setCountry(country);}
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00033}00033\ }
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00034}00034\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ teamRepository.save(team);}
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00035}00035\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00012}00012\ \textcolor{keyword}{import}\ org.springframework.cache.annotation.Cacheable;}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00013}00013\ \textcolor{keyword}{import}\ org.springframework.cache.annotation.CacheEvict;}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00014}00014\ \textcolor{keyword}{import}\ org.springframework.stereotype.Service;}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00016}00016\ @Service}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00017}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1TeamService}{00017}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1TeamService_a5f25cbc9330b1cdeba55691a9ad0b0f2}{TeamService}}\ \{}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00019}00019\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1TeamRepository}{TeamRepository}}\ teamRepository;}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00020}00020\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1CountryRepository}{CountryRepository}}\ countryRepository;}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00022}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1TeamService_a5f25cbc9330b1cdeba55691a9ad0b0f2}{00022}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1TeamService_a5f25cbc9330b1cdeba55691a9ad0b0f2}{TeamService}}(\mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1TeamRepository}{TeamRepository}}\ teamRepository,\ \mbox{\hyperlink{interfacecom_1_1example_1_1football__manager_1_1repository_1_1CountryRepository}{CountryRepository}}\ countryRepository)\ \{}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00023}00023\ \ \ \ \ \ \ \ \ this.teamRepository\ =\ teamRepository;}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00024}00024\ \ \ \ \ \ \ \ \ this.countryRepository\ =\ countryRepository;}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00025}00025\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00027}00027\ \ \ \ \ @CacheEvict(cacheNames\ =\ \textcolor{stringliteral}{"{}teams"{}},\ allEntries\ =\ \textcolor{keyword}{true})}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00028}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1TeamService_abb49a24ce1fa9fc8699fe614c1288b47}{00028}}\ \ \ \ \ public\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Team}{Team}}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1TeamService_abb49a24ce1fa9fc8699fe614c1288b47}{createTeam}}(\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1TeamRequestDTO}{TeamRequestDTO}}\ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}})\ \{}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00029}00029\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Country}{Country}}\ country\ =\ countryRepository.findById(\mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}.getCountryId())}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ RuntimeException(\textcolor{stringliteral}{"{}Country\ not\ found\ with\ id:\ "{}}\ +\ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}.getCountryId()));}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00032}00032\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Team}{Team}}\ team\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Team}{Team}}();}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00033}00033\ \ \ \ \ \ \ \ \ team.setName(\mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}.getName().trim());}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00034}00034\ \ \ \ \ \ \ \ \ team.setLogoUrl(\mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}.getLogoUrl().trim());}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00035}00035\ \ \ \ \ \ \ \ \ team.setCountry(country);}
 \DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00036}00036\ }
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00037}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1TeamService_a2fdfa2c64d52be9b673688b6d93b327f}{00037}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Team}{Team}}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1TeamService_a2fdfa2c64d52be9b673688b6d93b327f}{updateTeam}}(Long\ \textcolor{keywordtype}{id},\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1TeamRequestDTO}{TeamRequestDTO}}\ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}})\ \{}
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00038}00038\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Team}{Team}}\ existingTeam\ =\ teamRepository.findById(\textcolor{keywordtype}{id})}
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ RuntimeException(\textcolor{stringliteral}{"{}Team\ not\ found\ with\ id:\ "{}}\ +\ \textcolor{keywordtype}{id}));}
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00040}00040\ }
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00041}00041\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Country}{Country}}\ country\ =\ countryRepository.findById(\mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}.getCountryId())}
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ RuntimeException(\textcolor{stringliteral}{"{}Country\ not\ found\ with\ id:\ "{}}\ +\ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}.getCountryId()));}
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00043}00043\ }
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00044}00044\ \ \ \ \ \ \ \ \ existingTeam.setName(\mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}.getName().trim());}
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00045}00045\ \ \ \ \ \ \ \ \ existingTeam.setLogoUrl(\mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}.getLogoUrl().trim());}
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00046}00046\ \ \ \ \ \ \ \ \ existingTeam.setCountry(country);}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00037}00037\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ teamRepository.save(team);}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00038}00038\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00040}00040\ \ \ \ \ @CacheEvict(cacheNames\ =\ \textcolor{stringliteral}{"{}teams"{}},\ allEntries\ =\ \textcolor{keyword}{true})}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00041}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1TeamService_a2fdfa2c64d52be9b673688b6d93b327f}{00041}}\ \ \ \ \ public\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Team}{Team}}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1TeamService_a2fdfa2c64d52be9b673688b6d93b327f}{updateTeam}}(Long\ \textcolor{keywordtype}{id},\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1TeamRequestDTO}{TeamRequestDTO}}\ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}})\ \{}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00042}00042\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Team}{Team}}\ existingTeam\ =\ teamRepository.findById(\textcolor{keywordtype}{id})}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ RuntimeException(\textcolor{stringliteral}{"{}Team\ not\ found\ with\ id:\ "{}}\ +\ \textcolor{keywordtype}{id}));}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00045}00045\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Country}{Country}}\ country\ =\ countryRepository.findById(\mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}.getCountryId())}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ RuntimeException(\textcolor{stringliteral}{"{}Country\ not\ found\ with\ id:\ "{}}\ +\ \mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}.getCountryId()));}
 \DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00047}00047\ }
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00048}00048\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ teamRepository.save(existingTeam);}
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00049}00049\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00050}00050\ }
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00051}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1TeamService_a20b577cc514fa9dd770d2bf19d9cf714}{00051}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1TeamService_a20b577cc514fa9dd770d2bf19d9cf714}{deleteTeam}}(Long\ \textcolor{keywordtype}{id})\ \{}
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00052}00052\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Team}{Team}}\ existingTeam\ =\ teamRepository.findById(\textcolor{keywordtype}{id})}
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ RuntimeException(\textcolor{stringliteral}{"{}Team\ not\ found\ with\ id:\ "{}}\ +\ \textcolor{keywordtype}{id}));}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00048}00048\ \ \ \ \ \ \ \ \ existingTeam.setName(\mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}.getName().trim());}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00049}00049\ \ \ \ \ \ \ \ \ existingTeam.setLogoUrl(\mbox{\hyperlink{namespacecom_1_1example_1_1football__manager_1_1dto}{dto}}.getLogoUrl().trim());}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00050}00050\ \ \ \ \ \ \ \ \ existingTeam.setCountry(country);}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00052}00052\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ teamRepository.save(existingTeam);}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00053}00053\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00054}00054\ }
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00055}00055\ \ \ \ \ \ \ \ \ teamRepository.delete(existingTeam);}
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00056}00056\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00057}00057\ }
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00058}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1TeamService_abaf8a63b38d209cb1980769c3a124af5}{00058}}\ \ \ \ \ \textcolor{keyword}{public}\ Optional<Team>\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1TeamService_abaf8a63b38d209cb1980769c3a124af5}{getTeamById}}(Long\ \textcolor{keywordtype}{id})\ \{}
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00059}00059\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ teamRepository.findById(\textcolor{keywordtype}{id});}
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00060}00060\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00061}00061\ }
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00062}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1TeamService_a596fd86d0bdd3cd4df878db107766bc9}{00062}}\ \ \ \ \ \textcolor{keyword}{public}\ List<Team>\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1TeamService_a596fd86d0bdd3cd4df878db107766bc9}{getTeamsContainingName}}(String\ name)\ \{}
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00063}00063\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (name\ ==\ \textcolor{keyword}{null}\ ||\ name.trim().isEmpty())\ \{}
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ List.of();}
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00065}00065\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00066}00066\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ teamRepository.findByNameContainingIgnoreCase(name.trim());}
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00067}00067\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00068}00068\ }
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00069}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1TeamService_ab45119fcfd2632aa8bf728e2f0df2aa6}{00069}}\ \ \ \ \ \textcolor{keyword}{public}\ List<Team>\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1TeamService_ab45119fcfd2632aa8bf728e2f0df2aa6}{getAllTeams}}()\ \{}
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00070}00070\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ teamRepository.findAll();}
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00071}00071\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00072}00072\ \}}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00055}00055\ \ \ \ \ @CacheEvict(cacheNames\ =\ \textcolor{stringliteral}{"{}teams"{}},\ allEntries\ =\ \textcolor{keyword}{true})}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00056}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1TeamService_a20b577cc514fa9dd770d2bf19d9cf714}{00056}}\ \ \ \ \ public\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1TeamService_a20b577cc514fa9dd770d2bf19d9cf714}{deleteTeam}}(Long\ \textcolor{keywordtype}{id})\ \{}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00057}00057\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Team}{Team}}\ existingTeam\ =\ teamRepository.findById(\textcolor{keywordtype}{id})}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .orElseThrow(()\ -\/>\ \textcolor{keyword}{new}\ RuntimeException(\textcolor{stringliteral}{"{}Team\ not\ found\ with\ id:\ "{}}\ +\ \textcolor{keywordtype}{id}));}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00060}00060\ \ \ \ \ \ \ \ \ teamRepository.delete(existingTeam);}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00061}00061\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00063}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1TeamService_abaf8a63b38d209cb1980769c3a124af5}{00063}}\ \ \ \ \ \textcolor{keyword}{public}\ Optional<Team>\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1TeamService_abaf8a63b38d209cb1980769c3a124af5}{getTeamById}}(Long\ \textcolor{keywordtype}{id})\ \{}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00064}00064\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ teamRepository.findById(\textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00065}00065\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00067}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1TeamService_a596fd86d0bdd3cd4df878db107766bc9}{00067}}\ \ \ \ \ \textcolor{keyword}{public}\ List<Team>\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1TeamService_a596fd86d0bdd3cd4df878db107766bc9}{getTeamsContainingName}}(String\ name)\ \{}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00068}00068\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (name\ ==\ \textcolor{keyword}{null}\ ||\ name.trim().isEmpty())\ \{}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ List.of();}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00070}00070\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00071}00071\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ teamRepository.findByNameContainingIgnoreCase(name.trim());}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00072}00072\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00074}00074\ \ \ \ \ @Cacheable(cacheNames\ =\ \textcolor{stringliteral}{"{}teams"{}})}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00075}\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1TeamService_ab45119fcfd2632aa8bf728e2f0df2aa6}{00075}}\ \ \ \ \ public\ List<\mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Team}{Team}}>\ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1TeamService_ab45119fcfd2632aa8bf728e2f0df2aa6}{getAllTeams}}()\ \{}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00076}00076\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ teamRepository.findAll();}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00077}00077\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{TeamService_8java_source_l00078}00078\ \}}
 
 \end{DoxyCode}

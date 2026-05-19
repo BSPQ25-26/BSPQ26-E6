@@ -110,6 +110,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ab1797659de1049ec02af6dfdf919f32c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a63ebdd4f1955fe4e0b5e0f2549604fc2" id="r_a63ebdd4f1955fe4e0b5e0f2549604fc2"><td class="memItemLeft" align="right" valign="top">ResponseEntity&lt;?&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a63ebdd4f1955fe4e0b5e0f2549604fc2">createPlayer</a> ( @PathVariable Long teamId, @Valid @RequestBody <a class="el" href="classcom_1_1example_1_1football__manager_1_1dto_1_1PlayerRequestDTO.html">PlayerRequestDTO</a> dto)</td></tr>
 <tr class="separator:a63ebdd4f1955fe4e0b5e0f2549604fc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ea237862f0af79402d51f4a3ad4bc64" id="r_a7ea237862f0af79402d51f4a3ad4bc64"><td class="memItemLeft" align="right" valign="top">ResponseEntity&lt;?&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7ea237862f0af79402d51f4a3ad4bc64">createPlayers</a> ( @PathVariable Long teamId, @Valid @RequestBody <a class="el" href="classcom_1_1example_1_1football__manager_1_1dto_1_1PlayerBulkRequestDTO.html">PlayerBulkRequestDTO</a> dto)</td></tr>
+<tr class="separator:a7ea237862f0af79402d51f4a3ad4bc64"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2810cca7a2d5ed3dd9faec02af138666" id="r_a2810cca7a2d5ed3dd9faec02af138666"><td class="memItemLeft" align="right" valign="top">ResponseEntity&lt;?&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2810cca7a2d5ed3dd9faec02af138666">getPlayersByTeamId</a> (@PathVariable Long teamId)</td></tr>
 <tr class="separator:a2810cca7a2d5ed3dd9faec02af138666"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa2f1a043442e42f8bf09f5b5ff00bb38" id="r_aa2f1a043442e42f8bf09f5b5ff00bb38"><td class="memItemLeft" align="right" valign="top">ResponseEntity&lt;?&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa2f1a043442e42f8bf09f5b5ff00bb38">updatePlayer</a> ( @PathVariable Long teamId, @PathVariable Long playerId, @Valid @RequestBody <a class="el" href="classcom_1_1example_1_1football__manager_1_1dto_1_1PlayerRequestDTO.html">PlayerRequestDTO</a> dto)</td></tr>
@@ -119,7 +121,7 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="PlayerController_8java_source.html#l00022">22</a> of file <a class="el" href="PlayerController_8java_source.html">PlayerController.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PlayerController_8java_source.html#l00023">23</a> of file <a class="el" href="PlayerController_8java_source.html">PlayerController.java</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ab1797659de1049ec02af6dfdf919f32c" name="ab1797659de1049ec02af6dfdf919f32c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab1797659de1049ec02af6dfdf919f32c">&#9670;&#160;</a></span>PlayerController()</h2>
@@ -136,7 +138,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PlayerController_8java_source.html#l00026">26</a> of file <a class="el" href="PlayerController_8java_source.html">PlayerController.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PlayerController_8java_source.html#l00027">27</a> of file <a class="el" href="PlayerController_8java_source.html">PlayerController.java</a>.</p>
 
 </div>
 </div>
@@ -160,7 +162,30 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PlayerController_8java_source.html#l00039">39</a> of file <a class="el" href="PlayerController_8java_source.html">PlayerController.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PlayerController_8java_source.html#l00040">40</a> of file <a class="el" href="PlayerController_8java_source.html">PlayerController.java</a>.</p>
+
+</div>
+</div>
+<a id="a7ea237862f0af79402d51f4a3ad4bc64" name="a7ea237862f0af79402d51f4a3ad4bc64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ea237862f0af79402d51f4a3ad4bc64">&#9670;&#160;</a></span>createPlayers()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ResponseEntity&lt;?&gt; com.example.football_manager.controller.PlayerController.createPlayers </td>
+          <td>(</td>
+          <td class="paramtype">@PathVariable Long</td>          <td class="paramname"><span class="paramname"><em>teamId</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">@Valid @RequestBody <a class="el" href="classcom_1_1example_1_1football__manager_1_1dto_1_1PlayerBulkRequestDTO.html">PlayerBulkRequestDTO</a></td>          <td class="paramname"><span class="paramname"><em>dto</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="PlayerController_8java_source.html#l00060">60</a> of file <a class="el" href="PlayerController_8java_source.html">PlayerController.java</a>.</p>
 
 </div>
 </div>
@@ -183,7 +208,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PlayerController_8java_source.html#l00098">98</a> of file <a class="el" href="PlayerController_8java_source.html">PlayerController.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PlayerController_8java_source.html#l00119">119</a> of file <a class="el" href="PlayerController_8java_source.html">PlayerController.java</a>.</p>
 
 </div>
 </div>
@@ -202,7 +227,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PlayerController_8java_source.html#l00059">59</a> of file <a class="el" href="PlayerController_8java_source.html">PlayerController.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PlayerController_8java_source.html#l00080">80</a> of file <a class="el" href="PlayerController_8java_source.html">PlayerController.java</a>.</p>
 
 </div>
 </div>
@@ -230,7 +255,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PlayerController_8java_source.html#l00077">77</a> of file <a class="el" href="PlayerController_8java_source.html">PlayerController.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PlayerController_8java_source.html#l00098">98</a> of file <a class="el" href="PlayerController_8java_source.html">PlayerController.java</a>.</p>
 
 </div>
 </div>

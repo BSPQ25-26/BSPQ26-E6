@@ -9,10 +9,13 @@ var dir_8b58963b26ff80c4d245858eaf33ec0a =
     [ "CompetitionController.java", "CompetitionController_8java.html", "CompetitionController_8java" ],
     [ "CountryController.java", "CountryController_8java.html", "CountryController_8java" ],
     [ "FavouriteTeamController.java", "FavouriteTeamController_8java.html", "FavouriteTeamController_8java" ],
+    [ "GlobalModelAttributes.java", "GlobalModelAttributes_8java.html", "GlobalModelAttributes_8java" ],
     [ "MatchController.java", "MatchController_8java.html", "MatchController_8java" ],
     [ "MatchViewController.java", "MatchViewController_8java.html", "MatchViewController_8java" ],
     [ "PlayerController.java", "PlayerController_8java.html", "PlayerController_8java" ],
     [ "ProfileViewController.java", "ProfileViewController_8java.html", "ProfileViewController_8java" ],
+    [ "StandingsController.java", "StandingsController_8java.html", "StandingsController_8java" ],
+    [ "StandingsViewController.java", "StandingsViewController_8java.html", "StandingsViewController_8java" ],
     [ "TeamController.java", "TeamController_8java.html", "TeamController_8java" ],
     [ "TeamViewController.java", "TeamViewController_8java.html", "TeamViewController_8java" ]
 ];

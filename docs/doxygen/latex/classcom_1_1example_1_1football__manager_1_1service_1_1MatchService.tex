@@ -19,6 +19,8 @@ Optional$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1
 \item 
 List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}} $>$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a2fd28e3d0901517233996dcc4cd94de4}{get\+All\+Matches}} ()
 \item 
+List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}} $>$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_ae0e6105522fd2af2ed6ad3b865965869}{get\+Upcoming\+Matches}} ()
+\item 
 List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}} $>$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a0bb976d48d9d5fdf63fd95f4822b2850}{get\+Matches}} (Long team\+Id, Match\+Request\+DTO.\+Match\+Status status, Long competition\+Id)
 \item 
 \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}} \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a770134eee6ba9d451c6c125094e58a6d}{get\+Match\+By\+Id}} (Long id)
@@ -36,7 +38,7 @@ List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Ma
 \doxysubsection{Detailed Description}
 
 
-Definition at line \mbox{\hyperlink{MatchService_8java_source_l00027}{27}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
+Definition at line \mbox{\hyperlink{MatchService_8java_source_l00029}{29}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
 
 
 
@@ -49,7 +51,7 @@ com.\+example.\+football\+\_\+manager.\+service.\+Match\+Service.\+Match\+Servic
 
 
 
-Definition at line \mbox{\hyperlink{MatchService_8java_source_l00035}{35}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
+Definition at line \mbox{\hyperlink{MatchService_8java_source_l00037}{37}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
 
 
 
@@ -62,7 +64,7 @@ String com.\+example.\+football\+\_\+manager.\+service.\+Match\+Service.\+create
 
 
 
-Definition at line \mbox{\hyperlink{MatchService_8java_source_l00048}{48}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
+Definition at line \mbox{\hyperlink{MatchService_8java_source_l00051}{51}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
 
 
 
@@ -76,7 +78,7 @@ String com.\+example.\+football\+\_\+manager.\+service.\+Match\+Service.\+delete
 
 
 
-Definition at line \mbox{\hyperlink{MatchService_8java_source_l00141}{141}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
+Definition at line \mbox{\hyperlink{MatchService_8java_source_l00146}{146}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
 
 \Hypertarget{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a2fd28e3d0901517233996dcc4cd94de4}\index{com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}!getAllMatches@{getAllMatches}}
 \index{getAllMatches@{getAllMatches}!com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}}
@@ -86,11 +88,11 @@ List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Ma
 
 
 
-Definition at line \mbox{\hyperlink{MatchService_8java_source_l00263}{263}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
+Definition at line \mbox{\hyperlink{MatchService_8java_source_l00270}{270}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
 
 
 
-Referenced by \mbox{\hyperlink{MatchService_8java_source_l00267}{get\+Matches()}}.
+Referenced by \mbox{\hyperlink{MatchService_8java_source_l00283}{get\+Matches()}}.
 
 \Hypertarget{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_ad33b25c0df2261d7df5309bb08dc428a}\index{com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}!getFinishedMatchResults@{getFinishedMatchResults}}
 \index{getFinishedMatchResults@{getFinishedMatchResults}!com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}}
@@ -100,7 +102,15 @@ List$<$ Match\+Result\+DTO $>$ com.\+example.\+football\+\_\+manager.\+service.\
 
 
 
-Definition at line \mbox{\hyperlink{MatchService_8java_source_l00192}{192}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
+Definition at line \mbox{\hyperlink{MatchService_8java_source_l00199}{199}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
+
+
+
+References \mbox{\hyperlink{MatchService_8java_source_l00199}{get\+Finished\+Match\+Results()}}.
+
+
+
+Referenced by \mbox{\hyperlink{MatchService_8java_source_l00199}{get\+Finished\+Match\+Results()}}.
 
 \Hypertarget{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_ae5308e68df3538942e7cb8ca4da2b454}\index{com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}!getFutureMatchesByFavouriteTeamIds@{getFutureMatchesByFavouriteTeamIds}}
 \index{getFutureMatchesByFavouriteTeamIds@{getFutureMatchesByFavouriteTeamIds}!com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}}
@@ -110,7 +120,7 @@ List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Ma
 
 
 
-Definition at line \mbox{\hyperlink{MatchService_8java_source_l00306}{306}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
+Definition at line \mbox{\hyperlink{MatchService_8java_source_l00322}{322}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
 
 \Hypertarget{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a4846b07a9e09105fc00a2a9449a2f051}\index{com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}!getFutureMatchesByTeamId@{getFutureMatchesByTeamId}}
 \index{getFutureMatchesByTeamId@{getFutureMatchesByTeamId}!com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}}
@@ -120,7 +130,7 @@ List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Ma
 
 
 
-Definition at line \mbox{\hyperlink{MatchService_8java_source_l00294}{294}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
+Definition at line \mbox{\hyperlink{MatchService_8java_source_l00310}{310}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
 
 \Hypertarget{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a317cc552896456fe5572f34f651e580a}\index{com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}!getGoalsByMatchId@{getGoalsByMatchId}}
 \index{getGoalsByMatchId@{getGoalsByMatchId}!com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}}
@@ -130,7 +140,7 @@ List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Ma
 
 
 
-Definition at line \mbox{\hyperlink{MatchService_8java_source_l00282}{282}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
+Definition at line \mbox{\hyperlink{MatchService_8java_source_l00298}{298}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
 
 \Hypertarget{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a770134eee6ba9d451c6c125094e58a6d}\index{com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}!getMatchById@{getMatchById}}
 \index{getMatchById@{getMatchById}!com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}}
@@ -140,7 +150,7 @@ Definition at line \mbox{\hyperlink{MatchService_8java_source_l00282}{282}} of f
 
 
 
-Definition at line \mbox{\hyperlink{MatchService_8java_source_l00277}{277}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
+Definition at line \mbox{\hyperlink{MatchService_8java_source_l00293}{293}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
 
 \Hypertarget{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a0bb976d48d9d5fdf63fd95f4822b2850}\index{com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}!getMatches@{getMatches}}
 \index{getMatches@{getMatches}!com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}}
@@ -150,11 +160,15 @@ List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Ma
 
 
 
-Definition at line \mbox{\hyperlink{MatchService_8java_source_l00267}{267}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
+Definition at line \mbox{\hyperlink{MatchService_8java_source_l00283}{283}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
 
 
 
-References \mbox{\hyperlink{MatchService_8java_source_l00263}{get\+All\+Matches()}}.
+References \mbox{\hyperlink{MatchService_8java_source_l00270}{get\+All\+Matches()}}, and \mbox{\hyperlink{MatchService_8java_source_l00283}{get\+Matches()}}.
+
+
+
+Referenced by \mbox{\hyperlink{MatchService_8java_source_l00283}{get\+Matches()}}.
 
 \Hypertarget{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_ac098037788db4a971140caba8887c7ba}\index{com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}!getMatchForEdit@{getMatchForEdit}}
 \index{getMatchForEdit@{getMatchForEdit}!com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}}
@@ -164,7 +178,7 @@ Optional$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1dto_1_1
 
 
 
-Definition at line \mbox{\hyperlink{MatchService_8java_source_l00207}{207}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
+Definition at line \mbox{\hyperlink{MatchService_8java_source_l00214}{214}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
 
 
 
@@ -178,7 +192,25 @@ List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Ma
 
 
 
-Definition at line \mbox{\hyperlink{MatchService_8java_source_l00286}{286}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
+Definition at line \mbox{\hyperlink{MatchService_8java_source_l00302}{302}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_ae0e6105522fd2af2ed6ad3b865965869}\index{com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}!getUpcomingMatches@{getUpcomingMatches}}
+\index{getUpcomingMatches@{getUpcomingMatches}!com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}}
+\doxysubsubsection{\texorpdfstring{getUpcomingMatches()}{getUpcomingMatches()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_ae0e6105522fd2af2ed6ad3b865965869} 
+List$<$ \mbox{\hyperlink{classcom_1_1example_1_1football__manager_1_1model_1_1Match}{Match}} $>$ com.\+example.\+football\+\_\+manager.\+service.\+Match\+Service.\+get\+Upcoming\+Matches (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{MatchService_8java_source_l00275}{275}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
+
+
+
+References \mbox{\hyperlink{MatchService_8java_source_l00275}{get\+Upcoming\+Matches()}}.
+
+
+
+Referenced by \mbox{\hyperlink{MatchService_8java_source_l00275}{get\+Upcoming\+Matches()}}.
 
 \Hypertarget{classcom_1_1example_1_1football__manager_1_1service_1_1MatchService_a5ab09f54e5258ea8786775dace75b662}\index{com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}!registerResult@{registerResult}}
 \index{registerResult@{registerResult}!com.example.football\_manager.service.MatchService@{com.example.football\_manager.service.MatchService}}
@@ -188,7 +220,7 @@ String com.\+example.\+football\+\_\+manager.\+service.\+Match\+Service.\+regist
 
 
 
-Definition at line \mbox{\hyperlink{MatchService_8java_source_l00152}{152}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
+Definition at line \mbox{\hyperlink{MatchService_8java_source_l00158}{158}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
 
 
 
@@ -202,7 +234,7 @@ String com.\+example.\+football\+\_\+manager.\+service.\+Match\+Service.\+update
 
 
 
-Definition at line \mbox{\hyperlink{MatchService_8java_source_l00102}{102}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
+Definition at line \mbox{\hyperlink{MatchService_8java_source_l00106}{106}} of file \mbox{\hyperlink{MatchService_8java_source}{Match\+Service.\+java}}.
 
 
 

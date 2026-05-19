@@ -31,21 +31,25 @@
 \DoxyCodeLine{\Hypertarget{AdminSecurityFilter_8java_source_l00027}00027\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{boolean}\ isProtectedPath\ =\ uri.startsWith(\textcolor{stringliteral}{"{}/admin"{}})\ ||}
 \DoxyCodeLine{\Hypertarget{AdminSecurityFilter_8java_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uri.startsWith(\textcolor{stringliteral}{"{}/teams/add"{}})\ ||}
 \DoxyCodeLine{\Hypertarget{AdminSecurityFilter_8java_source_l00029}00029\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uri.startsWith(\textcolor{stringliteral}{"{}/teams/edit"{}})\ ||}
-\DoxyCodeLine{\Hypertarget{AdminSecurityFilter_8java_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uri.startsWith(\textcolor{stringliteral}{"{}/teams/delete"{}});}
-\DoxyCodeLine{\Hypertarget{AdminSecurityFilter_8java_source_l00031}00031\ }
-\DoxyCodeLine{\Hypertarget{AdminSecurityFilter_8java_source_l00032}00032\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (isProtectedPath)\ \{}
-\DoxyCodeLine{\Hypertarget{AdminSecurityFilter_8java_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ HttpSession\ session\ =\ req.getSession(\textcolor{keyword}{false});}
-\DoxyCodeLine{\Hypertarget{AdminSecurityFilter_8java_source_l00034}00034\ }
-\DoxyCodeLine{\Hypertarget{AdminSecurityFilter_8java_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ Boolean\ isAdmin\ =\ (session\ !=\ \textcolor{keyword}{null})\ ?\ (Boolean)\ session.getAttribute(\textcolor{stringliteral}{"{}isAdmin"{}})\ :\ \textcolor{keyword}{null};}
-\DoxyCodeLine{\Hypertarget{AdminSecurityFilter_8java_source_l00036}00036\ }
-\DoxyCodeLine{\Hypertarget{AdminSecurityFilter_8java_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (isAdmin\ ==\ \textcolor{keyword}{null}\ ||\ !isAdmin)\ \{}
-\DoxyCodeLine{\Hypertarget{AdminSecurityFilter_8java_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ res.sendRedirect(\textcolor{stringliteral}{"{}/teams"{}});}
-\DoxyCodeLine{\Hypertarget{AdminSecurityFilter_8java_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{\Hypertarget{AdminSecurityFilter_8java_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{AdminSecurityFilter_8java_source_l00041}00041\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{AdminSecurityFilter_8java_source_l00042}00042\ }
-\DoxyCodeLine{\Hypertarget{AdminSecurityFilter_8java_source_l00043}00043\ \ \ \ \ \ \ \ \ chain.doFilter(request,\ response);}
-\DoxyCodeLine{\Hypertarget{AdminSecurityFilter_8java_source_l00044}00044\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{AdminSecurityFilter_8java_source_l00045}00045\ \}}
+\DoxyCodeLine{\Hypertarget{AdminSecurityFilter_8java_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uri.startsWith(\textcolor{stringliteral}{"{}/teams/delete"{}})\ ||}
+\DoxyCodeLine{\Hypertarget{AdminSecurityFilter_8java_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uri.startsWith(\textcolor{stringliteral}{"{}/matches/schedule"{}})\ ||}
+\DoxyCodeLine{\Hypertarget{AdminSecurityFilter_8java_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uri.startsWith(\textcolor{stringliteral}{"{}/matches/edit"{}})\ ||}
+\DoxyCodeLine{\Hypertarget{AdminSecurityFilter_8java_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uri.startsWith(\textcolor{stringliteral}{"{}/matches/results"{}})\ ||}
+\DoxyCodeLine{\Hypertarget{AdminSecurityFilter_8java_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uri.matches(\textcolor{stringliteral}{"{}\string^/matches/\(\backslash\)\(\backslash\)d+/(score|results).*\$"{}});}
+\DoxyCodeLine{\Hypertarget{AdminSecurityFilter_8java_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{AdminSecurityFilter_8java_source_l00036}00036\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (isProtectedPath)\ \{}
+\DoxyCodeLine{\Hypertarget{AdminSecurityFilter_8java_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ HttpSession\ session\ =\ req.getSession(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{AdminSecurityFilter_8java_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{AdminSecurityFilter_8java_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ Boolean\ isAdmin\ =\ (session\ !=\ \textcolor{keyword}{null})\ ?\ (Boolean)\ session.getAttribute(\textcolor{stringliteral}{"{}isAdmin"{}})\ :\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{AdminSecurityFilter_8java_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{AdminSecurityFilter_8java_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (isAdmin\ ==\ \textcolor{keyword}{null}\ ||\ !isAdmin)\ \{}
+\DoxyCodeLine{\Hypertarget{AdminSecurityFilter_8java_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ res.sendRedirect(\textcolor{stringliteral}{"{}/teams"{}});}
+\DoxyCodeLine{\Hypertarget{AdminSecurityFilter_8java_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{AdminSecurityFilter_8java_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{AdminSecurityFilter_8java_source_l00045}00045\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{AdminSecurityFilter_8java_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{AdminSecurityFilter_8java_source_l00047}00047\ \ \ \ \ \ \ \ \ chain.doFilter(request,\ response);}
+\DoxyCodeLine{\Hypertarget{AdminSecurityFilter_8java_source_l00048}00048\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{AdminSecurityFilter_8java_source_l00049}00049\ \}}
 
 \end{DoxyCode}

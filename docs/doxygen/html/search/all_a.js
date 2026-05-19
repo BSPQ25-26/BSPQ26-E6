@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['openapiconfig_0',['OpenApiConfig',['../classcom_1_1example_1_1football__manager_1_1config_1_1OpenApiConfig.html',1,'com::example::football_manager::config']]],
-  ['openapiconfig_2ejava_1',['OpenApiConfig.java',['../OpenApiConfig_8java.html',1,'']]]
+  ['jacoco_0',['Code Coverage with JaCoCo',['../md_README.html#autotoc_md20',1,'']]],
+  ['jenkins_20ci_20pipeline_1',['Jenkins CI Pipeline',['../md_README.html#autotoc_md28',1,'']]],
+  ['junitperf_2',['Performance Testing with JUnitPerf',['../md_README.html#autotoc_md24',1,'']]]
 ];

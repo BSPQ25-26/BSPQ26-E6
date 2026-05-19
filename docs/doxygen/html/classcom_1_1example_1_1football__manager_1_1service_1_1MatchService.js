@@ -12,6 +12,7 @@ var classcom_1_1example_1_1football__manager_1_1service_1_1MatchService =
     [ "getMatches", "classcom_1_1example_1_1football__manager_1_1service_1_1MatchService.html#a0bb976d48d9d5fdf63fd95f4822b2850", null ],
     [ "getMatchForEdit", "classcom_1_1example_1_1football__manager_1_1service_1_1MatchService.html#ac098037788db4a971140caba8887c7ba", null ],
     [ "getRecentMatchesByTeamId", "classcom_1_1example_1_1football__manager_1_1service_1_1MatchService.html#a63f11b2245ea33304a45fd5fd5be7c02", null ],
+    [ "getUpcomingMatches", "classcom_1_1example_1_1football__manager_1_1service_1_1MatchService.html#ae0e6105522fd2af2ed6ad3b865965869", null ],
     [ "registerResult", "classcom_1_1example_1_1football__manager_1_1service_1_1MatchService.html#a5ab09f54e5258ea8786775dace75b662", null ],
     [ "updateMatch", "classcom_1_1example_1_1football__manager_1_1service_1_1MatchService.html#a29a97f0da2fe4a950291db609bee986f", null ]
 ];
