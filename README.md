@@ -153,6 +153,24 @@ chmod +x mvnw
 ./mvnw spring-boot:run
 ```
 
+### Docker
+
+You can also run the application using Docker. Make sure you have Docker installed and running.
+
+1. Build the Docker image:
+
+```bash
+docker build -t football_manager .
+```
+
+2. Run the Docker container:
+
+```bash
+docker run --rm -p 8080:8080 football_manager
+```
+
+---
+
 The application will be available at:
 
 ```text
