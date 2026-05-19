@@ -22,15 +22,31 @@ import java.util.Optional;
 
 import static org.junit.Assert.assertFalse;
 
+/**
+ * Performance tests for TeamService using JUnitPerf.
+ *
+ * <p>These tests validate repeated and concurrent execution of the
+ * getAllTeams operation. JUnitPerf is used as a replacement for the
+ * deprecated ContiPerf library.</p>
+ *
+ * <p>The tests use lightweight repository proxies instead of a real database
+ * in order to focus on service execution and avoid external dependencies.</p>
+ */
 public class TeamServicePerformanceTest {
 
     private static final Logger logger = LoggerFactory.getLogger(TeamServicePerformanceTest.class);
 
+    /**
+     * JUnitPerf rule required to execute performance tests.
+     */
     @Rule
     public JUnitPerfRule perfTestRule = new JUnitPerfRule();
 
     private TeamService teamService;
 
+    /**
+     * Prepares test data and fake repositories before each performance test.
+     */
     @Before
     public void setUp() {
         logger.info("Preparing TeamService performance test data");
@@ -52,6 +68,9 @@ public class TeamServicePerformanceTest {
         logger.info("TeamService performance test setup completed with {} sample teams", sampleTeams.size());
     }
 
+    /**
+     * Validates TeamService performance using a single execution thread.
+     */
     @Test
     @JUnitPerfTest(
             threads = 1,
@@ -73,6 +92,9 @@ public class TeamServicePerformanceTest {
         assertFalse(teams.isEmpty());
     }
 
+    /**
+     * Validates TeamService performance under multiple concurrent threads.
+     */
     @Test
     @JUnitPerfTest(
             threads = 5,
@@ -94,6 +116,9 @@ public class TeamServicePerformanceTest {
         assertFalse(teams.isEmpty());
     }
 
+    /**
+     * Validates that TeamService reaches the expected throughput.
+     */
     @Test
     @JUnitPerfTest(
             threads = 10,
@@ -115,6 +140,9 @@ public class TeamServicePerformanceTest {
         assertFalse(teams.isEmpty());
     }
 
+    /**
+     * Validates TeamService stability during a longer performance test duration.
+     */
     @Test
     @JUnitPerfTest(
             threads = 3,
@@ -136,6 +164,13 @@ public class TeamServicePerformanceTest {
         assertFalse(teams.isEmpty());
     }
 
+    /**
+     * Intentionally failing performance test kept as evidence for manual testing.
+     *
+     * <p>This test is ignored by default because it is designed to fail with
+     * unrealistic thresholds. It can be enabled manually to show how JUnitPerf
+     * reports performance failures.</p>
+     */
     @Ignore("Enable manually only to generate failing performance evidence for Sprint 2")
     @Test
     @JUnitPerfTest(
@@ -158,6 +193,14 @@ public class TeamServicePerformanceTest {
         assertFalse(teams.isEmpty());
     }
 
+    /**
+     * Creates a dynamic proxy for repository interfaces used by TeamService.
+     *
+     * @param repositoryClass repository interface to proxy
+     * @param teams list of teams returned by the fake findAll method
+     * @param <T> repository type
+     * @return fake repository implementation
+     */
     @SuppressWarnings("unchecked")
     private <T> T createRepositoryProxy(Class<T> repositoryClass, List<Team> teams) {
         return (T) Proxy.newProxyInstance(
@@ -214,6 +257,9 @@ public class TeamServicePerformanceTest {
         );
     }
 
+    /**
+     * Simulates a small service latency to make performance tests more realistic.
+     */
     private void simulateServerLatency() {
         try {
             Thread.sleep(5);
@@ -223,6 +269,12 @@ public class TeamServicePerformanceTest {
         }
     }
 
+    /**
+     * Creates sample teams used during performance testing.
+     *
+     * @param amount number of teams to create
+     * @return list of sample teams
+     */
     private List<Team> createSampleTeams(int amount) {
         Country country = new Country();
         country.setId(1L);

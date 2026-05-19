@@ -14,16 +14,34 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
+/**
+ * MVC controller responsible for rendering and processing Fantasy mode pages.
+ *
+ * <p>This controller connects the Thymeleaf frontend with the Fantasy service layer.
+ * It handles the Fantasy home page, league creation, league joining and lineup saving.</p>
+ */
 @Controller
 @RequestMapping("/fantasy")
 public class FantasyViewController {
 
     private final FantasyService fantasyService;
 
+    /**
+     * Creates a new Fantasy view controller.
+     *
+     * @param fantasyService service containing Fantasy business logic
+     */
     public FantasyViewController(FantasyService fantasyService) {
         this.fantasyService = fantasyService;
     }
 
+    /**
+     * Displays the main Fantasy page for the logged-in user.
+     *
+     * @param model Spring MVC model used to pass Fantasy data to the Thymeleaf view
+     * @param session current HTTP session containing logged user information
+     * @return Fantasy page view name or login redirect
+     */
     @GetMapping
     public String fantasyHome(Model model, HttpSession session) {
         Long userId = getLoggedUserIdOrNull(session);
@@ -36,6 +54,15 @@ public class FantasyViewController {
         return "fantasy";
     }
 
+    /**
+     * Displays the Fantasy page with a selected league.
+     *
+     * @param leagueId id of the selected fantasy league
+     * @param model Spring MVC model used to pass Fantasy data to the Thymeleaf view
+     * @param session current HTTP session containing logged user information
+     * @param redirectAttributes redirect attributes used to show error messages
+     * @return Fantasy page view name or redirect to the Fantasy home page
+     */
     @GetMapping("/leagues/{leagueId}")
     public String fantasyLeague(
             @PathVariable Long leagueId,
@@ -58,6 +85,14 @@ public class FantasyViewController {
         }
     }
 
+    /**
+     * Creates a new fantasy league from the submitted form.
+     *
+     * @param request form data containing the league name
+     * @param session current HTTP session containing logged user information
+     * @param redirectAttributes redirect attributes used to show success or error messages
+     * @return redirect to the created league or to the Fantasy home page
+     */
     @PostMapping("/leagues")
     public String createLeague(
             @ModelAttribute CreateFantasyLeagueRequestDTO request,
@@ -83,6 +118,14 @@ public class FantasyViewController {
         }
     }
 
+    /**
+     * Joins an existing fantasy league using an invite code.
+     *
+     * @param request form data containing the invite code
+     * @param session current HTTP session containing logged user information
+     * @param redirectAttributes redirect attributes used to show success or error messages
+     * @return redirect to the joined league or to the Fantasy home page
+     */
     @PostMapping("/leagues/join")
     public String joinLeague(
             @ModelAttribute JoinFantasyLeagueRequestDTO request,
@@ -108,6 +151,14 @@ public class FantasyViewController {
         }
     }
 
+    /**
+     * Saves the selected fantasy lineup for the logged-in user.
+     *
+     * @param playerIds ids of the selected players
+     * @param session current HTTP session containing logged user information
+     * @param redirectAttributes redirect attributes used to show success or error messages
+     * @return redirect to the Fantasy home page
+     */
     @PostMapping("/lineup")
     public String saveLineup(
             @RequestParam(value = "playerIds", required = false) List<Long> playerIds,
@@ -133,6 +184,17 @@ public class FantasyViewController {
         return "redirect:/fantasy";
     }
 
+    /**
+     * Populates the model with all data required by the Fantasy page.
+     *
+     * <p>This includes user leagues, selected league, leaderboard, available players,
+     * selected lineup, selected player ids and user score.</p>
+     *
+     * @param model Spring MVC model
+     * @param session current HTTP session
+     * @param userId id of the logged-in user
+     * @param selectedLeagueId optional selected fantasy league id
+     */
     private void populateFantasyModel(Model model, HttpSession session, Long userId, Long selectedLeagueId) {
         List<FantasyLeagueDTO> myLeagues = fantasyService.getMyLeagues(userId);
 
@@ -161,6 +223,12 @@ public class FantasyViewController {
         model.addAttribute("joinLeagueRequest", new JoinFantasyLeagueRequestDTO());
     }
 
+    /**
+     * Reads the logged-in user id from the current HTTP session.
+     *
+     * @param session current HTTP session
+     * @return user id if present, otherwise null
+     */
     private Long getLoggedUserIdOrNull(HttpSession session) {
         Object userId = session.getAttribute("userId");
 

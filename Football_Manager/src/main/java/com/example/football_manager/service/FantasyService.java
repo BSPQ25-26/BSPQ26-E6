@@ -17,6 +17,16 @@ import java.util.List;
 import java.util.Locale;
 import java.util.stream.IntStream;
 
+/**
+ * Service responsible for managing the Fantasy mode of the application.
+ *
+ * <p>This service contains the main business logic for Fantasy leagues:
+ * creating leagues, joining leagues with invite codes, selecting lineups,
+ * calculating fantasy points and generating league leaderboards.</p>
+ *
+ * <p>Fantasy points are calculated from finished football matches using
+ * team result, goal difference, clean sheets and player position bonuses.</p>
+ */
 @Service
 public class FantasyService {
 
@@ -33,6 +43,16 @@ public class FantasyService {
     private final PlayerRepository playerRepository;
     private final MatchRepository matchRepository;
 
+    /**
+     * Creates a new Fantasy service instance with all required repositories.
+     *
+     * @param fantasyLeagueRepository repository used to manage fantasy leagues
+     * @param fantasyLeagueMemberRepository repository used to manage league memberships
+     * @param fantasyLineupPlayerRepository repository used to manage user fantasy lineups
+     * @param userRepository repository used to access users
+     * @param playerRepository repository used to access players
+     * @param matchRepository repository used to access football matches
+     */
     public FantasyService(
             FantasyLeagueRepository fantasyLeagueRepository,
             FantasyLeagueMemberRepository fantasyLeagueMemberRepository,
@@ -49,6 +69,14 @@ public class FantasyService {
         this.matchRepository = matchRepository;
     }
 
+    /**
+     * Creates a new fantasy league and automatically adds the creator as a member.
+     *
+     * @param userId id of the user creating the fantasy league
+     * @param request request containing the league name
+     * @return created fantasy league data
+     * @throws IllegalArgumentException if the user does not exist or the league name is invalid
+     */
     @Transactional
     @CacheEvict(cacheNames = "fantasyLeagues", key = "#userId")
     public FantasyLeagueDTO createLeague(Long userId, CreateFantasyLeagueRequestDTO request) {
@@ -83,6 +111,15 @@ public class FantasyService {
         return toLeagueDTO(savedLeague);
     }
 
+    /**
+     * Adds a user to an existing fantasy league using an invite code.
+     *
+     * @param userId id of the user joining the league
+     * @param request request containing the fantasy league invite code
+     * @return joined fantasy league data
+     * @throws IllegalArgumentException if the user does not exist, the code is invalid,
+     *                                  or the user is already a league member
+     */
     @Transactional
     @Caching(evict = {
             @CacheEvict(cacheNames = "fantasyLeagues", key = "#userId"),
@@ -130,6 +167,13 @@ public class FantasyService {
         return toLeagueDTO(league);
     }
 
+    /**
+     * Returns all fantasy leagues where a user is a member.
+     *
+     * @param userId id of the user
+     * @return list of fantasy leagues joined by the user
+     * @throws IllegalArgumentException if the user does not exist
+     */
     @Transactional(readOnly = true)
     @Cacheable(cacheNames = "fantasyLeagues", key = "#userId")
     public List<FantasyLeagueDTO> getMyLeagues(Long userId) {
@@ -144,6 +188,14 @@ public class FantasyService {
                 .toList();
     }
 
+    /**
+     * Returns a specific fantasy league only if the user belongs to it.
+     *
+     * @param leagueId id of the fantasy league
+     * @param userId id of the user requesting the league
+     * @return fantasy league data
+     * @throws IllegalArgumentException if the league does not exist or the user is not a member
+     */
     @Transactional(readOnly = true)
     @Cacheable(cacheNames = "fantasyLeague", key = "T(java.util.Objects).hash(#leagueId, #userId)")
     public FantasyLeagueDTO getLeagueForMember(Long leagueId, Long userId) {
@@ -163,6 +215,11 @@ public class FantasyService {
         return toLeagueDTO(league);
     }
 
+    /**
+     * Returns the list of players available for fantasy lineup selection.
+     *
+     * @return sorted list of available fantasy players
+     */
     @Transactional(readOnly = true)
     @Cacheable(cacheNames = "fantasyAvailablePlayers")
     public List<FantasyAvailablePlayerDTO> getAvailablePlayers() {
@@ -179,6 +236,17 @@ public class FantasyService {
                 .toList();
     }
 
+    /**
+     * Saves the fantasy lineup selected by a user.
+     *
+     * <p>The lineup can contain up to eleven players, cannot include duplicated
+     * players and cannot include more than one goalkeeper.</p>
+     *
+     * @param userId id of the user saving the lineup
+     * @param request request containing selected player ids
+     * @return saved lineup including calculated fantasy points
+     * @throws IllegalArgumentException if the user does not exist or the lineup is invalid
+     */
     @Transactional
     @Caching(evict = {
             @CacheEvict(cacheNames = "fantasyLineup", key = "#userId"),
@@ -248,6 +316,13 @@ public class FantasyService {
         return getLineup(userId);
     }
 
+    /**
+     * Returns the current fantasy lineup of a user.
+     *
+     * @param userId id of the user
+     * @return ordered fantasy lineup with points for each player
+     * @throws IllegalArgumentException if the user does not exist
+     */
     @Transactional(readOnly = true)
     @Cacheable(cacheNames = "fantasyLineup", key = "#userId")
     public List<FantasyLineupPlayerDTO> getLineup(Long userId) {
@@ -266,6 +341,13 @@ public class FantasyService {
                 .toList();
     }
 
+    /**
+     * Calculates the total fantasy score of a user from the selected lineup.
+     *
+     * @param userId id of the user
+     * @return fantasy score summary with total points and selected lineup
+     * @throws IllegalArgumentException if the user does not exist
+     */
     @Transactional(readOnly = true)
     @Cacheable(cacheNames = "fantasyScore", key = "#userId")
     public FantasyScoreDTO getMyScore(Long userId) {
@@ -289,6 +371,16 @@ public class FantasyService {
         );
     }
 
+    /**
+     * Generates the leaderboard of a fantasy league.
+     *
+     * <p>The leaderboard is ordered by total fantasy points in descending order.
+     * If users have the same points, they are sorted by username.</p>
+     *
+     * @param leagueId id of the fantasy league
+     * @return ordered leaderboard entries
+     * @throws IllegalArgumentException if the fantasy league does not exist
+     */
     @Transactional(readOnly = true)
     @Cacheable(cacheNames = "fantasyLeaderboard", key = "#leagueId")
     public List<FantasyLeaderboardEntryDTO> getLeaderboard(Long leagueId) {
@@ -321,6 +413,12 @@ public class FantasyService {
                 .toList();
     }
 
+    /**
+     * Validates basic fantasy lineup restrictions.
+     *
+     * @param players selected players
+     * @throws IllegalArgumentException if more than one goalkeeper is selected
+     */
     private void validateLineupStructure(List<Player> players) {
         long goalkeepers = players.stream()
                 .filter(player -> player.getPosition() == PlayerPosition.GOALKEEPER)
@@ -332,6 +430,12 @@ public class FantasyService {
         }
     }
 
+    /**
+     * Calculates the total fantasy points of a player across all finished matches.
+     *
+     * @param player player whose fantasy points are calculated
+     * @return total fantasy points
+     */
     private int calculatePlayerTotalPoints(Player player) {
         return matchRepository.findAll()
                 .stream()
@@ -341,6 +445,13 @@ public class FantasyService {
                 .sum();
     }
 
+    /**
+     * Checks whether a player belongs to one of the two teams in a match.
+     *
+     * @param player player to check
+     * @param match match to check
+     * @return true if the player team participated in the match
+     */
     private boolean playerAppearedInMatch(Player player, Match match) {
         Long playerTeamId = player.getTeam().getId();
 
@@ -348,6 +459,13 @@ public class FantasyService {
                 || match.getRightTeam().getId().equals(playerTeamId);
     }
 
+    /**
+     * Calculates the fantasy points of a player for a single finished match.
+     *
+     * @param player player whose points are calculated
+     * @param match match used as source of performance data
+     * @return fantasy points obtained in that match
+     */
     private int calculatePlayerMatchPoints(Player player, Match match) {
         boolean playerTeamIsLeftTeam = match.getLeftTeam().getId().equals(player.getTeam().getId());
 
@@ -374,6 +492,12 @@ public class FantasyService {
         return Math.max(points, 0);
     }
 
+    /**
+     * Returns the clean sheet bonus depending on the player position.
+     *
+     * @param position player position
+     * @return clean sheet bonus
+     */
     private int cleanSheetBonus(PlayerPosition position) {
         return switch (position) {
             case GOALKEEPER -> 5;
@@ -383,6 +507,13 @@ public class FantasyService {
         };
     }
 
+    /**
+     * Returns attacking bonus points depending on the player position and team goals.
+     *
+     * @param position player position
+     * @param teamGoals goals scored by the player's team
+     * @return attacking bonus points
+     */
     private int attackingBonus(PlayerPosition position, int teamGoals) {
         return switch (position) {
             case FORWARD -> teamGoals * 2;
@@ -392,6 +523,13 @@ public class FantasyService {
         };
     }
 
+    /**
+     * Returns penalty points for goals conceded depending on the player position.
+     *
+     * @param position player position
+     * @param opponentGoals goals conceded by the player's team
+     * @return penalty points
+     */
     private int goalsConcededPenalty(PlayerPosition position, int opponentGoals) {
         return switch (position) {
             case GOALKEEPER, DEFENDER -> opponentGoals / 2;
@@ -399,6 +537,13 @@ public class FantasyService {
         };
     }
 
+    /**
+     * Finds a user by id or throws an exception if it does not exist.
+     *
+     * @param userId id of the user
+     * @return found user
+     * @throws IllegalArgumentException if the user does not exist
+     */
     private User getUserOrThrow(Long userId) {
         return userRepository.findById(userId)
                 .orElseThrow(() -> {
@@ -407,6 +552,11 @@ public class FantasyService {
                 });
     }
 
+    /**
+     * Generates a unique invite code for a fantasy league.
+     *
+     * @return unique uppercase fantasy league code
+     */
     private String generateUniqueCode() {
         String code;
 
@@ -420,6 +570,12 @@ public class FantasyService {
         return code;
     }
 
+    /**
+     * Converts a FantasyLeague entity into a DTO.
+     *
+     * @param league fantasy league entity
+     * @return fantasy league DTO
+     */
     private FantasyLeagueDTO toLeagueDTO(FantasyLeague league) {
         return new FantasyLeagueDTO(
                 league.getId(),
@@ -430,6 +586,12 @@ public class FantasyService {
         );
     }
 
+    /**
+     * Converts a Player entity into a fantasy available player DTO.
+     *
+     * @param player player entity
+     * @return available player DTO
+     */
     private FantasyAvailablePlayerDTO toAvailablePlayerDTO(Player player) {
         Team team = player.getTeam();
 
@@ -444,6 +606,13 @@ public class FantasyService {
         );
     }
 
+    /**
+     * Converts a FantasyLineupPlayer entity into a lineup DTO.
+     *
+     * @param lineupPlayer lineup player entity
+     * @param points calculated fantasy points
+     * @return lineup player DTO
+     */
     private FantasyLineupPlayerDTO toLineupPlayerDTO(FantasyLineupPlayer lineupPlayer, int points) {
         Player player = lineupPlayer.getPlayer();
         Team team = player.getTeam();
