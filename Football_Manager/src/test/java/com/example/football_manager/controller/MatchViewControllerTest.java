@@ -67,7 +67,7 @@ class MatchViewControllerTest {
 
     @Test
     void showMatchesPage_addsMatchesTeamsAndSelectedFilters() {
-        Match match = createMatch();
+        Match match = createFinishedMatch();
         Team team = match.getLeftTeam();
 
         when(matchService.getMatches(1L, FINISHED, 2L)).thenReturn(List.of(match));
@@ -119,10 +119,80 @@ class MatchViewControllerTest {
         verify(matchService).getMatches(null, MatchRequestDTO.MatchStatus.IN_PROGRESS, null);
     }
 
-    private Match createMatch() {
-        Country country = new Country(1L, "Spain");
-        Team homeTeam = new Team(1L, "Real Sociedad", "home-logo.png", country);
-        Team awayTeam = new Team(2L, "Athletic Club", "away-logo.png", country);
+    @Test
+    void showUpcomingMatchesPage_addsUpcomingMatchesAndReturnsUpcomingView() {
+        Match upcomingMatch = createUpcomingMatch();
+
+        when(matchService.getUpcomingMatches()).thenReturn(List.of(upcomingMatch));
+
+        Model model = new ConcurrentModel();
+        MockHttpSession session = new MockHttpSession();
+        session.setAttribute("isAdmin", true);
+
+        String viewName = matchViewController.showUpcomingMatchesPage(model, session);
+
+        assertEquals("upcoming-matches", viewName);
+        assertEquals(List.of(upcomingMatch), model.getAttribute("matches"));
+        assertEquals(true, model.getAttribute("isAdmin"));
+
+        verify(matchService).getUpcomingMatches();
+    }
+
+    @Test
+    void showUpcomingMatchesPage_withoutAdminSession_shouldSetIsAdminFalse() {
+        Match upcomingMatch = createUpcomingMatch();
+
+        when(matchService.getUpcomingMatches()).thenReturn(List.of(upcomingMatch));
+
+        Model model = new ConcurrentModel();
+        MockHttpSession session = new MockHttpSession();
+
+        String viewName = matchViewController.showUpcomingMatchesPage(model, session);
+
+        assertEquals("upcoming-matches", viewName);
+        assertEquals(List.of(upcomingMatch), model.getAttribute("matches"));
+        assertEquals(false, model.getAttribute("isAdmin"));
+
+        verify(matchService).getUpcomingMatches();
+    }
+
+    @Test
+    void showScheduleForm_shouldAddMatchRequestAndTeamsAndReturnScheduleView() {
+        Team team = createTeam(1L, "Real Sociedad", "real.png");
+
+        when(teamService.getAllTeams()).thenReturn(List.of(team));
+
+        Model model = new ConcurrentModel();
+
+        String viewName = matchViewController.showScheduleForm(model);
+
+        assertEquals("schedule-match", viewName);
+        assertNotNull(model.getAttribute("matchRequest"));
+        assertEquals(List.of(team), model.getAttribute("teams"));
+
+        verify(teamService).getAllTeams();
+    }
+
+    private Match createFinishedMatch() {
+        Match match = createBaseMatch();
+        match.setLeftScore((short) 2);
+        match.setRightScore((short) 1);
+        match.setFinished(true);
+        return match;
+    }
+
+    private Match createUpcomingMatch() {
+        Match match = createBaseMatch();
+        match.setDatetime(OffsetDateTime.parse("2026-06-17T20:00:00Z"));
+        match.setLeftScore((short) 0);
+        match.setRightScore((short) 0);
+        match.setFinished(false);
+        return match;
+    }
+
+    private Match createBaseMatch() {
+        Team homeTeam = createTeam(1L, "Real Sociedad", "home-logo.png");
+        Team awayTeam = createTeam(2L, "Athletic Club", "away-logo.png");
         Competition competition = new Competition(1L, "LaLiga");
 
         Match match = new Match();
@@ -132,10 +202,12 @@ class MatchViewControllerTest {
         match.setCompetition(competition);
         match.setDatetime(OffsetDateTime.parse("2026-05-17T20:00:00Z"));
         match.setVenue("Anoeta");
-        match.setLeftScore((short) 2);
-        match.setRightScore((short) 1);
-        match.setFinished(true);
 
         return match;
+    }
+
+    private Team createTeam(Long id, String name, String logoUrl) {
+        Country country = new Country(1L, "Spain");
+        return new Team(id, name, logoUrl, country);
     }
 }
