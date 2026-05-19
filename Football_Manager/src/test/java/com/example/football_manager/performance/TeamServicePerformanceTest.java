@@ -12,6 +12,8 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
@@ -22,6 +24,8 @@ import static org.junit.Assert.assertFalse;
 
 public class TeamServicePerformanceTest {
 
+    private static final Logger logger = LoggerFactory.getLogger(TeamServicePerformanceTest.class);
+
     @Rule
     public JUnitPerfRule perfTestRule = new JUnitPerfRule();
 
@@ -29,6 +33,8 @@ public class TeamServicePerformanceTest {
 
     @Before
     public void setUp() {
+        logger.info("Preparing TeamService performance test data");
+
         List<Team> sampleTeams = createSampleTeams(100);
 
         TeamRepository teamRepository = createRepositoryProxy(
@@ -42,6 +48,8 @@ public class TeamServicePerformanceTest {
         );
 
         teamService = new TeamService(teamRepository, countryRepository);
+
+        logger.info("TeamService performance test setup completed with {} sample teams", sampleTeams.size());
     }
 
     @Test
@@ -56,7 +64,11 @@ public class TeamServicePerformanceTest {
             executionsPerSec = 50
     )
     public void getAllTeams_singleThreadPerformance_shouldPass() {
+        logger.info("Running TeamService performance test: single thread");
+
         List<Team> teams = teamService.getAllTeams();
+
+        logger.info("Single thread performance test returned {} teams", teams.size());
 
         assertFalse(teams.isEmpty());
     }
@@ -73,7 +85,11 @@ public class TeamServicePerformanceTest {
             executionsPerSec = 150
     )
     public void getAllTeams_multipleThreadsPerformance_shouldPass() {
+        logger.info("Running TeamService performance test: multiple threads");
+
         List<Team> teams = teamService.getAllTeams();
+
+        logger.info("Multiple threads performance test returned {} teams", teams.size());
 
         assertFalse(teams.isEmpty());
     }
@@ -90,7 +106,11 @@ public class TeamServicePerformanceTest {
             executionsPerSec = 300
     )
     public void getAllTeams_throughputPerformance_shouldPass() {
+        logger.info("Running TeamService performance test: throughput");
+
         List<Team> teams = teamService.getAllTeams();
+
+        logger.info("Throughput performance test returned {} teams", teams.size());
 
         assertFalse(teams.isEmpty());
     }
@@ -107,7 +127,11 @@ public class TeamServicePerformanceTest {
             executionsPerSec = 80
     )
     public void getAllTeams_durationPerformance_shouldPass() {
+        logger.info("Running TeamService performance test: duration");
+
         List<Team> teams = teamService.getAllTeams();
+
+        logger.info("Duration performance test returned {} teams", teams.size());
 
         assertFalse(teams.isEmpty());
     }
@@ -125,7 +149,11 @@ public class TeamServicePerformanceTest {
             executionsPerSec = 5000
     )
     public void getAllTeams_intentionallyFailingPerformanceTest() {
+        logger.info("Running intentionally failing TeamService performance test");
+
         List<Team> teams = teamService.getAllTeams();
+
+        logger.info("Intentionally failing performance test returned {} teams", teams.size());
 
         assertFalse(teams.isEmpty());
     }
@@ -190,6 +218,7 @@ public class TeamServicePerformanceTest {
         try {
             Thread.sleep(5);
         } catch (InterruptedException e) {
+            logger.warn("Performance test latency simulation was interrupted", e);
             Thread.currentThread().interrupt();
         }
     }

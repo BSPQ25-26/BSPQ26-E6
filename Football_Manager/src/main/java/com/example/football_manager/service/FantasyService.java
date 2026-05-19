@@ -3,6 +3,8 @@ package com.example.football_manager.service;
 import com.example.football_manager.dto.*;
 import com.example.football_manager.model.*;
 import com.example.football_manager.repository.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
@@ -17,6 +19,8 @@ import java.util.stream.IntStream;
 
 @Service
 public class FantasyService {
+
+    private static final Logger logger = LoggerFactory.getLogger(FantasyService.class);
 
     private static final int MAX_LINEUP_SIZE = 11;
     private static final String CODE_CHARS = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
@@ -48,9 +52,12 @@ public class FantasyService {
     @Transactional
     @CacheEvict(cacheNames = "fantasyLeagues", key = "#userId")
     public FantasyLeagueDTO createLeague(Long userId, CreateFantasyLeagueRequestDTO request) {
+        logger.info("Creating fantasy league for userId={}", userId);
+
         User owner = getUserOrThrow(userId);
 
         if (request == null || request.getName() == null || request.getName().trim().isEmpty()) {
+            logger.warn("Fantasy league creation failed for userId={} because league name is empty", userId);
             throw new IllegalArgumentException("League name is required.");
         }
 
@@ -66,6 +73,13 @@ public class FantasyService {
         member.setUser(owner);
         fantasyLeagueMemberRepository.save(member);
 
+        logger.info(
+                "Fantasy league created successfully with id={}, code={} and ownerId={}",
+                savedLeague.getId(),
+                savedLeague.getCode(),
+                owner.getId()
+        );
+
         return toLeagueDTO(savedLeague);
     }
 
@@ -75,17 +89,34 @@ public class FantasyService {
             @CacheEvict(cacheNames = "fantasyLeaderboard", key = "#result.id")
     })
     public FantasyLeagueDTO joinLeague(Long userId, JoinFantasyLeagueRequestDTO request) {
+        logger.info("User id={} is trying to join a fantasy league", userId);
+
         User user = getUserOrThrow(userId);
 
         if (request == null || request.getCode() == null || request.getCode().trim().isEmpty()) {
+            logger.warn("Fantasy league join failed for userId={} because league code is empty", userId);
             throw new IllegalArgumentException("League code is required.");
         }
 
+        String normalizedCode = request.getCode().trim();
+
         FantasyLeague league = fantasyLeagueRepository
-                .findByCodeIgnoreCase(request.getCode().trim())
-                .orElseThrow(() -> new IllegalArgumentException("Fantasy league not found."));
+                .findByCodeIgnoreCase(normalizedCode)
+                .orElseThrow(() -> {
+                    logger.warn(
+                            "Fantasy league join failed for userId={} because code={} was not found",
+                            userId,
+                            normalizedCode
+                    );
+                    return new IllegalArgumentException("Fantasy league not found.");
+                });
 
         if (fantasyLeagueMemberRepository.existsByLeagueIdAndUserId(league.getId(), user.getId())) {
+            logger.warn(
+                    "Fantasy league join failed because userId={} is already member of leagueId={}",
+                    userId,
+                    league.getId()
+            );
             throw new IllegalArgumentException("You are already a member of this fantasy league.");
         }
 
@@ -94,12 +125,16 @@ public class FantasyService {
         member.setUser(user);
         fantasyLeagueMemberRepository.save(member);
 
+        logger.info("User id={} joined fantasy league id={}", userId, league.getId());
+
         return toLeagueDTO(league);
     }
 
     @Transactional(readOnly = true)
     @Cacheable(cacheNames = "fantasyLeagues", key = "#userId")
     public List<FantasyLeagueDTO> getMyLeagues(Long userId) {
+        logger.info("Fetching fantasy leagues for userId={}", userId);
+
         getUserOrThrow(userId);
 
         return fantasyLeagueMemberRepository.findByUserId(userId)
@@ -112,10 +147,16 @@ public class FantasyService {
     @Transactional(readOnly = true)
     @Cacheable(cacheNames = "fantasyLeague", key = "T(java.util.Objects).hash(#leagueId, #userId)")
     public FantasyLeagueDTO getLeagueForMember(Long leagueId, Long userId) {
+        logger.info("Fetching fantasy league id={} for userId={}", leagueId, userId);
+
         FantasyLeague league = fantasyLeagueRepository.findById(leagueId)
-                .orElseThrow(() -> new IllegalArgumentException("Fantasy league not found."));
+                .orElseThrow(() -> {
+                    logger.warn("Fantasy league id={} was not found", leagueId);
+                    return new IllegalArgumentException("Fantasy league not found.");
+                });
 
         if (!fantasyLeagueMemberRepository.existsByLeagueIdAndUserId(leagueId, userId)) {
+            logger.warn("User id={} tried to access fantasy league id={} without membership", userId, leagueId);
             throw new IllegalArgumentException("You are not a member of this fantasy league.");
         }
 
@@ -125,6 +166,8 @@ public class FantasyService {
     @Transactional(readOnly = true)
     @Cacheable(cacheNames = "fantasyAvailablePlayers")
     public List<FantasyAvailablePlayerDTO> getAvailablePlayers() {
+        logger.info("Fetching available fantasy players");
+
         return playerRepository.findAll()
                 .stream()
                 .sorted(
@@ -143,26 +186,36 @@ public class FantasyService {
             @CacheEvict(cacheNames = "fantasyLeaderboard", allEntries = true)
     })
     public List<FantasyLineupPlayerDTO> saveLineup(Long userId, FantasyLineupRequestDTO request) {
+        logger.info("Saving fantasy lineup for userId={}", userId);
+
         User user = getUserOrThrow(userId);
 
         if (request == null || request.getPlayerIds() == null || request.getPlayerIds().isEmpty()) {
+            logger.warn("Fantasy lineup save failed for userId={} because no players were selected", userId);
             throw new IllegalArgumentException("Select at least one player.");
         }
 
         List<Long> playerIds = request.getPlayerIds();
 
         if (playerIds.size() > MAX_LINEUP_SIZE) {
+            logger.warn(
+                    "Fantasy lineup save failed for userId={} because {} players were selected",
+                    userId,
+                    playerIds.size()
+            );
             throw new IllegalArgumentException("A fantasy lineup cannot have more than 11 players.");
         }
 
         long distinctPlayers = playerIds.stream().distinct().count();
         if (distinctPlayers != playerIds.size()) {
+            logger.warn("Fantasy lineup save failed for userId={} because duplicated players were selected", userId);
             throw new IllegalArgumentException("A fantasy lineup cannot contain duplicated players.");
         }
 
         List<Player> players = playerRepository.findAllById(playerIds);
 
         if (players.size() != playerIds.size()) {
+            logger.warn("Fantasy lineup save failed for userId={} because some selected players do not exist", userId);
             throw new IllegalArgumentException("One or more selected players do not exist.");
         }
 
@@ -190,12 +243,16 @@ public class FantasyService {
 
         fantasyLineupPlayerRepository.saveAll(lineupPlayers);
 
+        logger.info("Fantasy lineup saved for userId={} with {} players", userId, lineupPlayers.size());
+
         return getLineup(userId);
     }
 
     @Transactional(readOnly = true)
     @Cacheable(cacheNames = "fantasyLineup", key = "#userId")
     public List<FantasyLineupPlayerDTO> getLineup(Long userId) {
+        logger.info("Fetching fantasy lineup for userId={}", userId);
+
         getUserOrThrow(userId);
 
         return fantasyLineupPlayerRepository.findByUserIdOrderByLineupOrderAsc(userId)
@@ -212,6 +269,8 @@ public class FantasyService {
     @Transactional(readOnly = true)
     @Cacheable(cacheNames = "fantasyScore", key = "#userId")
     public FantasyScoreDTO getMyScore(Long userId) {
+        logger.info("Calculating fantasy score for userId={}", userId);
+
         User user = getUserOrThrow(userId);
 
         List<FantasyLineupPlayerDTO> lineup = getLineup(userId);
@@ -219,6 +278,8 @@ public class FantasyService {
         int totalPoints = lineup.stream()
                 .mapToInt(FantasyLineupPlayerDTO::getPoints)
                 .sum();
+
+        logger.info("Fantasy score calculated for userId={} with totalPoints={}", userId, totalPoints);
 
         return new FantasyScoreDTO(
                 user.getId(),
@@ -231,8 +292,13 @@ public class FantasyService {
     @Transactional(readOnly = true)
     @Cacheable(cacheNames = "fantasyLeaderboard", key = "#leagueId")
     public List<FantasyLeaderboardEntryDTO> getLeaderboard(Long leagueId) {
+        logger.info("Generating fantasy leaderboard for leagueId={}", leagueId);
+
         FantasyLeague league = fantasyLeagueRepository.findById(leagueId)
-                .orElseThrow(() -> new IllegalArgumentException("Fantasy league not found."));
+                .orElseThrow(() -> {
+                    logger.warn("Fantasy leaderboard generation failed because leagueId={} was not found", leagueId);
+                    return new IllegalArgumentException("Fantasy league not found.");
+                });
 
         List<FantasyScoreDTO> scores = fantasyLeagueMemberRepository.findByLeagueId(league.getId())
                 .stream()
@@ -242,6 +308,8 @@ public class FantasyService {
                                 .thenComparing(FantasyScoreDTO::getUsername)
                 )
                 .toList();
+
+        logger.info("Fantasy leaderboard generated for leagueId={} with {} members", leagueId, scores.size());
 
         return IntStream.range(0, scores.size())
                 .mapToObj(index -> new FantasyLeaderboardEntryDTO(
@@ -259,6 +327,7 @@ public class FantasyService {
                 .count();
 
         if (goalkeepers > 1) {
+            logger.warn("Fantasy lineup validation failed because more than one goalkeeper was selected");
             throw new IllegalArgumentException("A fantasy lineup cannot contain more than one goalkeeper.");
         }
     }
@@ -332,7 +401,10 @@ public class FantasyService {
 
     private User getUserOrThrow(Long userId) {
         return userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("User not found."));
+                .orElseThrow(() -> {
+                    logger.warn("User id={} was not found", userId);
+                    return new IllegalArgumentException("User not found.");
+                });
     }
 
     private String generateUniqueCode() {
