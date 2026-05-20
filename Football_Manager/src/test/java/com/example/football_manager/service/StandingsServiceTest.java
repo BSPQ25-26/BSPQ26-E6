@@ -10,6 +10,8 @@ import com.example.football_manager.repository.MatchRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -18,6 +20,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class StandingsServiceTest {
+
+    private static final Logger logger = LoggerFactory.getLogger(StandingsServiceTest.class);
 
     private StandingsService standingsService;
 
@@ -47,6 +51,7 @@ class StandingsServiceTest {
 
     @Test
     void getCompetitions_shouldReturnAllCompetitions() {
+        logger.info("Get competitions service test: expectedCount={}", 1);
         when(competitionRepository.findAll()).thenReturn(List.of(competition));
 
         List<Competition> result = standingsService.getCompetitions();
@@ -59,6 +64,7 @@ class StandingsServiceTest {
 
     @Test
     void getStandingsForCompetition_shouldCalculatePointsAndStatsCorrectly() {
+        logger.info("Standings calculation test: competitionId={}", 1L);
         Match arsenalBeatsChelsea = createMatch(
                 1L,
                 arsenal,
@@ -119,6 +125,7 @@ class StandingsServiceTest {
 
     @Test
     void getStandingsForCompetition_shouldSortByPointsGoalDifferenceGoalsForAndName() {
+        logger.info("Standings sort order test: competitionId={}", 1L);
         Team alpha = new Team(10L, "Alpha FC", "alpha.png", country);
         Team beta = new Team(11L, "Beta FC", "beta.png", country);
         Team gamma = new Team(12L, "Gamma FC", "gamma.png", country);
@@ -144,6 +151,7 @@ class StandingsServiceTest {
 
     @Test
     void getStandingsForCompetition_shouldIgnoreUnfinishedMatchesInStats() {
+        logger.info("Standings ignore unfinished matches test: competitionId={}", 1L);
         Match unfinishedMatch = createMatch(
                 1L,
                 arsenal,
@@ -183,6 +191,7 @@ class StandingsServiceTest {
 
     @Test
     void getStandingsForCompetition_whenNoMatches_shouldReturnEmptyList() {
+        logger.info("Standings no matches test: competitionId={}", 99L);
         when(matchRepository.findByFilters(null, null, 99L)).thenReturn(List.of());
 
         List<StandingDTO> standings = standingsService.getStandingsForCompetition(99L);

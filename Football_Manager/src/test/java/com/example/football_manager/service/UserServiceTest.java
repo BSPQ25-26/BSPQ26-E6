@@ -9,6 +9,8 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Optional;
@@ -22,6 +24,7 @@ import java.util.Set;
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceTest {
+    private static final Logger logger = LoggerFactory.getLogger(UserServiceTest.class);
     @Mock
     private TeamRepository teamRepository;
     @Mock
@@ -47,6 +50,7 @@ class UserServiceTest {
 
     @Test
     void registerUser_shouldCreateNormalUser() {
+        logger.info("Register user service test: username={}, isAdmin={}", "elena", false);
         when(userRepository.existsByUsername("elena")).thenReturn(false);
         when(userRepository.existsByEmail("elena@test.com")).thenReturn(false);
         when(passwordEncoder.encode("1234")).thenReturn("hashed1234");
@@ -73,6 +77,7 @@ class UserServiceTest {
 
     @Test
     void registerUser_shouldCreateAdminUser() {
+        logger.info("Register admin service test: username={}, isAdmin={}", "admin", true);
         when(userRepository.existsByUsername("admin")).thenReturn(false);
         when(userRepository.existsByEmail("admin@test.com")).thenReturn(false);
         when(passwordEncoder.encode("adminpass")).thenReturn("hashedAdmin");
@@ -93,6 +98,7 @@ class UserServiceTest {
 
     @Test
     void registerUser_shouldThrowWhenUsernameAlreadyExists() {
+        logger.info("Register user conflict test: username={}", "elena");
         when(userRepository.existsByUsername("elena")).thenReturn(true);
 
         IllegalArgumentException ex = assertThrows(IllegalArgumentException.class,
@@ -104,6 +110,7 @@ class UserServiceTest {
 
     @Test
     void registerUser_shouldThrowWhenEmailAlreadyExists() {
+        logger.info("Register user email conflict test: email={}", "elena@test.com");
         when(userRepository.existsByUsername("elena")).thenReturn(false);
         when(userRepository.existsByEmail("elena@test.com")).thenReturn(true);
 
@@ -116,6 +123,7 @@ class UserServiceTest {
 
     @Test
     void login_shouldReturnUserWhenCredentialsAreValid() {
+        logger.info("Login service test: username={}", "elena");
         when(userRepository.findByUsername("elena")).thenReturn(Optional.of(normalUser));
         when(passwordEncoder.matches("1234", "hashedPass")).thenReturn(true);
 
@@ -126,6 +134,7 @@ class UserServiceTest {
 
     @Test
     void login_shouldThrowWhenUserNotFound() {
+        logger.info("Login user not found test: username={}", "ghost");
         when(userRepository.findByUsername("ghost")).thenReturn(Optional.empty());
 
         IllegalArgumentException ex = assertThrows(IllegalArgumentException.class,
@@ -136,6 +145,7 @@ class UserServiceTest {
 
     @Test
     void login_shouldThrowWhenPasswordDoesNotMatch() {
+        logger.info("Login bad password test: username={}", "elena");
         when(userRepository.findByUsername("elena")).thenReturn(Optional.of(normalUser));
         when(passwordEncoder.matches("badpass", "hashedPass")).thenReturn(false);
 
@@ -147,6 +157,7 @@ class UserServiceTest {
 
     @Test
     void getUserById_shouldReturnUser() {
+        logger.info("Get user by id service test: id={}", 1L);
         when(userRepository.findById(1L)).thenReturn(Optional.of(normalUser));
 
         User result = userService.getUserById(1L);
@@ -156,6 +167,7 @@ class UserServiceTest {
 
     @Test
     void getUserById_shouldThrowWhenMissing() {
+        logger.info("Get user by id not found test: id={}", 99L);
         when(userRepository.findById(99L)).thenReturn(Optional.empty());
 
         IllegalArgumentException ex = assertThrows(IllegalArgumentException.class,
@@ -166,6 +178,7 @@ class UserServiceTest {
 
     @Test
     void getUserByUsername_shouldReturnUser() {
+        logger.info("Get user by username service test: username={}", "elena");
         when(userRepository.findByUsername("elena")).thenReturn(Optional.of(normalUser));
 
         User result = userService.getUserByUsername("elena");
@@ -175,6 +188,7 @@ class UserServiceTest {
 
     @Test
     void getUserByUsername_shouldThrowWhenMissing() {
+        logger.info("Get user by username not found test: username={}", "ghost");
         when(userRepository.findByUsername("ghost")).thenReturn(Optional.empty());
 
         IllegalArgumentException ex = assertThrows(IllegalArgumentException.class,
@@ -185,6 +199,7 @@ class UserServiceTest {
 
     @Test
     void addFavouriteTeam_shouldAddTeamSuccessfully() {
+        logger.info("Add favourite team test: userId={}, teamId={}", 1L, 10L);
         Team team = new Team();
         team.setId(10L);
         team.setName("Real Madrid");
@@ -204,6 +219,7 @@ class UserServiceTest {
 
     @Test
     void addFavouriteTeam_shouldThrowWhenTeamAlreadyFavourite() {
+        logger.info("Add favourite team conflict test: userId={}, teamId={}", 1L, 10L);
         Team team = new Team();
         team.setId(10L);
         team.setName("Real Madrid");
@@ -225,6 +241,7 @@ class UserServiceTest {
 
     @Test
     void removeFavouriteTeam_shouldRemoveTeamSuccessfully() {
+        logger.info("Remove favourite team test: userId={}, teamId={}", 1L, 10L);
         Team team = new Team();
         team.setId(10L);
         team.setName("Real Madrid");
@@ -244,6 +261,7 @@ class UserServiceTest {
 
     @Test
     void removeFavouriteTeam_shouldThrowWhenTeamNotInFavourites() {
+        logger.info("Remove favourite team missing test: userId={}, teamId={}", 1L, 10L);
         normalUser.setFavouriteTeams(new HashSet<>());
 
         when(userRepository.findById(1L)).thenReturn(Optional.of(normalUser));
@@ -260,6 +278,7 @@ class UserServiceTest {
 
     @Test
     void getFavouriteTeamIdsByUserId_shouldReturnFavouriteIds() {
+        logger.info("Get favourite team ids test: userId={}", 1L);
         Team team1 = new Team();
         team1.setId(10L);
 
@@ -277,6 +296,7 @@ class UserServiceTest {
 
     @Test
     void getFavouriteTeamIdsByUserId_shouldReturnEmptyWhenUserIdIsNull() {
+        logger.info("Get favourite team ids null user test");
         Set<Long> result = userService.getFavouriteTeamIdsByUserId(null);
 
         assertTrue(result.isEmpty());

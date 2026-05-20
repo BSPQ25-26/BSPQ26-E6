@@ -1,6 +1,8 @@
 package com.example.football_manager;
 
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest(properties = {
@@ -14,8 +16,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 })
 class FootballManagerApplicationTests {
 
+    private static final Logger logger = LoggerFactory.getLogger(FootballManagerApplicationTests.class);
+
     @Test
     void contextLoads() {
+        logger.info("Spring context load test");
         // Verifies that the Spring application context can start using an isolated test database.
     }
 }

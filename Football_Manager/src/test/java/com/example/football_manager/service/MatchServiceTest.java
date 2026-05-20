@@ -13,6 +13,8 @@ import com.example.football_manager.repository.TeamRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
@@ -24,6 +26,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class MatchServiceTest {
+
+    private static final Logger logger = LoggerFactory.getLogger(MatchServiceTest.class);
 
     private MatchService matchService;
 
@@ -78,6 +82,8 @@ class MatchServiceTest {
 
     @Test
     void createMatch_shouldScheduleSuccessfully() {
+        logger.info("Create match service test: homeTeamId={}, awayTeamId={}, competitionId={}",
+                validRequest.getHomeTeamId(), validRequest.getAwayTeamId(), validRequest.getCompetitionId());
         String result = matchService.createMatch(validRequest);
 
         assertEquals("Match scheduled successfully.", result);
@@ -88,6 +94,8 @@ class MatchServiceTest {
     @Test
     void createMatch_shouldKeepProvidedStatus() {
         validRequest.setStatus(MatchRequestDTO.MatchStatus.CANCELLED);
+
+        logger.info("Create match service test with provided status: status={}", validRequest.getStatus());
 
         String result = matchService.createMatch(validRequest);
 
@@ -165,6 +173,9 @@ class MatchServiceTest {
     void createMatch_shouldThrowWhenTeamsAreTheSame() {
         validRequest.setAwayTeamId(1L);
 
+        logger.info("Create match invalid test: homeTeamId={}, awayTeamId={}",
+                validRequest.getHomeTeamId(), validRequest.getAwayTeamId());
+
         IllegalArgumentException ex = assertThrows(
                 IllegalArgumentException.class,
                 () -> matchService.createMatch(validRequest)
@@ -201,6 +212,8 @@ class MatchServiceTest {
     void updateMatch_shouldReturnSuccessMessage() {
         validRequest.setStatus(MatchRequestDTO.MatchStatus.SCHEDULED);
 
+        logger.info("Update match service test: matchId={}, status={}", 8L, validRequest.getStatus());
+
         Match existingMatch = new Match();
         existingMatch.setId(8L);
 
@@ -235,6 +248,8 @@ class MatchServiceTest {
         Match existingMatch = new Match();
         existingMatch.setId(3L);
 
+        logger.info("Delete match service test: matchId={}", 3L);
+
         when(matchRepository.findById(3L)).thenReturn(Optional.of(existingMatch));
 
         String result = matchService.deleteMatch(3L);
@@ -264,6 +279,9 @@ class MatchServiceTest {
         match.setId(9L);
         match.setLeftTeam(homeTeam);
         match.setRightTeam(awayTeam);
+
+        logger.info("Register result service test: matchId={}, homeTeamId={}, awayTeamId={}",
+                9L, homeTeam.getId(), awayTeam.getId());
 
         when(matchRepository.findById(9L)).thenReturn(Optional.of(match));
 
@@ -391,6 +409,8 @@ class MatchServiceTest {
         Match match = new Match();
         match.setId(50L);
 
+        logger.info("Get matches service test: no filters");
+
         when(matchRepository.findAll()).thenReturn(List.of(match));
 
         List<Match> result = matchService.getMatches(null, null, null);
@@ -475,6 +495,7 @@ class MatchServiceTest {
 
     @Test
     void getMatches_withInvalidStatusForFiltering_shouldThrowException() {
+        logger.info("Get matches invalid status filter test: status={}", MatchRequestDTO.MatchStatus.IN_PROGRESS);
         IllegalArgumentException ex = assertThrows(
                 IllegalArgumentException.class,
                 () -> matchService.getMatches(

@@ -14,6 +14,8 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,6 +30,8 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class PlayerServiceTest {
+
+    private static final Logger logger = LoggerFactory.getLogger(PlayerServiceTest.class);
 
     @Mock
     private PlayerRepository playerRepository;
@@ -58,6 +62,7 @@ class PlayerServiceTest {
 
     @Test
     void createPlayer_shouldCreatePlayerSuccessfully() {
+        logger.info("Create player service test: teamId={}, number={}", 10L, validDto.getNumber());
         when(teamRepository.findById(10L)).thenReturn(Optional.of(team));
         when(playerRepository.existsByTeamIdAndNumber(10L, 10)).thenReturn(false);
         when(playerRepository.save(any(Player.class))).thenAnswer(invocation -> {
@@ -88,6 +93,7 @@ class PlayerServiceTest {
 
     @Test
     void createPlayer_shouldThrowExceptionWhenTeamNotFound() {
+        logger.info("Create player team missing test: teamId={}", 55L);
         when(teamRepository.findById(55L)).thenReturn(Optional.empty());
 
         IllegalArgumentException ex = assertThrows(IllegalArgumentException.class,
@@ -99,6 +105,7 @@ class PlayerServiceTest {
 
     @Test
     void createPlayer_shouldThrowExceptionWhenNumberAlreadyExistsInTeam() {
+        logger.info("Create player number conflict test: teamId={}, number={}", 10L, validDto.getNumber());
         when(teamRepository.findById(10L)).thenReturn(Optional.of(team));
         when(playerRepository.existsByTeamIdAndNumber(10L, 10)).thenReturn(true);
 
@@ -111,6 +118,7 @@ class PlayerServiceTest {
 
     @Test
     void createPlayer_shouldThrowExceptionWhenNameIsBlank() {
+        logger.info("Create player name blank test: teamId={}", 10L);
         PlayerRequestDTO dto = new PlayerRequestDTO("   ", 8, PlayerPosition.MIDFIELDER);
 
         IllegalArgumentException ex = assertThrows(IllegalArgumentException.class,
@@ -122,6 +130,7 @@ class PlayerServiceTest {
 
     @Test
     void createPlayer_shouldThrowExceptionWhenPositionIsMissing() {
+        logger.info("Create player missing position test: teamId={}", 10L);
         PlayerRequestDTO dto = new PlayerRequestDTO("Take Kubo", 14, null);
 
         IllegalArgumentException ex = assertThrows(IllegalArgumentException.class,
@@ -133,6 +142,7 @@ class PlayerServiceTest {
 
     @Test
     void createPlayers_shouldCreateAllPlayersSuccessfully() {
+        logger.info("Create players bulk service test: teamId={}, count={}", 10L, 2);
         PlayerRequestDTO player1 = new PlayerRequestDTO(" Unai Simon ", 1, PlayerPosition.GOALKEEPER);
         PlayerRequestDTO player2 = new PlayerRequestDTO(" Inaki Williams ", 9, PlayerPosition.FORWARD);
 
@@ -152,6 +162,7 @@ class PlayerServiceTest {
 
     @Test
     void createPlayers_shouldThrowExceptionWhenRequestContainsDuplicatedNumbers() {
+        logger.info("Create players duplicate number test: teamId={}, number={}", 10L, 1);
         PlayerRequestDTO player1 = new PlayerRequestDTO("Unai Simon", 1, PlayerPosition.GOALKEEPER);
         PlayerRequestDTO player2 = new PlayerRequestDTO("Julen Agirrezabala", 1, PlayerPosition.GOALKEEPER);
 
@@ -167,6 +178,7 @@ class PlayerServiceTest {
 
     @Test
     void createPlayers_shouldThrowExceptionWhenListIsEmpty() {
+        logger.info("Create players empty list test: teamId={}", 10L);
         IllegalArgumentException ex = assertThrows(IllegalArgumentException.class,
                 () -> playerService.createPlayers(10L, List.of()));
 
@@ -176,6 +188,7 @@ class PlayerServiceTest {
 
     @Test
     void getPlayersByTeamId_shouldReturnOrderedPlayers() {
+        logger.info("Get players by team service test: teamId={}", 10L);
         Player player1 = new Player(1L, "Alex Remiro", 1, PlayerPosition.GOALKEEPER, team);
         Player player2 = new Player(2L, "Mikel Oyarzabal", 10, PlayerPosition.FORWARD, team);
 
@@ -191,6 +204,7 @@ class PlayerServiceTest {
 
     @Test
     void getPlayersByTeamId_shouldThrowExceptionWhenTeamIdIsMissing() {
+        logger.info("Get players by team missing id test");
         IllegalArgumentException ex = assertThrows(IllegalArgumentException.class,
                 () -> playerService.getPlayersByTeamId(null));
 
@@ -199,6 +213,7 @@ class PlayerServiceTest {
 
     @Test
     void getPlayersByTeamId_shouldThrowExceptionWhenTeamDoesNotExist() {
+        logger.info("Get players by team not found test: teamId={}", 404L);
         when(teamRepository.existsById(404L)).thenReturn(false);
 
         IllegalArgumentException ex = assertThrows(IllegalArgumentException.class,
@@ -209,6 +224,7 @@ class PlayerServiceTest {
 
     @Test
     void updatePlayer_shouldUpdatePlayerSuccessfully() {
+        logger.info("Update player service test: teamId={}, playerId={}, number={}", 10L, 1L, 8);
         Player existingPlayer = new Player(1L, "Mikel Oyarzabal", 10, PlayerPosition.FORWARD, team);
 
         when(teamRepository.findById(10L)).thenReturn(Optional.of(team));
@@ -228,6 +244,7 @@ class PlayerServiceTest {
 
     @Test
     void updatePlayer_shouldThrowExceptionWhenPlayerNotFound() {
+        logger.info("Update player not found test: teamId={}, playerId={}", 10L, 999L);
         when(teamRepository.findById(10L)).thenReturn(Optional.of(team));
         when(playerRepository.findByIdAndTeamId(999L, 10L)).thenReturn(Optional.empty());
 
@@ -240,6 +257,7 @@ class PlayerServiceTest {
 
     @Test
     void updatePlayer_shouldThrowExceptionWhenNumberAlreadyExistsInAnotherPlayer() {
+        logger.info("Update player number conflict test: teamId={}, playerId={}, number={}", 10L, 1L, 8);
         Player existingPlayer = new Player(1L, "Mikel Oyarzabal", 10, PlayerPosition.FORWARD, team);
 
         when(teamRepository.findById(10L)).thenReturn(Optional.of(team));
@@ -257,6 +275,7 @@ class PlayerServiceTest {
 
     @Test
     void deletePlayer_shouldDeleteSuccessfully() {
+        logger.info("Delete player service test: teamId={}, playerId={}", 10L, 1L);
         Player existingPlayer = new Player(1L, "Unai Simon", 1, PlayerPosition.GOALKEEPER, team);
         team.getPlayers().add(existingPlayer);
 
@@ -271,6 +290,7 @@ class PlayerServiceTest {
 
     @Test
     void deletePlayer_shouldThrowExceptionWhenPlayerNotFound() {
+        logger.info("Delete player not found test: teamId={}, playerId={}", 10L, 123L);
         when(teamRepository.findById(10L)).thenReturn(Optional.of(team));
         when(playerRepository.findByIdAndTeamId(123L, 10L)).thenReturn(Optional.empty());
 

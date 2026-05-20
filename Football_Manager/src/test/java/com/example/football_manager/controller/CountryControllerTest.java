@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -18,6 +20,8 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class CountryControllerTest {
+
+    private static final Logger logger = LoggerFactory.getLogger(CountryControllerTest.class);
 
     @Mock
     private CountryService countryService;
@@ -34,6 +38,8 @@ class CountryControllerTest {
         CountryRequestDTO dto = new CountryRequestDTO("Spain");
         Country country = new Country(1L, "Spain");
 
+        logger.info("Create country test: name={}", dto.getName());
+
         when(countryService.createCountry(dto)).thenReturn(country);
 
         ResponseEntity<Country> response = countryController.createCountry(dto);
@@ -47,6 +53,8 @@ class CountryControllerTest {
     void getAllCountries_shouldReturnCountries() {
         Country country = new Country(1L, "Spain");
 
+        logger.info("Get all countries test: expectedCount={}", 1);
+
         when(countryService.getAllCountries()).thenReturn(List.of(country));
 
         ResponseEntity<List<Country>> response = countryController.getAllCountries();
@@ -58,6 +66,7 @@ class CountryControllerTest {
 
     @Test
     void deleteCountry_shouldReturnNoContent() {
+        logger.info("Delete country test: id={}", 1L);
         ResponseEntity<Void> response = countryController.deleteCountry(1L);
 
         assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());

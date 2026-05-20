@@ -7,6 +7,8 @@ import com.example.football_manager.model.Match;
 import com.example.football_manager.service.MatchService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -21,6 +23,8 @@ import static org.mockito.Mockito.*;
 
 class MatchControllerTest {
 
+    private static final Logger logger = LoggerFactory.getLogger(MatchControllerTest.class);
+
     private MatchService matchService;
     private MatchController matchController;
 
@@ -33,6 +37,7 @@ class MatchControllerTest {
 
     @Test
     void getMatches_shouldReturnFilteredMatches() {
+        logger.info("Testing filtered matches retrieval: competitionId={}, status={}, teamId={}", 1L, MatchRequestDTO.MatchStatus.FINISHED, 2L);
         Match match = new Match();
         match.setId(1L);
 
@@ -52,6 +57,7 @@ class MatchControllerTest {
 
     @Test
     void getMatches_whenInvalidFilter_shouldThrowBadRequest() {
+        logger.info("Testing invalid filter handling: status={}", MatchRequestDTO.MatchStatus.IN_PROGRESS);
         when(matchService.getMatches(null, MatchRequestDTO.MatchStatus.IN_PROGRESS, null))
                 .thenThrow(new IllegalArgumentException("Match status filter not supported"));
 
@@ -70,6 +76,7 @@ class MatchControllerTest {
 
     @Test
     void getUpcomingMatches_shouldReturnUpcomingMatches() {
+        logger.info("Testing upcoming matches retrieval");
         Match match = new Match();
         match.setId(1L);
 
@@ -85,6 +92,7 @@ class MatchControllerTest {
     @Test
     void createMatchFromJson_whenValid_shouldReturnCreated() {
         MatchRequestDTO dto = createMatchRequestDTO();
+        logger.info("Testing match creation (JSON): homeTeamId={}, awayTeamId={}", dto.getHomeTeamId(), dto.getAwayTeamId());
 
         when(matchService.createMatch(dto)).thenReturn("Match scheduled successfully.");
 
@@ -98,6 +106,7 @@ class MatchControllerTest {
     @Test
     void createMatchFromJson_whenServiceThrows_shouldReturnBadRequest() {
         MatchRequestDTO dto = createMatchRequestDTO();
+        logger.info("Testing match creation failure (JSON): homeTeamId={}, awayTeamId={}", dto.getHomeTeamId(), dto.getAwayTeamId());
 
         when(matchService.createMatch(dto))
                 .thenThrow(new IllegalArgumentException("Teams must be different."));
@@ -112,6 +121,7 @@ class MatchControllerTest {
     @Test
     void createMatchFromForm_whenValid_shouldReturnCreated() {
         MatchRequestDTO dto = createMatchRequestDTO();
+        logger.info("Testing match creation (form): competitionId={}, kickoffTime={}", dto.getCompetitionId(), dto.getKickoffTime());
 
         when(matchService.createMatch(dto)).thenReturn("Match scheduled successfully.");
 
@@ -124,6 +134,7 @@ class MatchControllerTest {
 
     @Test
     void getMatchResults_shouldReturnFinishedResults() {
+        logger.info("Testing finished match results retrieval");
         MatchResultDTO resultDTO = new MatchResultDTO(
                 1L,
                 "Real Sociedad",
@@ -145,6 +156,7 @@ class MatchControllerTest {
     @Test
     void updateMatch_whenValid_shouldReturnOk() {
         MatchRequestDTO dto = createMatchRequestDTO();
+        logger.info("Testing match update: matchId={}, status={}", 1L, dto.getStatus());
 
         when(matchService.updateMatch(1L, dto)).thenReturn("Match updated successfully.");
 
@@ -158,6 +170,7 @@ class MatchControllerTest {
     @Test
     void updateMatch_whenServiceThrows_shouldReturnBadRequest() {
         MatchRequestDTO dto = createMatchRequestDTO();
+        logger.info("Testing match update failure: matchId={}", 1L);
 
         when(matchService.updateMatch(1L, dto))
                 .thenThrow(new IllegalArgumentException("Match not found."));
@@ -171,6 +184,7 @@ class MatchControllerTest {
 
     @Test
     void deleteMatch_whenValid_shouldReturnOk() {
+        logger.info("Testing match deletion: matchId={}", 1L);
         when(matchService.deleteMatch(1L)).thenReturn("Match deleted successfully.");
 
         ResponseEntity<String> response = matchController.deleteMatch(1L);
@@ -182,6 +196,7 @@ class MatchControllerTest {
 
     @Test
     void deleteMatch_whenServiceThrows_shouldReturnBadRequest() {
+        logger.info("Testing match deletion failure: matchId={}", 1L);
         when(matchService.deleteMatch(1L))
                 .thenThrow(new IllegalArgumentException("Match not found."));
 
@@ -196,6 +211,7 @@ class MatchControllerTest {
     void registerResult_whenValid_shouldReturnOk() {
         MatchResultRequestDTO dto = new MatchResultRequestDTO();
         dto.setGoals(List.of());
+        logger.info("Testing result registration: matchId={}, goalsCount={}", 1L, dto.getGoals().size());
 
         when(matchService.registerResult(1L, dto)).thenReturn("Result registered successfully.");
 
@@ -210,6 +226,7 @@ class MatchControllerTest {
     void registerResult_whenServiceThrows_shouldReturnBadRequest() {
         MatchResultRequestDTO dto = new MatchResultRequestDTO();
         dto.setGoals(List.of());
+        logger.info("Testing result registration failure: matchId={}, goalsCount={}", 1L, dto.getGoals().size());
 
         when(matchService.registerResult(1L, dto))
                 .thenThrow(new IllegalArgumentException("Invalid result."));
@@ -229,6 +246,8 @@ class MatchControllerTest {
         dto.setKickoffTime(LocalDateTime.of(2026, 5, 17, 20, 0));
         dto.setVenue("Anoeta");
         dto.setStatus(MatchRequestDTO.MatchStatus.SCHEDULED);
+        logger.info("Created MatchRequestDTO for tests: homeTeamId={}, awayTeamId={}, competitionId={}",
+                dto.getHomeTeamId(), dto.getAwayTeamId(), dto.getCompetitionId());
         return dto;
     }
 }

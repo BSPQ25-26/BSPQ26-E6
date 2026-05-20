@@ -5,6 +5,8 @@ import com.example.football_manager.model.Competition;
 import com.example.football_manager.repository.CompetitionRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,6 +15,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class CompetitionServiceTest {
+
+    private static final Logger logger = LoggerFactory.getLogger(CompetitionServiceTest.class);
 
     private CompetitionRepository competitionRepository;
     private CompetitionService competitionService;
@@ -26,6 +30,8 @@ class CompetitionServiceTest {
     @Test
     void createCompetition_shouldCreateCompetitionSuccessfully() {
         CompetitionRequestDTO dto = new CompetitionRequestDTO(" LaLiga ");
+
+        logger.info("Create competition service test: name={}", dto.getName().trim());
 
         Competition savedCompetition = new Competition();
         savedCompetition.setId(1L);
@@ -50,6 +56,8 @@ class CompetitionServiceTest {
 
         CompetitionRequestDTO dto = new CompetitionRequestDTO(" Champions League ");
 
+        logger.info("Update competition service test: id={}, newName={}", 1L, dto.getName().trim());
+
         when(competitionRepository.findById(1L)).thenReturn(Optional.of(existingCompetition));
         when(competitionRepository.save(any(Competition.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
@@ -64,6 +72,8 @@ class CompetitionServiceTest {
     @Test
     void updateCompetition_shouldThrowExceptionWhenCompetitionNotFound() {
         CompetitionRequestDTO dto = new CompetitionRequestDTO("Europa League");
+
+        logger.info("Update competition not found test: id={}", 99L);
 
         when(competitionRepository.findById(99L)).thenReturn(Optional.empty());
 
@@ -83,6 +93,8 @@ class CompetitionServiceTest {
         Competition competition = new Competition();
         competition.setId(1L);
         competition.setName("Premier League");
+
+        logger.info("Get competition by id service test: id={}", 1L);
 
         when(competitionRepository.findById(1L)).thenReturn(Optional.of(competition));
 
@@ -104,6 +116,8 @@ class CompetitionServiceTest {
         c2.setId(2L);
         c2.setName("Premier League");
 
+        logger.info("Get all competitions service test: expectedCount={}", 2);
+
         when(competitionRepository.findAll()).thenReturn(List.of(c1, c2));
 
         List<Competition> result = competitionService.getAllCompetitions();
@@ -117,6 +131,7 @@ class CompetitionServiceTest {
 
     @Test
     void getAllCompetitions_shouldReturnEmptyList() {
+        logger.info("Get all competitions empty service test");
         when(competitionRepository.findAll()).thenReturn(List.of());
 
         List<Competition> result = competitionService.getAllCompetitions();
@@ -133,6 +148,8 @@ class CompetitionServiceTest {
         competition.setId(1L);
         competition.setName("LaLiga");
 
+        logger.info("Delete competition service test: id={}", 1L);
+
         when(competitionRepository.findById(1L)).thenReturn(Optional.of(competition));
 
         competitionService.deleteCompetition(1L);
@@ -143,6 +160,7 @@ class CompetitionServiceTest {
 
     @Test
     void deleteCompetition_shouldThrowExceptionWhenCompetitionNotFound() {
+        logger.info("Delete competition not found test: id={}", 99L);
         when(competitionRepository.findById(99L)).thenReturn(Optional.empty());
 
         RuntimeException ex = assertThrows(

@@ -8,6 +8,8 @@ import com.example.football_manager.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -16,6 +18,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class AuthControllerTest {
+
+    private static final Logger logger = LoggerFactory.getLogger(AuthControllerTest.class);
 
     private UserService userService;
     private AuthController authController;
@@ -37,6 +41,8 @@ class AuthControllerTest {
         registerDTO.setEmail("elena@test.com");
         registerDTO.setPassword("1234");
         registerDTO.setIsAdmin(false);
+
+        logger.info("Register success test: username={}, isAdmin={}", registerDTO.getUsername(), registerDTO.getIsAdmin());
 
         User user = new User();
         user.setId(1L);
@@ -68,6 +74,8 @@ class AuthControllerTest {
         registerDTO.setPassword("1234");
         registerDTO.setIsAdmin(false);
 
+        logger.info("Register conflict test: username={}, email={}", registerDTO.getUsername(), registerDTO.getEmail());
+
         when(userService.registerUser("elena", "elena@test.com", "1234", false))
                 .thenThrow(new IllegalArgumentException("Username already exists"));
 
@@ -89,6 +97,8 @@ class AuthControllerTest {
         LoginDTO loginDTO = new LoginDTO();
         loginDTO.setUsername("elena");
         loginDTO.setPassword("1234");
+
+        logger.info("Login success test: username={}", loginDTO.getUsername());
 
         User user = new User();
         user.setId(1L);
@@ -118,6 +128,8 @@ class AuthControllerTest {
         LoginDTO loginDTO = new LoginDTO();
         loginDTO.setUsername("elena");
         loginDTO.setPassword("wrong");
+
+        logger.info("Login failure test: username={}", loginDTO.getUsername());
 
         when(userService.login("elena", "wrong"))
                 .thenThrow(new IllegalArgumentException("Invalid credentials"));
