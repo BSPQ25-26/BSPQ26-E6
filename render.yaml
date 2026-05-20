@@ -1,0 +1,16 @@
+version: "1"
+projects:
+- name: BSPQ26-E6
+  environments:
+  - name: Production
+    services:
+    - type: web
+      name: BSPQ26-E6
+      runtime: docker
+      repo: https://github.com/BSPQ25-26/BSPQ26-E6
+      plan: free
+      region: oregon
+      dockerContext: .
+      dockerfilePath: ./Dockerfile
+      autoDeployTrigger: commit
+      rootDir: Football_Manager
