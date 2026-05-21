@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Football Manager">
+    <body>
+        <menu name="Football Manager">
+            <item name="Home" href="index.html"/>
+            <item name="Surefire Tests" href="surefire.html"/>
+            <item name="JaCoCo Coverage" href="jacoco/index.html"/>
+            <item name="Acceptance Tests" href="acceptance-tests.html"/>
+            <item name="Performance Tests" href="performance-tests.html"/>
+            <item name="JUnitPerf Report" href="junitperf/junitperf_report.html"/>
+        </menu>
+
+        <menu ref="reports"/>
+    </body>
+</project>

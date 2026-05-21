@@ -92,10 +92,27 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- Cache -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
+        </dependency>
+
         <!-- Spring Boot tests -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webmvc-test</artifactId>
             <scope>test</scope>
         </dependency>
 
@@ -123,6 +140,13 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- H2 database for tests -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>test</scope>
+        </dependency>
+
         <!-- JUnitPerf for performance testing -->
         <dependency>
             <groupId>com.github.noconnor</groupId>
@@ -143,23 +167,6 @@
         <dependency>
             <groupId>org.junit.vintage</groupId>
             <artifactId>junit-vintage-engine</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- Spring Cache and Caffeine -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-cache</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.github.ben-manes.caffeine</groupId>
-            <artifactId>caffeine</artifactId>
-        </dependency>
-        <!-- In-memory database for Spring Boot context tests -->
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
             <scope>test</scope>
         </dependency>
 
@@ -231,10 +238,40 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.5.4</version>
             </plugin>
+
+            <!-- Maven Site generation: stable version -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>3.21.0</version>
+                <version>3.12.1</version>
+            </plugin>
+
+            <!-- Copy JUnitPerf HTML report into Maven Site -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.1</version>
+                <executions>
+                    <execution>
+                        <id>copy-junitperf-report-to-maven-site</id>
+                        <phase>site</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/site/junitperf</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}/build/reports</directory>
+                                    <includes>
+                                        <include>junitperf_report.html</include>
+                                    </includes>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
 
         </plugins>
@@ -250,7 +287,7 @@
                 <version>3.9.0</version>
             </plugin>
 
-            <!-- Unit test report for Maven Site -->
+            <!-- Unit, integration and acceptance test report for Maven Site -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-report-plugin</artifactId>
