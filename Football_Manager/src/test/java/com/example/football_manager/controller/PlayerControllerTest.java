@@ -8,6 +8,8 @@ import com.example.football_manager.model.Team;
 import com.example.football_manager.service.PlayerService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -22,6 +24,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 class PlayerControllerTest {
+
+    private static final Logger logger = LoggerFactory.getLogger(PlayerControllerTest.class);
 
     private PlayerService playerService;
     private PlayerController playerController;
@@ -40,6 +44,8 @@ class PlayerControllerTest {
         PlayerRequestDTO dto = new PlayerRequestDTO("Take Kubo", 14, PlayerPosition.FORWARD);
         Player player = new Player(1L, "Take Kubo", 14, PlayerPosition.FORWARD, team);
 
+        logger.info("Create player test: teamId={}, name={}, number={}", 10L, dto.getName(), dto.getNumber());
+
         when(playerService.createPlayer(10L, dto)).thenReturn(player);
 
         ResponseEntity<?> response = playerController.createPlayer(10L, dto);
@@ -54,6 +60,7 @@ class PlayerControllerTest {
     @Test
     void createPlayer_shouldReturnBadRequestWhenValidationFails() {
         PlayerRequestDTO dto = new PlayerRequestDTO("Take Kubo", 14, PlayerPosition.FORWARD);
+        logger.info("Create player validation failure test: teamId={}, number={}", 10L, dto.getNumber());
         when(playerService.createPlayer(10L, dto))
                 .thenThrow(new IllegalArgumentException("Validation Error: Team already has a player with number 14."));
 
@@ -75,6 +82,8 @@ class PlayerControllerTest {
         Player savedPlayer1 = new Player(1L, "Unai Simon", 1, PlayerPosition.GOALKEEPER, team);
         Player savedPlayer2 = new Player(2L, "Inaki Williams", 9, PlayerPosition.FORWARD, team);
 
+        logger.info("Create players bulk test: teamId={}, count={}", 10L, dto.getPlayers().size());
+
         when(playerService.createPlayers(10L, dto.getPlayers())).thenReturn(List.of(savedPlayer1, savedPlayer2));
 
         ResponseEntity<?> response = playerController.createPlayers(10L, dto);
@@ -92,6 +101,8 @@ class PlayerControllerTest {
                 new PlayerRequestDTO("Julen Agirrezabala", 1, PlayerPosition.GOALKEEPER)
         ));
 
+        logger.info("Create players bulk validation failure test: teamId={}, count={}", 10L, dto.getPlayers().size());
+
         when(playerService.createPlayers(10L, dto.getPlayers()))
                 .thenThrow(new IllegalArgumentException("Validation Error: Request contains duplicated player number 1."));
 
@@ -107,6 +118,7 @@ class PlayerControllerTest {
         team.setId(10L);
 
         Player player = new Player(1L, "Alex Remiro", 1, PlayerPosition.GOALKEEPER, team);
+        logger.info("Get players by team test: teamId={}, expectedCount={}", 10L, 1);
         when(playerService.getPlayersByTeamId(10L)).thenReturn(List.of(player));
 
         ResponseEntity<?> response = playerController.getPlayersByTeamId(10L);
@@ -118,6 +130,7 @@ class PlayerControllerTest {
 
     @Test
     void getPlayersByTeamId_shouldReturnBadRequestWhenTeamIsInvalid() {
+        logger.info("Get players by team invalid test: teamId={}", 404L);
         when(playerService.getPlayersByTeamId(404L))
                 .thenThrow(new IllegalArgumentException("Team not found with id: 404"));
 
@@ -135,6 +148,8 @@ class PlayerControllerTest {
         PlayerRequestDTO dto = new PlayerRequestDTO("Oihan Sancet", 8, PlayerPosition.MIDFIELDER);
         Player player = new Player(1L, "Oihan Sancet", 8, PlayerPosition.MIDFIELDER, team);
 
+        logger.info("Update player test: teamId={}, playerId={}, number={}", 10L, 1L, dto.getNumber());
+
         when(playerService.updatePlayer(10L, 1L, dto)).thenReturn(player);
 
         ResponseEntity<?> response = playerController.updatePlayer(10L, 1L, dto);
@@ -148,6 +163,7 @@ class PlayerControllerTest {
     @Test
     void updatePlayer_shouldReturnBadRequestWhenValidationFails() {
         PlayerRequestDTO dto = new PlayerRequestDTO("Oihan Sancet", 8, PlayerPosition.MIDFIELDER);
+        logger.info("Update player validation failure test: teamId={}, playerId={}, number={}", 10L, 1L, dto.getNumber());
         when(playerService.updatePlayer(10L, 1L, dto))
                 .thenThrow(new IllegalArgumentException("Validation Error: Team already has a player with number 8."));
 
@@ -159,6 +175,7 @@ class PlayerControllerTest {
 
     @Test
     void deletePlayer_shouldReturnNoContentWhenPlayerIsDeleted() {
+        logger.info("Delete player test: teamId={}, playerId={}", 10L, 1L);
         ResponseEntity<?> response = playerController.deletePlayer(10L, 1L);
 
         assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
@@ -167,6 +184,7 @@ class PlayerControllerTest {
 
     @Test
     void deletePlayer_shouldReturnBadRequestWhenDeleteFails() {
+        logger.info("Delete player failure test: teamId={}, playerId={}", 10L, 1L);
         doThrow(new IllegalArgumentException("Player not found with id: 1 for team id: 10"))
                 .when(playerService).deletePlayer(10L, 1L);
 

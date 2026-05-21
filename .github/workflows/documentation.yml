@@ -1,4 +1,4 @@
-name: Generate Documentation
+name: Generate and Deploy Documentation
 
 on:
   push:
@@ -9,9 +9,18 @@ on:
       - main
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
 jobs:
-  generate-documentation:
-    name: Build tests, Maven Site and Doxygen
+  build-documentation:
+    name: Build tests, reports and documentation
     runs-on: ubuntu-latest
 
     steps:
@@ -37,13 +46,235 @@ jobs:
         working-directory: Football_Manager
         run: ./mvnw site
 
-      - name: Install Doxygen and Graphviz
+      - name: Install Doxygen, Graphviz and LaTeX
         run: |
           sudo apt-get update
-          sudo apt-get install -y doxygen graphviz
+          sudo apt-get install -y \
+            doxygen \
+            graphviz \
+            make \
+            latexmk \
+            texlive-latex-base \
+            texlive-latex-recommended \
+            texlive-latex-extra \
+            texlive-fonts-recommended \
+            texlive-font-utils \
+            cm-super
 
-      - name: Generate Doxygen HTML documentation
+      - name: Generate Doxygen HTML and LaTeX documentation
         run: doxygen Doxyfile
+
+      - name: Sanitize Doxygen LaTeX files
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          replacements = {
+              "│": "|",
+              "┃": "|",
+              "║": "|",
+              "─": "-",
+              "━": "-",
+              "═": "-",
+              "┌": "+",
+              "┐": "+",
+              "└": "+",
+              "┘": "+",
+              "├": "+",
+              "┤": "+",
+              "┬": "+",
+              "┴": "+",
+              "┼": "+",
+              "╔": "+",
+              "╗": "+",
+              "╚": "+",
+              "╝": "+",
+              "╠": "+",
+              "╣": "+",
+              "╦": "+",
+              "╩": "+",
+              "╬": "+",
+              "→": "->",
+              "←": "<-",
+              "≥": ">=",
+              "≤": "<=",
+              "—": "-",
+              "–": "-",
+              "✅": "[OK]",
+              "❌": "[ERROR]",
+              "⚠️": "[WARNING]",
+              "⚠": "[WARNING]",
+              "📌": "",
+              "🚀": "",
+              "📄": "",
+              "📊": "",
+              "🧪": "",
+              "⚽": "",
+          }
+
+          latex_dir = Path("docs/doxygen/latex")
+
+          if latex_dir.exists():
+              for file in latex_dir.rglob("*.tex"):
+                  text = file.read_text(encoding="utf-8", errors="ignore")
+                  for old, new in replacements.items():
+                      text = text.replace(old, new)
+                  file.write_text(text, encoding="utf-8")
+          PY
+
+      - name: Generate Doxygen PDF documentation
+        working-directory: docs/doxygen/latex
+        run: |
+          make clean || true
+          make
+          test -f refman.pdf
+
+      - name: Prepare GitHub Pages site
+        run: |
+          mkdir -p public
+
+          mkdir -p public/maven-site
+          cp -r Football_Manager/target/site/* public/maven-site/
+
+          mkdir -p public/jacoco
+          cp -r Football_Manager/target/site/jacoco/* public/jacoco/
+
+          mkdir -p public/doxygen
+          cp -r docs/doxygen/html/* public/doxygen/
+
+          mkdir -p public/pdf
+          cp docs/doxygen/latex/refman.pdf public/pdf/doxygen-refman.pdf
+
+          cat > public/index.html <<'EOF'
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>Football Manager Documentation</title>
+              <style>
+                  body {
+                      margin: 0;
+                      font-family: Arial, sans-serif;
+                      background: #0f172a;
+                      color: #f8fafc;
+                  }
+
+                  .top-bar {
+                      height: 12px;
+                      background: #10b981;
+                  }
+
+                  main {
+                      max-width: 1100px;
+                      margin: 0 auto;
+                      padding: 60px 24px;
+                  }
+
+                  .badge {
+                      display: inline-block;
+                      color: #10b981;
+                      font-size: 14px;
+                      font-weight: 800;
+                      letter-spacing: 0.18em;
+                      text-transform: uppercase;
+                      margin-bottom: 16px;
+                  }
+
+                  h1 {
+                      font-size: 48px;
+                      margin: 0 0 12px;
+                      line-height: 1.05;
+                  }
+
+                  p {
+                      color: #94a3b8;
+                      font-size: 18px;
+                      line-height: 1.6;
+                  }
+
+                  .grid {
+                      display: grid;
+                      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+                      gap: 24px;
+                      margin-top: 40px;
+                  }
+
+                  .card {
+                      background: #111827;
+                      border: 1px solid #1f2937;
+                      border-radius: 24px;
+                      padding: 28px;
+                      text-decoration: none;
+                      color: #f8fafc;
+                      transition: 0.2s ease;
+                      min-height: 160px;
+                  }
+
+                  .card:hover {
+                      border-color: #10b981;
+                      transform: translateY(-4px);
+                  }
+
+                  .card h2 {
+                      margin-top: 0;
+                      margin-bottom: 12px;
+                      color: #10b981;
+                      font-size: 24px;
+                  }
+
+                  .card p {
+                      font-size: 15px;
+                      line-height: 1.5;
+                      margin-bottom: 0;
+                  }
+
+                  footer {
+                      margin-top: 56px;
+                      color: #64748b;
+                      font-size: 14px;
+                  }
+              </style>
+          </head>
+          <body>
+              <div class="top-bar"></div>
+
+              <main>
+                  <span class="badge">Sprint 3 Documentation</span>
+                  <h1>Football Manager Documentation</h1>
+                  <p>
+                      Generated documentation, quality reports and testing evidence for the Football Manager teamwork project.
+                  </p>
+
+                  <section class="grid">
+                      <a class="card" href="./maven-site/index.html">
+                          <h2>Maven Site</h2>
+                          <p>Project information, dependencies, plugins and Maven-generated reports.</p>
+                      </a>
+
+                      <a class="card" href="./jacoco/index.html">
+                          <h2>JaCoCo Report</h2>
+                          <p>Code coverage report generated from the automated test suite.</p>
+                      </a>
+
+                      <a class="card" href="./doxygen/index.html">
+                          <h2>Doxygen HTML</h2>
+                          <p>Source code documentation generated from Java comments and project structure.</p>
+                      </a>
+
+                      <a class="card" href="./pdf/doxygen-refman.pdf">
+                          <h2>Doxygen PDF</h2>
+                          <p>PDF version of the Doxygen reference manual.</p>
+                      </a>
+                  </section>
+
+                  <footer>
+                      Football Manager · Sprint 3 · Generated with GitHub Actions
+                  </footer>
+              </main>
+          </body>
+          </html>
+          EOF
 
       - name: Upload Maven Site artifact
         uses: actions/upload-artifact@v4
@@ -62,3 +293,32 @@ jobs:
         with:
           name: doxygen-html
           path: docs/doxygen/html/
+
+      - name: Upload Doxygen PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: doxygen-pdf
+          path: docs/doxygen/latex/refman.pdf
+          if-no-files-found: error
+
+      - name: Upload GitHub Pages artifact
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+  deploy-documentation:
+    name: Deploy documentation to GitHub Pages
+    needs: build-documentation
+    runs-on: ubuntu-latest
+
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

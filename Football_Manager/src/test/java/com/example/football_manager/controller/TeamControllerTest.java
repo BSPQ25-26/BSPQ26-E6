@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -20,6 +22,8 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class TeamControllerTest {
+
+    private static final Logger logger = LoggerFactory.getLogger(TeamControllerTest.class);
 
     @Mock
     private TeamService teamService;
@@ -37,6 +41,8 @@ class TeamControllerTest {
         TeamRequestDTO dto = new TeamRequestDTO("Real Sociedad", "logo.png", 1L);
         Team team = new Team(1L, "Real Sociedad", "logo.png", country);
 
+        logger.info("Create team test: name={}, countryId={}", dto.getName(), dto.getCountryId());
+
         when(teamService.createTeam(dto)).thenReturn(team);
 
         ResponseEntity<Team> response = teamController.createTeam(dto);
@@ -52,6 +58,8 @@ class TeamControllerTest {
         TeamRequestDTO dto = new TeamRequestDTO("Athletic Club", "logo.png", 1L);
         Team team = new Team(2L, "Athletic Club", "logo.png", country);
 
+        logger.info("Update team test: id={}, name={}", 2L, dto.getName());
+
         when(teamService.updateTeam(2L, dto)).thenReturn(team);
 
         ResponseEntity<Team> response = teamController.updateTeam(2L, dto);
@@ -63,6 +71,7 @@ class TeamControllerTest {
 
     @Test
     void deleteTeam_shouldReturnNoContent() {
+        logger.info("Delete team test: id={}", 1L);
         ResponseEntity<Void> response = teamController.deleteTeam(1L);
 
         assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
@@ -73,6 +82,8 @@ class TeamControllerTest {
     void getTeamById_whenTeamExists_shouldReturnOk() {
         Country country = new Country(1L, "Spain");
         Team team = new Team(1L, "Real Sociedad", "logo.png", country);
+
+        logger.info("Get team by id test: id={}", 1L);
 
         when(teamService.getTeamById(1L)).thenReturn(Optional.of(team));
 
@@ -85,6 +96,7 @@ class TeamControllerTest {
 
     @Test
     void getTeamById_whenTeamDoesNotExist_shouldReturnNotFound() {
+        logger.info("Get team by id not found test: id={}", 99L);
         when(teamService.getTeamById(99L)).thenReturn(Optional.empty());
 
         ResponseEntity<Team> response = teamController.getTeamById(99L);
@@ -99,6 +111,8 @@ class TeamControllerTest {
         Country country = new Country(1L, "Spain");
         Team team = new Team(1L, "Real Sociedad", "logo.png", country);
 
+        logger.info("Search teams by name test: query={}", "Real");
+
         when(teamService.getTeamsContainingName("Real")).thenReturn(List.of(team));
 
         ResponseEntity<List<Team>> response = teamController.getTeamsContainingName("Real");
@@ -112,6 +126,8 @@ class TeamControllerTest {
     void getAllTeams_shouldReturnAllTeams() {
         Country country = new Country(1L, "Spain");
         Team team = new Team(1L, "Real Sociedad", "logo.png", country);
+
+        logger.info("Get all teams test: expectedCount={}", 1);
 
         when(teamService.getAllTeams()).thenReturn(List.of(team));
 

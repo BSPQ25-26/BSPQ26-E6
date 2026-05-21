@@ -12,6 +12,8 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +23,8 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class TeamServiceTest {
+
+    private static final Logger logger = LoggerFactory.getLogger(TeamServiceTest.class);
 
     @Mock
     private TeamRepository teamRepository;
@@ -48,6 +52,7 @@ class TeamServiceTest {
 
     @Test
     void createTeam_shouldCreateTeamSuccessfully() {
+        logger.info("Create team service test: name={}, countryId={}", validDto.getName().trim(), validDto.getCountryId());
         when(countryRepository.findById(1L)).thenReturn(Optional.of(spain));
 
         Team savedTeam = new Team();
@@ -77,6 +82,7 @@ class TeamServiceTest {
 
     @Test
     void createTeam_shouldThrowExceptionWhenCountryNotFound() {
+        logger.info("Create team country missing test: countryId={}", 999L);
         when(countryRepository.findById(999L)).thenReturn(Optional.empty());
 
         TeamRequestDTO dto = new TeamRequestDTO("Team A", "/logo.png", 999L);
@@ -90,6 +96,7 @@ class TeamServiceTest {
 
     @Test
     void getAllTeams_shouldReturnEmptyList() {
+        logger.info("Get all teams empty service test");
         when(teamRepository.findAll()).thenReturn(List.of());
 
         List<Team> result = teamService.getAllTeams();
@@ -101,6 +108,7 @@ class TeamServiceTest {
 
     @Test
     void getAllTeams_shouldReturnTeams() {
+        logger.info("Get all teams service test: expectedCount={}", 2);
         Team t1 = new Team(1L, "Barcelona", "/barca.png", spain);
         Team t2 = new Team(2L, "Madrid", "/madrid.png", spain);
 
@@ -115,6 +123,7 @@ class TeamServiceTest {
 
     @Test
     void updateTeam_shouldUpdateSuccessfully() {
+        logger.info("Update team service test: id={}, newCountryId={}", 5L, 2L);
         Team existing = new Team();
         existing.setId(5L);
         existing.setName("Old Name");
@@ -143,6 +152,7 @@ class TeamServiceTest {
 
     @Test
     void updateTeam_shouldThrowExceptionWhenTeamNotFound() {
+        logger.info("Update team not found test: id={}", 404L);
         when(teamRepository.findById(404L)).thenReturn(Optional.empty());
 
         RuntimeException ex = assertThrows(RuntimeException.class,
@@ -155,6 +165,7 @@ class TeamServiceTest {
 
     @Test
     void updateTeam_shouldThrowExceptionWhenCountryNotFound() {
+        logger.info("Update team country missing test: teamId={}, countryId={}", 5L, 999L);
         Team existing = new Team();
         existing.setId(5L);
 
@@ -172,6 +183,7 @@ class TeamServiceTest {
 
     @Test
     void deleteTeam_shouldDeleteSuccessfully() {
+        logger.info("Delete team service test: id={}", 7L);
         Team existing = new Team();
         existing.setId(7L);
 
@@ -184,6 +196,7 @@ class TeamServiceTest {
 
     @Test
     void deleteTeam_shouldThrowExceptionWhenTeamNotFound() {
+        logger.info("Delete team not found test: id={}", 123L);
         when(teamRepository.findById(123L)).thenReturn(Optional.empty());
 
         RuntimeException ex = assertThrows(RuntimeException.class,
@@ -195,6 +208,7 @@ class TeamServiceTest {
 
     @Test
     void getTeamById_shouldReturnOptional() {
+        logger.info("Get team by id service test: id={}", 1L);
         Team team = new Team(1L, "Valencia", "/valencia.png", spain);
         when(teamRepository.findById(1L)).thenReturn(Optional.of(team));
 
@@ -206,6 +220,7 @@ class TeamServiceTest {
 
     @Test
     void getTeamsContainingName_shouldReturnEmptyWhenNameIsNull() {
+        logger.info("Get teams by name empty input test");
         List<Team> result = teamService.getTeamsContainingName(null);
 
         assertTrue(result.isEmpty());
@@ -214,6 +229,7 @@ class TeamServiceTest {
 
     @Test
     void getTeamsContainingName_shouldReturnFilteredTeams() {
+        logger.info("Get teams by name service test: query={}", "vil");
         Team team = new Team(1L, "Sevilla", "/sevilla.png", spain);
         when(teamRepository.findByNameContainingIgnoreCase("vil"))
                 .thenReturn(List.of(team));

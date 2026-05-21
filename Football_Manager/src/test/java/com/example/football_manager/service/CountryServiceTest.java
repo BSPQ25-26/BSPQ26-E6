@@ -5,6 +5,8 @@ import com.example.football_manager.model.Country;
 import com.example.football_manager.repository.CountryRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,6 +15,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class CountryServiceTest {
+
+    private static final Logger logger = LoggerFactory.getLogger(CountryServiceTest.class);
 
     private CountryRepository countryRepository;
     private CountryService countryService;
@@ -26,6 +30,8 @@ class CountryServiceTest {
     @Test
     void createCountry_shouldCreateCountrySuccessfully() {
         CountryRequestDTO dto = new CountryRequestDTO(" Spain ");
+
+        logger.info("Create country service test: name={}", dto.getName().trim());
 
         Country savedCountry = new Country();
         savedCountry.setId(1L);
@@ -52,6 +58,8 @@ class CountryServiceTest {
         france.setId(2L);
         france.setName("France");
 
+        logger.info("Get all countries service test: expectedCount={}", 2);
+
         when(countryRepository.findAll()).thenReturn(List.of(spain, france));
 
         List<Country> result = countryService.getAllCountries();
@@ -65,6 +73,7 @@ class CountryServiceTest {
 
     @Test
     void getAllCountries_shouldReturnEmptyList() {
+        logger.info("Get all countries empty service test");
         when(countryRepository.findAll()).thenReturn(List.of());
 
         List<Country> result = countryService.getAllCountries();
@@ -81,6 +90,8 @@ class CountryServiceTest {
         country.setId(1L);
         country.setName("Spain");
 
+        logger.info("Delete country service test: id={}", 1L);
+
         when(countryRepository.findById(1L)).thenReturn(Optional.of(country));
 
         countryService.deleteCountry(1L);
@@ -91,6 +102,7 @@ class CountryServiceTest {
 
     @Test
     void deleteCountry_shouldThrowExceptionWhenCountryNotFound() {
+        logger.info("Delete country not found test: id={}", 99L);
         when(countryRepository.findById(99L)).thenReturn(Optional.empty());
 
         RuntimeException ex = assertThrows(

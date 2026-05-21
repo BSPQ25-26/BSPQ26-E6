@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * REST endpoints for managing competitions.
+ */
 @RestController
 @RequestMapping("/api/competitions")
 @Tag(name = "Competitions")
@@ -27,6 +30,12 @@ public class CompetitionController {
         this.competitionService = competitionService;
     }
 
+    /**
+     * Creates a competition.
+     *
+     * @param dto competition details payload
+     * @return created competition with HTTP 201
+     */
     @PostMapping
     @Operation(
             summary = "Create a competition",
@@ -46,6 +55,13 @@ public class CompetitionController {
         return new ResponseEntity<>(createdCompetition, HttpStatus.CREATED);
     }
 
+    /**
+     * Updates a competition.
+     *
+     * @param id competition identifier
+     * @param dto updated competition payload
+     * @return updated competition
+     */
     @PutMapping("/{id}")
     @Operation(
             summary = "Update a competition",
@@ -67,6 +83,12 @@ public class CompetitionController {
         return ResponseEntity.ok(updatedCompetition);
     }
 
+    /**
+     * Retrieves a competition by id.
+     *
+     * @param id competition identifier
+     * @return competition details if found
+     */
     @GetMapping("/{id}")
     @Operation(
             summary = "Get competition by id",
@@ -80,6 +102,11 @@ public class CompetitionController {
         return ResponseEntity.of(competitionService.getCompetitionById(id));
     }
 
+    /**
+     * Lists all competitions.
+     *
+     * @return all competitions
+     */
     @GetMapping
     @Operation(
             summary = "List all competitions",
@@ -92,6 +119,12 @@ public class CompetitionController {
         return ResponseEntity.ok(competitionService.getAllCompetitions());
     }
 
+    /**
+     * Deletes a competition by id.
+     *
+     * @param id competition identifier
+     * @return empty response with HTTP 204
+     */
     @DeleteMapping("/{id}")
     @Operation(
             summary = "Delete a competition",

@@ -12,6 +12,8 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
@@ -20,15 +22,35 @@ import java.util.Optional;
 
 import static org.junit.Assert.assertFalse;
 
+/**
+ * Performance tests for TeamService using JUnitPerf.
+ *
+ * <p>These tests validate repeated and concurrent execution of the
+ * getAllTeams operation. JUnitPerf is used as a replacement for the
+ * deprecated ContiPerf library.</p>
+ *
+ * <p>The tests use lightweight repository proxies instead of a real database
+ * in order to focus on service execution and avoid external dependencies.</p>
+ */
 public class TeamServicePerformanceTest {
 
+    private static final Logger logger = LoggerFactory.getLogger(TeamServicePerformanceTest.class);
+
+    /**
+     * JUnitPerf rule required to execute performance tests.
+     */
     @Rule
     public JUnitPerfRule perfTestRule = new JUnitPerfRule();
 
     private TeamService teamService;
 
+    /**
+     * Prepares test data and fake repositories before each performance test.
+     */
     @Before
     public void setUp() {
+        logger.info("Preparing TeamService performance test data");
+
         List<Team> sampleTeams = createSampleTeams(100);
 
         TeamRepository teamRepository = createRepositoryProxy(
@@ -42,8 +64,13 @@ public class TeamServicePerformanceTest {
         );
 
         teamService = new TeamService(teamRepository, countryRepository);
+
+        logger.info("TeamService performance test setup completed with {} sample teams", sampleTeams.size());
     }
 
+    /**
+     * Validates TeamService performance using a single execution thread.
+     */
     @Test
     @JUnitPerfTest(
             threads = 1,
@@ -56,11 +83,18 @@ public class TeamServicePerformanceTest {
             executionsPerSec = 50
     )
     public void getAllTeams_singleThreadPerformance_shouldPass() {
+        logger.info("Running TeamService performance test: single thread");
+
         List<Team> teams = teamService.getAllTeams();
+
+        logger.info("Single thread performance test returned {} teams", teams.size());
 
         assertFalse(teams.isEmpty());
     }
 
+    /**
+     * Validates TeamService performance under multiple concurrent threads.
+     */
     @Test
     @JUnitPerfTest(
             threads = 5,
@@ -73,11 +107,18 @@ public class TeamServicePerformanceTest {
             executionsPerSec = 150
     )
     public void getAllTeams_multipleThreadsPerformance_shouldPass() {
+        logger.info("Running TeamService performance test: multiple threads");
+
         List<Team> teams = teamService.getAllTeams();
+
+        logger.info("Multiple threads performance test returned {} teams", teams.size());
 
         assertFalse(teams.isEmpty());
     }
 
+    /**
+     * Validates that TeamService reaches the expected throughput.
+     */
     @Test
     @JUnitPerfTest(
             threads = 10,
@@ -90,11 +131,18 @@ public class TeamServicePerformanceTest {
             executionsPerSec = 300
     )
     public void getAllTeams_throughputPerformance_shouldPass() {
+        logger.info("Running TeamService performance test: throughput");
+
         List<Team> teams = teamService.getAllTeams();
+
+        logger.info("Throughput performance test returned {} teams", teams.size());
 
         assertFalse(teams.isEmpty());
     }
 
+    /**
+     * Validates TeamService stability during a longer performance test duration.
+     */
     @Test
     @JUnitPerfTest(
             threads = 3,
@@ -107,11 +155,22 @@ public class TeamServicePerformanceTest {
             executionsPerSec = 80
     )
     public void getAllTeams_durationPerformance_shouldPass() {
+        logger.info("Running TeamService performance test: duration");
+
         List<Team> teams = teamService.getAllTeams();
+
+        logger.info("Duration performance test returned {} teams", teams.size());
 
         assertFalse(teams.isEmpty());
     }
 
+    /**
+     * Intentionally failing performance test kept as evidence for manual testing.
+     *
+     * <p>This test is ignored by default because it is designed to fail with
+     * unrealistic thresholds. It can be enabled manually to show how JUnitPerf
+     * reports performance failures.</p>
+     */
     @Ignore("Enable manually only to generate failing performance evidence for Sprint 2")
     @Test
     @JUnitPerfTest(
@@ -125,11 +184,23 @@ public class TeamServicePerformanceTest {
             executionsPerSec = 5000
     )
     public void getAllTeams_intentionallyFailingPerformanceTest() {
+        logger.info("Running intentionally failing TeamService performance test");
+
         List<Team> teams = teamService.getAllTeams();
+
+        logger.info("Intentionally failing performance test returned {} teams", teams.size());
 
         assertFalse(teams.isEmpty());
     }
 
+    /**
+     * Creates a dynamic proxy for repository interfaces used by TeamService.
+     *
+     * @param repositoryClass repository interface to proxy
+     * @param teams list of teams returned by the fake findAll method
+     * @param <T> repository type
+     * @return fake repository implementation
+     */
     @SuppressWarnings("unchecked")
     private <T> T createRepositoryProxy(Class<T> repositoryClass, List<Team> teams) {
         return (T) Proxy.newProxyInstance(
@@ -186,14 +257,24 @@ public class TeamServicePerformanceTest {
         );
     }
 
+    /**
+     * Simulates a small service latency to make performance tests more realistic.
+     */
     private void simulateServerLatency() {
         try {
             Thread.sleep(5);
         } catch (InterruptedException e) {
+            logger.warn("Performance test latency simulation was interrupted", e);
             Thread.currentThread().interrupt();
         }
     }
 
+    /**
+     * Creates sample teams used during performance testing.
+     *
+     * @param amount number of teams to create
+     * @return list of sample teams
+     */
     private List<Team> createSampleTeams(int amount) {
         Country country = new Country();
         country.setId(1L);

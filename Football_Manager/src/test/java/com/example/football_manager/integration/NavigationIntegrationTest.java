@@ -3,6 +3,8 @@ package com.example.football_manager.integration;
 import com.example.football_manager.dto.FantasyScoreDTO;
 import com.example.football_manager.service.FantasyService;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
@@ -27,6 +29,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc(addFilters = false)
 class NavigationIntegrationTest {
 
+    private static final Logger logger = LoggerFactory.getLogger(NavigationIntegrationTest.class);
+
     @Autowired
     private MockMvc mockMvc;
 
@@ -35,6 +39,7 @@ class NavigationIntegrationTest {
 
     @Test
     void fantasyPage_withoutSession_shouldRedirectToLogin() throws Exception {
+        logger.info("Fantasy page without session integration test");
         mockMvc.perform(get("/fantasy"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/login"));
@@ -43,6 +48,8 @@ class NavigationIntegrationTest {
     @Test
     void fantasyPage_withSession_shouldLoadSuccessfully() throws Exception {
         Long userId = 1L;
+
+        logger.info("Fantasy page with session integration test: userId={}", userId);
 
         when(fantasyService.getMyLeagues(userId)).thenReturn(List.of());
         when(fantasyService.getLineup(userId)).thenReturn(List.of());
@@ -63,6 +70,7 @@ class NavigationIntegrationTest {
 
     @Test
     void fantasyLeaguePage_withoutSession_shouldRedirectToLogin() throws Exception {
+        logger.info("Fantasy league page without session integration test");
         mockMvc.perform(get("/fantasy/leagues/1"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/login"));

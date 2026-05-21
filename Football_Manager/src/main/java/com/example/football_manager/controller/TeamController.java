@@ -17,6 +17,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * REST endpoints for managing teams.
+ */
 @RestController
 @RequestMapping("/api/teams")
 @Tag(name = "Teams")
@@ -28,6 +31,12 @@ public class TeamController {
         this.teamService = teamService;
     }
 
+    /**
+     * Creates a new team.
+     *
+     * @param dto team details payload
+     * @return created team with HTTP 201
+     */
     @PostMapping
     @Operation(
             summary = "Create a team",
@@ -47,6 +56,13 @@ public class TeamController {
         return new ResponseEntity<>(createdTeam, HttpStatus.CREATED);
     }
 
+    /**
+     * Updates a team.
+     *
+     * @param id team identifier
+     * @param dto updated team payload
+     * @return updated team
+     */
     @PutMapping("/{id}")
     @Operation(
             summary = "Update a team",
@@ -68,6 +84,12 @@ public class TeamController {
         return ResponseEntity.ok(updatedTeam);
     }
 
+    /**
+     * Deletes a team.
+     *
+     * @param id team identifier
+     * @return empty response with HTTP 204
+     */
     @DeleteMapping("/{id}")
     @Operation(
             summary = "Delete a team",
@@ -82,6 +104,12 @@ public class TeamController {
         return ResponseEntity.noContent().build();
     }
 
+    /**
+     * Retrieves a team by id.
+     *
+     * @param id team identifier
+     * @return team details if found
+     */
     @GetMapping("/{id}")
     @Operation(
             summary = "Get team by id",
@@ -95,6 +123,12 @@ public class TeamController {
         return ResponseEntity.of(teamService.getTeamById(id));
     }
 
+    /**
+     * Searches teams by name.
+     *
+     * @param name text to match against team names
+     * @return matching teams
+     */
     @GetMapping("/search")
     @Operation(
             summary = "Search teams by name",
@@ -106,7 +140,12 @@ public class TeamController {
     public ResponseEntity<List<Team>> getTeamsContainingName(@RequestParam String name) {
         return ResponseEntity.ok(teamService.getTeamsContainingName(name));
     }
-    
+
+    /**
+     * Lists all teams.
+     *
+     * @return all registered teams
+     */
     @GetMapping
     @Operation(
             summary = "List all teams",

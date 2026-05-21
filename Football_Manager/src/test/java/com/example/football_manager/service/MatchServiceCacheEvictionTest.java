@@ -3,6 +3,8 @@ package com.example.football_manager.service;
 import com.example.football_manager.dto.MatchRequestDTO;
 import com.example.football_manager.dto.MatchResultRequestDTO;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
 
 import java.lang.reflect.Method;
@@ -11,6 +13,8 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MatchServiceCacheEvictionTest {
+
+    private static final Logger logger = LoggerFactory.getLogger(MatchServiceCacheEvictionTest.class);
 
     @Test
     void createMatch_shouldEvictStandingsCache() throws NoSuchMethodException {
@@ -49,6 +53,7 @@ class MatchServiceCacheEvictionTest {
     private void assertMethodEvictsStandingsCache(String methodName, Class<?>... parameterTypes)
             throws NoSuchMethodException {
 
+        logger.info("Checking cache eviction annotation: method={}", methodName);
         Method method = MatchService.class.getMethod(methodName, parameterTypes);
         CacheEvict cacheEvict = method.getAnnotation(CacheEvict.class);
 

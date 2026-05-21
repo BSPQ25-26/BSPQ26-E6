@@ -18,6 +18,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * REST endpoints for user authentication and registration.
+ */
 @RestController
 @RequestMapping("/auth")
 @Tag(name = "Auth")
@@ -26,6 +29,12 @@ public class AuthController {
     @Autowired
     private UserService userService;
 
+    /**
+     * Registers a new user.
+     *
+     * @param registerDTO registration payload
+     * @return registration result
+     */
     @PostMapping("/register")
     @Operation(
             summary = "Register a user",
@@ -58,6 +67,13 @@ public class AuthController {
         }
     }
 
+    /**
+     * Authenticates a user and stores session attributes.
+     *
+     * @param loginDTO login payload
+     * @param session HTTP session to populate
+     * @return login result
+     */
     @PostMapping("/login")
     @Operation(
             summary = "Login",

@@ -17,6 +17,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
+/**
+ * REST endpoints for competition standings.
+ */
 @RestController
 @RequestMapping("/api/standings")
 @Tag(name = "Standings")
@@ -31,6 +34,12 @@ public class StandingsController {
         this.competitionRepository = competitionRepository;
     }
 
+    /**
+     * Retrieves standings for a competition.
+     *
+     * @param competitionId competition identifier
+     * @return standings table entries
+     */
     @GetMapping
     @Operation(
             summary = "Get standings by competition",

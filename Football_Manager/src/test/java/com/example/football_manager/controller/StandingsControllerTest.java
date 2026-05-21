@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.server.ResponseStatusException;
@@ -19,6 +21,8 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class StandingsControllerTest {
+
+    private static final Logger logger = LoggerFactory.getLogger(StandingsControllerTest.class);
 
     @Mock
     private StandingsService standingsService;
@@ -35,6 +39,7 @@ class StandingsControllerTest {
 
     @Test
     void getStandings_whenCompetitionExists_shouldReturnStandings() {
+        logger.info("Get standings test: competitionId={}, exists=true", 1L);
         StandingDTO row = new StandingDTO(
                 "Arsenal",
                 "arsenal.png",
@@ -62,6 +67,7 @@ class StandingsControllerTest {
 
     @Test
     void getStandings_whenCompetitionDoesNotExist_shouldThrowNotFound() {
+        logger.info("Get standings not found test: competitionId={}, exists=false", 99L);
         when(competitionRepository.existsById(99L)).thenReturn(false);
 
         ResponseStatusException exception = assertThrows(

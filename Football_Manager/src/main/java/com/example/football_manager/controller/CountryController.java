@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * REST endpoints for managing countries.
+ */
 @RestController
 @RequestMapping("/api/countries")
 @Tag(name = "Countries")
@@ -27,6 +30,12 @@ public class CountryController {
         this.countryService = countryService;
     }
 
+    /**
+     * Creates a country.
+     *
+     * @param dto country details payload
+     * @return created country with HTTP 201
+     */
     @PostMapping
     @Operation(
             summary = "Create a country",
@@ -46,6 +55,11 @@ public class CountryController {
         return new ResponseEntity<>(createdCountry, HttpStatus.CREATED);
     }
 
+    /**
+     * Lists all countries.
+     *
+     * @return all countries
+     */
     @GetMapping
     @Operation(
             summary = "List all countries",
@@ -58,7 +72,13 @@ public class CountryController {
         List<Country> countries = countryService.getAllCountries();
         return ResponseEntity.ok(countries);
     }
-    
+
+    /**
+     * Deletes a country by id.
+     *
+     * @param id country identifier
+     * @return empty response with HTTP 204
+     */
     @DeleteMapping("/{id}")
     @Operation(
             summary = "Delete a country",

@@ -13,6 +13,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.ui.ConcurrentModel;
@@ -29,6 +31,8 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class MatchViewControllerTest {
 
+    private static final Logger logger = LoggerFactory.getLogger(MatchViewControllerTest.class);
+
     @Mock
     private MatchService matchService;
 
@@ -44,6 +48,7 @@ class MatchViewControllerTest {
 
     @Test
     void showResultsPage_addsFinishedResultsAndReturnsResultsView() {
+        logger.info("Match results view test: expect finished results");
         MatchResultDTO resultDTO = new MatchResultDTO(
                 1L,
                 "Real Sociedad",
@@ -67,6 +72,7 @@ class MatchViewControllerTest {
 
     @Test
     void showMatchesPage_addsMatchesTeamsAndSelectedFilters() {
+        logger.info("Matches view test: competitionId={}, status={}, teamId={}", 1L, FINISHED, 2L);
         Match match = createFinishedMatch();
         Team team = match.getLeftTeam();
 
@@ -97,6 +103,7 @@ class MatchViewControllerTest {
 
     @Test
     void showMatchesPage_whenServiceThrowsInvalidFilter_returnsBadRequest() {
+        logger.info("Matches view invalid filter test: status={}", MatchRequestDTO.MatchStatus.IN_PROGRESS);
         when(matchService.getMatches(null, MatchRequestDTO.MatchStatus.IN_PROGRESS, null))
                 .thenThrow(new IllegalArgumentException("Invalid status filter"));
 
@@ -121,6 +128,7 @@ class MatchViewControllerTest {
 
     @Test
     void showUpcomingMatchesPage_addsUpcomingMatchesAndReturnsUpcomingView() {
+        logger.info("Upcoming matches view test: adminSession=true");
         Match upcomingMatch = createUpcomingMatch();
 
         when(matchService.getUpcomingMatches()).thenReturn(List.of(upcomingMatch));
@@ -140,6 +148,7 @@ class MatchViewControllerTest {
 
     @Test
     void showUpcomingMatchesPage_withoutAdminSession_shouldSetIsAdminFalse() {
+        logger.info("Upcoming matches view test: adminSession=false");
         Match upcomingMatch = createUpcomingMatch();
 
         when(matchService.getUpcomingMatches()).thenReturn(List.of(upcomingMatch));
@@ -158,6 +167,7 @@ class MatchViewControllerTest {
 
     @Test
     void showScheduleForm_shouldAddMatchRequestAndTeamsAndReturnScheduleView() {
+        logger.info("Schedule form view test: expect teams list");
         Team team = createTeam(1L, "Real Sociedad", "real.png");
 
         when(teamService.getAllTeams()).thenReturn(List.of(team));
